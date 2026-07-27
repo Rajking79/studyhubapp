@@ -8,7 +8,7 @@ export default defineConfig({
   base: './',
   plugins: [react(), tailwindcss()],
   build: {
-    outDir: '../backend/public/admin',
+    outDir: 'dist',
     emptyOutDir: true,
   },
   resolve: {

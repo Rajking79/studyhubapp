@@ -25,6 +25,8 @@ import { College, Material, ViewType } from '../types';
 // Register Chart.js modules
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, ArcElement, Title, Tooltip, Legend, Filler);
 
+import { adminApiService } from '../services/adminApiService';
+
 interface DashboardViewProps {
   colleges: College[];
   materials: Material[];
@@ -37,15 +39,29 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   materials,
   onNavigateView
 }) => {
+  const [liveStats, setLiveStats] = React.useState<any>(null);
+
+  React.useEffect(() => {
+    adminApiService.getStats().then(data => {
+      if (data) setLiveStats(data);
+    }).catch(() => {});
+  }, []);
+
+  const totalStudentsVal = liveStats?.totalStudents ? Number(liveStats.totalStudents).toLocaleString() : '15,480';
+  const totalCollegesVal = liveStats?.totalColleges ? String(liveStats.totalColleges) : String(colleges.length || 25);
+  const totalCoursesVal = liveStats?.totalCourses ? String(liveStats.totalCourses) : '120';
+  const totalMaterialsVal = liveStats?.totalMaterials ? String(liveStats.totalMaterials) : String(materials.length || 3840);
+  const totalDownloadsVal = liveStats?.totalDownloads ? Number(liveStats.totalDownloads).toLocaleString() : '128,400';
+
   const statCards: { title: string; value: string; change: string; icon: any; color: string; bg: string; viewTarget?: ViewType }[] = [
-    { title: 'Total Students', value: '15,480', change: '1,420 Online', icon: Users, color: 'text-blue-600', bg: 'bg-blue-50', viewTarget: 'students' },
-    { title: 'Total Colleges', value: '25', change: '10 Featured', icon: Building2, color: 'text-sky-600', bg: 'bg-sky-50', viewTarget: 'colleges' },
-    { title: 'Total Courses', value: '120', change: 'Across All Degrees', icon: GraduationCap, color: 'text-purple-600', bg: 'bg-purple-50', viewTarget: 'courses' },
+    { title: 'Total Students', value: totalStudentsVal, change: '1,420 Active Today', icon: Users, color: 'text-blue-600', bg: 'bg-blue-50', viewTarget: 'students' },
+    { title: 'Total Colleges', value: totalCollegesVal, change: '10 Featured', icon: Building2, color: 'text-sky-600', bg: 'bg-sky-50', viewTarget: 'colleges' },
+    { title: 'Total Courses', value: totalCoursesVal, change: 'Across All Degrees', icon: GraduationCap, color: 'text-purple-600', bg: 'bg-purple-50', viewTarget: 'courses' },
     { title: 'Total Subjects', value: '480', change: 'Mapped Sem 1-8', icon: BookOpen, color: 'text-rose-600', bg: 'bg-rose-50', viewTarget: 'subjects' },
-    { title: 'Total PDFs & Videos', value: String(materials.length * 1500), change: '6 Cards System', icon: FileText, color: 'text-emerald-600', bg: 'bg-emerald-50', viewTarget: 'study-materials' },
+    { title: 'Total PDFs & Videos', value: totalMaterialsVal, change: '6 Cards System', icon: FileText, color: 'text-emerald-600', bg: 'bg-emerald-50', viewTarget: 'study-materials' },
     { title: 'Today Active Users', value: '1,420', change: '🟢 Live Sessions', icon: UserPlus, color: 'text-teal-600', bg: 'bg-teal-50', viewTarget: 'students' },
     { title: 'Storage Used', value: '256 GB', change: 'Cloudinary CDN', icon: HardDrive, color: 'text-cyan-600', bg: 'bg-cyan-50', viewTarget: 'downloads-manager' },
-    { title: 'Total Downloads', value: '820K+', change: '⚡ High Engagement', icon: Download, color: 'text-[#2563EB]', bg: 'bg-blue-50', viewTarget: 'downloads-manager' }
+    { title: 'Total Downloads', value: totalDownloadsVal, change: '⚡ High Engagement', icon: Download, color: 'text-[#2563EB]', bg: 'bg-blue-50', viewTarget: 'downloads-manager' }
   ];
 
   // Chart 1: Daily Active Line

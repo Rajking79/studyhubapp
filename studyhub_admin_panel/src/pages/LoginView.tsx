@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import logoImg from '../assets/logo.png';
 import { ShieldCheck, Lock, Mail, ArrowRight, AlertCircle, Eye, EyeOff, User, Phone, Key, CheckCircle2, UserPlus, LogIn } from 'lucide-react';
+import { adminApiService } from '../services/adminApiService';
 
 interface LoginViewProps {
   onLoginSuccess: (token: string) => void;
@@ -24,39 +25,33 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess }) => {
   const [regSecretKey, setRegSecretKey] = useState('');
   const [regPassword, setRegPassword] = useState('');
 
-  // Local Registered Admins Database simulation
-  const [registeredAdmins, setRegisteredAdmins] = useState([
-    { email: 'admin@studyhub.com', password: 'Password@123', name: 'Super Admin' }
-  ]);
-
-  const handleLoginSubmit = (e: React.FormEvent) => {
+  const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg('');
     setSuccessMsg('');
     setIsLoading(true);
 
-    setTimeout(() => {
+    try {
       if (!email || !password) {
         setErrorMsg('Please enter both Admin Email and Password');
         setIsLoading(false);
         return;
       }
 
-      // Check against default or registered admins
-      const foundAdmin = registeredAdmins.find(
-        a => a.email.toLowerCase() === email.toLowerCase() && a.password === password
-      );
-
-      if (foundAdmin || (email === 'admin@studyhub.com' && password === 'Password@123')) {
-        onLoginSuccess(`saas_admin_token_${Date.now()}`);
+      const res = await adminApiService.login(email, password);
+      if (res && res.token) {
+        onLoginSuccess(res.token);
       } else {
-        setErrorMsg('Invalid Credentials! If you are a new Admin, please click "Register Admin".');
-        setIsLoading(false);
+        setErrorMsg('Invalid Credentials! Please check your details.');
       }
-    }, 300);
+    } catch (err: any) {
+      setErrorMsg(err.message || 'Login failed. Please check connection.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleRegisterSubmit = (e: React.FormEvent) => {
+  const handleRegisterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg('');
     setSuccessMsg('');
@@ -67,21 +62,17 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess }) => {
     }
 
     setIsLoading(true);
-
-    setTimeout(() => {
-      const newAdmin = {
-        email: regEmail,
-        password: regPassword,
-        name: regName
-      };
-
-      setRegisteredAdmins(prev => [...prev, newAdmin]);
+    try {
+      await adminApiService.register(regName, regEmail, regPassword, regPhone);
       setEmail(regEmail);
       setPassword(regPassword);
-      setIsLoading(false);
       setSuccessMsg('🎉 Admin Account Created Successfully! You can now Sign In below.');
       setActiveTab('login');
-    }, 400);
+    } catch (err: any) {
+      setErrorMsg(err.message || 'Registration failed.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

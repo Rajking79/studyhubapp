@@ -18,6 +18,18 @@ app.use(cors({ origin: process.env.CORS_ORIGIN || "*", credentials: true }));
 app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 
+// Root Welcome Route
+app.get("/", (req, res) => {
+  res.status(200).json({
+    success: true,
+    statusCode: 200,
+    message: "🚀 StudyHub AI & Admin Panel Backend Server is Running Live!",
+    adminWebPanel: `${req.protocol}://${req.get("host")}/admin/`,
+    healthCheck: `${req.protocol}://${req.get("host")}/api/v1/health`,
+    apiBaseUrl: `${req.protocol}://${req.get("host")}/api/v1`
+  });
+});
+
 // Static uploads folder
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 

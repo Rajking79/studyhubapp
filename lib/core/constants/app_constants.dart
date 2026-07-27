@@ -2,6 +2,9 @@ class AppConstants {
   static const String appName = 'College Study Hub';
   static const String appTagline = 'All Study Materials - Notes, Books, Guides & Previous Papers - All in One Place';
   
+  // Live Production Render API Base URL
+  static const String apiBaseUrl = 'https://studyhub-backend-server.onrender.com/api/v1';
+
   // Radius
   static const double cardRadius = 20.0;
   static const double buttonRadius = 16.0;

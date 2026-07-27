@@ -25,8 +25,10 @@ class _SignupScreenState extends State<SignupScreen> {
 
   String _selectedCollege = 'Delhi University';
   String _selectedCourse = 'B.Tech';
+  String _selectedSemester = 'Semester 1';
   bool _acceptTerms = true;
-  final bool _obscurePassword = true;
+  bool _obscurePassword = false;
+  bool _obscureConfirmPassword = false;
 
   @override
   void dispose() {
@@ -55,6 +57,8 @@ class _SignupScreenState extends State<SignupScreen> {
       college: _selectedCollege,
       course: _selectedCourse,
       password: _passwordController.text,
+      confirmPassword: _confirmPasswordController.text,
+      semester: _selectedSemester,
     );
 
     if (mounted && success) {
@@ -225,6 +229,15 @@ class _SignupScreenState extends State<SignupScreen> {
                   controller: _passwordController,
                   obscureText: _obscurePassword,
                   prefixIcon: Icons.lock_outline_rounded,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscurePassword
+                          ? Icons.visibility_off_outlined
+                          : Icons.visibility_outlined,
+                      size: 20,
+                    ),
+                    onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
+                  ),
                   validator: Validators.validatePassword,
                 ),
                 const SizedBox(height: 16),
@@ -232,10 +245,74 @@ class _SignupScreenState extends State<SignupScreen> {
                 CustomTextField(
                   label: 'Confirm Password',
                   controller: _confirmPasswordController,
-                  obscureText: _obscurePassword,
+                  obscureText: _obscureConfirmPassword,
                   prefixIcon: Icons.lock_outline_rounded,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscureConfirmPassword
+                          ? Icons.visibility_off_outlined
+                          : Icons.visibility_outlined,
+                      size: 20,
+                    ),
+                    onPressed: () => setState(() => _obscureConfirmPassword = !_obscureConfirmPassword),
+                  ),
                   validator: (val) =>
                       Validators.validateConfirmPassword(val, _passwordController.text),
+                ),
+                const SizedBox(height: 16),
+
+                // Semester Dropdown
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Current Semester',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: isDark
+                            ? AppColors.textSecondaryDark
+                            : AppColors.textSecondaryLight,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      decoration: BoxDecoration(
+                        color: isDark ? AppColors.surfaceDark : Colors.white,
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(
+                          color: isDark
+                              ? AppColors.borderDark
+                              : AppColors.borderLight,
+                        ),
+                      ),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          value: _selectedSemester,
+                          isExpanded: true,
+                          items: [
+                            'Semester 1',
+                            'Semester 2',
+                            'Semester 3',
+                            'Semester 4',
+                            'Semester 5',
+                            'Semester 6',
+                            'Semester 7',
+                            'Semester 8',
+                          ]
+                              .map((item) => DropdownMenuItem(
+                                    value: item,
+                                    child: Text(item),
+                                  ))
+                              .toList(),
+                          onChanged: (val) {
+                            if (val != null) setState(() => _selectedSemester = val);
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 16),
 

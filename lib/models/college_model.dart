@@ -19,6 +19,20 @@ class CollegeModel {
     this.availableCourses = const ['B.Tech', 'BCA', 'B.Com', 'M.Tech', 'MCA'],
   });
 
+  factory CollegeModel.fromJson(Map<String, dynamic> json) {
+    return CollegeModel(
+      id: json['id'] ?? json['_id'] ?? 'col_1',
+      name: json['name'] ?? 'College',
+      location: json['city'] != null ? '${json['city']}, ${json['state'] ?? ''}' : (json['location'] ?? 'Delhi'),
+      logoUrl: json['logo'] ?? json['logoUrl'] ?? 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=200&h=200&fit=crop',
+      subjectCount: json['subjectCount'] ?? json['coursesCount'] ?? 15,
+      category: json['category'] ?? json['university'] ?? 'State Univ',
+      isBookmarked: json['isBookmarked'] ?? false,
+      availableCourses: (json['availableCourses'] as List?)?.map((e) => e.toString()).toList() ??
+          const ['B.Tech', 'BCA', 'B.Com', 'M.Tech', 'MCA'],
+    );
+  }
+
   CollegeModel copyWith({
     String? id,
     String? name,

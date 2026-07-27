@@ -14,4 +14,14 @@ class CourseModel {
     required this.iconName,
     required this.badgeColor,
   });
+
+  factory CourseModel.fromJson(Map<String, dynamic> json) {
+    return CourseModel(
+      id: json['id'] ?? json['_id'] ?? 'btech_cs',
+      title: json['title'] ?? json['name'] ?? 'B.Tech CS',
+      subtitle: json['subtitle'] ?? json['code'] ?? 'Computer Science',
+      iconName: json['iconName'] ?? 'code',
+      badgeColor: Colors.blue,
+    );
+  }
 }

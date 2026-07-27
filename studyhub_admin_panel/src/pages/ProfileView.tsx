@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { User, Key, ShieldCheck, History, Save, CheckCircle2, Lock, Mail, Phone, Shield, Award, Clock } from 'lucide-react';
+import { adminApiService } from '../services/adminApiService';
 
 export const ProfileView: React.FC = () => {
   // Form states
@@ -15,23 +16,44 @@ export const ProfileView: React.FC = () => {
 
   const [message, setMessage] = useState('');
 
-  const handleProfileSave = (e: React.FormEvent) => {
+  useEffect(() => {
+    adminApiService.getProfile().then(profile => {
+      if (profile) {
+        if (profile.name) setName(profile.name);
+        if (profile.email) setEmail(profile.email);
+        if (profile.phone) setPhone(profile.phone);
+        if (profile.role) setRole(profile.role);
+      }
+    }).catch(() => {});
+  }, []);
+
+  const handleProfileSave = async (e: React.FormEvent) => {
     e.preventDefault();
-    setMessage('✅ Profile details updated successfully!');
-    setTimeout(() => setMessage(''), 3000);
+    try {
+      await adminApiService.updateProfile({ name, email, phone, role });
+      setMessage('✅ Profile details updated successfully!');
+      setTimeout(() => setMessage(''), 3000);
+    } catch (err: any) {
+      alert(err.message || 'Profile update failed.');
+    }
   };
 
-  const handlePasswordUpdate = (e: React.FormEvent) => {
+  const handlePasswordUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newPassword || newPassword !== confirmPassword) {
       alert('New Password and Confirm Password must match!');
       return;
     }
-    setMessage('🔒 Password updated successfully!');
-    setCurrentPassword('');
-    setNewPassword('');
-    setConfirmPassword('');
-    setTimeout(() => setMessage(''), 3000);
+    try {
+      await adminApiService.changePassword(currentPassword, newPassword);
+      setMessage('🔒 Password updated successfully!');
+      setCurrentPassword('');
+      setNewPassword('');
+      setConfirmPassword('');
+      setTimeout(() => setMessage(''), 3000);
+    } catch (err: any) {
+      alert(err.message || 'Password update failed.');
+    }
   };
 
   const auditLogs = [

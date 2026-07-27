@@ -1,14 +1,14 @@
 {
   "info": {
-    "_postman_id": "studyhub-clean-2-folder-suite-2026",
-    "name": "StudyHub Master REST API Suite (App & Admin Clean Split)",
-    "description": "Super Clean Postman Collection cleanly split into 2 Main Top-Level Folders: Mobile App APIs and Admin Control Panel APIs.",
+    "_postman_id": "studyhub-live-render-suite-2026",
+    "name": "StudyHub Live Production REST API Suite (Render Cloud)",
+    "description": "Official Live Production Postman Collection pointing directly to Render Cloud deployment: https://studyhub-backend-server.onrender.com/api/v1",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
     {
       "key": "baseUrl",
-      "value": "http://localhost:5000/api/v1",
+      "value": "https://studyhub-backend-server.onrender.com/api/v1",
       "type": "string"
     },
     {
@@ -24,7 +24,7 @@
   ],
   "item": [
     {
-      "name": "📱 1. StudyHub Mobile App APIs",
+      "name": "📱 1. StudyHub Mobile App APIs (Live Render Server)",
       "item": [
         {
           "name": "Authentication & Login",
@@ -44,7 +44,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/auth/register",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/auth/register",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -79,7 +79,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/auth/login",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/auth/login",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -114,7 +114,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/auth/google-login",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/auth/google-login",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -149,7 +149,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/auth/guest-login",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/auth/guest-login",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -184,7 +184,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/auth/logout",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/auth/logout",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -210,7 +210,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/auth/forgot-password",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/auth/forgot-password",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -245,7 +245,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/auth/resend-otp",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/auth/resend-otp",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -280,7 +280,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/auth/verify-otp",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/auth/verify-otp",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -315,7 +315,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/auth/reset-password",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/auth/reset-password",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -351,7 +351,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/dashboard/home",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/dashboard/home",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -373,7 +373,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/dashboard/banners",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/dashboard/banners",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -395,7 +395,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/dashboard/continue-reading",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/dashboard/continue-reading",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -421,7 +421,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/dashboard/update-progress",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/dashboard/update-progress",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -452,7 +452,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/dashboard/search?q=operating system&type=all",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/dashboard/search?q=operating system&type=all",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -479,7 +479,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/colleges?search=Delhi&category=State Univ",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/colleges?search=Delhi&category=State Univ",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -500,7 +500,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/colleges/du_dtu",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/colleges/du_dtu",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -522,7 +522,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/courses?collegeId=du_dtu",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/courses?collegeId=du_dtu",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -543,7 +543,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/courses/btech_cs/years",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/courses/btech_cs/years",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -566,7 +566,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/courses/btech_cs/semesters?year=2",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/courses/btech_cs/semesters?year=2",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -589,7 +589,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/subjects?courseId=btech_cs&semester=Sem 4&search=DBMS",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/subjects?courseId=btech_cs&semester=Sem 4&search=DBMS",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -610,7 +610,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/subjects/subj_dbms_101",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/subjects/subj_dbms_101",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -637,7 +637,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/materials?subjectId=subj_dbms_101&category=pyq&tab=pdf&examType=End Sem",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/materials?subjectId=subj_dbms_101&category=pyq&tab=pdf&examType=End Sem",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -658,7 +658,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/materials/mat_dbms_2024_endsem",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/materials/mat_dbms_2024_endsem",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -684,7 +684,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/materials/mat_dbms_2024_endsem/download",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/materials/mat_dbms_2024_endsem/download",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -712,7 +712,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/tools/cgpa",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/tools/cgpa",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -738,7 +738,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/tools/cgpa/calculate",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/tools/cgpa/calculate",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -770,7 +770,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/tools/attendance",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/tools/attendance",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -796,7 +796,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/tools/attendance/subject",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/tools/attendance/subject",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -832,7 +832,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/tools/attendance/mark",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/tools/attendance/mark",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -873,7 +873,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/ai/chat",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/ai/chat",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -908,7 +908,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/ai/snap-solve",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/ai/snap-solve",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -944,7 +944,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/downloads/my-downloads",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/downloads/my-downloads",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -970,7 +970,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/downloads/sync-storage",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/downloads/sync-storage",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1005,7 +1005,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/favorites/toggle",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/favorites/toggle",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1036,7 +1036,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/favorites",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/favorites",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1062,7 +1062,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/user/profile",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/user/profile",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1088,7 +1088,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/user/profile",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/user/profile",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1123,7 +1123,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/support/feedback",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/support/feedback",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1154,7 +1154,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/notifications?category=Exams",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/notifications?category=Exams",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1169,7 +1169,7 @@
       ]
     },
     {
-      "name": "⚡ 2. StudyHub Admin Control Panel APIs",
+      "name": "⚡ 2. StudyHub Admin Control Panel APIs (Live Render Server)",
       "item": [
         {
           "name": "Admin Auth & Profile Security",
@@ -1189,7 +1189,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/login",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/login",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1224,7 +1224,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/register",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/register",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1255,7 +1255,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/profile",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/profile",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1281,7 +1281,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/profile",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/profile",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1316,7 +1316,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/change-password",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/change-password",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1352,7 +1352,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/stats",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/stats",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1379,7 +1379,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/colleges",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/colleges",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1405,7 +1405,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/colleges",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/colleges",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1440,7 +1440,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/colleges/col-1",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/colleges/col-1",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1476,7 +1476,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/colleges/col-1/featured",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/colleges/col-1/featured",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1500,7 +1500,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/colleges/col-1",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/colleges/col-1",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1528,7 +1528,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/courses",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/courses",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1554,7 +1554,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/courses",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/courses",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1585,7 +1585,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/courses/crs-1",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/courses/crs-1",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1608,7 +1608,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/subjects",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/subjects",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1634,7 +1634,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/subjects",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/subjects",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1665,7 +1665,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/subjects/sbj-1",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/subjects/sbj-1",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1693,7 +1693,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/materials",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/materials",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1719,7 +1719,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/materials",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/materials",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1754,7 +1754,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/materials",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/materials",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1785,7 +1785,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/materials/mat-1",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/materials/mat-1",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1813,7 +1813,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/banners",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/banners",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1839,7 +1839,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/banners",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/banners",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1874,7 +1874,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/banners/bnr-1/toggle",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/banners/bnr-1/toggle",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1898,7 +1898,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/home-sections",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/home-sections",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1924,7 +1924,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/home-sections/sec-1/toggle",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/home-sections/sec-1/toggle",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1953,7 +1953,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/notifications",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/notifications",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -1979,7 +1979,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/notifications/broadcast",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/notifications/broadcast",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -2016,7 +2016,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/students",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/students",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -2042,7 +2042,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/students/std-1/block",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/students/std-1/block",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -2066,7 +2066,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/students/std-1",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/students/std-1",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -2089,7 +2089,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://localhost:5000/api/v1/admin/feedback",
+                  "raw": "https://studyhub-backend-server.onrender.com/api/v1/admin/feedback",
                   "host": [
                     "{{baseUrl}}"
                   ],

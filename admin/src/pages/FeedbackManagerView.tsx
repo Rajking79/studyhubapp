@@ -1,13 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MessageSquare, CheckCircle2 } from 'lucide-react';
+import { adminApiService } from '../services/adminApiService';
 
 export const FeedbackManagerView: React.FC = () => {
-  const [feedbacks, setFeedbacks] = useState([
-    { id: 1, student: 'rohitsharma@gmail.com', category: 'Missing PYQ', message: 'Please add more 2024 End Sem Solved Papers for Computer Networks.', rating: 5, status: 'Pending' },
+  const [feedbacks, setFeedbacks] = useState<any[]>([
+    { id: 1, student: 'rahul@studyhub.com', category: 'Missing PYQ', message: 'Please add more 2024 End Sem Solved Papers for Computer Networks.', rating: 5, status: 'Pending' },
     { id: 2, student: 'priyapatel@gmail.com', category: 'App Bug', message: 'PDF reader page zoom button gets cut off on smaller screens.', rating: 4, status: 'In Progress' }
   ]);
 
-  const handleResolve = (id: number) => {
+  useEffect(() => {
+    adminApiService.getStudentFeedback().then(data => {
+      if (Array.isArray(data) && data.length) {
+        setFeedbacks(data.map((item, idx) => ({
+          id: item.id || idx + 1,
+          student: item.email || item.studentName || item.student || 'student@studyhub.com',
+          category: item.type || item.category || 'Suggestion',
+          message: item.message || 'Great app!',
+          rating: item.rating || 5,
+          status: item.status || 'Pending'
+        })));
+      }
+    }).catch(() => {});
+  }, []);
+
+  const handleResolve = (id: any) => {
     setFeedbacks(prev => prev.map(f => f.id === id ? { ...f, status: 'Resolved' } : f));
     alert('✅ Support Feedback Marked as Resolved!');
   };
@@ -42,7 +58,7 @@ export const FeedbackManagerView: React.FC = () => {
                     </span>
                   </td>
                   <td className="px-3 text-slate-700 max-w-xs truncate">{f.message}</td>
-                  <td className="px-3 text-amber-500 font-bold">{"⭐".repeat(f.rating)}</td>
+                  <td className="px-3 text-amber-500 font-bold">{"⭐".repeat(f.rating || 5)}</td>
                   <td className="px-3">
                     <span className={`px-2 py-0.5 text-[10px] font-bold rounded ${
                       f.status === 'Resolved' ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'

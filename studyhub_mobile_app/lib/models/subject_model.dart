@@ -27,6 +27,23 @@ class SubjectModel {
     this.isBookmarked = false,
   });
 
+  factory SubjectModel.fromJson(Map<String, dynamic> json) {
+    return SubjectModel(
+      id: json['id'] ?? json['_id'] ?? 'subj_dbms_101',
+      title: json['title'] ?? json['name'] ?? 'Subject',
+      courseId: json['courseId'] ?? json['courseName'] ?? 'btech_cs',
+      department: json['department'] ?? 'Computer Science',
+      materialCount: json['materialCount'] ?? json['materialsCount'] ?? 10,
+      downloadCount: json['downloadCount'] ?? json['downloadsCount'] ?? 250,
+      rating: (json['rating'] is num) ? (json['rating'] as num).toDouble() : 4.6,
+      description: json['description'] ?? 'Comprehensive subject details.',
+      instructorName: json['instructorName'] ?? json['teacherName'] ?? 'Dr. A.K. Sharma',
+      instructorRole: json['instructorRole'] ?? 'Professor',
+      instructorAvatar: json['instructorAvatar'] ?? '',
+      isBookmarked: json['isBookmarked'] ?? false,
+    );
+  }
+
   SubjectModel copyWith({
     String? id,
     String? title,

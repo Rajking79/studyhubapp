@@ -64,8 +64,18 @@ const getDashboardStats = asyncHandler(async (req, res) => {
   return res.status(200).json(
     new ApiResponse(200, {
       stats: dataStore.stats,
+      totalStudents: dataStore.stats.totalStudents,
+      totalColleges: dataStore.stats.totalColleges,
+      totalCourses: dataStore.stats.totalCourses,
+      totalSubjects: dataStore.stats.totalSubjects,
+      totalMaterials: dataStore.stats.totalMaterials,
+      totalDownloads: dataStore.stats.totalDownloads,
+      activeBanners: dataStore.stats.activeBanners,
+      activeSubscriptions: dataStore.stats.activeSubscriptions,
+      pendingStudentUploads: dataStore.stats.pendingStudentUploads,
+      onlineStudents: dataStore.stats.onlineStudents,
       recentMaterials: dataStore.materials.slice(0, 5),
-      featuredColleges: dataStore.colleges.slice(0, 4)
+      featuredColleges: dataStore.colleges.filter(c => c.isFeatured).slice(0, 4)
     }, "Dashboard statistics and analytics loaded")
   );
 });

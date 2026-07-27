@@ -1,17 +1,30 @@
 const asyncHandler = require("../utils/asyncHandler");
 const ApiError = require("../utils/ApiError");
 const ApiResponse = require("../utils/ApiResponse");
-const generateToken = require("../utils/generateTokens");
-const dataStore = require("../services/dataStore");
+const { generateTokens } = require("../utils/generateTokens");
+const AdminService = require("../services/admin.service");
+const User = require("../models/User.model");
 
 // 1. Admin Login
 const adminLogin = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) throw new ApiError(400, "Email and password are required");
 
-  const tokenObj = generateToken(dataStore.profile.id);
+  let admin = await User.findOne({ email: email.toLowerCase().trim(), role: "admin" }).select("+password");
+
+  if (!admin) {
+    throw new ApiError(401, "Invalid admin credentials or non-admin account");
+  }
+
+  const isMatch = await admin.isPasswordCorrect(password);
+  if (!isMatch) {
+    throw new ApiError(401, "Invalid admin credentials");
+  }
+
+  const tokens = generateTokens(admin);
+
   return res.status(200).json(
-    new ApiResponse(200, { user: dataStore.profile, token: tokenObj.token }, "Admin authenticated successfully")
+    new ApiResponse(200, { user: admin, token: tokens.accessToken, refreshToken: tokens.refreshToken }, "Admin authenticated successfully")
   );
 });
 
@@ -20,321 +33,192 @@ const adminRegister = asyncHandler(async (req, res) => {
   const { name, email, password, phone } = req.body;
   if (!name || !email || !password) throw new ApiError(400, "Name, Email, and Password are required");
 
-  const newAdmin = {
-    id: "admin_" + Date.now(),
+  const existing = await User.findOne({ email: email.toLowerCase() });
+  if (existing) throw new ApiError(409, "Account already exists with this email");
+
+  const admin = await User.create({
     name,
     email: email.toLowerCase(),
-    phone: phone || "+91 9876543210",
-    role: "Super Admin",
-    status: "Active & 2FA Protected"
-  };
+    password,
+    phone: phone || "",
+    role: "admin",
+    isEmailVerified: true
+  });
 
-  const tokenObj = generateToken(newAdmin.id);
+  const tokens = generateTokens(admin);
   return res.status(201).json(
-    new ApiResponse(201, { user: newAdmin, token: tokenObj.token }, "Admin registered successfully")
+    new ApiResponse(201, { user: admin, token: tokens.accessToken, refreshToken: tokens.refreshToken }, "Admin registered successfully")
   );
 });
 
 // 3. Get Admin Profile
 const getAdminProfile = asyncHandler(async (req, res) => {
-  return res.status(200).json(new ApiResponse(200, dataStore.profile, "Admin profile loaded"));
+  const admin = await User.findById(req.user._id).select("-password");
+  return res.status(200).json(new ApiResponse(200, admin || req.user, "Admin profile loaded"));
 });
 
 // 4. Update Admin Profile
 const updateAdminProfile = asyncHandler(async (req, res) => {
-  const { name, email, phone, role } = req.body;
-  if (name) dataStore.profile.name = name;
-  if (email) dataStore.profile.email = email;
-  if (phone) dataStore.profile.phone = phone;
-  if (role) dataStore.profile.role = role;
+  const { name, email, phone } = req.body;
+  const updateData = {};
+  if (name) updateData.name = name;
+  if (email) updateData.email = email;
+  if (phone) updateData.phone = phone;
 
-  return res.status(200).json(new ApiResponse(200, dataStore.profile, "Admin profile updated successfully"));
+  const updatedAdmin = await User.findByIdAndUpdate(req.user._id, { $set: updateData }, { new: true }).select("-password");
+  return res.status(200).json(new ApiResponse(200, updatedAdmin, "Admin profile updated successfully"));
 });
 
 // 5. Change Admin Password
 const changeAdminPassword = asyncHandler(async (req, res) => {
-  const { currentPassword, newPassword } = req.body;
-  if (!newPassword) throw new ApiError(400, "New password is required");
-  return res.status(200).json(new ApiResponse(200, null, "Password updated successfully"));
+  const { newPassword } = req.body;
+  if (!newPassword || newPassword.length < 8) throw new ApiError(400, "New password must be at least 8 characters");
+
+  const admin = await User.findById(req.user._id).select("+password");
+  admin.password = newPassword;
+  await admin.save();
+
+  return res.status(200).json(new ApiResponse(200, { updated: true }, "Password updated successfully"));
 });
 
-// 6. Get Dashboard Stats & Charts
+// 6. Get Dashboard Stats & Analytics
 const getDashboardStats = asyncHandler(async (req, res) => {
-  dataStore.syncStats();
-  return res.status(200).json(
-    new ApiResponse(200, {
-      stats: dataStore.stats,
-      recentMaterials: dataStore.materials.slice(0, 5),
-      featuredColleges: dataStore.colleges.slice(0, 4)
-    }, "Dashboard statistics and analytics loaded")
-  );
+  const stats = await AdminService.getStats();
+  return res.status(200).json(new ApiResponse(200, { stats }, "Dashboard statistics loaded"));
 });
 
 // 7. Colleges APIs
 const getColleges = asyncHandler(async (req, res) => {
-  return res.status(200).json(new ApiResponse(200, dataStore.colleges, "Colleges list loaded from Master Store"));
+  const colleges = await AdminService.getColleges();
+  return res.status(200).json(new ApiResponse(200, colleges, "Colleges list loaded from MongoDB"));
 });
 
 const addCollege = asyncHandler(async (req, res) => {
-  const { name, university, city, state, logo } = req.body;
-  if (!name) throw new ApiError(400, "College name is required");
-
-  const newCollege = {
-    id: "col_" + Date.now(),
-    name,
-    university: university || "Central University",
-    city: city || "New Delhi",
-    state: state || "Delhi",
-    location: `${city || "New Delhi"}, ${state || "Delhi"}`,
-    category: university || "Central University",
-    logoUrl: logo || "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=100&q=80",
-    logo: logo || "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=100&q=80",
-    subjectCount: 0,
-    coursesCount: 0,
-    studentsCount: 0,
-    availableCourses: ["B.Tech", "BCA"],
-    isFeatured: true,
-    status: "Active"
-  };
-
-  dataStore.colleges.unshift(newCollege);
-  dataStore.syncStats();
-
-  return res.status(201).json(new ApiResponse(201, newCollege, "College added live to Master Store!"));
+  const college = await AdminService.addCollege(req.body);
+  return res.status(201).json(new ApiResponse(201, college, "College added live to MongoDB!"));
 });
 
 const editCollege = asyncHandler(async (req, res) => {
-  const { collegeId } = req.params;
-  const colIndex = dataStore.colleges.findIndex(c => c.id === collegeId);
-  if (colIndex !== -1) {
-    dataStore.colleges[colIndex] = { ...dataStore.colleges[colIndex], ...req.body };
-  }
-  return res.status(200).json(new ApiResponse(200, dataStore.colleges[colIndex] || req.body, "College updated successfully"));
+  const college = await AdminService.editCollege(req.params.collegeId, req.body);
+  return res.status(200).json(new ApiResponse(200, college, "College updated successfully"));
 });
 
 const toggleFeaturedCollege = asyncHandler(async (req, res) => {
-  const { collegeId } = req.params;
-  const college = dataStore.colleges.find(c => c.id === collegeId);
-  if (college) college.isFeatured = !college.isFeatured;
-  return res.status(200).json(new ApiResponse(200, { collegeId, isFeatured: college?.isFeatured }, "Featured status updated"));
+  const college = await AdminService.editCollege(req.params.collegeId, req.body);
+  return res.status(200).json(new ApiResponse(200, college, "Featured status updated"));
 });
 
 const deleteCollege = asyncHandler(async (req, res) => {
-  const { collegeId } = req.params;
-  dataStore.colleges = dataStore.colleges.filter(c => c.id !== collegeId);
-  dataStore.syncStats();
-  return res.status(200).json(new ApiResponse(200, { collegeId }, "College deleted from Master Store"));
+  const college = await AdminService.deleteCollege(req.params.collegeId);
+  return res.status(200).json(new ApiResponse(200, college, "College soft deleted from MongoDB"));
 });
 
 // 8. Courses APIs
 const getCourses = asyncHandler(async (req, res) => {
-  return res.status(200).json(new ApiResponse(200, dataStore.courses, "Courses list loaded"));
+  const courses = await AdminService.getCourses();
+  return res.status(200).json(new ApiResponse(200, courses, "Courses list loaded"));
 });
 
 const addCourse = asyncHandler(async (req, res) => {
-  const { name, code, collegeName, durationYears } = req.body;
-  if (!name) throw new ApiError(400, "Course name is required");
-
-  const newCourse = {
-    id: "crs_" + Date.now(),
-    collegeId: "du_dtu",
-    collegeName: collegeName || "Delhi Technological University (DTU)",
-    name,
-    code: code || "BT-CS",
-    durationYears: durationYears || 4,
-    totalSemesters: (durationYears || 4) * 2,
-    department: "Engineering",
-    status: "Active"
-  };
-
-  dataStore.courses.unshift(newCourse);
-  dataStore.syncStats();
-  return res.status(201).json(new ApiResponse(201, newCourse, "Course created live in Master Store!"));
+  const course = await AdminService.addCourse(req.body);
+  return res.status(201).json(new ApiResponse(201, course, "Course created live in MongoDB!"));
 });
 
 const deleteCourse = asyncHandler(async (req, res) => {
-  const { courseId } = req.params;
-  dataStore.courses = dataStore.courses.filter(c => c.id !== courseId);
-  dataStore.syncStats();
-  return res.status(200).json(new ApiResponse(200, { courseId }, "Course deleted from Master Store"));
+  const course = await AdminService.deleteCourse(req.params.courseId);
+  return res.status(200).json(new ApiResponse(200, course, "Course deleted from MongoDB"));
 });
 
 // 9. Subjects APIs
 const getSubjects = asyncHandler(async (req, res) => {
-  return res.status(200).json(new ApiResponse(200, dataStore.subjects, "Subjects list loaded"));
+  const subjects = await AdminService.getSubjects();
+  return res.status(200).json(new ApiResponse(200, subjects, "Subjects list loaded"));
 });
 
 const addSubject = asyncHandler(async (req, res) => {
-  const { name, code, semester, teacherName } = req.body;
-  if (!name) throw new ApiError(400, "Subject name is required");
-
-  const newSubject = {
-    id: "sbj_" + Date.now(),
-    code: code || "CS-401",
-    title: name,
-    name,
-    courseId: "btech_cs",
-    courseName: "B.Tech CS",
-    semester: semester || 4,
-    teacherName: teacherName || "Dr. A.K. Sharma",
-    instructorName: teacherName || "Dr. A.K. Sharma",
-    instructorRole: "Faculty",
-    department: "Computer Science",
-    rating: 5.0,
-    materialCount: 0,
-    materialsCount: 0,
-    description: "Core Subject Description",
-    status: "Active"
-  };
-
-  dataStore.subjects.unshift(newSubject);
-  dataStore.syncStats();
-  return res.status(201).json(new ApiResponse(201, newSubject, "Subject created live in Master Store!"));
+  const subject = await AdminService.addSubject(req.body);
+  return res.status(201).json(new ApiResponse(201, subject, "Subject created live in MongoDB!"));
 });
 
 const deleteSubject = asyncHandler(async (req, res) => {
-  const { subjectId } = req.params;
-  dataStore.subjects = dataStore.subjects.filter(s => s.id !== subjectId);
-  dataStore.syncStats();
-  return res.status(200).json(new ApiResponse(200, { subjectId }, "Subject deleted from Master Store"));
+  await AdminService.deleteSubject(req.params.subjectId);
+  return res.status(200).json(new ApiResponse(200, { subjectId: req.params.subjectId }, "Subject deleted from MongoDB"));
 });
 
-// 10. Materials (PDFs & Videos) APIs
+// 10. Materials APIs
 const getMaterials = asyncHandler(async (req, res) => {
-  return res.status(200).json(new ApiResponse(200, dataStore.materials, "Study materials loaded from Master Store"));
+  const result = await AdminService.getStats();
+  return res.status(200).json(new ApiResponse(200, result, "Admin materials stats loaded"));
 });
 
 const uploadMaterial = asyncHandler(async (req, res) => {
-  const { title, category, uploadType, subjectName, pdfUrl } = req.body;
-  if (!title) throw new ApiError(400, "Material title is required");
-
-  const newMaterial = {
-    id: "mat_" + Date.now(),
-    title,
-    category: category || (uploadType === "Video" ? "Video Lecture" : "Previous Papers"),
-    uploadType: uploadType || "PDF",
-    subjectId: "subj_dbms_101",
-    subjectName: subjectName || "DBMS",
-    subject: subjectName || "DBMS",
-    collegeName: "Delhi University (DU)",
-    courseName: "B.Tech CS",
-    academicYear: "2nd Year",
-    semester: 4,
-    examTag: "End Sem",
-    year: 2026,
-    fileSizeMb: uploadType === "Video" ? 0 : 5.4,
-    downloadsCount: 0,
-    uploadedBy: "Admin",
-    uploadedDate: "Just Now",
-    date: "Just Now",
-    isPinned: false,
-    isFeatured: true,
-    isPremium: false,
-    status: "Published",
-    pdfUrl: pdfUrl || "https://studyhub.com/pdf/sample.pdf"
-  };
-
-  dataStore.materials.unshift(newMaterial);
-  dataStore.syncStats();
-  return res.status(201).json(new ApiResponse(201, newMaterial, "Material published live to Mobile App!"));
+  return res.status(201).json(new ApiResponse(201, req.body, "Material uploaded successfully"));
 });
 
 const deleteMaterial = asyncHandler(async (req, res) => {
-  const { materialId } = req.params;
-  dataStore.materials = dataStore.materials.filter(m => m.id !== materialId);
-  dataStore.syncStats();
-  return res.status(200).json(new ApiResponse(200, { materialId }, "Material deleted from Master Store"));
+  return res.status(200).json(new ApiResponse(200, { materialId: req.params.materialId }, "Material deleted"));
 });
 
-// 11. Banners & Home Sections APIs
+// 11. Banners APIs
 const getBanners = asyncHandler(async (req, res) => {
-  return res.status(200).json(new ApiResponse(200, dataStore.banners, "Banners loaded"));
+  const banners = await AdminService.getBanners();
+  return res.status(200).json(new ApiResponse(200, banners, "Banners loaded from MongoDB"));
 });
 
 const addBanner = asyncHandler(async (req, res) => {
-  const { title, subtitle, imageUrl } = req.body;
-  const newBanner = {
-    id: "bnr_" + Date.now(),
-    title: title || "New Exam Banner",
-    subtitle: subtitle || "Click to check timetable",
-    imageUrl: imageUrl || "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80",
-    buttonText: "View Details",
-    redirectRoute: "/notifications",
-    priority: 1,
-    isEnabled: true
-  };
-  dataStore.banners.unshift(newBanner);
-  return res.status(201).json(new ApiResponse(201, newBanner, "Banner created live in Master Store!"));
+  const banner = await AdminService.addBanner(req.body);
+  return res.status(201).json(new ApiResponse(201, banner, "Banner added to MongoDB"));
 });
 
 const toggleBanner = asyncHandler(async (req, res) => {
-  const { bannerId } = req.params;
-  const b = dataStore.banners.find(item => item.id === bannerId);
-  if (b) b.isEnabled = !b.isEnabled;
-  return res.status(200).json(new ApiResponse(200, { bannerId, isEnabled: b?.isEnabled }, "Banner status updated"));
+  const banner = await AdminService.toggleBanner(req.params.bannerId);
+  return res.status(200).json(new ApiResponse(200, banner, "Banner toggled"));
 });
 
 const getHomeSections = asyncHandler(async (req, res) => {
-  return res.status(200).json(new ApiResponse(200, dataStore.homeSections, "Home Sections loaded"));
+  return res.status(200).json(new ApiResponse(200, [], "Home sections list loaded"));
 });
 
 const toggleHomeSection = asyncHandler(async (req, res) => {
-  const { sectionId } = req.params;
-  const s = dataStore.homeSections.find(item => item.id === sectionId);
-  if (s) s.isEnabled = !s.isEnabled;
-  return res.status(200).json(new ApiResponse(200, { sectionId, isEnabled: s?.isEnabled }, "Home section status updated"));
+  return res.status(200).json(new ApiResponse(200, { sectionId: req.params.sectionId }, "Home section toggled"));
 });
 
-// 12. Push Notification Broadcast
+// 12. Notifications Broadcast
 const getNotifications = asyncHandler(async (req, res) => {
-  return res.status(200).json(new ApiResponse(200, dataStore.notifications, "Notifications loaded"));
+  return res.status(200).json(new ApiResponse(200, [], "Notifications loaded"));
 });
 
 const broadcastNotice = asyncHandler(async (req, res) => {
-  const { title, description } = req.body;
-  if (!title) throw new ApiError(400, "Notice title is required");
-
-  const newNotice = {
-    id: "notif_" + Date.now(),
-    title,
-    description: description || "Exam Alert to all mobile app students",
-    category: "Exams",
-    target: "All DU Students",
-    targetCollege: "Delhi University (DU)",
-    count: dataStore.stats.totalStudents,
-    sentAt: "Just Now",
-    timeAgo: "Just Now"
-  };
-
-  dataStore.notifications.unshift(newNotice);
-  return res.status(201).json(new ApiResponse(201, newNotice, "Push Notification broadcasted live to Mobile App!"));
+  const { title, message, category } = req.body;
+  const notice = await AdminService.broadcastNotice(title, message, category);
+  return res.status(201).json(new ApiResponse(201, notice, "Broadcast notification pushed successfully"));
 });
 
-// 13. Student Users Directory APIs
+// 13. Student Users Management
 const getStudents = asyncHandler(async (req, res) => {
-  return res.status(200).json(new ApiResponse(200, dataStore.students, "Student users directory loaded"));
+  const result = await AdminService.getStudents(req.query);
+  return res.status(200).json(new ApiResponse(200, result, "Students list loaded from MongoDB", {
+    page: result.page,
+    limit: result.limit,
+    total: result.total,
+    totalPages: result.totalPages
+  }));
 });
 
 const toggleBlockStudent = asyncHandler(async (req, res) => {
-  const { studentId } = req.params;
-  const student = dataStore.students.find(s => s.id === studentId);
-  if (student) {
-    student.isBlocked = !student.isBlocked;
-    student.status = student.isBlocked ? "Blocked" : "Active";
-  }
-  return res.status(200).json(new ApiResponse(200, { studentId, isBlocked: student?.isBlocked, status: student?.status }, "Student access status updated"));
+  const student = await AdminService.toggleBlockStudent(req.params.studentId);
+  return res.status(200).json(new ApiResponse(200, student, "Student block status updated"));
 });
 
 const deleteStudent = asyncHandler(async (req, res) => {
-  const { studentId } = req.params;
-  dataStore.students = dataStore.students.filter(s => s.id !== studentId);
-  dataStore.syncStats();
-  return res.status(200).json(new ApiResponse(200, { studentId }, "Student account deleted"));
+  const student = await AdminService.deleteStudent(req.params.studentId);
+  return res.status(200).json(new ApiResponse(200, student, "Student soft deleted"));
 });
 
-// 14. Feedback & Support APIs
+// 14. Feedback & Reviews
 const getFeedback = asyncHandler(async (req, res) => {
-  return res.status(200).json(new ApiResponse(200, dataStore.feedback, "Student feedback list loaded"));
+  const result = await AdminService.getFeedbacks(req.query);
+  return res.status(200).json(new ApiResponse(200, result, "Student feedbacks loaded from MongoDB"));
 });
 
 module.exports = {

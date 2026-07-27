@@ -66,6 +66,8 @@ import { LoginView } from './pages/LoginView';
 
 import { Search, Sparkles, Building2, UploadCloud, Bell, LogOut } from 'lucide-react';
 
+import { adminApiService } from './services/adminApiService';
+
 export function App() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [currentView, setCurrentView] = useState<ViewType>('dashboard');
@@ -94,12 +96,40 @@ export function App() {
 
   useEffect(() => {
     const token = localStorage.getItem('adminToken');
-    if (token) setIsAuthenticated(true);
+    if (token) {
+      setIsAuthenticated(true);
+      fetchLiveAdminData();
+    }
   }, []);
+
+  const fetchLiveAdminData = async () => {
+    try {
+      const [colData, crsData, sbjData, matData, bnrData, secData, notData, stdData] = await Promise.allSettled([
+        adminApiService.getColleges(),
+        adminApiService.getCourses(),
+        adminApiService.getSubjects(),
+        adminApiService.getMaterials(),
+        adminApiService.getBanners(),
+        adminApiService.getHomeSections(),
+        adminApiService.getNotificationsHistory(),
+        adminApiService.getStudents(),
+      ]);
+
+      if (colData.status === 'fulfilled' && colData.value.length) setColleges(colData.value);
+      if (crsData.status === 'fulfilled' && crsData.value.length) setCourses(crsData.value);
+      if (sbjData.status === 'fulfilled' && sbjData.value.length) setSubjects(sbjData.value);
+      if (matData.status === 'fulfilled' && matData.value.length) setMaterials(matData.value);
+      if (bnrData.status === 'fulfilled' && bnrData.value.length) setBanners(bnrData.value);
+      if (secData.status === 'fulfilled' && secData.value.length) setHomeSections(secData.value);
+      if (notData.status === 'fulfilled' && notData.value.length) setNotifications(notData.value);
+      if (stdData.status === 'fulfilled' && stdData.value.length) setStudents(stdData.value);
+    } catch (_) {}
+  };
 
   const handleLoginSuccess = (token: string) => {
     localStorage.setItem('adminToken', token);
     setIsAuthenticated(true);
+    fetchLiveAdminData();
   };
 
   const handlePromptLogout = () => {
@@ -113,51 +143,63 @@ export function App() {
   };
 
   // Handlers
-  const handleAddCollege = (c: Omit<College, 'id'>) => {
-    setColleges(prev => [{ ...c, id: `col-${Date.now()}` }, ...prev]);
+  const handleAddCollege = async (c: Omit<College, 'id'>) => {
+    const newCol = await adminApiService.addCollege(c);
+    setColleges(prev => [newCol, ...prev]);
   };
 
-  const handleToggleFeaturedCollege = (id: string) => {
+  const handleToggleFeaturedCollege = async (id: string) => {
+    await adminApiService.toggleFeaturedCollege(id);
     setColleges(prev => prev.map(c => c.id === id ? { ...c, isFeatured: !c.isFeatured } : c));
   };
 
-  const handleEditCollege = (id: string, updated: Partial<College>) => {
-    setColleges(prev => prev.map(c => c.id === id ? { ...c, ...updated } : c));
+  const handleEditCollege = async (id: string, updated: Partial<College>) => {
+    const edited = await adminApiService.updateCollege(id, updated);
+    setColleges(prev => prev.map(c => c.id === id ? { ...c, ...edited } : c));
   };
 
-  const handleDeleteCollege = (id: string) => {
+  const handleDeleteCollege = async (id: string) => {
+    await adminApiService.deleteCollege(id);
     setColleges(prev => prev.filter(c => c.id !== id));
   };
 
-  const handleAddCourse = (crs: Omit<Course, 'id'>) => {
-    setCourses(prev => [{ ...crs, id: `crs-${Date.now()}` }, ...prev]);
+  const handleAddCourse = async (crs: Omit<Course, 'id'>) => {
+    const newCrs = await adminApiService.addCourse(crs);
+    setCourses(prev => [newCrs, ...prev]);
   };
 
-  const handleAddSubject = (sbj: Omit<Subject, 'id'>) => {
-    setSubjects(prev => [{ ...sbj, id: `sbj-${Date.now()}` }, ...prev]);
+  const handleAddSubject = async (sbj: Omit<Subject, 'id'>) => {
+    const newSbj = await adminApiService.addSubject(sbj);
+    setSubjects(prev => [newSbj, ...prev]);
   };
 
-  const handleDeleteSubject = (id: string) => {
+  const handleDeleteSubject = async (id: string) => {
+    await adminApiService.deleteSubject(id);
     setSubjects(prev => prev.filter(s => s.id !== id));
   };
 
-  const handleUploadMaterial = (mat: Omit<Material, 'id'>) => {
-    setMaterials(prev => [{ ...mat, id: `mat-${Date.now()}` }, ...prev]);
+  const handleUploadMaterial = async (mat: Omit<Material, 'id'>) => {
+    const newMat = await adminApiService.uploadMaterialPdf(mat);
+    setMaterials(prev => [newMat, ...prev]);
   };
 
-  const handleDeleteMaterial = (id: string) => {
+  const handleDeleteMaterial = async (id: string) => {
+    await adminApiService.deleteMaterial(id);
     setMaterials(prev => prev.filter(m => m.id !== id));
   };
 
-  const handleAddVideo = (vid: Omit<VideoMaterial, 'id'>) => {
+  const handleAddVideo = async (vid: Omit<VideoMaterial, 'id'>) => {
+    const newVid = await adminApiService.publishVideoLecture(vid as any);
     setVideos(prev => [{ ...vid, id: `vid-${Date.now()}` }, ...prev]);
   };
 
-  const handleDeleteVideo = (id: string) => {
+  const handleDeleteVideo = async (id: string) => {
+    await adminApiService.deleteMaterial(id);
     setVideos(prev => prev.filter(v => v.id !== id));
   };
 
-  const handleToggleHomeSection = (id: string) => {
+  const handleToggleHomeSection = async (id: string) => {
+    await adminApiService.toggleHomeSectionStatus(id);
     setHomeSections(prev => prev.map(s => s.id === id ? { ...s, isEnabled: !s.isEnabled } : s));
   };
 
@@ -171,19 +213,23 @@ export function App() {
     alert(`❌ Student Note Rejected. Reason sent to student: ${reason}`);
   };
 
-  const handleSendBroadcast = (notif: Omit<NotificationBroadcast, 'id' | 'sentAt' | 'deliveredCount'>) => {
+  const handleSendBroadcast = async (notif: Omit<NotificationBroadcast, 'id' | 'sentAt' | 'deliveredCount'>) => {
+    await adminApiService.sendPushBroadcast(notif);
     setNotifications(prev => [{ ...notif, id: `not-${Date.now()}`, sentAt: 'Just now', deliveredCount: 12450 }, ...prev]);
   };
 
-  const handleToggleBanner = (id: string) => {
+  const handleToggleBanner = async (id: string) => {
+    await adminApiService.toggleBannerStatus(id);
     setBanners(prev => prev.map(b => b.id === id ? { ...b, isEnabled: !b.isEnabled } : b));
   };
 
-  const handleToggleBlockStudent = (id: string) => {
+  const handleToggleBlockStudent = async (id: string) => {
+    await adminApiService.toggleBlockStudent(id);
     setStudents(prev => prev.map(s => s.id === id ? { ...s, status: s.status === 'Active' ? 'Blocked' : 'Active' } : s));
   };
 
-  const handleDeleteStudent = (id: string) => {
+  const handleDeleteStudent = async (id: string) => {
+    await adminApiService.deleteStudent(id);
     setStudents(prev => prev.filter(s => s.id !== id));
   };
 
