@@ -1,29 +1,42 @@
 const fs = require('fs');
+const path = require('path');
+
+const liveBaseUrl = "https://studyhub-backend-server.onrender.com/api/v1";
 
 function buildUrl(pathStr) {
-  const fullUrl = `http://localhost:5000/api/v1/${pathStr}`;
-  const cleanPath = pathStr.split('?')[0];
-  const pathParts = ['api', 'v1', ...cleanPath.split('/').filter(Boolean)];
-  
-  return {
-    raw: fullUrl,
-    protocol: 'http',
-    host: ['localhost'],
-    port: '5000',
-    path: pathParts
+  const parts = pathStr.split('?');
+  const cleanPath = parts[0];
+  const queryArray = [];
+  if (parts[1]) {
+    parts[1].split('&').forEach(param => {
+      const [key, value] = param.split('=');
+      queryArray.push({ key, value: decodeURIComponent(value || '') });
+    });
+  }
+
+  const urlObj = {
+    raw: `{{baseUrl}}/${cleanPath}`,
+    host: ["{{baseUrl}}"],
+    path: cleanPath.split('/').filter(Boolean)
   };
+
+  if (queryArray.length > 0) {
+    urlObj.query = queryArray;
+    urlObj.raw += '?' + parts[1];
+  }
+
+  return urlObj;
 }
 
-function buildRequest(name, method, pathStr, bodyObj = null, isAuth = false) {
+function req(name, method, pathStr, bodyObj = null, isAdmin = false) {
   const headers = [];
   if (bodyObj || method === 'POST' || method === 'PUT' || method === 'PATCH') {
     headers.push({ key: 'Content-Type', value: 'application/json' });
   }
-  if (isAuth) {
-    headers.push({ key: 'Authorization', value: 'Bearer {{adminToken}}' });
-  }
+  const tokenKey = isAdmin ? 'adminToken' : 'token';
+  headers.push({ key: 'Authorization', value: `Bearer {{${tokenKey}}}` });
 
-  const reqObj = {
+  const r = {
     name: name,
     request: {
       method: method,
@@ -33,118 +46,164 @@ function buildRequest(name, method, pathStr, bodyObj = null, isAuth = false) {
   };
 
   if (bodyObj && (method === 'POST' || method === 'PUT' || method === 'PATCH')) {
-    reqObj.request.body = {
+    r.request.body = {
       mode: 'raw',
       raw: JSON.stringify(bodyObj, null, 2),
-      options: {
-        raw: {
-          language: 'json'
-        }
-      }
+      options: { raw: { language: 'json' } }
     };
   }
 
-  return reqObj;
+  return r;
 }
 
 const collection = {
   info: {
-    _postman_id: "studyhub-master-suite-v2026",
-    name: "StudyHub Master REST API Suite 2026",
-    description: "Exhaustive collection containing all Mobile App & Admin Control Panel endpoints with full JSON request bodies.",
+    _postman_id: "studyhub-production-postman-suite-2026",
+    name: "StudyHub Live Production REST API Suite (Render Cloud)",
+    description: "Official Production Postman Collection with 83 fully functional endpoints. Pointing directly to Render Cloud deployment: https://studyhub-backend-server.onrender.com/api/v1",
     schema: "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   variable: [
-    { key: "baseUrl", value: "http://localhost:5000/api/v1", type: "string" },
-    { key: "adminToken", value: "saas_admin_jwt_token_12345", type: "string" },
-    { key: "userToken", value: "student_jwt_token_67890", type: "string" }
+    { key: "baseUrl", value: liveBaseUrl, type: "string" },
+    { key: "token", value: "student_jwt_token_here", type: "string" },
+    { key: "adminToken", value: "admin_jwt_token_here", type: "string" }
   ],
   item: [
     {
-      name: "1. 🔐 Admin Authentication & Security",
+      name: "🔐 1. Student Authentication & Security (17 APIs)",
       item: [
-        buildRequest("Admin Login", "POST", "admin/login", { email: "admin@studyhub.com", password: "Password@123" }),
-        buildRequest("Register New Admin", "POST", "admin/register", { name: "Super Admin", email: "admin@studyhub.com", password: "Password@123", phone: "+91 9876543210" }),
-        buildRequest("Get Admin Profile", "GET", "admin/profile", null, true),
-        buildRequest("Update Admin Profile", "PUT", "admin/profile", { name: "Super Administrator", email: "admin@studyhub.com", phone: "+91 9876543210", role: "Master Super Admin" }, true),
-        buildRequest("Change Admin Password", "PUT", "admin/change-password", { currentPassword: "Password@123", newPassword: "NewPassword@123" }, true)
+        req("Register Student", "POST", "auth/register", { name: "Rahul Sharma", email: "rahul@studyhub.com", password: "Password@123", confirmPassword: "Password@123", phone: "9876543210", college: "Delhi University", course: "B.Tech CS", semester: "Semester 4" }),
+        req("Login Student", "POST", "auth/login", { email: "rahul@studyhub.com", password: "Password@123" }),
+        req("Google OAuth Login", "POST", "auth/google-login", { idToken: "sample_google_token" }),
+        req("Guest Mode Login", "POST", "auth/guest-login", { deviceId: "android_device_12345" }),
+        req("Refresh Access Token", "POST", "auth/refresh-token", { refreshToken: "sample_refresh_token" }),
+        req("Get Current User Profile (Me)", "GET", "auth/me"),
+        req("Change Student Password", "POST", "auth/change-password", { oldPassword: "Password@123", newPassword: "NewPassword@456" }),
+        req("Verify Email Token", "POST", "auth/verify-email", { token: "sample_verification_token" }),
+        req("Resend Email Verification Link", "POST", "auth/resend-email-verification", { email: "rahul@studyhub.com" }),
+        req("Get Login Audit History", "GET", "auth/login-history"),
+        req("Logout Student", "POST", "auth/logout"),
+        req("Logout All Devices", "POST", "auth/logout-all-devices"),
+        req("Delete Account", "DELETE", "auth/delete-account", { password: "Password@123" }),
+        req("Forgot Password (Dynamic OTP)", "POST", "auth/forgot-password", { email: "rahul@studyhub.com" }),
+        req("Resend Dynamic OTP", "POST", "auth/resend-otp", { email: "rahul@studyhub.com" }),
+        req("Verify Dynamic OTP", "POST", "auth/verify-otp", { email: "rahul@studyhub.com", otp: "685538" }),
+        req("Reset Password", "POST", "auth/reset-password", { resetToken: "sample_token", newPassword: "NewPass@123" })
       ]
     },
     {
-      name: "2. 📊 Executive Dashboard & Real-Time Analytics",
+      name: "🏠 2. Student Dashboard & Home Feed (5 APIs)",
       item: [
-        buildRequest("Get Executive 8 KPI Stats & Charts", "GET", "admin/stats", null, true)
+        req("Get Home Feed Data", "GET", "dashboard/home"),
+        req("Get Banners Carousel", "GET", "dashboard/banners"),
+        req("Get Continue Reading Progress", "GET", "dashboard/continue-reading"),
+        req("Update Reading Progress", "POST", "dashboard/update-progress", { materialId: "mat_os_notes_101", lastPage: 14, lastTimeSeconds: 480 }),
+        req("Global Search (Voice & Camera OCR)", "GET", "dashboard/search?q=operating system&type=all")
       ]
     },
     {
-      name: "3. 🏛️ Academic Hierarchy (Colleges, Courses, Subjects)",
+      name: "🎓 3. Academic Hierarchy (Colleges, Courses, Subjects) (7 APIs)",
       item: [
-        buildRequest("Get All Colleges List", "GET", "admin/colleges"),
-        buildRequest("Add New College", "POST", "admin/colleges", { name: "Indian Institute of Technology Delhi (IITD)", university: "Institute of National Importance", city: "New Delhi", state: "Delhi", logo: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=100&q=80" }, true),
-        buildRequest("Edit College Details", "PUT", "admin/colleges/col-1", { name: "Delhi University (DU)", university: "Central University", city: "New Delhi", state: "Delhi" }, true),
-        buildRequest("Toggle Featured College Status", "PATCH", "admin/colleges/col-1/featured", null, true),
-        buildRequest("Delete College", "DELETE", "admin/colleges/col-1", null, true),
-        buildRequest("Get All Degree Courses", "GET", "admin/courses"),
-        buildRequest("Add New Degree Course", "POST", "admin/courses", { collegeName: "Delhi University (DU)", name: "B.Tech Computer Science (CS)", code: "BT-CS", durationYears: 4 }, true),
-        buildRequest("Delete Course", "DELETE", "admin/courses/crs-1", null, true),
-        buildRequest("Get All Subjects Catalog", "GET", "admin/subjects"),
-        buildRequest("Add New Subject to Semester", "POST", "admin/subjects", { name: "Database Management Systems (DBMS)", code: "CS-401", semester: 4, teacherName: "Dr. A.K. Sharma" }, true),
-        buildRequest("Delete Subject", "DELETE", "admin/subjects/sbj-1", null, true)
+        req("Get Colleges List", "GET", "colleges?search=Delhi&category=State Univ"),
+        req("Get Single College Details", "GET", "colleges/du_dtu"),
+        req("Step 1: Choose Course", "GET", "courses?collegeId=du_dtu"),
+        req("Step 2: Select Year", "GET", "courses/btech_cs/years"),
+        req("Step 3: Select Semester", "GET", "courses/btech_cs/semesters?year=2"),
+        req("Step 4: Select Subjects", "GET", "subjects?courseId=btech_cs&semester=Sem 4&search=DBMS"),
+        req("Step 5: Subject Details Screen", "GET", "subjects/subj_dbms_101")
       ]
     },
     {
-      name: "4. 📁 Media & Study Materials (PDFs & Videos)",
+      name: "📚 4. Study Materials & 6 Cards System (4 APIs)",
       item: [
-        buildRequest("Get All PDFs & Videos List", "GET", "admin/materials"),
-        buildRequest("Upload Study Material (PDF Document)", "POST", "admin/materials", { title: "DBMS 2024 End Sem Solved PYQ Paper.pdf", category: "Previous Papers", uploadType: "PDF", subjectName: "DBMS", collegeName: "Delhi University (DU)", courseName: "B.Tech CS", semester: 4, pdfUrl: "https://studyhub.com/pdf/sample.pdf" }, true),
-        buildRequest("Publish Video Lecture URL", "POST", "admin/materials", { title: "DBMS B-Trees & Indexing Video Lecture 14", category: "Video Lecture", uploadType: "Video", subjectName: "DBMS", collegeName: "Delhi University (DU)", courseName: "B.Tech CS", semester: 4, pdfUrl: "https://youtube.com/watch?v=demo1" }, true),
-        buildRequest("Delete Study Material / Video", "DELETE", "admin/materials/mat-1", null, true)
+        req("Fetch Materials (PYQs, Notes, Books)", "GET", "materials?subjectId=subj_dbms_101&category=pyq&tab=pdf&examType=End Sem"),
+        req("Get Single Material Details", "GET", "materials/mat_dbms_2024_endsem"),
+        req("Upload Study Material", "POST", "materials/upload", { title: "DBMS EndSem Solved PYQ.pdf", subjectId: "subj_dbms_101", category: "pyq", fileUrl: "https://studyhub.com/pdf/sample.pdf" }),
+        req("Record Material Download Action", "POST", "materials/mat_dbms_2024_endsem/download")
       ]
     },
     {
-      name: "5. 🖼️ Banners & Home Layout Manager",
+      name: "🛠️ 5. CGPA Tools & Attendance Tracker (5 APIs)",
       item: [
-        buildRequest("Get Promotional Banners List", "GET", "admin/banners"),
-        buildRequest("Add New Promotional Banner", "POST", "admin/banners", { title: "End-Sem Examination Datesheet Released", subtitle: "View complete May 2026 timetable now", imageUrl: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80", buttonText: "View Datesheet", redirectRoute: "/notifications" }, true),
-        buildRequest("Toggle Banner On/Off", "PATCH", "admin/banners/bnr-1/toggle", null, true),
-        buildRequest("Get Home Layout Sections", "GET", "admin/home-sections"),
-        buildRequest("Toggle Home Layout Section", "PATCH", "admin/home-sections/sec-1/toggle", null, true)
+        req("Get CGPA / SGPA History", "GET", "tools/cgpa"),
+        req("Calculate & Save CGPA", "POST", "tools/cgpa/calculate", { semester: "Semester 4", subjects: [{ name: "Operating Systems", credits: 4, grade: "A+" }] }),
+        req("Get Attendance Tracker Summary", "GET", "tools/attendance"),
+        req("Add Subject to Attendance Tracker", "POST", "tools/attendance/subject", { subjectName: "Computer Architecture", attended: 22, total: 28, targetPercentage: 75 }),
+        req("Mark Daily Class Attendance", "PATCH", "tools/attendance/mark", { subjectId: "att_subj_101", status: "present" })
       ]
     },
     {
-      name: "6. 🔔 Push Notification Broadcast",
+      name: "🤖 6. StudyHub AI Assistant & Snap & Solve (2 APIs)",
       item: [
-        buildRequest("Get Broadcast History", "GET", "admin/notifications", null, true),
-        buildRequest("Send Instant FCM Push Notification", "POST", "admin/notifications/broadcast", { title: "DU May 2026 End-Sem Examination Datesheet Released", description: "Complete timetable for B.Tech CS Sem 4 end sem exams is now available on feed.", category: "Exams", targetCollege: "Delhi University (DU)" }, true)
+        req("StudyHub AI Chat Assistant", "POST", "ai/chat", { prompt: "Explain B-Trees indexing in DBMS with example.", subjectContext: "DBMS" }),
+        req("Snap & Solve AI Image Solver", "POST", "ai/snap-solve", { imageBase64: "sample_image_base64", note: "Solve step by step" })
       ]
     },
     {
-      name: "7. 👥 Student Users Directory & Moderation",
+      name: "📥 7. Offline Downloads & Bookmarks (4 APIs)",
       item: [
-        buildRequest("Get All App Students Directory", "GET", "admin/students", null, true),
-        buildRequest("Toggle Block/Unblock Student Account", "PATCH", "admin/students/std-1/block", null, true),
-        buildRequest("Delete Student Account", "DELETE", "admin/students/std-1", null, true),
-        buildRequest("Get Student Support & Feedback List", "GET", "admin/feedback", null, true)
+        req("Get User Downloaded Files List", "GET", "downloads/my-downloads"),
+        req("Sync Local Offline Storage Usage", "POST", "downloads/sync-storage", { totalStorageUsedMB: 120, downloadedIds: ["mat-1"] }),
+        req("Toggle Bookmark / Favorite", "POST", "favorites/toggle", { targetType: "material", targetId: "mat_dbms_2024_endsem" }),
+        req("Get Bookmarks List", "GET", "favorites")
       ]
     },
     {
-      name: "8. 📱 Mobile App Student APIs",
+      name: "👤 8. Student Profile, Support & Notifications (7 APIs)",
       item: [
-        buildRequest("Student Register (with Confirm Password)", "POST", "auth/register", { name: "Rahul Sharma", email: "rahul@studyhub.com", password: "Password@123", confirmPassword: "Password@123", phone: "9876543210", college: "Delhi University", course: "B.Tech CS", semester: "Semester 4" }),
-        buildRequest("Student Login (Email & Password)", "POST", "auth/login", { email: "rahul@studyhub.com", password: "Password@123" }),
-        buildRequest("Student Google Sign-In", "POST", "auth/google-login", { googleIdToken: "sample_google_token", email: "rahul.google@studyhub.com", name: "Rahul Sharma" }),
-        buildRequest("Continue as Guest Mode", "POST", "auth/guest-login", { deviceId: "android_device_unique_12345" }),
-        buildRequest("Get Home Feed (Banners, Continue Reading)", "GET", "dashboard/home"),
-        buildRequest("StudyHub AI Chat Assistant", "POST", "ai/chat", { prompt: "Explain B-Trees indexing in DBMS with example.", subjectContext: "DBMS" }),
-        buildRequest("Snap & Solve AI Image Solver", "POST", "ai/snap-solve", { imageBase64: "sample_base64_image", note: "Solve integral step by step" }),
-        buildRequest("Get CGPA Calculator Rules", "GET", "tools/cgpa"),
-        buildRequest("Get Attendance Tracker Summary", "GET", "tools/attendance"),
-        buildRequest("Submit Student Feedback", "POST", "support/feedback", { type: "suggestion", message: "Please add more PYQs for Semester 5 Computer Networks.", rating: 5 })
+        req("Get Student Profile", "GET", "user/profile"),
+        req("Edit Student Profile", "PUT", "user/profile", { name: "Rahul Sharma", phone: "9876543210", college: "Delhi Tech Univ", course: "B.Tech CS", semester: "Semester 5" }),
+        req("Submit Student Feedback", "POST", "support/feedback", { type: "suggestion", message: "Please add more PYQs for Semester 5 Computer Networks.", rating: 5 }),
+        req("Get All Notifications", "GET", "notifications?category=Exams"),
+        req("Mark Notification Read", "PATCH", "notifications/notif_101/read"),
+        req("Get Referral Code", "GET", "referrals/my-code"),
+        req("Claim Referral Reward", "POST", "referrals/claim", { referralCode: "STUDY50" })
+      ]
+    },
+    {
+      name: "⚡ 9. Admin Control Panel Suite (32 APIs)",
+      item: [
+        req("Admin Login", "POST", "admin/login", { email: "admin@studyhub.com", password: "Password@123" }, true),
+        req("Register New Admin Account", "POST", "admin/register", { name: "Super Admin", email: "admin@studyhub.com", password: "Password@123", phone: "+91 9876543210" }, true),
+        req("Get Admin Profile Details", "GET", "admin/profile", null, true),
+        req("Update Admin Profile Details", "PUT", "admin/profile", { name: "Super Administrator", email: "admin@studyhub.com", phone: "+91 9876543210", role: "Master Super Admin" }, true),
+        req("Change Admin Password", "PUT", "admin/change-password", { currentPassword: "Password@123", newPassword: "NewPassword@123" }, true),
+        req("Get Executive Dashboard Stats", "GET", "admin/stats", null, true),
+        req("Get All Colleges List", "GET", "admin/colleges", null, true),
+        req("Add New College", "POST", "admin/colleges", { name: "IIT Delhi (IITD)", university: "Institute of National Importance", city: "New Delhi", state: "Delhi" }, true),
+        req("Edit College Details", "PUT", "admin/colleges/col-1", { name: "Delhi University (DU)", university: "Central University", city: "New Delhi", state: "Delhi" }, true),
+        req("Toggle Featured College", "PATCH", "admin/colleges/col-1/featured", null, true),
+        req("Delete College", "DELETE", "admin/colleges/col-1", null, true),
+        req("Get All Degree Courses List", "GET", "admin/courses", null, true),
+        req("Add New Degree Course", "POST", "admin/courses", { collegeName: "Delhi University (DU)", name: "B.Tech Computer Science (CS)", code: "BT-CS", durationYears: 4 }, true),
+        req("Delete Degree Course", "DELETE", "admin/courses/crs-1", null, true),
+        req("Get All Subjects Catalog", "GET", "admin/subjects", null, true),
+        req("Add New Subject to Semester", "POST", "admin/subjects", { name: "Database Management Systems (DBMS)", code: "CS-401", semester: 4, teacherName: "Dr. A.K. Sharma" }, true),
+        req("Delete Subject", "DELETE", "admin/subjects/sbj-1", null, true),
+        req("Get All Materials & Videos", "GET", "admin/materials", null, true),
+        req("Upload Study Material PDF", "POST", "admin/materials", { title: "DBMS 2024 End Sem Solved PYQ Paper.pdf", category: "Previous Papers", uploadType: "PDF", subjectName: "DBMS", collegeName: "Delhi University (DU)", courseName: "B.Tech CS", semester: 4, pdfUrl: "https://studyhub.com/pdf/sample.pdf" }, true),
+        req("Publish Video Lecture URL", "POST", "admin/materials", { title: "DBMS B-Trees & Indexing Video Lecture 14", category: "Video Lecture", uploadType: "Video", subjectName: "DBMS", collegeName: "Delhi University (DU)", courseName: "B.Tech CS", semester: 4, pdfUrl: "https://youtube.com/watch?v=demo1" }, true),
+        req("Delete Material or Video", "DELETE", "admin/materials/mat-1", null, true),
+        req("Get Promotional Banners List", "GET", "admin/banners", null, true),
+        req("Add New Promotional Banner", "POST", "admin/banners", { title: "End-Sem Examination Datesheet Released", subtitle: "View complete May 2026 timetable now", imageUrl: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80", buttonText: "View Datesheet", redirectRoute: "/notifications" }, true),
+        req("Toggle Banner On/Off Status", "PATCH", "admin/banners/bnr-1/toggle", null, true),
+        req("Get Home Layout Sections Order", "GET", "admin/home-sections", null, true),
+        req("Toggle Home Layout Section", "PATCH", "admin/home-sections/sec-1/toggle", null, true),
+        req("Get Broadcast Notice History", "GET", "admin/notifications", null, true),
+        req("Send Instant FCM Push Broadcast", "POST", "admin/notifications/broadcast", { title: "DU May 2026 End-Sem Examination Datesheet Released", description: "Complete timetable for B.Tech CS Sem 4 end sem exams is now available on feed.", category: "Exams", targetCollege: "Delhi University (DU)" }, true),
+        req("Get All App Students Directory", "GET", "admin/students", null, true),
+        req("Toggle Block/Unblock Student Account", "PATCH", "admin/students/std-1/block", null, true),
+        req("Delete Student Account", "DELETE", "admin/students/std-1", null, true),
+        req("Get Student Support & Feedback List", "GET", "admin/feedback", null, true)
       ]
     }
   ]
 };
 
-fs.writeFileSync('d:/studyhubapp/backend/postman_collection.json', JSON.stringify(collection, null, 2));
-fs.copyFileSync('d:/studyhubapp/backend/postman_collection.json', 'C:/Users/hp/.gemini/antigravity-ide/brain/27126f0f-8db5-45c2-91b0-3b9fb97695ae/postman_collection.json');
-console.log('✅ Postman v2.1 Schema Compliant Master Collection JSON 2026 written successfully!');
+const jsonContent = JSON.stringify(collection, null, 2);
+fs.writeFileSync(path.join(__dirname, 'postman_collection.json'), jsonContent);
+if (fs.existsSync(path.join(__dirname, '../studyhub_backend_server'))) {
+  fs.writeFileSync(path.join(__dirname, '../studyhub_backend_server/postman_collection.json'), jsonContent);
+}
+
+console.log('✅ Clean Single-Level Postman Collection JSON Generated Successfully with 83 APIs!');

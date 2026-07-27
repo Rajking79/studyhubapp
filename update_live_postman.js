@@ -59,7 +59,7 @@ const collection = {
   info: {
     _postman_id: "studyhub-production-postman-suite-2026",
     name: "StudyHub Live Production REST API Suite (Render Cloud)",
-    description: "Official Production Postman Collection with 82 fully functional endpoints. Pointing directly to Render Cloud deployment: https://studyhub-backend-server.onrender.com/api/v1",
+    description: "Official Production Postman Collection with 83 fully functional endpoints. Pointing directly to Render Cloud deployment: https://studyhub-backend-server.onrender.com/api/v1",
     schema: "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   variable: [
@@ -117,7 +117,7 @@ const collection = {
       item: [
         req("Fetch Materials (PYQs, Notes, Books)", "GET", "materials?subjectId=subj_dbms_101&category=pyq&tab=pdf&examType=End Sem"),
         req("Get Single Material Details", "GET", "materials/mat_dbms_2024_endsem"),
-        req("Upload Study Material", "POST", "materials/upload", { title: "DBMS Unit 4 Notes", subjectId: "subj_dbms_101", category: "notes", fileUrl: "https://example.com/notes.pdf" }),
+        req("Upload Study Material", "POST", "materials/upload", { title: "DBMS EndSem Solved PYQ.pdf", subjectId: "subj_dbms_101", category: "pyq", fileUrl: "https://studyhub.com/pdf/sample.pdf" }),
         req("Record Material Download Action", "POST", "materials/mat_dbms_2024_endsem/download")
       ]
     },
@@ -142,7 +142,7 @@ const collection = {
       name: "📥 7. Offline Downloads & Bookmarks (4 APIs)",
       item: [
         req("Get User Downloaded Files List", "GET", "downloads/my-downloads"),
-        req("Sync Local Offline Storage Usage", "POST", "downloads/sync-storage", { totalStorageUsedMB: 245.8, downloadedIds: ["mat_os_101"] }),
+        req("Sync Local Offline Storage Usage", "POST", "downloads/sync-storage", { totalStorageUsedMB: 120, downloadedIds: ["mat-1"] }),
         req("Toggle Bookmark / Favorite", "POST", "favorites/toggle", { targetType: "material", targetId: "mat_dbms_2024_endsem" }),
         req("Get Bookmarks List", "GET", "favorites")
       ]
@@ -160,7 +160,7 @@ const collection = {
       ]
     },
     {
-      name: "⚡ 9. Admin Control Panel Suite (31 APIs)",
+      name: "⚡ 9. Admin Control Panel Suite (32 APIs)",
       item: [
         req("Admin Login", "POST", "admin/login", { email: "admin@studyhub.com", password: "Password@123" }, true),
         req("Register New Admin Account", "POST", "admin/register", { name: "Super Admin", email: "admin@studyhub.com", password: "Password@123", phone: "+91 9876543210" }, true),
@@ -200,8 +200,10 @@ const collection = {
 };
 
 const jsonContent = JSON.stringify(collection, null, 2);
-fs.writeFileSync('d:/studyhubapp/studyhub_backend_server/postman_collection.json', jsonContent);
+if (fs.existsSync('d:/studyhubapp/studyhub_backend_server')) {
+  fs.writeFileSync('d:/studyhubapp/studyhub_backend_server/postman_collection.json', jsonContent);
+}
 fs.writeFileSync('d:/studyhubapp/backend/postman_collection.json', jsonContent);
-fs.writeFileSync('C:/Users/hp/.gemini/antigravity-ide/brain/27126f0f-8db5-45c2-91b0-3b9fb97695ae/postman_collection.json', jsonContent);
+fs.writeFileSync('d:/studyhubapp/update_live_postman.js', fs.readFileSync(__filename));
 
-console.log('✅ Clean Single-Level Postman Collection JSON Generated Successfully with 82 APIs!');
+console.log('✅ Clean Single-Level Postman Collection JSON Generated Successfully with 83 APIs!');

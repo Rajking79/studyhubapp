@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "studyhub-production-postman-suite-2026",
     "name": "StudyHub Live Production REST API Suite (Render Cloud)",
-    "description": "Official Production Postman Collection with 82 fully functional endpoints. Pointing directly to Render Cloud deployment: https://studyhub-backend-server.onrender.com/api/v1",
+    "description": "Official Production Postman Collection with 83 fully functional endpoints. Pointing directly to Render Cloud deployment: https://studyhub-backend-server.onrender.com/api/v1",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -992,7 +992,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"DBMS Unit 4 Notes\",\n  \"subjectId\": \"subj_dbms_101\",\n  \"category\": \"notes\",\n  \"fileUrl\": \"https://example.com/notes.pdf\"\n}",
+              "raw": "{\n  \"title\": \"DBMS EndSem Solved PYQ.pdf\",\n  \"subjectId\": \"subj_dbms_101\",\n  \"category\": \"pyq\",\n  \"fileUrl\": \"https://studyhub.com/pdf/sample.pdf\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1313,7 +1313,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"totalStorageUsedMB\": 245.8,\n  \"downloadedIds\": [\n    \"mat_os_101\"\n  ]\n}",
+              "raw": "{\n  \"totalStorageUsedMB\": 120,\n  \"downloadedIds\": [\n    \"mat-1\"\n  ]\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1589,7 +1589,7 @@
       ]
     },
     {
-      "name": "⚡ 9. Admin Control Panel Suite (31 APIs)",
+      "name": "⚡ 9. Admin Control Panel Suite (32 APIs)",
       "item": [
         {
           "name": "Admin Login",
