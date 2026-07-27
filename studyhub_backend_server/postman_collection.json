@@ -1,0 +1,2108 @@
+{
+  "info": {
+    "_postman_id": "studyhub-clean-2-folder-suite-2026",
+    "name": "StudyHub Master REST API Suite (App & Admin Clean Split)",
+    "description": "Super Clean Postman Collection cleanly split into 2 Main Top-Level Folders: Mobile App APIs and Admin Control Panel APIs.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000/api/v1",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "student_jwt_token_67890",
+      "type": "string"
+    },
+    {
+      "key": "adminToken",
+      "value": "saas_admin_jwt_token_12345",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "📱 1. StudyHub Mobile App APIs",
+      "item": [
+        {
+          "name": "Authentication & Login",
+          "item": [
+            {
+              "name": "Register Student (with Confirm Password)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/auth/register",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "register"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Rahul Sharma\",\n  \"email\": \"rahul@studyhub.com\",\n  \"password\": \"Password@123\",\n  \"confirmPassword\": \"Password@123\",\n  \"phone\": \"9876543210\",\n  \"college\": \"Delhi University\",\n  \"course\": \"B.Tech CS\",\n  \"semester\": \"Semester 4\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Login Student (Email & Password)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"rahul@studyhub.com\",\n  \"password\": \"Password@123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Google Sign-In / Login",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/auth/google-login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "google-login"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"googleIdToken\": \"sample_google_token\",\n  \"email\": \"rahul.google@studyhub.com\",\n  \"name\": \"Rahul Sharma\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Continue as Guest Mode",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/auth/guest-login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "guest-login"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"deviceId\": \"android_device_12345\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Logout Student",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/auth/logout",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "logout"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Forgot Password (Dynamic OTP)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/auth/forgot-password",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "forgot-password"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"rahul@studyhub.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Resend Dynamic OTP",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/auth/resend-otp",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "resend-otp"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"rahul@studyhub.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Verify Dynamic OTP",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/auth/verify-otp",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "verify-otp"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"rahul@studyhub.com\",\n  \"otp\": \"123456\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Reset Password",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/auth/reset-password",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "reset-password"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resetToken\": \"sample_token\",\n  \"newPassword\": \"NewPass@123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Dashboard & Home Feed",
+          "item": [
+            {
+              "name": "Get Home Feed (Banners & Quick Access)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/dashboard/home",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dashboard",
+                    "home"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Banners Carousel",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/dashboard/banners",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dashboard",
+                    "banners"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Continue Reading Progress",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/dashboard/continue-reading",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dashboard",
+                    "continue-reading"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Reading Progress",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/dashboard/update-progress",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dashboard",
+                    "update-progress"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"materialId\": \"mat_os_notes_101\",\n  \"lastPage\": 14,\n  \"lastTimeSeconds\": 480\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Global Search (Voice & Camera OCR)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/dashboard/search?q=operating system&type=all",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dashboard",
+                    "search"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Academic Catalog & Hierarchy",
+          "item": [
+            {
+              "name": "Get Colleges List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/colleges?search=Delhi&category=State Univ",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "colleges"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Single College Details",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/colleges/du_dtu",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "colleges",
+                    "du_dtu"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Step 1: Choose Course",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/courses?collegeId=du_dtu",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "courses"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Step 2: Select Year",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/courses/btech_cs/years",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "courses",
+                    "btech_cs",
+                    "years"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Step 3: Select Semester",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/courses/btech_cs/semesters?year=2",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "courses",
+                    "btech_cs",
+                    "semesters"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Step 4: Select Subjects",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/subjects?courseId=btech_cs&semester=Sem 4&search=DBMS",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subjects"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Step 5: Subject Details Screen",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/subjects/subj_dbms_101",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subjects",
+                    "subj_dbms_101"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Study Content & 6 Cards System",
+          "item": [
+            {
+              "name": "Fetch Materials (PYQs, Notes, Books)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/materials?subjectId=subj_dbms_101&category=pyq&tab=pdf&examType=End Sem",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "materials"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Single Material Details / Stream",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/materials/mat_dbms_2024_endsem",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "materials",
+                    "mat_dbms_2024_endsem"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Record Material Download Action",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/materials/mat_dbms_2024_endsem/download",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "materials",
+                    "mat_dbms_2024_endsem",
+                    "download"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "CGPA Tools & Attendance Tracker",
+          "item": [
+            {
+              "name": "Get CGPA / SGPA History",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/tools/cgpa",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tools",
+                    "cgpa"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Calculate & Save CGPA",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/tools/cgpa/calculate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tools",
+                    "cgpa",
+                    "calculate"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"semester\": \"Semester 4\",\n  \"subjects\": [\n    {\n      \"name\": \"Operating Systems\",\n      \"credits\": 4,\n      \"grade\": \"A+\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Get Attendance Tracker Summary",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/tools/attendance",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tools",
+                    "attendance"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Add Subject to Attendance Tracker",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/tools/attendance/subject",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tools",
+                    "attendance",
+                    "subject"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subjectName\": \"Computer Architecture\",\n  \"attended\": 22,\n  \"total\": 28,\n  \"targetPercentage\": 75\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Mark Daily Class Attendance",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/tools/attendance/mark",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tools",
+                    "attendance",
+                    "mark"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subjectId\": \"att_subj_101\",\n  \"status\": \"present\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "StudyHub AI Assistant & Snap & Solve",
+          "item": [
+            {
+              "name": "StudyHub AI Chat Assistant",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/ai/chat",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ai",
+                    "chat"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"Explain B-Trees indexing in DBMS with example.\",\n  \"subjectContext\": \"DBMS\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Snap & Solve AI Image Solver",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/ai/snap-solve",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ai",
+                    "snap-solve"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"imageBase64\": \"sample_image_base64\",\n  \"note\": \"Solve step by step\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Offline Downloads & Bookmarks",
+          "item": [
+            {
+              "name": "Get User Downloaded Files List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/downloads/my-downloads",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "downloads",
+                    "my-downloads"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Sync Local Offline Storage Usage",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/downloads/sync-storage",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "downloads",
+                    "sync-storage"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"totalStorageUsedMB\": 245.8,\n  \"downloadedIds\": [\n    \"mat_os_101\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Toggle Bookmark / Favorite",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/favorites/toggle",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "favorites",
+                    "toggle"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetType\": \"material\",\n  \"targetId\": \"mat_dbms_2024_endsem\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Get Bookmarks List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/favorites",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "favorites"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Student Profile & Support",
+          "item": [
+            {
+              "name": "Get Student Profile",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/user/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "user",
+                    "profile"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Edit Student Profile",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/user/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "user",
+                    "profile"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Rahul Sharma\",\n  \"phone\": \"9876543210\",\n  \"college\": \"Delhi Tech Univ\",\n  \"course\": \"B.Tech CS\",\n  \"semester\": \"Semester 5\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Submit Student Feedback",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/support/feedback",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "support",
+                    "feedback"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"suggestion\",\n  \"message\": \"Please add more PYQs for Semester 5 Computer Networks.\",\n  \"rating\": 5\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Get All Notifications",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/notifications?category=Exams",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "notifications"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "⚡ 2. StudyHub Admin Control Panel APIs",
+      "item": [
+        {
+          "name": "Admin Auth & Profile Security",
+          "item": [
+            {
+              "name": "Admin Login",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "login"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"admin@studyhub.com\",\n  \"password\": \"Password@123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Register New Admin Account",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/register",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "register"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Super Admin\",\n  \"email\": \"admin@studyhub.com\",\n  \"password\": \"Password@123\",\n  \"phone\": \"+91 9876543210\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Get Admin Profile Details",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "profile"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Admin Profile Details",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "profile"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Super Administrator\",\n  \"email\": \"admin@studyhub.com\",\n  \"phone\": \"+91 9876543210\",\n  \"role\": \"Master Super Admin\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Change Admin Password",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/change-password",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "change-password"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"currentPassword\": \"Password@123\",\n  \"newPassword\": \"NewPassword@123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Executive Analytics & Dashboard",
+          "item": [
+            {
+              "name": "Get Executive 8 KPI Stats & Charts",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/stats",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "stats"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Academic Colleges Management (CRUD)",
+          "item": [
+            {
+              "name": "Get All Colleges List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/colleges",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "colleges"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Add New College",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/colleges",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "colleges"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"IIT Delhi (IITD)\",\n  \"university\": \"Institute of National Importance\",\n  \"city\": \"New Delhi\",\n  \"state\": \"Delhi\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Edit College Details",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/colleges/col-1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "colleges",
+                    "col-1"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Delhi University (DU)\",\n  \"university\": \"Central University\",\n  \"city\": \"New Delhi\",\n  \"state\": \"Delhi\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Toggle Featured College",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/colleges/col-1/featured",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "colleges",
+                    "col-1",
+                    "featured"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete College",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/colleges/col-1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "colleges",
+                    "col-1"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Degree Courses & Subjects Management (CRUD)",
+          "item": [
+            {
+              "name": "Get All Degree Courses List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/courses",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "courses"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Add New Degree Course",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/courses",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "courses"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"collegeName\": \"Delhi University (DU)\",\n  \"name\": \"B.Tech Computer Science (CS)\",\n  \"code\": \"BT-CS\",\n  \"durationYears\": 4\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Delete Degree Course",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/courses/crs-1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "courses",
+                    "crs-1"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get All Subjects Catalog",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/subjects",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "subjects"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Add New Subject to Semester",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/subjects",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "subjects"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Database Management Systems (DBMS)\",\n  \"code\": \"CS-401\",\n  \"semester\": 4,\n  \"teacherName\": \"Dr. A.K. Sharma\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Delete Subject",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/subjects/sbj-1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "subjects",
+                    "sbj-1"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Materials & Video Upload System",
+          "item": [
+            {
+              "name": "Get All Materials & Videos",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/materials",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "materials"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Upload Study Material PDF Document",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/materials",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "materials"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"DBMS 2024 End Sem Solved PYQ Paper.pdf\",\n  \"category\": \"Previous Papers\",\n  \"uploadType\": \"PDF\",\n  \"subjectName\": \"DBMS\",\n  \"collegeName\": \"Delhi University (DU)\",\n  \"courseName\": \"B.Tech CS\",\n  \"semester\": 4,\n  \"pdfUrl\": \"https://studyhub.com/pdf/sample.pdf\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Publish Video Lecture URL",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/materials",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "materials"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"DBMS B-Trees & Indexing Video Lecture 14\",\n  \"category\": \"Video Lecture\",\n  \"uploadType\": \"Video\",\n  \"subjectName\": \"DBMS\",\n  \"collegeName\": \"Delhi University (DU)\",\n  \"courseName\": \"B.Tech CS\",\n  \"semester\": 4,\n  \"pdfUrl\": \"https://youtube.com/watch?v=demo1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Delete Material or Video",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/materials/mat-1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "materials",
+                    "mat-1"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Banners & Home Layout Manager",
+          "item": [
+            {
+              "name": "Get Promotional Banners List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/banners",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "banners"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Add New Promotional Banner",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/banners",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "banners"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"End-Sem Examination Datesheet Released\",\n  \"subtitle\": \"View complete May 2026 timetable now\",\n  \"imageUrl\": \"https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80\",\n  \"buttonText\": \"View Datesheet\",\n  \"redirectRoute\": \"/notifications\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Toggle Banner On/Off Status",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/banners/bnr-1/toggle",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "banners",
+                    "bnr-1",
+                    "toggle"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Home Layout Sections Order",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/home-sections",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "home-sections"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Toggle Home Layout Section",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/home-sections/sec-1/toggle",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "home-sections",
+                    "sec-1",
+                    "toggle"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Push Notification Broadcast",
+          "item": [
+            {
+              "name": "Get Broadcast Notice History",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/notifications",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "notifications"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Send Instant FCM Push Broadcast",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/notifications/broadcast",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "notifications",
+                    "broadcast"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"DU May 2026 End-Sem Examination Datesheet Released\",\n  \"description\": \"Complete timetable for B.Tech CS Sem 4 end sem exams is now available on feed.\",\n  \"category\": \"Exams\",\n  \"targetCollege\": \"Delhi University (DU)\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Student Directory & Moderation",
+          "item": [
+            {
+              "name": "Get All App Students Directory",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/students",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "students"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Toggle Block/Unblock Student Account",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/students/std-1/block",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "students",
+                    "std-1",
+                    "block"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Student Account",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/students/std-1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "students",
+                    "std-1"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Student Support & Feedback List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/api/v1/admin/feedback",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "feedback"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
