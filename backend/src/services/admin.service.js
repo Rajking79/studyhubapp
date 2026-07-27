@@ -1,100 +1,98 @@
 const AdminRepository = require("../repositories/admin.repository");
-const College = require("../models/College.model");
-const Course = require("../models/Course.model");
-const Subject = require("../models/Subject.model");
-const Material = require("../models/Material.model");
-const Banner = require("../models/Banner.model");
-const Notification = require("../models/Notification.model");
+const UserRepository = require("../repositories/user.repository");
+const AcademicRepository = require("../repositories/academic.repository");
+const MaterialRepository = require("../repositories/material.repository");
+const NotificationRepository = require("../repositories/notification.repository");
+const FeedbackRepository = require("../repositories/feedback.repository");
+const ApiError = require("../utils/ApiError");
+const { generateTokens } = require("../utils/generateTokens");
 
 class AdminService {
+  static async adminLogin({ email, password }) {
+    const admin = await UserRepository.findByEmailWithPassword(email);
+    if (!admin || !["admin", "super_admin"].includes(admin.role)) {
+      throw new ApiError(401, "Invalid admin credentials or non-admin account.");
+    }
+
+    const isMatch = await admin.isPasswordCorrect(password);
+    if (!isMatch) throw new ApiError(401, "Invalid admin credentials.");
+
+    if (admin.isBlocked) throw new ApiError(403, "Admin account suspended.");
+    if (admin.isDeleted) throw new ApiError(403, "Admin account deleted.");
+
+    const tokens = generateTokens(admin);
+    return { user: admin, token: tokens.accessToken, refreshToken: tokens.refreshToken };
+  }
+
+  static async adminRegister({ name, email, password, phone }) {
+    const existing = await UserRepository.findByEmail(email);
+    if (existing) throw new ApiError(409, "Account already exists with this email.");
+
+    const admin = await UserRepository.createUser({
+      name,
+      email: email.toLowerCase().trim(),
+      password,
+      phone: phone || "",
+      role: "admin",
+      isEmailVerified: true
+    });
+
+    const tokens = generateTokens(admin);
+    return { user: admin, token: tokens.accessToken, refreshToken: tokens.refreshToken };
+  }
+
   static async getStats() {
     return await AdminRepository.getStats();
   }
 
-  static async getStudents(queryParams) {
-    return await AdminRepository.getStudents(queryParams);
-  }
-
-  static async toggleBlockStudent(studentId) {
-    return await AdminRepository.toggleBlockStudent(studentId);
-  }
-
-  static async deleteStudent(studentId) {
-    return await AdminRepository.softDeleteStudent(studentId);
-  }
-
-  static async getFeedbacks(queryParams) {
-    return await AdminRepository.getFeedbacks(queryParams);
-  }
-
-  // Colleges CRUD
-  static async getColleges() {
-    return await College.find({ isDeleted: { $ne: true } }).lean();
-  }
-
-  static async addCollege(data) {
-    return await College.create(data);
-  }
-
-  static async editCollege(collegeId, data) {
-    return await College.findByIdAndUpdate(collegeId, { $set: data }, { new: true });
-  }
-
-  static async deleteCollege(collegeId) {
-    return await College.findByIdAndUpdate(collegeId, { $set: { isDeleted: true } }, { new: true });
-  }
-
-  // Courses CRUD
-  static async getCourses() {
-    return await Course.find({ isDeleted: { $ne: true } }).lean();
-  }
-
-  static async addCourse(data) {
-    return await Course.create(data);
-  }
-
-  static async deleteCourse(courseId) {
-    return await Course.findByIdAndUpdate(courseId, { $set: { isDeleted: true } }, { new: true });
-  }
-
-  // Subjects CRUD
-  static async getSubjects() {
-    return await Subject.find({}).lean();
-  }
-
-  static async addSubject(data) {
-    return await Subject.create(data);
-  }
-
-  static async deleteSubject(subjectId) {
-    return await Subject.findByIdAndDelete(subjectId);
-  }
-
-  // Banners CRUD
+  // Banner Operations
   static async getBanners() {
-    return await Banner.find({ isDeleted: { $ne: true } }).lean();
+    return await AdminRepository.getBanners();
   }
 
   static async addBanner(data) {
-    return await Banner.create(data);
+    return await AdminRepository.createBanner(data);
   }
 
-  static async toggleBanner(bannerId) {
-    const banner = await Banner.findById(bannerId);
-    if (!banner) return null;
-    banner.isActive = !banner.isActive;
-    await banner.save();
+  static async toggleBanner(id) {
+    const banner = await AdminRepository.toggleBanner(id);
+    if (!banner) throw new ApiError(404, "Banner not found");
     return banner;
   }
 
-  // Broadcast Notification
-  static async broadcastNotice(title, message, category) {
-    return await Notification.create({
+  // Students Operations
+  static async getStudents(queryParams) {
+    return await UserRepository.getAllStudents(queryParams);
+  }
+
+  static async toggleBlockStudent(studentId, blockedReason) {
+    const student = await UserRepository.toggleBlockStudent(studentId, blockedReason);
+    if (!student) throw new ApiError(404, "Student not found");
+    return student;
+  }
+
+  static async deleteStudent(studentId) {
+    const student = await UserRepository.softDeleteUser(studentId);
+    if (!student) throw new ApiError(404, "Student not found");
+    return student;
+  }
+
+  // Notifications Broadcast
+  static async broadcastNotice({ title, description, category, colorHex, targetCollege }) {
+    return await NotificationRepository.createNotice({
       title,
-      message,
-      category: category || "general",
-      createdAt: new Date()
+      description,
+      category: category || "Notices",
+      colorHex: colorHex || "#2563EB",
+      targetCollege: targetCollege || "all",
+      isGlobal: true,
+      userId: null
     });
+  }
+
+  // Feedback Operations
+  static async getFeedback(queryParams) {
+    return await FeedbackRepository.getAllFeedback(queryParams);
   }
 }
 

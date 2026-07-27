@@ -1,11 +1,10 @@
 const asyncHandler = require("../utils/asyncHandler");
 const ApiResponse = require("../utils/ApiResponse");
-const UserRepository = require("../repositories/user.repository");
-const MaterialRepository = require("../repositories/material.repository");
+const UserService = require("../services/user.service");
 
 const getProfile = asyncHandler(async (req, res) => {
-  const profile = await UserRepository.findById(req.user._id);
-  return res.status(200).json(new ApiResponse(200, profile || req.user, "Student profile fetched"));
+  const profile = await UserService.getProfile(req.user._id);
+  return res.status(200).json(new ApiResponse(200, profile, "Student profile fetched"));
 });
 
 const updateProfile = asyncHandler(async (req, res) => {
@@ -18,12 +17,12 @@ const updateProfile = asyncHandler(async (req, res) => {
   if (semester) updateData.semester = semester;
   if (avatarUrl) updateData.avatarUrl = avatarUrl;
 
-  const updatedProfile = await UserRepository.updateProfile(req.user._id, updateData);
+  const updatedProfile = await UserService.updateProfile(req.user._id, updateData);
   return res.status(200).json(new ApiResponse(200, updatedProfile, "Profile updated successfully"));
 });
 
 const getMyUploads = asyncHandler(async (req, res) => {
-  const uploads = await MaterialRepository.getMaterials({ page: 1, limit: 50 });
+  const uploads = await UserService.getMyUploads(req.user._id);
   return res.status(200).json(new ApiResponse(200, uploads.items, "My uploaded materials fetched"));
 });
 

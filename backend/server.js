@@ -3,6 +3,10 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const helmet = require("helmet");
 const path = require("path");
+const morgan = require("morgan");
+const compression = require("compression");
+const mongoSanitize = require("express-mongo-sanitize");
+const xss = require("xss-clean");
 
 dotenv.config();
 
@@ -12,11 +16,18 @@ const errorMiddleware = require("./src/middlewares/error.middleware.js");
 
 const app = express();
 
-// Middlewares
+// Security & Optimization Middlewares
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cors({ origin: process.env.CORS_ORIGIN || "*", credentials: true }));
 app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
+app.use(mongoSanitize());
+app.use(xss());
+app.use(compression());
+
+if (process.env.NODE_ENV !== "production") {
+  app.use(morgan("dev"));
+}
 
 // Root Welcome Route
 app.get("/", (req, res) => {
@@ -67,7 +78,7 @@ app.use("*", (req, res) => {
 // Global Error Handler Middleware
 app.use(errorMiddleware);
 
-// Start Server Immediately & Connect DB in Background
+// Start Server & Connect DB
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {

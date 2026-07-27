@@ -1,12 +1,24 @@
 const Material = require("../models/Material.model");
 
 class MaterialRepository {
-  static async getMaterials({ subjectId = "", category = "", tab = "pdf", examType = "", search = "", page = 1, limit = 20, sort = "createdAt", order = "desc" }) {
-    const query = { status: "approved" };
+  static async getMaterials({
+    subjectId = "",
+    category = "",
+    tabType = "",
+    examType = "",
+    search = "",
+    uploadedBy = "",
+    page = 1,
+    limit = 20,
+    sort = "createdAt",
+    order = "desc"
+  }) {
+    const query = { isDeleted: { $ne: true }, status: "approved" };
     if (subjectId) query.subjectId = subjectId;
-    if (category) query.category = category;
-    if (tab) query.tabType = tab;
+    if (category && category !== "All") query.category = category;
+    if (tabType) query.tabType = tabType;
     if (examType && examType !== "All") query.examType = examType;
+    if (uploadedBy) query.uploadedBy = uploadedBy;
     if (search) query.title = { $regex: search, $options: "i" };
 
     const skip = (page - 1) * limit;
@@ -20,16 +32,20 @@ class MaterialRepository {
     return { items, total, page: Number(page), limit: Number(limit), totalPages: Math.ceil(total / limit) || 1 };
   }
 
-  static async getMaterialById(materialId) {
-    return await Material.findById(materialId).lean();
+  static async getMaterialById(id) {
+    return await Material.findOne({ _id: id, isDeleted: { $ne: true } }).lean();
   }
 
-  static async createMaterial(materialData) {
-    return await Material.create(materialData);
+  static async createMaterial(data) {
+    return await Material.create(data);
   }
 
-  static async incrementDownloadCount(materialId) {
-    return await Material.findByIdAndUpdate(materialId, { $inc: { downloadsCount: 1 } }, { new: true });
+  static async incrementDownloadCount(id) {
+    return await Material.findByIdAndUpdate(id, { $inc: { downloadsCount: 1 } }, { new: true });
+  }
+
+  static async softDeleteMaterial(id) {
+    return await Material.findByIdAndUpdate(id, { $set: { isDeleted: true, deletedAt: new Date() } }, { new: true });
   }
 }
 

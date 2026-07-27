@@ -24,57 +24,59 @@ const {
   getBanners,
   addBanner,
   toggleBanner,
-  getHomeSections,
-  toggleHomeSection,
-  getNotifications,
-  broadcastNotice,
   getStudents,
   toggleBlockStudent,
   deleteStudent,
+  broadcastNotice,
   getFeedback
 } = require("../controllers/admin.controller");
 
-// Admin Auth & Profile
-router.post("/login", adminLogin);
-router.post("/register", adminRegister);
+const { authenticate, verifyAdmin } = require("../middlewares/auth.middleware");
+const { authRateLimiter } = require("../middlewares/rateLimiter.middleware");
+const { validateCollege, validateCourse, validateSubject } = require("../validators/academic.validator");
+const { validateBanner, validateBroadcastNotice } = require("../validators/admin.validator");
+
+// Public Admin Auth Routes
+router.post("/login", authRateLimiter, adminLogin);
+router.post("/register", authRateLimiter, adminRegister);
+
+// All subsequent Admin endpoints REQUIRE Admin JWT Authentication & Role Authorization!
+router.use(authenticate);
+router.use(verifyAdmin);
+
+// Admin Profile & Executive Analytics
 router.get("/profile", getAdminProfile);
 router.put("/profile", updateAdminProfile);
 router.put("/change-password", changeAdminPassword);
-
-// Executive Dashboard & Analytics
 router.get("/stats", getDashboardStats);
 
-// Academic Hierarchy (Colleges, Courses, Subjects)
+// Academic Hierarchy Management
 router.get("/colleges", getColleges);
-router.post("/colleges", addCollege);
-router.put("/colleges/:collegeId", editCollege);
+router.post("/colleges", validateCollege, addCollege);
+router.put("/colleges/:collegeId", validateCollege, editCollege);
 router.patch("/colleges/:collegeId/featured", toggleFeaturedCollege);
 router.delete("/colleges/:collegeId", deleteCollege);
 
 router.get("/courses", getCourses);
-router.post("/courses", addCourse);
+router.post("/courses", validateCourse, addCourse);
 router.delete("/courses/:courseId", deleteCourse);
 
 router.get("/subjects", getSubjects);
-router.post("/subjects", addSubject);
+router.post("/subjects", validateSubject, addSubject);
 router.delete("/subjects/:subjectId", deleteSubject);
 
-// Media & Study Materials (PDFs & Videos)
+// Media & Materials Management
 router.get("/materials", getMaterials);
 router.post("/materials", uploadMaterial);
 router.delete("/materials/:materialId", deleteMaterial);
 
-// Banners & Home Screen Manager
+// Banners Manager
 router.get("/banners", getBanners);
-router.post("/banners", addBanner);
+router.post("/banners", validateBanner, addBanner);
 router.patch("/banners/:bannerId/toggle", toggleBanner);
 
-router.get("/home-sections", getHomeSections);
-router.patch("/home-sections/:sectionId/toggle", toggleHomeSection);
-
-// Notifications Push Broadcast
-router.get("/notifications", getNotifications);
-router.post("/notifications/broadcast", broadcastNotice);
+// Notifications Broadcast
+router.post("/notifications/broadcast", validateBroadcastNotice, broadcastNotice);
 
 // Student Users Manager
 router.get("/students", getStudents);

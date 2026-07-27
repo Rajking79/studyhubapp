@@ -1,55 +1,107 @@
-const ApiError = require("../utils/ApiError");
+const { body, param } = require("express-validator");
+const validate = require("../middlewares/validate.middleware");
 
-const validateEmailFormat = (email) => {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return re.test(String(email).toLowerCase());
-};
+const validateRegister = [
+  body("name")
+    .trim()
+    .notEmpty()
+    .withMessage("Name is required")
+    .isLength({ min: 2 })
+    .withMessage("Name must be at least 2 characters long"),
+  body("email")
+    .trim()
+    .notEmpty()
+    .withMessage("Email is required")
+    .isEmail()
+    .withMessage("Please enter a valid email address")
+    .normalizeEmail(),
+  body("password")
+    .notEmpty()
+    .withMessage("Password is required")
+    .isLength({ min: 8 })
+    .withMessage("Password must be at least 8 characters long"),
+  body("confirmPassword")
+    .optional()
+    .custom((value, { req }) => {
+      if (value && value !== req.body.password) {
+        throw new Error("Password and confirm password do not match");
+      }
+      return true;
+    }),
+  body("phone")
+    .optional()
+    .trim(),
+  validate
+];
 
-const validatePasswordStrength = (password) => {
-  // Min 8 chars, 1 uppercase, 1 lowercase, 1 digit, 1 special char
-  const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-  return strongRegex.test(password);
-};
+const validateLogin = [
+  body("email")
+    .trim()
+    .notEmpty()
+    .withMessage("Email is required")
+    .isEmail()
+    .withMessage("Please enter a valid email address")
+    .normalizeEmail(),
+  body("password")
+    .notEmpty()
+    .withMessage("Password is required"),
+  validate
+];
 
-const validateRegisterInput = (req, res, next) => {
-  const { name, email, password, confirmPassword, phone, college, course, semester } = req.body;
+const validateGoogleLogin = [
+  body("idToken")
+    .notEmpty()
+    .withMessage("Google ID Token is required"),
+  validate
+];
 
-  const errors = [];
-  if (!name || name.trim().length < 2) errors.push("Name must be at least 2 characters");
-  if (!email || !validateEmailFormat(email)) errors.push("A valid email address is required");
-  if (!password) {
-    errors.push("Password is required");
-  } else if (password.length < 8) {
-    errors.push("Password must be at least 8 characters long");
-  }
-  if (confirmPassword !== undefined && password !== confirmPassword) {
-    errors.push("Password and Confirm Password do not match");
-  }
-  if (phone && !/^\+?[0-9]{7,15}$/.test(phone)) {
-    errors.push("Phone number format is invalid");
-  }
+const validateChangePassword = [
+  body("oldPassword")
+    .notEmpty()
+    .withMessage("Old password is required"),
+  body("newPassword")
+    .notEmpty()
+    .withMessage("New password is required")
+    .isLength({ min: 8 })
+    .withMessage("New password must be at least 8 characters long"),
+  validate
+];
 
-  if (errors.length > 0) {
-    return next(new ApiError(400, "Validation failed", errors));
-  }
-  next();
-};
+const validateForgotPassword = [
+  body("email")
+    .trim()
+    .notEmpty()
+    .withMessage("Email is required")
+    .isEmail()
+    .withMessage("Please enter a valid email address"),
+  validate
+];
 
-const validateLoginInput = (req, res, next) => {
-  const { email, password } = req.body;
-  const errors = [];
-  if (!email || !validateEmailFormat(email)) errors.push("A valid email address is required");
-  if (!password) errors.push("Password is required");
-
-  if (errors.length > 0) {
-    return next(new ApiError(400, "Validation failed", errors));
-  }
-  next();
-};
+const validateResetPassword = [
+  body("email")
+    .trim()
+    .notEmpty()
+    .withMessage("Email is required")
+    .isEmail()
+    .withMessage("Valid email is required"),
+  body("otp")
+    .notEmpty()
+    .withMessage("OTP is required"),
+  body("newPassword")
+    .notEmpty()
+    .withMessage("New password is required")
+    .isLength({ min: 8 })
+    .withMessage("Password must be at least 8 characters long"),
+  validate
+];
 
 module.exports = {
-  validateEmailFormat,
-  validatePasswordStrength,
-  validateRegisterInput,
-  validateLoginInput
+  validateRegisterInput: validateRegister,
+  validateLoginInput: validateLogin,
+  validateRegister,
+  validateLogin,
+  validateGoogleLogin,
+  validateChangePassword,
+  validateForgotPassword,
+  validateResetPassword
 };

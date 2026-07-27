@@ -1,27 +1,33 @@
 const GoogleAuthUtils = require("../utils/googleAuth.utils");
 const GoogleAuthRepository = require("../repositories/googleAuth.repository");
-const TokenService = require("../utils/token.service");
+const { generateTokens } = require("../utils/generateTokens");
+const ApiError = require("../utils/ApiError");
 
 class GoogleAuthService {
   static async processGoogleLogin(idToken, clientMetadata = {}) {
-    // 1. Verify Google ID Token server-side directly with Google
+    // 1. Verify Google ID Token server-side directly with Google Client
     const googleUser = await GoogleAuthUtils.verifyGoogleIdToken(idToken);
 
-    // 2. Query MongoDB for existing account by Email
+    // 2. Search MongoDB by verified Email extracted from token
     let user = await GoogleAuthRepository.findUserByEmail(googleUser.email);
 
     if (!user) {
-      // 3. User does not exist -> Create new account
+      // 3. User does not exist -> Create account (ONLY Google login auto-creates)
       user = await GoogleAuthRepository.createGoogleUser(googleUser);
     } else {
-      // 4. User exists -> Automatically link Google Account and update details
+      // 4. Status checks for existing user
+      if (user.isDeleted) throw new ApiError(403, "Account has been deleted.");
+      if (user.isBlocked) throw new ApiError(403, `Account suspended. ${user.blockedReason || ''}`);
+      if (user.isActive === false) throw new ApiError(403, "Account is inactive.");
+
+      // Link Google Account
       user = await GoogleAuthRepository.updateGoogleUser(user._id, googleUser);
     }
 
-    // 5. Generate Access Token (15 mins) & Refresh Token (30 days)
-    const { accessToken, refreshToken, expiresIn } = TokenService.generateAuthTokens(user);
+    // 5. Generate Access Token & Refresh Token
+    const { accessToken, refreshToken } = generateTokens(user);
 
-    // 6. Save Refresh Token in Database (`refresh_tokens` collection)
+    // 6. Record refresh token & login history
     await GoogleAuthRepository.saveRefreshToken(
       user._id,
       refreshToken,
@@ -29,7 +35,6 @@ class GoogleAuthService {
       clientMetadata.ipAddress
     );
 
-    // 7. Save Login History
     await GoogleAuthRepository.recordLoginHistory({
       userId: user._id,
       deviceName: clientMetadata.deviceName,
@@ -40,31 +45,24 @@ class GoogleAuthService {
       city: clientMetadata.city
     });
 
-    // 8. Record Security Activity Log
-    await GoogleAuthRepository.recordActivity(
-      user._id,
-      "GOOGLE_LOGIN_SUCCESS",
-      { provider: "google", email: user.email },
-      clientMetadata.ipAddress
-    );
-
-    // 9. Format Production User Response Payload
     const responseUser = {
       id: user._id.toString(),
       name: user.name,
       email: user.email,
-      avatar: user.avatarUrl || googleUser.avatar,
+      avatarUrl: user.avatarUrl || googleUser.avatar,
       college: user.college || "",
       course: user.course || "",
       semester: user.semester || "",
-      provider: "google"
+      role: user.role || "student",
+      isGuest: false,
+      loginMethod: "google"
     };
 
     return {
       user: responseUser,
-      accessToken,
+      token: accessToken,
       refreshToken,
-      expiresIn
+      expiresIn: "15m"
     };
   }
 }

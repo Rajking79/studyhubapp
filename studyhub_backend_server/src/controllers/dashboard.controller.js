@@ -18,14 +18,13 @@ const getContinueReading = asyncHandler(async (req, res) => {
 });
 
 const updateProgress = asyncHandler(async (req, res) => {
-  const { materialId, lastPage, lastTimeSeconds } = req.body;
-  return res.status(200).json(
-    new ApiResponse(
-      200,
-      { updated: true, materialId, lastPage, lastTimeSeconds, timestamp: new Date().toISOString() },
-      "Reading progress updated successfully"
-    )
-  );
+  const { materialId, lastPage, totalPages, lastTimeSeconds } = req.body;
+  const progress = await DashboardService.updateProgress(req.user._id, materialId, {
+    lastPage,
+    totalPages,
+    lastTimeSeconds
+  });
+  return res.status(200).json(new ApiResponse(200, progress, "Reading progress updated successfully in MongoDB"));
 });
 
 const globalSearch = asyncHandler(async (req, res) => {

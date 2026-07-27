@@ -6,24 +6,31 @@ class MaterialService {
     return await MaterialRepository.getMaterials(queryParams);
   }
 
-  static async getMaterialById(materialId) {
-    const material = await MaterialRepository.getMaterialById(materialId);
-    if (!material) throw new ApiError(404, "Study material not found");
+  static async getMaterialById(id) {
+    const material = await MaterialRepository.getMaterialById(id);
+    if (!material) throw new ApiError(404, "Material not found");
     return material;
   }
 
-  static async uploadMaterial(materialData, userId) {
-    return await MaterialRepository.createMaterial({
-      ...materialData,
+  static async uploadMaterial(data, userId) {
+    const materialData = {
+      ...data,
       uploadedBy: userId,
       status: "approved"
-    });
+    };
+    return await MaterialRepository.createMaterial(materialData);
   }
 
-  static async recordDownload(materialId) {
-    const updated = await MaterialRepository.incrementDownloadCount(materialId);
-    if (!updated) throw new ApiError(404, "Material not found to record download");
-    return updated;
+  static async recordDownload(id) {
+    const material = await MaterialRepository.incrementDownloadCount(id);
+    if (!material) throw new ApiError(404, "Material not found");
+    return material;
+  }
+
+  static async deleteMaterial(id) {
+    const material = await MaterialRepository.softDeleteMaterial(id);
+    if (!material) throw new ApiError(404, "Material not found");
+    return material;
   }
 }
 

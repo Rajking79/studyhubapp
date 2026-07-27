@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const notificationSchema = new mongoose.Schema(
   {
-    title: { type: String, required: true },
+    title: { type: String, required: true, trim: true },
     category: {
       type: String,
       enum: ["All", "Notices", "Exams", "New Uploads"],
@@ -11,8 +11,12 @@ const notificationSchema = new mongoose.Schema(
     description: { type: String, required: true },
     colorHex: { type: String, default: "#2563EB" },
     isUnread: { type: Boolean, default: true },
+    readBy: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     targetCollege: { type: String, default: "all" },
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // null if broadcast to all
+    isGlobal: { type: Boolean, default: false },
+    isDeleted: { type: Boolean, default: false },
+    deletedAt: { type: Date, default: null }
   },
   { timestamps: true }
 );

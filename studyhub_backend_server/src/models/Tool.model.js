@@ -1,28 +1,28 @@
 const mongoose = require("mongoose");
 
-const cgpaSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  semester: { type: String, required: true },
-  subjects: [
-    {
-      name: String,
-      credits: Number,
-      grade: String
+const toolSchema = new mongoose.Schema(
+  {
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    toolType: { type: String, enum: ["cgpa", "attendance"], required: true },
+    cgpaData: {
+      semester: { type: String, default: "" },
+      subjects: [
+        {
+          name: { type: String, default: "" },
+          grade: { type: String, default: "A" },
+          credits: { type: Number, default: 4 }
+        }
+      ],
+      cgpa: { type: Number, default: 0 }
+    },
+    attendanceData: {
+      subjectName: { type: String, default: "" },
+      attended: { type: Number, default: 0 },
+      total: { type: Number, default: 0 },
+      targetPercentage: { type: Number, default: 75 }
     }
-  ],
-  sgpa: { type: Number, required: true },
-  overallCgpa: { type: Number, default: 0.0 }
-}, { timestamps: true });
+  },
+  { timestamps: true }
+);
 
-const attendanceSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  subjectName: { type: String, required: true },
-  attended: { type: Number, default: 0 },
-  total: { type: Number, default: 0 },
-  targetPercentage: { type: Number, default: 75 }
-}, { timestamps: true });
-
-const CGPA = mongoose.model("CGPA", cgpaSchema);
-const Attendance = mongoose.model("Attendance", attendanceSchema);
-
-module.exports = { CGPA, Attendance };
+module.exports = mongoose.model("Tool", toolSchema);
