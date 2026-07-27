@@ -61,12 +61,20 @@ const collection = {
           item: [
             req("Register Student (with Confirm Password)", "POST", "auth/register", { name: "Rahul Sharma", email: "rahul@studyhub.com", password: "Password@123", confirmPassword: "Password@123", phone: "9876543210", college: "Delhi University", course: "B.Tech CS", semester: "Semester 4" }),
             req("Login Student (Email & Password)", "POST", "auth/login", { email: "rahul@studyhub.com", password: "Password@123" }),
-            req("Google Sign-In / Login", "POST", "auth/google-login", { googleIdToken: "sample_google_token", email: "rahul.google@studyhub.com", name: "Rahul Sharma" }),
+            req("Google Sign-In / Login", "POST", "auth/google-login", { idToken: "sample_google_token" }),
             req("Continue as Guest Mode", "POST", "auth/guest-login", { deviceId: "android_device_12345" }),
+            req("Refresh Access Token", "POST", "auth/refresh-token", { refreshToken: "sample_refresh_token" }),
+            req("Get Current User Profile (Me)", "GET", "auth/me"),
+            req("Change Student Password", "POST", "auth/change-password", { oldPassword: "Password@123", newPassword: "NewPassword@456" }),
+            req("Verify Email Token", "POST", "auth/verify-email", { token: "sample_verification_token" }),
+            req("Resend Email Verification Link", "POST", "auth/resend-email-verification", { email: "rahul@studyhub.com" }),
+            req("Get Login Audit History", "GET", "auth/login-history"),
             req("Logout Student", "POST", "auth/logout"),
+            req("Logout All Devices", "POST", "auth/logout-all-devices"),
+            req("Delete Account", "DELETE", "auth/delete-account", { password: "Password@123" }),
             req("Forgot Password (Dynamic OTP)", "POST", "auth/forgot-password", { email: "rahul@studyhub.com" }),
             req("Resend Dynamic OTP", "POST", "auth/resend-otp", { email: "rahul@studyhub.com" }),
-            req("Verify Dynamic OTP", "POST", "auth/verify-otp", { email: "rahul@studyhub.com", otp: "123456" }),
+            req("Verify Dynamic OTP", "POST", "auth/verify-otp", { email: "rahul@studyhub.com", otp: "685538" }),
             req("Reset Password", "POST", "auth/reset-password", { resetToken: "sample_token", newPassword: "NewPass@123" })
           ]
         },
