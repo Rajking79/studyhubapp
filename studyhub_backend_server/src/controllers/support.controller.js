@@ -1,9 +1,16 @@
 const asyncHandler = require("../utils/asyncHandler");
 const ApiResponse = require("../utils/ApiResponse");
+const Feedback = require("../models/Feedback.model");
 
 const submitFeedback = asyncHandler(async (req, res) => {
   const { type, message, rating } = req.body;
-  return res.status(201).json(new ApiResponse(201, { type, message, rating }, "Feedback submitted. Thank you!"));
+  const record = await Feedback.create({
+    userId: req.user?._id,
+    type: type || "feedback",
+    message: message || "Student feedback",
+    rating: Number(rating || 5)
+  });
+  return res.status(201).json(new ApiResponse(201, record, "Feedback submitted to MongoDB. Thank you!"));
 });
 
 const getLegalDocs = asyncHandler(async (req, res) => {

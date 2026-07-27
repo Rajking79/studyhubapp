@@ -9,7 +9,7 @@ const getSettings = asyncHandler(async (req, res) => {
     emailAnnouncements: false,
     dataSaver: false
   };
-  return res.status(200).json(new ApiResponse(200, settings, "Settings fetched"));
+  return res.status(200).json(new ApiResponse(200, settings, "User settings fetched successfully"));
 });
 
 const updateSettings = asyncHandler(async (req, res) => {
