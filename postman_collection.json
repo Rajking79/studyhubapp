@@ -2,32 +2,32 @@
   "info": {
     "_postman_id": "studyhub-production-postman-suite-2026",
     "name": "StudyHub Live Production REST API Suite (Render Cloud)",
-    "description": "Official Production Postman Collection with 84 fully functional endpoints. Features Automatic Token Saving and DEV LOGIN. Pointing directly to Render Cloud deployment: https://studyhub-backend-server.onrender.com/api/v1",
+    "description": "Official Production Postman Collection built with reference structure. Features BASE_URL, TOKEN, and ADMIN_TOKEN collection variables with automatic token saving test scripts.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
     {
-      "key": "baseUrl",
+      "key": "BASE_URL",
       "value": "https://studyhub-backend-server.onrender.com/api/v1",
       "type": "string"
     },
     {
-      "key": "token",
+      "key": "TOKEN",
       "value": "",
       "type": "string"
     },
     {
-      "key": "adminToken",
+      "key": "ADMIN_TOKEN",
       "value": "",
       "type": "string"
     }
   ],
   "item": [
     {
-      "name": "🔐 1. Student Authentication & Security (18 APIs)",
+      "name": "Auth",
       "item": [
         {
-          "name": "⚡ DEV LOGIN (Fast 1-Click Testing - No Password Needed)",
+          "name": " DEV LOGIN (Testing ke liye - No OTP needed)",
           "request": {
             "method": "POST",
             "header": [
@@ -37,13 +37,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/auth/dev-login",
+              "raw": "{{BASE_URL}}/auth/dev-login",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "auth",
@@ -52,7 +52,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"phone\": \"9876543210\",\n  \"email\": \"rahul@studyhub.com\"\n}",
+              "raw": "{\n  \"phone\": \"+919876543210\",\n  \"email\": \"rahul@studyhub.com\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -66,10 +66,10 @@
               "script": {
                 "exec": [
                   "var json = pm.response.json();",
-                  "var tokenVal = (json.data && json.data.token) || json.token;",
-                  "if (tokenVal) {",
-                  "  pm.collectionVariables.set('token', tokenVal);",
-                  "  console.log('✅ token saved automatically:', tokenVal);",
+                  "var tok = json.token || (json.data && json.data.token);",
+                  "if (tok) {",
+                  "  pm.collectionVariables.set('TOKEN', tok);",
+                  "  console.log('Token saved:', tok);",
                   "}"
                 ]
               }
@@ -77,7 +77,7 @@
           ]
         },
         {
-          "name": "Register Student",
+          "name": "Register (Email + Password)",
           "request": {
             "method": "POST",
             "header": [
@@ -87,13 +87,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/auth/register",
+              "raw": "{{BASE_URL}}/auth/register",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "auth",
@@ -116,10 +116,10 @@
               "script": {
                 "exec": [
                   "var json = pm.response.json();",
-                  "var tokenVal = (json.data && json.data.token) || json.token;",
-                  "if (tokenVal) {",
-                  "  pm.collectionVariables.set('token', tokenVal);",
-                  "  console.log('✅ token saved automatically:', tokenVal);",
+                  "var tok = json.token || (json.data && json.data.token);",
+                  "if (tok) {",
+                  "  pm.collectionVariables.set('TOKEN', tok);",
+                  "  console.log('Token saved:', tok);",
                   "}"
                 ]
               }
@@ -127,7 +127,7 @@
           ]
         },
         {
-          "name": "Login Student",
+          "name": "Login (Email + Password)",
           "request": {
             "method": "POST",
             "header": [
@@ -137,13 +137,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/auth/login",
+              "raw": "{{BASE_URL}}/auth/login",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "auth",
@@ -166,10 +166,10 @@
               "script": {
                 "exec": [
                   "var json = pm.response.json();",
-                  "var tokenVal = (json.data && json.data.token) || json.token;",
-                  "if (tokenVal) {",
-                  "  pm.collectionVariables.set('token', tokenVal);",
-                  "  console.log('✅ token saved automatically:', tokenVal);",
+                  "var tok = json.token || (json.data && json.data.token);",
+                  "if (tok) {",
+                  "  pm.collectionVariables.set('TOKEN', tok);",
+                  "  console.log('Token saved:', tok);",
                   "}"
                 ]
               }
@@ -177,7 +177,7 @@
           ]
         },
         {
-          "name": "Google OAuth Login",
+          "name": "Google Login",
           "request": {
             "method": "POST",
             "header": [
@@ -187,13 +187,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/auth/google-login",
+              "raw": "{{BASE_URL}}/auth/google-login",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "auth",
@@ -216,10 +216,10 @@
               "script": {
                 "exec": [
                   "var json = pm.response.json();",
-                  "var tokenVal = (json.data && json.data.token) || json.token;",
-                  "if (tokenVal) {",
-                  "  pm.collectionVariables.set('token', tokenVal);",
-                  "  console.log('✅ token saved automatically:', tokenVal);",
+                  "var tok = json.token || (json.data && json.data.token);",
+                  "if (tok) {",
+                  "  pm.collectionVariables.set('TOKEN', tok);",
+                  "  console.log('Token saved:', tok);",
                   "}"
                 ]
               }
@@ -237,13 +237,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/auth/guest-login",
+              "raw": "{{BASE_URL}}/auth/guest-login",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "auth",
@@ -266,10 +266,10 @@
               "script": {
                 "exec": [
                   "var json = pm.response.json();",
-                  "var tokenVal = (json.data && json.data.token) || json.token;",
-                  "if (tokenVal) {",
-                  "  pm.collectionVariables.set('token', tokenVal);",
-                  "  console.log('✅ token saved automatically:', tokenVal);",
+                  "var tok = json.token || (json.data && json.data.token);",
+                  "if (tok) {",
+                  "  pm.collectionVariables.set('TOKEN', tok);",
+                  "  console.log('Token saved:', tok);",
                   "}"
                 ]
               }
@@ -277,7 +277,7 @@
           ]
         },
         {
-          "name": "Refresh Access Token",
+          "name": "Refresh Token",
           "request": {
             "method": "POST",
             "header": [
@@ -287,13 +287,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/auth/refresh-token",
+              "raw": "{{BASE_URL}}/auth/refresh-token",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "auth",
@@ -316,10 +316,10 @@
               "script": {
                 "exec": [
                   "var json = pm.response.json();",
-                  "var tokenVal = (json.data && json.data.token) || json.token;",
-                  "if (tokenVal) {",
-                  "  pm.collectionVariables.set('token', tokenVal);",
-                  "  console.log('✅ token saved automatically:', tokenVal);",
+                  "var tok = json.token || (json.data && json.data.token);",
+                  "if (tok) {",
+                  "  pm.collectionVariables.set('TOKEN', tok);",
+                  "  console.log('Token saved:', tok);",
                   "}"
                 ]
               }
@@ -327,19 +327,19 @@
           ]
         },
         {
-          "name": "Get Current User Profile (Me)",
+          "name": "Get Profile",
           "request": {
             "method": "GET",
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/auth/me",
+              "raw": "{{BASE_URL}}/auth/me",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "auth",
@@ -349,7 +349,7 @@
           }
         },
         {
-          "name": "Change Student Password",
+          "name": "Change Password",
           "request": {
             "method": "POST",
             "header": [
@@ -359,13 +359,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/auth/change-password",
+              "raw": "{{BASE_URL}}/auth/change-password",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "auth",
@@ -384,7 +384,7 @@
           }
         },
         {
-          "name": "Verify Email Token",
+          "name": "Verify Email",
           "request": {
             "method": "POST",
             "header": [
@@ -394,13 +394,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/auth/verify-email",
+              "raw": "{{BASE_URL}}/auth/verify-email",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "auth",
@@ -419,7 +419,7 @@
           }
         },
         {
-          "name": "Resend Email Verification Link",
+          "name": "Resend Email Verification",
           "request": {
             "method": "POST",
             "header": [
@@ -429,13 +429,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/auth/resend-email-verification",
+              "raw": "{{BASE_URL}}/auth/resend-email-verification",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "auth",
@@ -454,19 +454,19 @@
           }
         },
         {
-          "name": "Get Login Audit History",
+          "name": "Get Login History",
           "request": {
             "method": "GET",
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/auth/login-history",
+              "raw": "{{BASE_URL}}/auth/login-history",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "auth",
@@ -480,10 +480,10 @@
               "script": {
                 "exec": [
                   "var json = pm.response.json();",
-                  "var tokenVal = (json.data && json.data.token) || json.token;",
-                  "if (tokenVal) {",
-                  "  pm.collectionVariables.set('token', tokenVal);",
-                  "  console.log('✅ token saved automatically:', tokenVal);",
+                  "var tok = json.token || (json.data && json.data.token);",
+                  "if (tok) {",
+                  "  pm.collectionVariables.set('TOKEN', tok);",
+                  "  console.log('Token saved:', tok);",
                   "}"
                 ]
               }
@@ -491,7 +491,7 @@
           ]
         },
         {
-          "name": "Logout Student",
+          "name": "Logout",
           "request": {
             "method": "POST",
             "header": [
@@ -501,13 +501,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/auth/logout",
+              "raw": "{{BASE_URL}}/auth/logout",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "auth",
@@ -527,13 +527,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/auth/logout-all-devices",
+              "raw": "{{BASE_URL}}/auth/logout-all-devices",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "auth",
@@ -553,13 +553,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/auth/delete-account",
+              "raw": "{{BASE_URL}}/auth/delete-account",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "auth",
@@ -569,7 +569,7 @@
           }
         },
         {
-          "name": "Forgot Password (Dynamic OTP)",
+          "name": "Forgot Password (OTP generate)",
           "request": {
             "method": "POST",
             "header": [
@@ -579,13 +579,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/auth/forgot-password",
+              "raw": "{{BASE_URL}}/auth/forgot-password",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "auth",
@@ -604,7 +604,7 @@
           }
         },
         {
-          "name": "Resend Dynamic OTP",
+          "name": "Resend OTP",
           "request": {
             "method": "POST",
             "header": [
@@ -614,13 +614,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/auth/resend-otp",
+              "raw": "{{BASE_URL}}/auth/resend-otp",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "auth",
@@ -639,7 +639,7 @@
           }
         },
         {
-          "name": "Verify Dynamic OTP",
+          "name": "Verify OTP (App User Login)",
           "request": {
             "method": "POST",
             "header": [
@@ -649,13 +649,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/auth/verify-otp",
+              "raw": "{{BASE_URL}}/auth/verify-otp",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "auth",
@@ -678,10 +678,10 @@
               "script": {
                 "exec": [
                   "var json = pm.response.json();",
-                  "var tokenVal = (json.data && json.data.token) || json.token;",
-                  "if (tokenVal) {",
-                  "  pm.collectionVariables.set('token', tokenVal);",
-                  "  console.log('✅ token saved automatically:', tokenVal);",
+                  "var tok = json.token || (json.data && json.data.token);",
+                  "if (tok) {",
+                  "  pm.collectionVariables.set('TOKEN', tok);",
+                  "  console.log('Token saved:', tok);",
                   "}"
                 ]
               }
@@ -689,7 +689,7 @@
           ]
         },
         {
-          "name": "Reset Password",
+          "name": "New Password (OTP + New Password)",
           "request": {
             "method": "POST",
             "header": [
@@ -699,13 +699,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/auth/reset-password",
+              "raw": "{{BASE_URL}}/auth/reset-password",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "auth",
@@ -726,22 +726,22 @@
       ]
     },
     {
-      "name": "🏠 2. Student Dashboard & Home Feed (5 APIs)",
+      "name": "Dashboard",
       "item": [
         {
-          "name": "Get Home Feed Data",
+          "name": "Get Dashboard",
           "request": {
             "method": "GET",
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/dashboard/home",
+              "raw": "{{BASE_URL}}/dashboard/home",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "dashboard",
@@ -757,13 +757,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/dashboard/banners",
+              "raw": "{{BASE_URL}}/dashboard/banners",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "dashboard",
@@ -779,13 +779,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/dashboard/continue-reading",
+              "raw": "{{BASE_URL}}/dashboard/continue-reading",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "dashboard",
@@ -805,13 +805,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/dashboard/update-progress",
+              "raw": "{{BASE_URL}}/dashboard/update-progress",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "dashboard",
@@ -830,19 +830,19 @@
           }
         },
         {
-          "name": "Global Search (Voice & Camera OCR)",
+          "name": "Global Search",
           "request": {
             "method": "GET",
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/dashboard/search?q=operating system&type=all",
+              "raw": "{{BASE_URL}}/dashboard/search?q=operating system&type=all",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "dashboard",
@@ -864,7 +864,7 @@
       ]
     },
     {
-      "name": "🎓 3. Academic Hierarchy (Colleges, Courses, Subjects) (7 APIs)",
+      "name": "Academic Hierarchy",
       "item": [
         {
           "name": "Get Colleges List",
@@ -873,13 +873,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/colleges?search=Delhi&category=State Univ",
+              "raw": "{{BASE_URL}}/colleges?search=Delhi&category=State Univ",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "colleges"
@@ -904,13 +904,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/colleges/du_dtu",
+              "raw": "{{BASE_URL}}/colleges/du_dtu",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "colleges",
@@ -926,13 +926,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/courses?collegeId=du_dtu",
+              "raw": "{{BASE_URL}}/courses?collegeId=du_dtu",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "courses"
@@ -953,13 +953,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/courses/btech_cs/years",
+              "raw": "{{BASE_URL}}/courses/btech_cs/years",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "courses",
@@ -976,13 +976,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/courses/btech_cs/semesters?year=2",
+              "raw": "{{BASE_URL}}/courses/btech_cs/semesters?year=2",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "courses",
@@ -1005,13 +1005,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/subjects?courseId=btech_cs&semester=4",
+              "raw": "{{BASE_URL}}/subjects?courseId=btech_cs&semester=4",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "subjects"
@@ -1036,13 +1036,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/subjects/subj_os_401",
+              "raw": "{{BASE_URL}}/subjects/subj_os_401",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "subjects",
@@ -1054,7 +1054,7 @@
       ]
     },
     {
-      "name": "📚 4. Study Materials (Notes, PYQs, Books, Videos, Q-Bank) (9 APIs)",
+      "name": "Study Materials",
       "item": [
         {
           "name": "Filter All Materials",
@@ -1063,13 +1063,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/materials?subjectId=subj_os_401&category=Notes&page=1&limit=10",
+              "raw": "{{BASE_URL}}/materials?subjectId=subj_os_401&category=Notes&page=1&limit=10",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "materials"
@@ -1102,13 +1102,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/materials/mat_os_notes_101",
+              "raw": "{{BASE_URL}}/materials/mat_os_notes_101",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "materials",
@@ -1124,13 +1124,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/pyqs?subjectId=subj_os_401&year=2024",
+              "raw": "{{BASE_URL}}/pyqs?subjectId=subj_os_401&year=2024",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "pyqs"
@@ -1155,13 +1155,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/notes?subjectId=subj_os_401",
+              "raw": "{{BASE_URL}}/notes?subjectId=subj_os_401",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "notes"
@@ -1182,13 +1182,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/books?subjectId=subj_os_401",
+              "raw": "{{BASE_URL}}/books?subjectId=subj_os_401",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "books"
@@ -1209,13 +1209,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/videos?subjectId=subj_os_401",
+              "raw": "{{BASE_URL}}/videos?subjectId=subj_os_401",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "videos"
@@ -1236,13 +1236,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/question-bank?subjectId=subj_os_401",
+              "raw": "{{BASE_URL}}/question-bank?subjectId=subj_os_401",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "question-bank"
@@ -1257,19 +1257,19 @@
           }
         },
         {
-          "name": "Stream Video Lecture (HLS/MP4)",
+          "name": "Stream Video Lecture",
           "request": {
             "method": "GET",
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/videos/vid_os_101/stream",
+              "raw": "{{BASE_URL}}/videos/vid_os_101/stream",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "videos",
@@ -1286,13 +1286,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/materials/mat_os_notes_101/download",
+              "raw": "{{BASE_URL}}/materials/mat_os_notes_101/download",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "materials",
@@ -1305,10 +1305,10 @@
       ]
     },
     {
-      "name": "🤖 5. AI Assistant & Snap & Solve Engine (4 APIs)",
+      "name": "AI Assistant",
       "item": [
         {
-          "name": "Ask AI Assistant (GPT-4o Mini)",
+          "name": "Ask AI Assistant",
           "request": {
             "method": "POST",
             "header": [
@@ -1318,13 +1318,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/ai/chat",
+              "raw": "{{BASE_URL}}/ai/chat",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "ai",
@@ -1343,7 +1343,7 @@
           }
         },
         {
-          "name": "Snap & Solve (OCR Image Solution)",
+          "name": "Snap & Solve (OCR Solution)",
           "request": {
             "method": "POST",
             "header": [
@@ -1353,13 +1353,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/ai/snap-and-solve",
+              "raw": "{{BASE_URL}}/ai/snap-and-solve",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "ai",
@@ -1384,13 +1384,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/ai/history?page=1&limit=20",
+              "raw": "{{BASE_URL}}/ai/history?page=1&limit=20",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "ai",
@@ -1416,13 +1416,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/ai/history/clear",
+              "raw": "{{BASE_URL}}/ai/history/clear",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "ai",
@@ -1435,7 +1435,7 @@
       ]
     },
     {
-      "name": "⚙️ 6. Utility Tools (CGPA Calculator & Attendance Tracker) (8 APIs)",
+      "name": "Utility Tools",
       "item": [
         {
           "name": "Calculate CGPA/SGPA",
@@ -1448,13 +1448,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/tools/cgpa/calculate",
+              "raw": "{{BASE_URL}}/tools/cgpa/calculate",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "tools",
@@ -1484,13 +1484,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/tools/cgpa/save",
+              "raw": "{{BASE_URL}}/tools/cgpa/save",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "tools",
@@ -1516,13 +1516,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/tools/cgpa/my-calculations",
+              "raw": "{{BASE_URL}}/tools/cgpa/my-calculations",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "tools",
@@ -1533,19 +1533,19 @@
           }
         },
         {
-          "name": "Get Attendance Overview",
+          "name": "Get Attendance Summary",
           "request": {
             "method": "GET",
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/tools/attendance/summary",
+              "raw": "{{BASE_URL}}/tools/attendance/summary",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "tools",
@@ -1566,13 +1566,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/tools/attendance/subject",
+              "raw": "{{BASE_URL}}/tools/attendance/subject",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "tools",
@@ -1592,7 +1592,7 @@
           }
         },
         {
-          "name": "Log Class Attendance (Present/Absent/Cancelled)",
+          "name": "Log Class Attendance",
           "request": {
             "method": "POST",
             "header": [
@@ -1602,13 +1602,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/tools/attendance/log",
+              "raw": "{{BASE_URL}}/tools/attendance/log",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "tools",
@@ -1628,7 +1628,7 @@
           }
         },
         {
-          "name": "Update Subject Attendance Target",
+          "name": "Update Attendance Target",
           "request": {
             "method": "PUT",
             "header": [
@@ -1638,13 +1638,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/tools/attendance/subject/att_subj_os_101",
+              "raw": "{{BASE_URL}}/tools/attendance/subject/att_subj_os_101",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "tools",
@@ -1671,13 +1671,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/tools/attendance/subject/att_subj_os_101",
+              "raw": "{{BASE_URL}}/tools/attendance/subject/att_subj_os_101",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "tools",
@@ -1691,10 +1691,10 @@
       ]
     },
     {
-      "name": "⭐ 7. Offline Downloads, Favorites & User Activity (6 APIs)",
+      "name": "Favorites & Downloads",
       "item": [
         {
-          "name": "Toggle Favorite / Bookmark Status",
+          "name": "Toggle Favorite Status",
           "request": {
             "method": "POST",
             "header": [
@@ -1704,13 +1704,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/favorites/toggle",
+              "raw": "{{BASE_URL}}/favorites/toggle",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "favorites",
@@ -1729,19 +1729,19 @@
           }
         },
         {
-          "name": "Get All User Favorites",
+          "name": "Get All Favorites",
           "request": {
             "method": "GET",
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/favorites",
+              "raw": "{{BASE_URL}}/favorites",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "favorites"
@@ -1750,7 +1750,7 @@
           }
         },
         {
-          "name": "Sync Offline Download Record",
+          "name": "Sync Download Record",
           "request": {
             "method": "POST",
             "header": [
@@ -1760,13 +1760,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/downloads/sync",
+              "raw": "{{BASE_URL}}/downloads/sync",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "downloads",
@@ -1785,19 +1785,19 @@
           }
         },
         {
-          "name": "Get User Downloaded Materials List",
+          "name": "Get Downloaded List",
           "request": {
             "method": "GET",
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/downloads",
+              "raw": "{{BASE_URL}}/downloads",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "downloads"
@@ -1806,19 +1806,19 @@
           }
         },
         {
-          "name": "Get Student Activity Logs",
+          "name": "Get Activity Logs",
           "request": {
             "method": "GET",
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/activity-logs?page=1&limit=20",
+              "raw": "{{BASE_URL}}/activity-logs?page=1&limit=20",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "activity-logs"
@@ -1837,19 +1837,19 @@
           }
         },
         {
-          "name": "Get User Notifications",
+          "name": "Get Notifications",
           "request": {
             "method": "GET",
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/notifications?unreadOnly=false",
+              "raw": "{{BASE_URL}}/notifications?unreadOnly=false",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "notifications"
@@ -1866,7 +1866,7 @@
       ]
     },
     {
-      "name": "⚡ 8. Admin Control Panel Suite (30 APIs)",
+      "name": "Admin",
       "item": [
         {
           "name": "Admin Login",
@@ -1879,13 +1879,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/login",
+              "raw": "{{BASE_URL}}/admin/login",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -1908,10 +1908,10 @@
               "script": {
                 "exec": [
                   "var json = pm.response.json();",
-                  "var tokenVal = (json.data && json.data.token) || json.token;",
-                  "if (tokenVal) {",
-                  "  pm.collectionVariables.set('adminToken', tokenVal);",
-                  "  console.log('✅ adminToken saved automatically:', tokenVal);",
+                  "var tok = json.token || (json.data && json.data.token);",
+                  "if (tok) {",
+                  "  pm.collectionVariables.set('ADMIN_TOKEN', tok);",
+                  "  console.log('Token saved:', tok);",
                   "}"
                 ]
               }
@@ -1919,19 +1919,19 @@
           ]
         },
         {
-          "name": "Get Overview Analytics & Stats",
+          "name": "Get Dashboard Stats",
           "request": {
             "method": "GET",
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/stats",
+              "raw": "{{BASE_URL}}/admin/stats",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -1941,19 +1941,19 @@
           }
         },
         {
-          "name": "Get Recent Activity Logs",
+          "name": "Get Activity Logs",
           "request": {
             "method": "GET",
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/activity-logs",
+              "raw": "{{BASE_URL}}/admin/activity-logs",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -1963,19 +1963,19 @@
           }
         },
         {
-          "name": "Get System Health Diagnostics",
+          "name": "Get System Health",
           "request": {
             "method": "GET",
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/health",
+              "raw": "{{BASE_URL}}/admin/health",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -1985,7 +1985,7 @@
           }
         },
         {
-          "name": "Create New College",
+          "name": "Create College",
           "request": {
             "method": "POST",
             "header": [
@@ -1995,13 +1995,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/colleges",
+              "raw": "{{BASE_URL}}/admin/colleges",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -2020,7 +2020,7 @@
           }
         },
         {
-          "name": "Update College Info",
+          "name": "Update College",
           "request": {
             "method": "PUT",
             "header": [
@@ -2030,13 +2030,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/colleges/du_dtu",
+              "raw": "{{BASE_URL}}/admin/colleges/du_dtu",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -2062,13 +2062,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/colleges/du_dtu",
+              "raw": "{{BASE_URL}}/admin/colleges/du_dtu",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -2079,7 +2079,7 @@
           }
         },
         {
-          "name": "Create New Course",
+          "name": "Create Course",
           "request": {
             "method": "POST",
             "header": [
@@ -2089,13 +2089,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/courses",
+              "raw": "{{BASE_URL}}/admin/courses",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -2114,7 +2114,7 @@
           }
         },
         {
-          "name": "Update Course Info",
+          "name": "Update Course",
           "request": {
             "method": "PUT",
             "header": [
@@ -2124,13 +2124,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/courses/btech_cs",
+              "raw": "{{BASE_URL}}/admin/courses/btech_cs",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -2156,13 +2156,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/courses/btech_cs",
+              "raw": "{{BASE_URL}}/admin/courses/btech_cs",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -2183,13 +2183,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/subjects",
+              "raw": "{{BASE_URL}}/admin/subjects",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -2218,13 +2218,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/subjects/subj_os_401",
+              "raw": "{{BASE_URL}}/admin/subjects/subj_os_401",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -2250,13 +2250,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/subjects/subj_os_401",
+              "raw": "{{BASE_URL}}/admin/subjects/subj_os_401",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -2267,7 +2267,7 @@
           }
         },
         {
-          "name": "Upload New Study Material",
+          "name": "Upload Material",
           "request": {
             "method": "POST",
             "header": [
@@ -2277,13 +2277,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/materials",
+              "raw": "{{BASE_URL}}/admin/materials",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -2302,7 +2302,7 @@
           }
         },
         {
-          "name": "Update Material Record",
+          "name": "Update Material",
           "request": {
             "method": "PUT",
             "header": [
@@ -2312,13 +2312,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/materials/mat_os_notes_101",
+              "raw": "{{BASE_URL}}/admin/materials/mat_os_notes_101",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -2338,19 +2338,19 @@
           }
         },
         {
-          "name": "Delete Study Material",
+          "name": "Delete Material",
           "request": {
             "method": "DELETE",
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/materials/mat_os_notes_101",
+              "raw": "{{BASE_URL}}/admin/materials/mat_os_notes_101",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -2367,13 +2367,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/users?role=student&page=1&limit=10",
+              "raw": "{{BASE_URL}}/admin/users?role=student&page=1&limit=10",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -2397,19 +2397,19 @@
           }
         },
         {
-          "name": "Get Student Profile Details",
+          "name": "Get Student Profile",
           "request": {
             "method": "GET",
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/users/usr_student_101",
+              "raw": "{{BASE_URL}}/admin/users/usr_student_101",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -2420,7 +2420,7 @@
           }
         },
         {
-          "name": "Block / Deactivate Student",
+          "name": "Block Student",
           "request": {
             "method": "PATCH",
             "header": [
@@ -2430,13 +2430,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/users/usr_student_101/block",
+              "raw": "{{BASE_URL}}/admin/users/usr_student_101/block",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -2467,13 +2467,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/users/usr_student_101/unblock",
+              "raw": "{{BASE_URL}}/admin/users/usr_student_101/unblock",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -2500,13 +2500,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/users/usr_student_101",
+              "raw": "{{BASE_URL}}/admin/users/usr_student_101",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -2517,7 +2517,7 @@
           }
         },
         {
-          "name": "Send Targeted Push Notification",
+          "name": "Send Push Notification",
           "request": {
             "method": "POST",
             "header": [
@@ -2527,13 +2527,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/notifications/send",
+              "raw": "{{BASE_URL}}/admin/notifications/send",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -2553,19 +2553,19 @@
           }
         },
         {
-          "name": "Get Notification History",
+          "name": "Get Notifications History",
           "request": {
             "method": "GET",
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/notifications",
+              "raw": "{{BASE_URL}}/admin/notifications",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -2575,7 +2575,7 @@
           }
         },
         {
-          "name": "Create Promotional Banner",
+          "name": "Create Banner",
           "request": {
             "method": "POST",
             "header": [
@@ -2585,13 +2585,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/banners",
+              "raw": "{{BASE_URL}}/admin/banners",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -2616,13 +2616,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/banners",
+              "raw": "{{BASE_URL}}/admin/banners",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -2642,13 +2642,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/banners/bnr_101",
+              "raw": "{{BASE_URL}}/admin/banners/bnr_101",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -2674,13 +2674,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/banners/bnr_101",
+              "raw": "{{BASE_URL}}/admin/banners/bnr_101",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -2697,13 +2697,13 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/audit-logs",
+              "raw": "{{BASE_URL}}/admin/audit-logs",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -2713,19 +2713,19 @@
           }
         },
         {
-          "name": "Get User Feedback & Ratings",
+          "name": "Get User Feedbacks",
           "request": {
             "method": "GET",
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/feedbacks",
+              "raw": "{{BASE_URL}}/admin/feedbacks",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
@@ -2735,19 +2735,19 @@
           }
         },
         {
-          "name": "Export All Reports (CSV/PDF)",
+          "name": "Export Reports",
           "request": {
             "method": "GET",
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
+                "value": "Bearer {{ADMIN_TOKEN}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/reports/export?format=csv",
+              "raw": "{{BASE_URL}}/admin/reports/export?format=csv",
               "host": [
-                "{{baseUrl}}"
+                "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
