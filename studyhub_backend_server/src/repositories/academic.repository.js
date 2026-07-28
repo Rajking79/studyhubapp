@@ -71,18 +71,21 @@ class AcademicRepository {
     return await Course.findByIdAndUpdate(id, { $set: { isDeleted: true, deletedAt: new Date() } }, { new: true });
   }
 
-  // Years & Semesters
+  // Years & Semesters (Strictly MongoDB Driven)
   static async getYears({ courseId = "" }) {
     const query = { isDeleted: { $ne: true } };
     if (courseId) query.courseId = courseId;
     let items = await Year.find(query).sort({ yearNumber: 1 }).lean();
+    
+    // Seed MongoDB if database collection is uninitialized
     if (!items || items.length === 0) {
-      items = [
-        { year: 1, name: "1st Year", label: "Freshman Year" },
-        { year: 2, name: "2nd Year", label: "Sophomore Year" },
-        { year: 3, name: "3rd Year", label: "Junior Year" },
-        { year: 4, name: "4th Year", label: "Senior Year" }
-      ];
+      await Year.insertMany([
+        { yearNumber: 1, name: "1st Year", label: "Freshman Year", courseId },
+        { yearNumber: 2, name: "2nd Year", label: "Sophomore Year", courseId },
+        { yearNumber: 3, name: "3rd Year", label: "Junior Year", courseId },
+        { yearNumber: 4, name: "4th Year", label: "Senior Year", courseId }
+      ]);
+      items = await Year.find(query).sort({ yearNumber: 1 }).lean();
     }
     return items;
   }
@@ -92,13 +95,16 @@ class AcademicRepository {
     const query = { isDeleted: { $ne: true }, yearNumber: yearNum };
     if (courseId) query.courseId = courseId;
     let items = await Semester.find(query).sort({ semesterNumber: 1 }).lean();
+    
+    // Seed MongoDB if database collection is uninitialized for this year
     if (!items || items.length === 0) {
       const sem1 = yearNum * 2 - 1;
       const sem2 = yearNum * 2;
-      items = [
-        { semester: sem1, name: `Semester ${sem1}`, label: `Sem ${sem1}` },
-        { semester: sem2, name: `Semester ${sem2}`, label: `Sem ${sem2}` }
-      ];
+      await Semester.insertMany([
+        { semesterNumber: sem1, name: `Semester ${sem1}`, label: `Sem ${sem1}`, yearNumber: yearNum, courseId },
+        { semesterNumber: sem2, name: `Semester ${sem2}`, label: `Sem ${sem2}`, yearNumber: yearNum, courseId }
+      ]);
+      items = await Semester.find(query).sort({ semesterNumber: 1 }).lean();
     }
     return items;
   }
