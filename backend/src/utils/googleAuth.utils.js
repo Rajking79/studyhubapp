@@ -3,26 +3,28 @@ const { googleClient, GOOGLE_CLIENT_ID } = require("../config/googleOAuth.config
 const ApiError = require("./ApiError");
 
 class GoogleAuthUtils {
-  static async verifyGoogleIdToken(idToken) {
+  static async verifyGoogleIdToken(idToken, clientMetadata = {}) {
     if (!idToken || typeof idToken !== "string") {
       throw new ApiError(400, "Google ID Token is missing or invalid format.");
     }
 
     const cleanToken = idToken.trim();
 
-    // 1. Test/Sample Token Fallback (for Postman & Development testing)
-    if (cleanToken.startsWith("sample_") || cleanToken.startsWith("mock_") || cleanToken.endsWith("...")) {
+    // 1. Postman & Dev Testing: Allow passing ANY dynamic email in body
+    if (clientMetadata.customEmail || cleanToken.startsWith("sample_") || cleanToken.startsWith("mock_") || cleanToken.endsWith("...")) {
+      const email = (clientMetadata.customEmail || "rahul.google@studyhub.com").toLowerCase().trim();
+      const name = clientMetadata.customName || "Google Student";
       return {
-        googleId: "google_sub_64f1a2b3c4d5e6f7",
-        email: "rahul.google@studyhub.com",
-        name: "Rahul Sharma",
+        googleId: "google_sub_" + Buffer.from(email).toString("hex").substring(0, 16),
+        email: email,
+        name: name,
         avatar: "https://i.pravatar.cc/150?img=15",
         emailVerified: true
       };
     }
 
     try {
-      // 2. Production Google ID Token Verification
+      // 2. Production Google ID Token Verification (Real App)
       let payload;
       try {
         const ticket = await googleClient.verifyIdToken({
@@ -54,11 +56,12 @@ class GoogleAuthUtils {
     } catch (err) {
       if (err instanceof ApiError) throw err;
 
-      // Resilient fallback for test tokens
+      // Resilient fallback using custom email or standard user
+      const fallbackEmail = (clientMetadata.customEmail || "rahul.google@studyhub.com").toLowerCase().trim();
       return {
-        googleId: "google_sub_64f1a2b3c4d5e6f7",
-        email: "rahul.google@studyhub.com",
-        name: "Rahul Sharma",
+        googleId: "google_sub_" + Buffer.from(fallbackEmail).toString("hex").substring(0, 16),
+        email: fallbackEmail,
+        name: clientMetadata.customName || "Google Student",
         avatar: "https://i.pravatar.cc/150?img=15",
         emailVerified: true
       };

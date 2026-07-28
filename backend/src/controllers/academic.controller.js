@@ -17,7 +17,8 @@ const getColleges = asyncHandler(async (req, res) => {
 
 // 2. Get Single College Details
 const getCollegeById = asyncHandler(async (req, res) => {
-  const college = await AcademicService.getCollegeById(req.params.collegeId);
+  const collegeId = req.params.id || req.params.collegeId;
+  const college = await AcademicService.getCollegeById(collegeId);
   return res.status(200).json(new ApiResponse(200, college, "College details retrieved successfully"));
 });
 
@@ -36,13 +37,17 @@ const getCourses = asyncHandler(async (req, res) => {
 
 // 4. Step 2: Select Academic Year (Query MongoDB Year Collection)
 const getYears = asyncHandler(async (req, res) => {
-  const years = await AcademicService.getYears(req.query);
+  const courseId = req.params.id || req.params.courseId;
+  const query = { ...req.query, courseId };
+  const years = await AcademicService.getYears(query);
   return res.status(200).json(new ApiResponse(200, { years }, "Academic years retrieved successfully from MongoDB"));
 });
 
 // 5. Step 3: Select Semester (Query MongoDB Semester Collection)
 const getSemesters = asyncHandler(async (req, res) => {
-  const semesters = await AcademicService.getSemesters(req.query);
+  const courseId = req.params.id || req.params.courseId;
+  const query = { ...req.query, courseId };
+  const semesters = await AcademicService.getSemesters(query);
   return res.status(200).json(new ApiResponse(200, { semesters }, "Semesters retrieved successfully from MongoDB"));
 });
 
@@ -61,7 +66,8 @@ const getSubjects = asyncHandler(async (req, res) => {
 
 // 7. Step 5: Subject Details Screen
 const getSubjectById = asyncHandler(async (req, res) => {
-  const subject = await AcademicService.getSubjectById(req.params.subjectId);
+  const subjectId = req.params.id || req.params.subjectId;
+  const subject = await AcademicService.getSubjectById(subjectId);
   return res.status(200).json(new ApiResponse(200, subject, "Subject details retrieved successfully from MongoDB"));
 });
 

@@ -43,6 +43,11 @@ class AIService {
   static async getUserHistory(userId) {
     return await AIRepository.getUserHistory(userId);
   }
+
+  static async clearUserHistory(userId) {
+    await AIRepository.clearUserHistory(userId);
+    return { message: "AI chat history cleared successfully." };
+  }
 }
 
 module.exports = AIService;

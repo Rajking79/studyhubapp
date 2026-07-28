@@ -2,6 +2,7 @@ const { param, query } = require("express-validator");
 const mongoose = require("mongoose");
 const validate = require("../middlewares/validate.middleware");
 
+// Validate Mongo ObjectId in URL params (if param is present and 24 hex char format)
 const validateMongoId = (paramName = "id") => [
   param(paramName)
     .optional()

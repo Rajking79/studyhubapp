@@ -14,6 +14,10 @@ class AIRepository {
   static async getUserHistory(userId) {
     return await AIHistory.find({ userId }).sort({ createdAt: -1 }).lean();
   }
+
+  static async clearUserHistory(userId) {
+    return await AIHistory.deleteMany({ userId });
+  }
 }
 
 module.exports = AIRepository;

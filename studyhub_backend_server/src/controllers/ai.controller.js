@@ -19,8 +19,14 @@ const getAIHistory = asyncHandler(async (req, res) => {
   return res.status(200).json(new ApiResponse(200, history, "AI chat history fetched from MongoDB"));
 });
 
+const clearAIHistory = asyncHandler(async (req, res) => {
+  const result = await AIService.clearUserHistory(req.user._id);
+  return res.status(200).json(new ApiResponse(200, result, "AI chat history cleared from MongoDB"));
+});
+
 module.exports = {
   aiChat,
   snapSolve,
-  getAIHistory
+  getAIHistory,
+  clearAIHistory
 };

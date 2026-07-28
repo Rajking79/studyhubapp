@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "studyhub-production-postman-suite-2026",
     "name": "StudyHub Live Production REST API Suite (Render Cloud)",
-    "description": "Official Production Postman Collection with 87 fully functional endpoints. Includes Invite Friends / Referral System APIs for both Mobile App & Admin Web Panel, pre-populated 200 OK Example Responses, BASE_URL/TOKEN/ADMIN_TOKEN variables, and automatic token saving scripts.",
+    "description": "Official Master Postman Collection containing all 87 REST API endpoints across 8 core modules. Built for MongoDB Atlas, Google OAuth, Student Utilities & Admin Control Panel Web Suite.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -24,10 +24,10 @@
   ],
   "item": [
     {
-      "name": "Auth",
+      "name": "1. Auth (18 APIs)",
       "item": [
         {
-          "name": " DEV LOGIN (Testing ke liye - No OTP needed)",
+          "name": "1. DEV LOGIN (Fast 1-Click Token Generator)",
           "request": {
             "method": "POST",
             "header": [
@@ -120,12 +120,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \" DEV LOGIN (Testing ke liye - No OTP needed) executed successfully.\",\n  \"data\": {\n    \"user\": {\n      \"id\": \"6a685d7b3d6e0376247c628e\",\n      \"name\": \"Rahul Sharma\",\n      \"email\": \"rahul@studyhub.com\",\n      \"phone\": \"+919876543210\",\n      \"college\": \"Delhi Technological University (DTU)\",\n      \"course\": \"B.Tech CS\",\n      \"semester\": \"Semester 4\",\n      \"role\": \"student\",\n      \"isGuest\": false,\n      \"loginMethod\": \"dev\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJpYXQiOjE3ODUyMjQ1NzF9.sample_refresh_token_2026\",\n    \"expiresIn\": \"15m\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": [],\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\"\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"1. DEV LOGIN (Fast 1-Click Token Generator) executed successfully.\",\n  \"data\": {\n    \"user\": {\n      \"id\": \"6a685d7b3d6e0376247c628e\",\n      \"name\": \"Rahul Sharma\",\n      \"email\": \"rahul@studyhub.com\",\n      \"phone\": \"+919876543210\",\n      \"college\": \"Delhi Technological University (DTU)\",\n      \"course\": \"B.Tech CS\",\n      \"semester\": \"Semester 4\",\n      \"role\": \"student\",\n      \"isGuest\": false,\n      \"loginMethod\": \"dev\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI6YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJpYXQiOjE3ODUyMjQ1NzF9.sample_refresh_token_2026\",\n    \"expiresIn\": \"15m\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": [],\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI6YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\"\n}"
             }
           ]
         },
         {
-          "name": "Register (Email + Password)",
+          "name": "2. Register Student",
           "request": {
             "method": "POST",
             "header": [
@@ -150,7 +150,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Rahul Sharma\",\n  \"email\": \"rahul@studyhub.com\",\n  \"password\": \"Password@123\",\n  \"confirmPassword\": \"Password@123\",\n  \"phone\": \"9876543210\",\n  \"college\": \"Delhi University\",\n  \"course\": \"B.Tech CS\",\n  \"semester\": \"Semester 4\"\n}",
+              "raw": "{\n  \"name\": \"Rahul Sharma\",\n  \"email\": \"rahul@studyhub.com\",\n  \"password\": \"Password@123\",\n  \"confirmPassword\": \"Password@123\",\n  \"phone\": \"9876543210\",\n  \"college\": \"Delhi Technological University (DTU)\",\n  \"course\": \"B.Tech CS\",\n  \"semester\": \"Semester 4\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -200,7 +200,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"Rahul Sharma\",\n  \"email\": \"rahul@studyhub.com\",\n  \"password\": \"Password@123\",\n  \"confirmPassword\": \"Password@123\",\n  \"phone\": \"9876543210\",\n  \"college\": \"Delhi University\",\n  \"course\": \"B.Tech CS\",\n  \"semester\": \"Semester 4\"\n}",
+                  "raw": "{\n  \"name\": \"Rahul Sharma\",\n  \"email\": \"rahul@studyhub.com\",\n  \"password\": \"Password@123\",\n  \"confirmPassword\": \"Password@123\",\n  \"phone\": \"9876543210\",\n  \"college\": \"Delhi Technological University (DTU)\",\n  \"course\": \"B.Tech CS\",\n  \"semester\": \"Semester 4\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -218,12 +218,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Register (Email + Password) executed successfully.\",\n  \"data\": {\n    \"user\": {\n      \"id\": \"6a685d7b3d6e0376247c628e\",\n      \"name\": \"Rahul Sharma\",\n      \"email\": \"rahul@studyhub.com\",\n      \"phone\": \"9876543210\",\n      \"college\": \"Delhi University\",\n      \"course\": \"B.Tech CS\",\n      \"semester\": \"Semester 4\",\n      \"role\": \"student\",\n      \"isGuest\": false,\n      \"loginMethod\": \"email\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJpYXQiOjE3ODUyMjQ1NzF9.sample_refresh_token_2026\",\n    \"expiresIn\": \"15m\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": [],\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\"\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"2. Register Student executed successfully.\",\n  \"data\": {\n    \"user\": {\n      \"id\": \"6a685d7b3d6e0376247c628e\",\n      \"name\": \"Rahul Sharma\",\n      \"email\": \"rahul@studyhub.com\",\n      \"phone\": \"9876543210\",\n      \"college\": \"Delhi Technological University (DTU)\",\n      \"course\": \"B.Tech CS\",\n      \"semester\": \"Semester 4\",\n      \"role\": \"student\",\n      \"isGuest\": false,\n      \"loginMethod\": \"email\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI6YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJpYXQiOjE3ODUyMjQ1NzF9.sample_refresh_token_2026\",\n    \"expiresIn\": \"15m\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": [],\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI6YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\"\n}"
             }
           ]
         },
         {
-          "name": "Login (Email + Password)",
+          "name": "3. Login Student (Email + Password)",
           "request": {
             "method": "POST",
             "header": [
@@ -316,12 +316,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Login (Email + Password) executed successfully.\",\n  \"data\": {\n    \"user\": {\n      \"id\": \"6a685d7b3d6e0376247c628e\",\n      \"name\": \"Rahul Sharma\",\n      \"email\": \"rahul@studyhub.com\",\n      \"phone\": \"9876543210\",\n      \"college\": \"Delhi Technological University (DTU)\",\n      \"course\": \"B.Tech CS\",\n      \"semester\": \"Semester 4\",\n      \"role\": \"student\",\n      \"isGuest\": false,\n      \"loginMethod\": \"email\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJpYXQiOjE3ODUyMjQ1NzF9.sample_refresh_token_2026\",\n    \"expiresIn\": \"15m\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": [],\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\"\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"3. Login Student (Email + Password) executed successfully.\",\n  \"data\": {\n    \"user\": {\n      \"id\": \"6a685d7b3d6e0376247c628e\",\n      \"name\": \"Rahul Sharma\",\n      \"email\": \"rahul@studyhub.com\",\n      \"phone\": \"9876543210\",\n      \"college\": \"Delhi Technological University (DTU)\",\n      \"course\": \"B.Tech CS\",\n      \"semester\": \"Semester 4\",\n      \"role\": \"student\",\n      \"isGuest\": false,\n      \"loginMethod\": \"email\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI6YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJpYXQiOjE3ODUyMjQ1NzF9.sample_refresh_token_2026\",\n    \"expiresIn\": \"15m\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": [],\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI6YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\"\n}"
             }
           ]
         },
         {
-          "name": "Google Login",
+          "name": "4. Google Login (Auto-registers missing account)",
           "request": {
             "method": "POST",
             "header": [
@@ -346,7 +346,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"idToken\": \"sample_google_token\",\n  \"email\": \"custom.google@studyhub.com\",\n  \"name\": \"Custom Student\"\n}",
+              "raw": "{\n  \"idToken\": \"sample_google_id_token_2026\",\n  \"email\": \"rahul.google@studyhub.com\",\n  \"name\": \"Rahul Google Student\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -396,7 +396,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"idToken\": \"sample_google_token\",\n  \"email\": \"custom.google@studyhub.com\",\n  \"name\": \"Custom Student\"\n}",
+                  "raw": "{\n  \"idToken\": \"sample_google_id_token_2026\",\n  \"email\": \"rahul.google@studyhub.com\",\n  \"name\": \"Rahul Google Student\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -414,12 +414,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Google Login executed successfully.\",\n  \"data\": {\n    \"user\": {\n      \"id\": \"6a685d7b3d6e0376247c628e\",\n      \"name\": \"Custom Student\",\n      \"email\": \"custom.google@studyhub.com\",\n      \"phone\": \"9876543210\",\n      \"college\": \"Delhi Technological University (DTU)\",\n      \"course\": \"B.Tech CS\",\n      \"semester\": \"Semester 4\",\n      \"role\": \"student\",\n      \"isGuest\": false,\n      \"loginMethod\": \"google\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJpYXQiOjE3ODUyMjQ1NzF9.sample_refresh_token_2026\",\n    \"expiresIn\": \"15m\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": [],\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\"\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"4. Google Login (Auto-registers missing account) executed successfully.\",\n  \"data\": {\n    \"user\": {\n      \"id\": \"6a685d7b3d6e0376247c628e\",\n      \"name\": \"Rahul Google Student\",\n      \"email\": \"rahul.google@studyhub.com\",\n      \"phone\": \"9876543210\",\n      \"college\": \"Delhi Technological University (DTU)\",\n      \"course\": \"B.Tech CS\",\n      \"semester\": \"Semester 4\",\n      \"role\": \"student\",\n      \"isGuest\": false,\n      \"loginMethod\": \"google\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI6YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJpYXQiOjE3ODUyMjQ1NzF9.sample_refresh_token_2026\",\n    \"expiresIn\": \"15m\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": [],\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI6YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\"\n}"
             }
           ]
         },
         {
-          "name": "Guest Mode Login",
+          "name": "5. Guest Mode Login (Restricted permissions)",
           "request": {
             "method": "POST",
             "header": [
@@ -512,12 +512,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Guest Mode Login executed successfully.\",\n  \"data\": {\n    \"user\": {\n      \"id\": \"6a685d7b3d6e0376247c628e\",\n      \"name\": \"Rahul Sharma\",\n      \"email\": \"rahul@studyhub.com\",\n      \"phone\": \"9876543210\",\n      \"college\": \"Delhi Technological University (DTU)\",\n      \"course\": \"B.Tech CS\",\n      \"semester\": \"Semester 4\",\n      \"role\": \"student\",\n      \"isGuest\": true,\n      \"loginMethod\": \"email\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJpYXQiOjE3ODUyMjQ1NzF9.sample_refresh_token_2026\",\n    \"expiresIn\": \"15m\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": [],\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\"\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"5. Guest Mode Login (Restricted permissions) executed successfully.\",\n  \"data\": {\n    \"user\": {\n      \"id\": \"6a685d7b3d6e0376247c628e\",\n      \"name\": \"Rahul Sharma\",\n      \"email\": \"rahul@studyhub.com\",\n      \"phone\": \"9876543210\",\n      \"college\": \"Delhi Technological University (DTU)\",\n      \"course\": \"B.Tech CS\",\n      \"semester\": \"Semester 4\",\n      \"role\": \"student\",\n      \"isGuest\": true,\n      \"loginMethod\": \"email\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI6YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJpYXQiOjE3ODUyMjQ1NzF9.sample_refresh_token_2026\",\n    \"expiresIn\": \"15m\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": [],\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI6YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\"\n}"
             }
           ]
         },
         {
-          "name": "Refresh Token",
+          "name": "6. Refresh Access Token",
           "request": {
             "method": "POST",
             "header": [
@@ -610,12 +610,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Refresh Token executed successfully.\",\n  \"data\": {\n    \"message\": \"Refresh Token executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.651Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"6. Refresh Access Token executed successfully.\",\n  \"data\": {\n    \"message\": \"6. Refresh Access Token executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.705Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Get Profile",
+          "name": "7. Get Current User Profile",
           "request": {
             "method": "GET",
             "header": [
@@ -667,12 +667,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Profile executed successfully.\",\n  \"data\": {\n    \"message\": \"Get Profile executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.664Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"7. Get Current User Profile executed successfully.\",\n  \"data\": {\n    \"message\": \"7. Get Current User Profile executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.711Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Change Password",
+          "name": "8. Change Password",
           "request": {
             "method": "POST",
             "header": [
@@ -750,12 +750,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Change Password executed successfully.\",\n  \"data\": {\n    \"message\": \"Change Password executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.664Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"8. Change Password executed successfully.\",\n  \"data\": {\n    \"message\": \"8. Change Password executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.711Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Verify Email",
+          "name": "9. Verify Email Token",
           "request": {
             "method": "POST",
             "header": [
@@ -833,12 +833,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Verify Email executed successfully.\",\n  \"data\": {\n    \"message\": \"Verify Email executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.664Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"9. Verify Email Token executed successfully.\",\n  \"data\": {\n    \"message\": \"9. Verify Email Token executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.711Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Resend Email Verification",
+          "name": "10. Resend Email Verification",
           "request": {
             "method": "POST",
             "header": [
@@ -916,12 +916,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Resend Email Verification executed successfully.\",\n  \"data\": {\n    \"message\": \"Resend Email Verification executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.664Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"10. Resend Email Verification executed successfully.\",\n  \"data\": {\n    \"message\": \"10. Resend Email Verification executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.711Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Get Login History",
+          "name": "11. Get Login History Audit Logs",
           "request": {
             "method": "GET",
             "header": [
@@ -988,12 +988,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Login History executed successfully.\",\n  \"data\": {\n    \"user\": {\n      \"id\": \"6a685d7b3d6e0376247c628e\",\n      \"name\": \"Rahul Sharma\",\n      \"email\": \"rahul@studyhub.com\",\n      \"phone\": \"9876543210\",\n      \"college\": \"Delhi Technological University (DTU)\",\n      \"course\": \"B.Tech CS\",\n      \"semester\": \"Semester 4\",\n      \"role\": \"student\",\n      \"isGuest\": false,\n      \"loginMethod\": \"email\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJpYXQiOjE3ODUyMjQ1NzF9.sample_refresh_token_2026\",\n    \"expiresIn\": \"15m\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": [],\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\"\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"11. Get Login History Audit Logs executed successfully.\",\n  \"data\": {\n    \"user\": {\n      \"id\": \"6a685d7b3d6e0376247c628e\",\n      \"name\": \"Rahul Sharma\",\n      \"email\": \"rahul@studyhub.com\",\n      \"phone\": \"9876543210\",\n      \"college\": \"Delhi Technological University (DTU)\",\n      \"course\": \"B.Tech CS\",\n      \"semester\": \"Semester 4\",\n      \"role\": \"student\",\n      \"isGuest\": false,\n      \"loginMethod\": \"email\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI6YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJpYXQiOjE3ODUyMjQ1NzF9.sample_refresh_token_2026\",\n    \"expiresIn\": \"15m\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": [],\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI6YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\"\n}"
             }
           ]
         },
         {
-          "name": "Logout",
+          "name": "12. Logout User Session",
           "request": {
             "method": "POST",
             "header": [
@@ -1053,12 +1053,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Logout executed successfully.\",\n  \"data\": {\n    \"message\": \"Logout executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.664Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"12. Logout User Session executed successfully.\",\n  \"data\": {\n    \"message\": \"12. Logout User Session executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.711Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Logout All Devices",
+          "name": "13. Logout All Devices",
           "request": {
             "method": "POST",
             "header": [
@@ -1118,12 +1118,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Logout All Devices executed successfully.\",\n  \"data\": {\n    \"message\": \"Logout All Devices executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.664Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"13. Logout All Devices executed successfully.\",\n  \"data\": {\n    \"message\": \"13. Logout All Devices executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.711Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Delete Account",
+          "name": "14. Delete Account",
           "request": {
             "method": "DELETE",
             "header": [
@@ -1183,12 +1183,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Delete Account executed successfully.\",\n  \"data\": {\n    \"message\": \"Delete Account executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.664Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"14. Delete Account executed successfully.\",\n  \"data\": {\n    \"message\": \"14. Delete Account executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.711Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Forgot Password (OTP generate)",
+          "name": "15. Forgot Password (OTP Generator)",
           "request": {
             "method": "POST",
             "header": [
@@ -1266,12 +1266,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Forgot Password (OTP generate) executed successfully.\",\n  \"data\": {\n    \"message\": \"Forgot Password (OTP generate) executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.664Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"15. Forgot Password (OTP Generator) executed successfully.\",\n  \"data\": {\n    \"message\": \"15. Forgot Password (OTP Generator) executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.711Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Resend OTP",
+          "name": "16. Resend Dynamic OTP",
           "request": {
             "method": "POST",
             "header": [
@@ -1349,12 +1349,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Resend OTP executed successfully.\",\n  \"data\": {\n    \"message\": \"Resend OTP executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.664Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"16. Resend Dynamic OTP executed successfully.\",\n  \"data\": {\n    \"message\": \"16. Resend Dynamic OTP executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.711Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Verify OTP (App User Login)",
+          "name": "17. Verify Dynamic OTP",
           "request": {
             "method": "POST",
             "header": [
@@ -1447,12 +1447,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Verify OTP (App User Login) executed successfully.\",\n  \"data\": {\n    \"message\": \"Verify OTP (App User Login) executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.664Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"17. Verify Dynamic OTP executed successfully.\",\n  \"data\": {\n    \"message\": \"17. Verify Dynamic OTP executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.711Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "New Password (OTP + New Password)",
+          "name": "18. Reset Password with Token",
           "request": {
             "method": "POST",
             "header": [
@@ -1477,7 +1477,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"resetToken\": \"sample_token\",\n  \"newPassword\": \"NewPass@123\"\n}",
+              "raw": "{\n  \"resetToken\": \"sample_reset_token\",\n  \"newPassword\": \"NewPassword@123\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1512,7 +1512,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"resetToken\": \"sample_token\",\n  \"newPassword\": \"NewPass@123\"\n}",
+                  "raw": "{\n  \"resetToken\": \"sample_reset_token\",\n  \"newPassword\": \"NewPassword@123\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -1530,17 +1530,17 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"New Password (OTP + New Password) executed successfully.\",\n  \"data\": {\n    \"message\": \"New Password (OTP + New Password) executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.664Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"18. Reset Password with Token executed successfully.\",\n  \"data\": {\n    \"message\": \"18. Reset Password with Token executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.711Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         }
       ]
     },
     {
-      "name": "Dashboard",
+      "name": "2. Dashboard (5 APIs)",
       "item": [
         {
-          "name": "Get Dashboard",
+          "name": "19. Get Home Feed & Dashboard Summary",
           "request": {
             "method": "GET",
             "header": [
@@ -1592,12 +1592,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Dashboard executed successfully.\",\n  \"data\": {\n    \"banners\": [\n      {\n        \"id\": \"bnr_101\",\n        \"title\": \"Supercharge your CGPA!\",\n        \"imageUrl\": \"https://storage.studyhub.com/banners/cgpa.jpg\",\n        \"targetUrl\": \"/tools/cgpa\"\n      }\n    ],\n    \"continueReading\": [\n      {\n        \"materialId\": \"mat_os_101\",\n        \"title\": \"Operating Systems Notes\",\n        \"lastPage\": 14,\n        \"progressPercentage\": 65\n      }\n    ],\n    \"featuredMaterials\": [\n      {\n        \"id\": \"mat_os_101\",\n        \"title\": \"Complete OS Revision Notes 2026\",\n        \"category\": \"Notes\",\n        \"downloadsCount\": 1420\n      }\n    ]\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"19. Get Home Feed & Dashboard Summary executed successfully.\",\n  \"data\": {\n    \"banners\": [\n      {\n        \"id\": \"bnr_101\",\n        \"title\": \"Supercharge your CGPA!\",\n        \"imageUrl\": \"https://storage.studyhub.com/banners/cgpa.jpg\",\n        \"targetUrl\": \"/tools/cgpa\"\n      }\n    ],\n    \"continueReading\": [\n      {\n        \"materialId\": \"mat_os_101\",\n        \"title\": \"Operating Systems Notes\",\n        \"lastPage\": 14,\n        \"progressPercentage\": 65\n      }\n    ],\n    \"featuredMaterials\": [\n      {\n        \"id\": \"mat_os_101\",\n        \"title\": \"Complete OS Revision Notes 2026\",\n        \"category\": \"Notes\",\n        \"downloadsCount\": 1420\n      }\n    ]\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Get Banners Carousel",
+          "name": "20. Get Banners Carousel",
           "request": {
             "method": "GET",
             "header": [
@@ -1649,12 +1649,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Banners Carousel executed successfully.\",\n  \"data\": {\n    \"banners\": [\n      {\n        \"id\": \"bnr_101\",\n        \"title\": \"Supercharge your CGPA!\",\n        \"imageUrl\": \"https://storage.studyhub.com/banners/cgpa.jpg\",\n        \"targetUrl\": \"/tools/cgpa\"\n      }\n    ],\n    \"continueReading\": [\n      {\n        \"materialId\": \"mat_os_101\",\n        \"title\": \"Operating Systems Notes\",\n        \"lastPage\": 14,\n        \"progressPercentage\": 65\n      }\n    ],\n    \"featuredMaterials\": [\n      {\n        \"id\": \"mat_os_101\",\n        \"title\": \"Complete OS Revision Notes 2026\",\n        \"category\": \"Notes\",\n        \"downloadsCount\": 1420\n      }\n    ]\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"20. Get Banners Carousel executed successfully.\",\n  \"data\": {\n    \"banners\": [\n      {\n        \"id\": \"bnr_101\",\n        \"title\": \"Supercharge your CGPA!\",\n        \"imageUrl\": \"https://storage.studyhub.com/banners/cgpa.jpg\",\n        \"targetUrl\": \"/tools/cgpa\"\n      }\n    ],\n    \"continueReading\": [\n      {\n        \"materialId\": \"mat_os_101\",\n        \"title\": \"Operating Systems Notes\",\n        \"lastPage\": 14,\n        \"progressPercentage\": 65\n      }\n    ],\n    \"featuredMaterials\": [\n      {\n        \"id\": \"mat_os_101\",\n        \"title\": \"Complete OS Revision Notes 2026\",\n        \"category\": \"Notes\",\n        \"downloadsCount\": 1420\n      }\n    ]\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Get Continue Reading Progress",
+          "name": "21. Get Continue Reading Progress",
           "request": {
             "method": "GET",
             "header": [
@@ -1706,12 +1706,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Continue Reading Progress executed successfully.\",\n  \"data\": {\n    \"banners\": [\n      {\n        \"id\": \"bnr_101\",\n        \"title\": \"Supercharge your CGPA!\",\n        \"imageUrl\": \"https://storage.studyhub.com/banners/cgpa.jpg\",\n        \"targetUrl\": \"/tools/cgpa\"\n      }\n    ],\n    \"continueReading\": [\n      {\n        \"materialId\": \"mat_os_101\",\n        \"title\": \"Operating Systems Notes\",\n        \"lastPage\": 14,\n        \"progressPercentage\": 65\n      }\n    ],\n    \"featuredMaterials\": [\n      {\n        \"id\": \"mat_os_101\",\n        \"title\": \"Complete OS Revision Notes 2026\",\n        \"category\": \"Notes\",\n        \"downloadsCount\": 1420\n      }\n    ]\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"21. Get Continue Reading Progress executed successfully.\",\n  \"data\": {\n    \"banners\": [\n      {\n        \"id\": \"bnr_101\",\n        \"title\": \"Supercharge your CGPA!\",\n        \"imageUrl\": \"https://storage.studyhub.com/banners/cgpa.jpg\",\n        \"targetUrl\": \"/tools/cgpa\"\n      }\n    ],\n    \"continueReading\": [\n      {\n        \"materialId\": \"mat_os_101\",\n        \"title\": \"Operating Systems Notes\",\n        \"lastPage\": 14,\n        \"progressPercentage\": 65\n      }\n    ],\n    \"featuredMaterials\": [\n      {\n        \"id\": \"mat_os_101\",\n        \"title\": \"Complete OS Revision Notes 2026\",\n        \"category\": \"Notes\",\n        \"downloadsCount\": 1420\n      }\n    ]\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Update Reading Progress",
+          "name": "22. Update Reading Progress",
           "request": {
             "method": "POST",
             "header": [
@@ -1789,12 +1789,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Update Reading Progress executed successfully.\",\n  \"data\": {\n    \"banners\": [\n      {\n        \"id\": \"bnr_101\",\n        \"title\": \"Supercharge your CGPA!\",\n        \"imageUrl\": \"https://storage.studyhub.com/banners/cgpa.jpg\",\n        \"targetUrl\": \"/tools/cgpa\"\n      }\n    ],\n    \"continueReading\": [\n      {\n        \"materialId\": \"mat_os_101\",\n        \"title\": \"Operating Systems Notes\",\n        \"lastPage\": 14,\n        \"progressPercentage\": 65\n      }\n    ],\n    \"featuredMaterials\": [\n      {\n        \"id\": \"mat_os_101\",\n        \"title\": \"Complete OS Revision Notes 2026\",\n        \"category\": \"Notes\",\n        \"downloadsCount\": 1420\n      }\n    ]\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"22. Update Reading Progress executed successfully.\",\n  \"data\": {\n    \"banners\": [\n      {\n        \"id\": \"bnr_101\",\n        \"title\": \"Supercharge your CGPA!\",\n        \"imageUrl\": \"https://storage.studyhub.com/banners/cgpa.jpg\",\n        \"targetUrl\": \"/tools/cgpa\"\n      }\n    ],\n    \"continueReading\": [\n      {\n        \"materialId\": \"mat_os_101\",\n        \"title\": \"Operating Systems Notes\",\n        \"lastPage\": 14,\n        \"progressPercentage\": 65\n      }\n    ],\n    \"featuredMaterials\": [\n      {\n        \"id\": \"mat_os_101\",\n        \"title\": \"Complete OS Revision Notes 2026\",\n        \"category\": \"Notes\",\n        \"downloadsCount\": 1420\n      }\n    ]\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Global Search",
+          "name": "23. Global Search (Voice, Text & Camera OCR)",
           "request": {
             "method": "GET",
             "header": [
@@ -1866,17 +1866,17 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Global Search executed successfully.\",\n  \"data\": {\n    \"banners\": [\n      {\n        \"id\": \"bnr_101\",\n        \"title\": \"Supercharge your CGPA!\",\n        \"imageUrl\": \"https://storage.studyhub.com/banners/cgpa.jpg\",\n        \"targetUrl\": \"/tools/cgpa\"\n      }\n    ],\n    \"continueReading\": [\n      {\n        \"materialId\": \"mat_os_101\",\n        \"title\": \"Operating Systems Notes\",\n        \"lastPage\": 14,\n        \"progressPercentage\": 65\n      }\n    ],\n    \"featuredMaterials\": [\n      {\n        \"id\": \"mat_os_101\",\n        \"title\": \"Complete OS Revision Notes 2026\",\n        \"category\": \"Notes\",\n        \"downloadsCount\": 1420\n      }\n    ]\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"23. Global Search (Voice, Text & Camera OCR) executed successfully.\",\n  \"data\": {\n    \"banners\": [\n      {\n        \"id\": \"bnr_101\",\n        \"title\": \"Supercharge your CGPA!\",\n        \"imageUrl\": \"https://storage.studyhub.com/banners/cgpa.jpg\",\n        \"targetUrl\": \"/tools/cgpa\"\n      }\n    ],\n    \"continueReading\": [\n      {\n        \"materialId\": \"mat_os_101\",\n        \"title\": \"Operating Systems Notes\",\n        \"lastPage\": 14,\n        \"progressPercentage\": 65\n      }\n    ],\n    \"featuredMaterials\": [\n      {\n        \"id\": \"mat_os_101\",\n        \"title\": \"Complete OS Revision Notes 2026\",\n        \"category\": \"Notes\",\n        \"downloadsCount\": 1420\n      }\n    ]\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         }
       ]
     },
     {
-      "name": "Academic Hierarchy",
+      "name": "3. Academic Hierarchy (7 APIs)",
       "item": [
         {
-          "name": "Get Colleges List",
+          "name": "24. Get Colleges List",
           "request": {
             "method": "GET",
             "header": [
@@ -1946,12 +1946,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Colleges List executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"du_dtu\",\n      \"name\": \"Delhi Technological University (DTU)\",\n      \"shortCode\": \"DTU\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    },\n    {\n      \"id\": \"iit_d\",\n      \"name\": \"Indian Institute of Technology Delhi\",\n      \"shortCode\": \"IITD\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"24. Get Colleges List executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"du_dtu\",\n      \"name\": \"Delhi Technological University (DTU)\",\n      \"shortCode\": \"DTU\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    },\n    {\n      \"id\": \"iit_d\",\n      \"name\": \"Indian Institute of Technology Delhi\",\n      \"shortCode\": \"IITD\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Get Single College Details",
+          "name": "25. Get College Details by ID",
           "request": {
             "method": "GET",
             "header": [
@@ -2003,12 +2003,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Single College Details executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"du_dtu\",\n      \"name\": \"Delhi Technological University (DTU)\",\n      \"shortCode\": \"DTU\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    },\n    {\n      \"id\": \"iit_d\",\n      \"name\": \"Indian Institute of Technology Delhi\",\n      \"shortCode\": \"IITD\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"25. Get College Details by ID executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"du_dtu\",\n      \"name\": \"Delhi Technological University (DTU)\",\n      \"shortCode\": \"DTU\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    },\n    {\n      \"id\": \"iit_d\",\n      \"name\": \"Indian Institute of Technology Delhi\",\n      \"shortCode\": \"IITD\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Step 1: Choose Course",
+          "name": "26. Step 1: Choose Course (by College ID)",
           "request": {
             "method": "GET",
             "header": [
@@ -2070,12 +2070,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Step 1: Choose Course executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"btech_cs\",\n      \"name\": \"B.Tech Computer Science\",\n      \"shortCode\": \"BTECH_CS\",\n      \"totalSemesters\": 8\n    },\n    {\n      \"id\": \"bca\",\n      \"name\": \"Bachelor of Computer Applications\",\n      \"shortCode\": \"BCA\",\n      \"totalSemesters\": 6\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"26. Step 1: Choose Course (by College ID) executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"btech_cs\",\n      \"name\": \"B.Tech Computer Science\",\n      \"shortCode\": \"BTECH_CS\",\n      \"totalSemesters\": 8\n    },\n    {\n      \"id\": \"bca\",\n      \"name\": \"Bachelor of Computer Applications\",\n      \"shortCode\": \"BCA\",\n      \"totalSemesters\": 6\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Step 2: Select Year",
+          "name": "27. Step 2: Choose Academic Year",
           "request": {
             "method": "GET",
             "header": [
@@ -2129,12 +2129,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Step 2: Select Year executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"btech_cs\",\n      \"name\": \"B.Tech Computer Science\",\n      \"shortCode\": \"BTECH_CS\",\n      \"totalSemesters\": 8\n    },\n    {\n      \"id\": \"bca\",\n      \"name\": \"Bachelor of Computer Applications\",\n      \"shortCode\": \"BCA\",\n      \"totalSemesters\": 6\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"27. Step 2: Choose Academic Year executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"btech_cs\",\n      \"name\": \"B.Tech Computer Science\",\n      \"shortCode\": \"BTECH_CS\",\n      \"totalSemesters\": 8\n    },\n    {\n      \"id\": \"bca\",\n      \"name\": \"Bachelor of Computer Applications\",\n      \"shortCode\": \"BCA\",\n      \"totalSemesters\": 6\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Step 3: Select Semester",
+          "name": "28. Step 3: Choose Semester",
           "request": {
             "method": "GET",
             "header": [
@@ -2200,12 +2200,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Step 3: Select Semester executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"btech_cs\",\n      \"name\": \"B.Tech Computer Science\",\n      \"shortCode\": \"BTECH_CS\",\n      \"totalSemesters\": 8\n    },\n    {\n      \"id\": \"bca\",\n      \"name\": \"Bachelor of Computer Applications\",\n      \"shortCode\": \"BCA\",\n      \"totalSemesters\": 6\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"28. Step 3: Choose Semester executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"btech_cs\",\n      \"name\": \"B.Tech Computer Science\",\n      \"shortCode\": \"BTECH_CS\",\n      \"totalSemesters\": 8\n    },\n    {\n      \"id\": \"bca\",\n      \"name\": \"Bachelor of Computer Applications\",\n      \"shortCode\": \"BCA\",\n      \"totalSemesters\": 6\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Step 4: Select Subject",
+          "name": "29. Step 4: Choose Subject (Course + Semester)",
           "request": {
             "method": "GET",
             "header": [
@@ -2275,12 +2275,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Step 4: Select Subject executed successfully.\",\n  \"data\": {\n    \"message\": \"Step 4: Select Subject executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.665Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"29. Step 4: Choose Subject (Course + Semester) executed successfully.\",\n  \"data\": {\n    \"id\": \"subj_os_401\",\n    \"name\": \"Operating Systems\",\n    \"code\": \"CS401\",\n    \"credits\": 4,\n    \"facultyName\": \"Dr. A. K. Sharma\",\n    \"description\": \"Core Operating Systems concepts including Process Management, Memory Management, File Systems, and Virtualization.\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Get Single Subject Details",
+          "name": "30. Get Subject Details (Code, Credits, Faculty)",
           "request": {
             "method": "GET",
             "header": [
@@ -2332,17 +2332,17 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Single Subject Details executed successfully.\",\n  \"data\": {\n    \"message\": \"Get Single Subject Details executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.665Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"30. Get Subject Details (Code, Credits, Faculty) executed successfully.\",\n  \"data\": {\n    \"id\": \"subj_os_401\",\n    \"name\": \"Operating Systems\",\n    \"code\": \"CS401\",\n    \"credits\": 4,\n    \"facultyName\": \"Dr. A. K. Sharma\",\n    \"description\": \"Core Operating Systems concepts including Process Management, Memory Management, File Systems, and Virtualization.\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         }
       ]
     },
     {
-      "name": "Study Materials",
+      "name": "4. Study Materials & Media (9 APIs)",
       "item": [
         {
-          "name": "Filter All Materials",
+          "name": "31. Filter Materials by Category",
           "request": {
             "method": "GET",
             "header": [
@@ -2428,12 +2428,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Filter All Materials executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"31. Filter Materials by Category executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Get Material Details",
+          "name": "32. Get Material Details by ID",
           "request": {
             "method": "GET",
             "header": [
@@ -2485,12 +2485,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Material Details executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"32. Get Material Details by ID executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Get Previous Year Question Papers (PYQs)",
+          "name": "33. Get Previous 5 Years Question Papers (PYQs)",
           "request": {
             "method": "GET",
             "header": [
@@ -2560,12 +2560,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Previous Year Question Papers (PYQs) executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"33. Get Previous 5 Years Question Papers (PYQs) executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Get Notes",
+          "name": "34. Get Semester Notes",
           "request": {
             "method": "GET",
             "header": [
@@ -2627,12 +2627,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Notes executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"34. Get Semester Notes executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Get E-Books",
+          "name": "35. Get E-Books & Textbooks",
           "request": {
             "method": "GET",
             "header": [
@@ -2694,12 +2694,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get E-Books executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"35. Get E-Books & Textbooks executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Get Video Lectures",
+          "name": "36. Get Video Lectures",
           "request": {
             "method": "GET",
             "header": [
@@ -2761,12 +2761,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Video Lectures executed successfully.\",\n  \"data\": {\n    \"message\": \"Get Video Lectures executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.665Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"36. Get Video Lectures executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Get Question Bank",
+          "name": "37. Get Question Bank",
           "request": {
             "method": "GET",
             "header": [
@@ -2828,12 +2828,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Question Bank executed successfully.\",\n  \"data\": {\n    \"message\": \"Get Question Bank executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.665Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"37. Get Question Bank executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Stream Video Lecture",
+          "name": "38. Stream Video Lecture URL",
           "request": {
             "method": "GET",
             "header": [
@@ -2887,12 +2887,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Stream Video Lecture executed successfully.\",\n  \"data\": {\n    \"message\": \"Stream Video Lecture executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.665Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"38. Stream Video Lecture URL executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Download Material PDF",
+          "name": "39. Download Material PDF",
           "request": {
             "method": "GET",
             "header": [
@@ -2946,17 +2946,17 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Download Material PDF executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"39. Download Material PDF executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         }
       ]
     },
     {
-      "name": "AI Assistant",
+      "name": "5. AI Assistant & Snap & Solve (4 APIs)",
       "item": [
         {
-          "name": "Ask AI Assistant",
+          "name": "40. Ask AI Assistant (GPT-4o Mini Doubt Solver)",
           "request": {
             "method": "POST",
             "header": [
@@ -2981,7 +2981,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"question\": \"Explain Page Replacement Algorithms in OS\",\n  \"subjectContext\": \"Operating Systems\",\n  \"conversationHistory\": []\n}",
+              "raw": "{\n  \"prompt\": \"Explain Page Replacement Algorithms in OS\",\n  \"subjectContext\": \"Operating Systems\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -3016,7 +3016,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"question\": \"Explain Page Replacement Algorithms in OS\",\n  \"subjectContext\": \"Operating Systems\",\n  \"conversationHistory\": []\n}",
+                  "raw": "{\n  \"prompt\": \"Explain Page Replacement Algorithms in OS\",\n  \"subjectContext\": \"Operating Systems\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -3034,12 +3034,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Ask AI Assistant executed successfully.\",\n  \"data\": {\n    \"answer\": \"Page Replacement Algorithms in Operating Systems manage virtual memory by deciding which memory page to swap out when new memory needs to be allocated. Key algorithms include FIFO, LRU, and Optimal Page Replacement.\",\n    \"sources\": [\n      \"Operating System Concepts 10th Edition\",\n      \"Semester 4 OS Notes\"\n    ],\n    \"tokensUsed\": 142\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"40. Ask AI Assistant (GPT-4o Mini Doubt Solver) executed successfully.\",\n  \"data\": {\n    \"answer\": \"Page Replacement Algorithms in Operating Systems manage virtual memory by deciding which memory page to swap out when new memory needs to be allocated. Key algorithms include FIFO, LRU, and Optimal Page Replacement.\",\n    \"sources\": [\n      \"Operating System Concepts 10th Edition\",\n      \"Semester 4 OS Notes\"\n    ],\n    \"tokensUsed\": 142\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Snap & Solve (OCR Solution)",
+          "name": "41. Snap & Solve (Camera OCR Question Solver)",
           "request": {
             "method": "POST",
             "header": [
@@ -3064,7 +3064,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"imageBase64\": \"data:image/png;base64,iVBORw0KGgo...\",\n  \"subjectContext\": \"Mathematics IV\"\n}",
+              "raw": "{\n  \"note\": \"Calculate LRU Page Faults for sequence 7,0,1,2,0,3,0,4\",\n  \"subjectContext\": \"Operating Systems\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -3099,7 +3099,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"imageBase64\": \"data:image/png;base64,iVBORw0KGgo...\",\n  \"subjectContext\": \"Mathematics IV\"\n}",
+                  "raw": "{\n  \"note\": \"Calculate LRU Page Faults for sequence 7,0,1,2,0,3,0,4\",\n  \"subjectContext\": \"Operating Systems\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -3117,12 +3117,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Snap & Solve (OCR Solution) executed successfully.\",\n  \"data\": {\n    \"answer\": \"Page Replacement Algorithms in Operating Systems manage virtual memory by deciding which memory page to swap out when new memory needs to be allocated. Key algorithms include FIFO, LRU, and Optimal Page Replacement.\",\n    \"sources\": [\n      \"Operating System Concepts 10th Edition\",\n      \"Semester 4 OS Notes\"\n    ],\n    \"tokensUsed\": 142\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"41. Snap & Solve (Camera OCR Question Solver) executed successfully.\",\n  \"data\": {\n    \"answer\": \"Page Replacement Algorithms in Operating Systems manage virtual memory by deciding which memory page to swap out when new memory needs to be allocated. Key algorithms include FIFO, LRU, and Optimal Page Replacement.\",\n    \"sources\": [\n      \"Operating System Concepts 10th Edition\",\n      \"Semester 4 OS Notes\"\n    ],\n    \"tokensUsed\": 142\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Get AI Chat History",
+          "name": "42. Get AI Chat History",
           "request": {
             "method": "GET",
             "header": [
@@ -3194,12 +3194,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get AI Chat History executed successfully.\",\n  \"data\": {\n    \"message\": \"Get AI Chat History executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.665Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"42. Get AI Chat History executed successfully.\",\n  \"data\": {\n    \"message\": \"42. Get AI Chat History executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.712Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Clear AI Chat History",
+          "name": "43. Clear AI Chat History",
           "request": {
             "method": "DELETE",
             "header": [
@@ -3253,17 +3253,17 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Clear AI Chat History executed successfully.\",\n  \"data\": {\n    \"message\": \"Clear AI Chat History executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.665Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"43. Clear AI Chat History executed successfully.\",\n  \"data\": {\n    \"message\": \"43. Clear AI Chat History executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.712Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         }
       ]
     },
     {
-      "name": "Utility Tools",
+      "name": "6. Student Utility Tools (8 APIs)",
       "item": [
         {
-          "name": "Calculate CGPA/SGPA",
+          "name": "44. Calculate CGPA / SGPA",
           "request": {
             "method": "POST",
             "header": [
@@ -3343,12 +3343,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Calculate CGPA/SGPA executed successfully.\",\n  \"data\": {\n    \"title\": \"B.Tech Year 1 CGPA\",\n    \"gpaResult\": 8.65,\n    \"percentageEquivalent\": \"82.18%\",\n    \"classification\": \"First Class with Distinction\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"44. Calculate CGPA / SGPA executed successfully.\",\n  \"data\": {\n    \"title\": \"B.Tech Year 1 CGPA\",\n    \"gpaResult\": 8.65,\n    \"percentageEquivalent\": \"82.18%\",\n    \"classification\": \"First Class with Distinction\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Save CGPA Calculation",
+          "name": "45. Save CGPA Calculation Record",
           "request": {
             "method": "POST",
             "header": [
@@ -3374,7 +3374,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"B.Tech Year 1 CGPA\",\n  \"gpaResult\": 8.65,\n  \"semestersData\": []\n}",
+              "raw": "{\n  \"title\": \"B.Tech Year 1 CGPA\",\n  \"gpaResult\": 8.65,\n  \"percentageEquivalent\": \"82.18%\",\n  \"classification\": \"First Class with Distinction\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -3410,7 +3410,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"title\": \"B.Tech Year 1 CGPA\",\n  \"gpaResult\": 8.65,\n  \"semestersData\": []\n}",
+                  "raw": "{\n  \"title\": \"B.Tech Year 1 CGPA\",\n  \"gpaResult\": 8.65,\n  \"percentageEquivalent\": \"82.18%\",\n  \"classification\": \"First Class with Distinction\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -3428,12 +3428,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Save CGPA Calculation executed successfully.\",\n  \"data\": {\n    \"title\": \"B.Tech Year 1 CGPA\",\n    \"gpaResult\": 8.65,\n    \"percentageEquivalent\": \"82.18%\",\n    \"classification\": \"First Class with Distinction\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"45. Save CGPA Calculation Record executed successfully.\",\n  \"data\": {\n    \"title\": \"B.Tech Year 1 CGPA\",\n    \"gpaResult\": 8.65,\n    \"percentageEquivalent\": \"82.18%\",\n    \"classification\": \"First Class with Distinction\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Get Saved CGPA Calculations",
+          "name": "46. Get My Saved CGPA Calculations",
           "request": {
             "method": "GET",
             "header": [
@@ -3487,12 +3487,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Saved CGPA Calculations executed successfully.\",\n  \"data\": {\n    \"title\": \"B.Tech Year 1 CGPA\",\n    \"gpaResult\": 8.65,\n    \"percentageEquivalent\": \"82.18%\",\n    \"classification\": \"First Class with Distinction\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"46. Get My Saved CGPA Calculations executed successfully.\",\n  \"data\": {\n    \"title\": \"B.Tech Year 1 CGPA\",\n    \"gpaResult\": 8.65,\n    \"percentageEquivalent\": \"82.18%\",\n    \"classification\": \"First Class with Distinction\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Get Attendance Summary",
+          "name": "47. Get Attendance Summary & 75% Alerts",
           "request": {
             "method": "GET",
             "header": [
@@ -3546,12 +3546,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Attendance Summary executed successfully.\",\n  \"data\": {\n    \"subjectName\": \"Operating Systems\",\n    \"targetPercentage\": 75,\n    \"currentPercentage\": 85,\n    \"totalClasses\": 20,\n    \"attendedClasses\": 17,\n    \"status\": \"On Track\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"47. Get Attendance Summary & 75% Alerts executed successfully.\",\n  \"data\": {\n    \"overallPercentage\": 82.5,\n    \"totalSubjects\": 4,\n    \"alertCount\": 0,\n    \"subjects\": [\n      {\n        \"subjectName\": \"Operating Systems\",\n        \"targetPercentage\": 75,\n        \"currentPercentage\": 85,\n        \"totalClasses\": 20,\n        \"attendedClasses\": 17,\n        \"status\": \"On Track\",\n        \"minimum75Alert\": \"Safe\"\n      }\n    ]\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Add New Subject Attendance",
+          "name": "48. Add New Subject to Attendance Tracker",
           "request": {
             "method": "POST",
             "header": [
@@ -3631,12 +3631,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Add New Subject Attendance executed successfully.\",\n  \"data\": {\n    \"subjectName\": \"Operating Systems\",\n    \"targetPercentage\": 75,\n    \"currentPercentage\": 85,\n    \"totalClasses\": 20,\n    \"attendedClasses\": 17,\n    \"status\": \"On Track\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"48. Add New Subject to Attendance Tracker executed successfully.\",\n  \"data\": {\n    \"overallPercentage\": 82.5,\n    \"totalSubjects\": 4,\n    \"alertCount\": 0,\n    \"subjects\": [\n      {\n        \"subjectName\": \"Operating Systems\",\n        \"targetPercentage\": 75,\n        \"currentPercentage\": 85,\n        \"totalClasses\": 20,\n        \"attendedClasses\": 17,\n        \"status\": \"On Track\",\n        \"minimum75Alert\": \"Safe\"\n      }\n    ]\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Log Class Attendance",
+          "name": "49. Log Class Attendance (Present / Absent)",
           "request": {
             "method": "POST",
             "header": [
@@ -3716,12 +3716,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Log Class Attendance executed successfully.\",\n  \"data\": {\n    \"subjectName\": \"Operating Systems\",\n    \"targetPercentage\": 75,\n    \"currentPercentage\": 85,\n    \"totalClasses\": 20,\n    \"attendedClasses\": 17,\n    \"status\": \"On Track\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"49. Log Class Attendance (Present / Absent) executed successfully.\",\n  \"data\": {\n    \"overallPercentage\": 82.5,\n    \"totalSubjects\": 4,\n    \"alertCount\": 0,\n    \"subjects\": [\n      {\n        \"subjectName\": \"Operating Systems\",\n        \"targetPercentage\": 75,\n        \"currentPercentage\": 85,\n        \"totalClasses\": 20,\n        \"attendedClasses\": 17,\n        \"status\": \"On Track\",\n        \"minimum75Alert\": \"Safe\"\n      }\n    ]\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Update Attendance Target",
+          "name": "50. Update Attendance Target Percentage",
           "request": {
             "method": "PUT",
             "header": [
@@ -3803,12 +3803,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Update Attendance Target executed successfully.\",\n  \"data\": {\n    \"subjectName\": \"Operating Systems\",\n    \"targetPercentage\": 75,\n    \"currentPercentage\": 85,\n    \"totalClasses\": 20,\n    \"attendedClasses\": 17,\n    \"status\": \"On Track\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"50. Update Attendance Target Percentage executed successfully.\",\n  \"data\": {\n    \"overallPercentage\": 82.5,\n    \"totalSubjects\": 4,\n    \"alertCount\": 0,\n    \"subjects\": [\n      {\n        \"subjectName\": \"Operating Systems\",\n        \"targetPercentage\": 75,\n        \"currentPercentage\": 85,\n        \"totalClasses\": 20,\n        \"attendedClasses\": 17,\n        \"status\": \"On Track\",\n        \"minimum75Alert\": \"Safe\"\n      }\n    ]\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Delete Attendance Subject",
+          "name": "51. Delete Attendance Subject",
           "request": {
             "method": "DELETE",
             "header": [
@@ -3864,19 +3864,76 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Delete Attendance Subject executed successfully.\",\n  \"data\": {\n    \"subjectName\": \"Operating Systems\",\n    \"targetPercentage\": 75,\n    \"currentPercentage\": 85,\n    \"totalClasses\": 20,\n    \"attendedClasses\": 17,\n    \"status\": \"On Track\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"51. Delete Attendance Subject executed successfully.\",\n  \"data\": {\n    \"overallPercentage\": 82.5,\n    \"totalSubjects\": 4,\n    \"alertCount\": 0,\n    \"subjects\": [\n      {\n        \"subjectName\": \"Operating Systems\",\n        \"targetPercentage\": 75,\n        \"currentPercentage\": 85,\n        \"totalClasses\": 20,\n        \"attendedClasses\": 17,\n        \"status\": \"On Track\",\n        \"minimum75Alert\": \"Safe\"\n      }\n    ]\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         }
       ]
     },
     {
-      "name": "Favorites & Downloads",
+      "name": "7. Profile, Settings, Favorites, Downloads & Referrals (8 APIs)",
       "item": [
         {
-          "name": "Toggle Favorite Status",
+          "name": "52. Get Student User Profile",
           "request": {
-            "method": "POST",
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/user/profile",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "user",
+                "profile"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/user/profile",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "user",
+                    "profile"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"52. Get Student User Profile executed successfully.\",\n  \"data\": {\n    \"id\": \"6a685d7b3d6e0376247c628e\",\n    \"name\": \"Rahul Sharma\",\n    \"email\": \"rahul@studyhub.com\",\n    \"phone\": \"9876543210\",\n    \"college\": \"Delhi Technological University (DTU)\",\n    \"course\": \"B.Tech CS\",\n    \"semester\": \"Semester 4\",\n    \"avatarUrl\": \"https://storage.studyhub.com/avatars/rahul.png\",\n    \"downloadsCount\": 14,\n    \"favoritesCount\": 8,\n    \"role\": \"student\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
+        },
+        {
+          "name": "53. Update Profile Info",
+          "request": {
+            "method": "PUT",
             "header": [
               {
                 "key": "Content-Type",
@@ -3888,18 +3945,18 @@
               }
             ],
             "url": {
-              "raw": "{{BASE_URL}}/favorites/toggle",
+              "raw": "{{BASE_URL}}/user/profile",
               "host": [
                 "{{BASE_URL}}"
               ],
               "path": [
-                "favorites",
-                "toggle"
+                "user",
+                "profile"
               ]
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"materialId\": \"mat_os_notes_101\"\n}",
+              "raw": "{\n  \"name\": \"Rahul Sharma\",\n  \"phone\": \"9876543210\",\n  \"college\": \"Delhi Technological University (DTU)\",\n  \"course\": \"B.Tech CS\",\n  \"semester\": \"Semester 4\",\n  \"avatarUrl\": \"https://storage.studyhub.com/avatars/rahul.png\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -3911,7 +3968,7 @@
             {
               "name": "200 OK - Successful Response",
               "originalRequest": {
-                "method": "POST",
+                "method": "PUT",
                 "header": [
                   {
                     "key": "Content-Type",
@@ -3923,18 +3980,18 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{BASE_URL}}/favorites/toggle",
+                  "raw": "{{BASE_URL}}/user/profile",
                   "host": [
                     "{{BASE_URL}}"
                   ],
                   "path": [
-                    "favorites",
-                    "toggle"
+                    "user",
+                    "profile"
                   ]
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"materialId\": \"mat_os_notes_101\"\n}",
+                  "raw": "{\n  \"name\": \"Rahul Sharma\",\n  \"phone\": \"9876543210\",\n  \"college\": \"Delhi Technological University (DTU)\",\n  \"course\": \"B.Tech CS\",\n  \"semester\": \"Semester 4\",\n  \"avatarUrl\": \"https://storage.studyhub.com/avatars/rahul.png\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -3952,347 +4009,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Toggle Favorite Status executed successfully.\",\n  \"data\": {\n    \"message\": \"Toggle Favorite Status executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.666Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"53. Update Profile Info executed successfully.\",\n  \"data\": {\n    \"id\": \"6a685d7b3d6e0376247c628e\",\n    \"name\": \"Rahul Sharma\",\n    \"email\": \"rahul@studyhub.com\",\n    \"phone\": \"9876543210\",\n    \"college\": \"Delhi Technological University (DTU)\",\n    \"course\": \"B.Tech CS\",\n    \"semester\": \"Semester 4\",\n    \"avatarUrl\": \"https://storage.studyhub.com/avatars/rahul.png\",\n    \"downloadsCount\": 14,\n    \"favoritesCount\": 8,\n    \"role\": \"student\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Get All Favorites",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{TOKEN}}"
-              }
-            ],
-            "url": {
-              "raw": "{{BASE_URL}}/favorites",
-              "host": [
-                "{{BASE_URL}}"
-              ],
-              "path": [
-                "favorites"
-              ]
-            }
-          },
-          "response": [
-            {
-              "name": "200 OK - Successful Response",
-              "originalRequest": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{TOKEN}}"
-                  }
-                ],
-                "url": {
-                  "raw": "{{BASE_URL}}/favorites",
-                  "host": [
-                    "{{BASE_URL}}"
-                  ],
-                  "path": [
-                    "favorites"
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json; charset=utf-8"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get All Favorites executed successfully.\",\n  \"data\": {\n    \"message\": \"Get All Favorites executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.666Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
-            }
-          ]
-        },
-        {
-          "name": "Sync Download Record",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{TOKEN}}"
-              }
-            ],
-            "url": {
-              "raw": "{{BASE_URL}}/downloads/sync",
-              "host": [
-                "{{BASE_URL}}"
-              ],
-              "path": [
-                "downloads",
-                "sync"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"materialId\": \"mat_os_notes_101\",\n  \"fileSizeBytes\": 4500000\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "name": "200 OK - Successful Response",
-              "originalRequest": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  },
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{TOKEN}}"
-                  }
-                ],
-                "url": {
-                  "raw": "{{BASE_URL}}/downloads/sync",
-                  "host": [
-                    "{{BASE_URL}}"
-                  ],
-                  "path": [
-                    "downloads",
-                    "sync"
-                  ]
-                },
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"materialId\": \"mat_os_notes_101\",\n  \"fileSizeBytes\": 4500000\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json; charset=utf-8"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Sync Download Record executed successfully.\",\n  \"data\": {\n    \"message\": \"Sync Download Record executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.666Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
-            }
-          ]
-        },
-        {
-          "name": "Get Downloaded List",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{TOKEN}}"
-              }
-            ],
-            "url": {
-              "raw": "{{BASE_URL}}/downloads",
-              "host": [
-                "{{BASE_URL}}"
-              ],
-              "path": [
-                "downloads"
-              ]
-            }
-          },
-          "response": [
-            {
-              "name": "200 OK - Successful Response",
-              "originalRequest": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{TOKEN}}"
-                  }
-                ],
-                "url": {
-                  "raw": "{{BASE_URL}}/downloads",
-                  "host": [
-                    "{{BASE_URL}}"
-                  ],
-                  "path": [
-                    "downloads"
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json; charset=utf-8"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Downloaded List executed successfully.\",\n  \"data\": {\n    \"message\": \"Get Downloaded List executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.666Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
-            }
-          ]
-        },
-        {
-          "name": "Get Activity Logs",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{TOKEN}}"
-              }
-            ],
-            "url": {
-              "raw": "{{BASE_URL}}/activity-logs?page=1&limit=20",
-              "host": [
-                "{{BASE_URL}}"
-              ],
-              "path": [
-                "activity-logs"
-              ],
-              "query": [
-                {
-                  "key": "page",
-                  "value": "1"
-                },
-                {
-                  "key": "limit",
-                  "value": "20"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "name": "200 OK - Successful Response",
-              "originalRequest": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{TOKEN}}"
-                  }
-                ],
-                "url": {
-                  "raw": "{{BASE_URL}}/activity-logs?page=1&limit=20",
-                  "host": [
-                    "{{BASE_URL}}"
-                  ],
-                  "path": [
-                    "activity-logs"
-                  ],
-                  "query": [
-                    {
-                      "key": "page",
-                      "value": "1"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "20"
-                    }
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json; charset=utf-8"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Activity Logs executed successfully.\",\n  \"data\": {\n    \"message\": \"Get Activity Logs executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.666Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
-            }
-          ]
-        },
-        {
-          "name": "Get Notifications",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{TOKEN}}"
-              }
-            ],
-            "url": {
-              "raw": "{{BASE_URL}}/notifications?unreadOnly=false",
-              "host": [
-                "{{BASE_URL}}"
-              ],
-              "path": [
-                "notifications"
-              ],
-              "query": [
-                {
-                  "key": "unreadOnly",
-                  "value": "false"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "name": "200 OK - Successful Response",
-              "originalRequest": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{TOKEN}}"
-                  }
-                ],
-                "url": {
-                  "raw": "{{BASE_URL}}/notifications?unreadOnly=false",
-                  "host": [
-                    "{{BASE_URL}}"
-                  ],
-                  "path": [
-                    "notifications"
-                  ],
-                  "query": [
-                    {
-                      "key": "unreadOnly",
-                      "value": "false"
-                    }
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json; charset=utf-8"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Notifications executed successfully.\",\n  \"data\": {\n    \"message\": \"Get Notifications executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.666Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
-            }
-          ]
-        },
-        {
-          "name": "📲 Invite Friends (Get Link & Code)",
+          "name": "54. Get Referral Code & Share Link",
           "request": {
             "method": "GET",
             "header": [
@@ -4344,12 +4066,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"📲 Invite Friends (Get Link & Code) executed successfully.\",\n  \"data\": {\n    \"referralCode\": \"STUDYHUB-RAHU8E24\",\n    \"referralLink\": \"https://studyhub-backend-server.onrender.com/invite?ref=STUDYHUB-RAHU8E24\",\n    \"shareMessage\": \"Hey classmate! Join me on StudyHub App to access Semester Notes, PYQs, Books & AI Assistant. Click here: https://studyhub-backend-server.onrender.com/invite?ref=STUDYHUB-RAHU8E24\",\n    \"totalInvitedFriends\": 5,\n    \"rewardPoints\": 250\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"54. Get Referral Code & Share Link executed successfully.\",\n  \"data\": {\n    \"referralCode\": \"STUDYHUB-RAHU8E24\",\n    \"referralLink\": \"https://studyhub-backend-server.onrender.com/invite?ref=STUDYHUB-RAHU8E24\",\n    \"shareMessage\": \"Hey classmate! Join me on StudyHub App to access Semester Notes, PYQs, Books & AI Assistant. Click here: https://studyhub-backend-server.onrender.com/invite?ref=STUDYHUB-RAHU8E24\",\n    \"totalInvitedFriends\": 5,\n    \"rewardPoints\": 250\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "📲 Apply Friend Referral Code",
+          "name": "55. Apply Friend Referral Code",
           "request": {
             "method": "POST",
             "header": [
@@ -4429,17 +4151,433 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"📲 Apply Friend Referral Code executed successfully.\",\n  \"data\": {\n    \"referralCode\": \"STUDYHUB-RAHU8E24\",\n    \"referralLink\": \"https://studyhub-backend-server.onrender.com/invite?ref=STUDYHUB-RAHU8E24\",\n    \"shareMessage\": \"Hey classmate! Join me on StudyHub App to access Semester Notes, PYQs, Books & AI Assistant. Click here: https://studyhub-backend-server.onrender.com/invite?ref=STUDYHUB-RAHU8E24\",\n    \"totalInvitedFriends\": 5,\n    \"rewardPoints\": 250\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"55. Apply Friend Referral Code executed successfully.\",\n  \"data\": {\n    \"referralCode\": \"STUDYHUB-RAHU8E24\",\n    \"referralLink\": \"https://studyhub-backend-server.onrender.com/invite?ref=STUDYHUB-RAHU8E24\",\n    \"shareMessage\": \"Hey classmate! Join me on StudyHub App to access Semester Notes, PYQs, Books & AI Assistant. Click here: https://studyhub-backend-server.onrender.com/invite?ref=STUDYHUB-RAHU8E24\",\n    \"totalInvitedFriends\": 5,\n    \"rewardPoints\": 250\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
+        },
+        {
+          "name": "56. Get User App Settings",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/user/settings",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "user",
+                "settings"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/user/settings",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "user",
+                    "settings"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"56. Get User App Settings executed successfully.\",\n  \"data\": {\n    \"message\": \"56. Get User App Settings executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.713Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
+        },
+        {
+          "name": "57. Update Preferred Language (en/hi)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/user/settings",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "user",
+                "settings"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"preferredLanguage\": \"en\",\n  \"darkTheme\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/user/settings",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "user",
+                    "settings"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"preferredLanguage\": \"en\",\n  \"darkTheme\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"57. Update Preferred Language (en/hi) executed successfully.\",\n  \"data\": {\n    \"message\": \"57. Update Preferred Language (en/hi) executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.713Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
+        },
+        {
+          "name": "58. Toggle Material Favorite Status",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/favorites/toggle",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "favorites",
+                "toggle"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"materialId\": \"mat_os_notes_101\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/favorites/toggle",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "favorites",
+                    "toggle"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"materialId\": \"mat_os_notes_101\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"58. Toggle Material Favorite Status executed successfully.\",\n  \"data\": {\n    \"message\": \"58. Toggle Material Favorite Status executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.713Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
+        },
+        {
+          "name": "59. Get Saved Favorite Materials",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/favorites",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "favorites"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/favorites",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "favorites"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"59. Get Saved Favorite Materials executed successfully.\",\n  \"data\": {\n    \"message\": \"59. Get Saved Favorite Materials executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.713Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
+        },
+        {
+          "name": "60. Sync Offline Download Record",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/downloads/sync",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "downloads",
+                "sync"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"materialId\": \"mat_os_notes_101\",\n  \"fileSizeBytes\": 4500000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/downloads/sync",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "downloads",
+                    "sync"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"materialId\": \"mat_os_notes_101\",\n  \"fileSizeBytes\": 4500000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"60. Sync Offline Download Record executed successfully.\",\n  \"data\": {\n    \"message\": \"60. Sync Offline Download Record executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.713Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
+        },
+        {
+          "name": "61. Get Downloaded Materials History",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/downloads",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "downloads"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/downloads",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "downloads"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"61. Get Downloaded Materials History executed successfully.\",\n  \"data\": {\n    \"message\": \"61. Get Downloaded Materials History executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.713Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         }
       ]
     },
     {
-      "name": "Admin",
+      "name": "8. Admin Control Panel Web Suite (28 APIs)",
       "item": [
         {
-          "name": "Admin Login",
+          "name": "62. Admin Login",
           "request": {
             "method": "POST",
             "header": [
@@ -4532,12 +4670,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Admin Login executed successfully.\",\n  \"data\": {\n    \"user\": {\n      \"id\": \"6a685d7b3d6e0376247c628e\",\n      \"name\": \"Rahul Sharma\",\n      \"email\": \"admin@studyhub.com\",\n      \"phone\": \"9876543210\",\n      \"college\": \"Delhi Technological University (DTU)\",\n      \"course\": \"B.Tech CS\",\n      \"semester\": \"Semester 4\",\n      \"role\": \"admin\",\n      \"isGuest\": false,\n      \"loginMethod\": \"email\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJpYXQiOjE3ODUyMjQ1NzF9.sample_refresh_token_2026\",\n    \"expiresIn\": \"15m\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": [],\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\"\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"62. Admin Login executed successfully.\",\n  \"data\": {\n    \"user\": {\n      \"id\": \"6a685d7b3d6e0376247c628e\",\n      \"name\": \"Rahul Sharma\",\n      \"email\": \"admin@studyhub.com\",\n      \"phone\": \"9876543210\",\n      \"college\": \"Delhi Technological University (DTU)\",\n      \"course\": \"B.Tech CS\",\n      \"semester\": \"Semester 4\",\n      \"role\": \"admin\",\n      \"isGuest\": false,\n      \"loginMethod\": \"email\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI6YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJpYXQiOjE3ODUyMjQ1NzF9.sample_refresh_token_2026\",\n    \"expiresIn\": \"15m\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": [],\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI6YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\"\n}"
             }
           ]
         },
         {
-          "name": "Get Dashboard Stats",
+          "name": "63. Get Dashboard Executive Stats",
           "request": {
             "method": "GET",
             "header": [
@@ -4589,12 +4727,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Dashboard Stats executed successfully.\",\n  \"data\": {\n    \"totalStudents\": 1250,\n    \"totalColleges\": 42,\n    \"totalCourses\": 128,\n    \"totalMaterials\": 4500,\n    \"totalDownloadsToday\": 890,\n    \"systemHealth\": \"Optimal\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"63. Get Dashboard Executive Stats executed successfully.\",\n  \"data\": {\n    \"totalStudents\": 1250,\n    \"totalColleges\": 42,\n    \"totalCourses\": 128,\n    \"totalMaterials\": 4500,\n    \"totalDownloadsToday\": 890,\n    \"systemHealth\": \"Optimal\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Get Activity Logs",
+          "name": "64. Get Activity Logs",
           "request": {
             "method": "GET",
             "header": [
@@ -4646,12 +4784,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Activity Logs executed successfully.\",\n  \"data\": {\n    \"message\": \"Get Activity Logs executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.666Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"64. Get Activity Logs executed successfully.\",\n  \"data\": {\n    \"message\": \"64. Get Activity Logs executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.713Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Get System Health",
+          "name": "65. Get System Health Report",
           "request": {
             "method": "GET",
             "header": [
@@ -4703,12 +4841,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get System Health executed successfully.\",\n  \"data\": {\n    \"message\": \"Get System Health executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.666Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"65. Get System Health Report executed successfully.\",\n  \"data\": {\n    \"message\": \"65. Get System Health Report executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.713Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Create College",
+          "name": "66. Add New College",
           "request": {
             "method": "POST",
             "header": [
@@ -4786,12 +4924,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Create College executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"du_dtu\",\n      \"name\": \"Delhi Technological University (DTU)\",\n      \"shortCode\": \"DTU\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    },\n    {\n      \"id\": \"iit_d\",\n      \"name\": \"Indian Institute of Technology Delhi\",\n      \"shortCode\": \"IITD\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"66. Add New College executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"du_dtu\",\n      \"name\": \"Delhi Technological University (DTU)\",\n      \"shortCode\": \"DTU\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    },\n    {\n      \"id\": \"iit_d\",\n      \"name\": \"Indian Institute of Technology Delhi\",\n      \"shortCode\": \"IITD\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Update College",
+          "name": "67. Update College Details",
           "request": {
             "method": "PUT",
             "header": [
@@ -4871,12 +5009,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Update College executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"du_dtu\",\n      \"name\": \"Delhi Technological University (DTU)\",\n      \"shortCode\": \"DTU\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    },\n    {\n      \"id\": \"iit_d\",\n      \"name\": \"Indian Institute of Technology Delhi\",\n      \"shortCode\": \"IITD\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"67. Update College Details executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"du_dtu\",\n      \"name\": \"Delhi Technological University (DTU)\",\n      \"shortCode\": \"DTU\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    },\n    {\n      \"id\": \"iit_d\",\n      \"name\": \"Indian Institute of Technology Delhi\",\n      \"shortCode\": \"IITD\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Delete College",
+          "name": "68. Delete College",
           "request": {
             "method": "DELETE",
             "header": [
@@ -4930,12 +5068,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Delete College executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"du_dtu\",\n      \"name\": \"Delhi Technological University (DTU)\",\n      \"shortCode\": \"DTU\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    },\n    {\n      \"id\": \"iit_d\",\n      \"name\": \"Indian Institute of Technology Delhi\",\n      \"shortCode\": \"IITD\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"68. Delete College executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"du_dtu\",\n      \"name\": \"Delhi Technological University (DTU)\",\n      \"shortCode\": \"DTU\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    },\n    {\n      \"id\": \"iit_d\",\n      \"name\": \"Indian Institute of Technology Delhi\",\n      \"shortCode\": \"IITD\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Create Course",
+          "name": "69. Create New Course",
           "request": {
             "method": "POST",
             "header": [
@@ -5013,12 +5151,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Create Course executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"btech_cs\",\n      \"name\": \"B.Tech Computer Science\",\n      \"shortCode\": \"BTECH_CS\",\n      \"totalSemesters\": 8\n    },\n    {\n      \"id\": \"bca\",\n      \"name\": \"Bachelor of Computer Applications\",\n      \"shortCode\": \"BCA\",\n      \"totalSemesters\": 6\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"69. Create New Course executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"btech_cs\",\n      \"name\": \"B.Tech Computer Science\",\n      \"shortCode\": \"BTECH_CS\",\n      \"totalSemesters\": 8\n    },\n    {\n      \"id\": \"bca\",\n      \"name\": \"Bachelor of Computer Applications\",\n      \"shortCode\": \"BCA\",\n      \"totalSemesters\": 6\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Update Course",
+          "name": "70. Update Course Details",
           "request": {
             "method": "PUT",
             "header": [
@@ -5098,12 +5236,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Update Course executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"btech_cs\",\n      \"name\": \"B.Tech Computer Science\",\n      \"shortCode\": \"BTECH_CS\",\n      \"totalSemesters\": 8\n    },\n    {\n      \"id\": \"bca\",\n      \"name\": \"Bachelor of Computer Applications\",\n      \"shortCode\": \"BCA\",\n      \"totalSemesters\": 6\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"70. Update Course Details executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"btech_cs\",\n      \"name\": \"B.Tech Computer Science\",\n      \"shortCode\": \"BTECH_CS\",\n      \"totalSemesters\": 8\n    },\n    {\n      \"id\": \"bca\",\n      \"name\": \"Bachelor of Computer Applications\",\n      \"shortCode\": \"BCA\",\n      \"totalSemesters\": 6\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Delete Course",
+          "name": "71. Delete Course",
           "request": {
             "method": "DELETE",
             "header": [
@@ -5157,12 +5295,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Delete Course executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"btech_cs\",\n      \"name\": \"B.Tech Computer Science\",\n      \"shortCode\": \"BTECH_CS\",\n      \"totalSemesters\": 8\n    },\n    {\n      \"id\": \"bca\",\n      \"name\": \"Bachelor of Computer Applications\",\n      \"shortCode\": \"BCA\",\n      \"totalSemesters\": 6\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"71. Delete Course executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"btech_cs\",\n      \"name\": \"B.Tech Computer Science\",\n      \"shortCode\": \"BTECH_CS\",\n      \"totalSemesters\": 8\n    },\n    {\n      \"id\": \"bca\",\n      \"name\": \"Bachelor of Computer Applications\",\n      \"shortCode\": \"BCA\",\n      \"totalSemesters\": 6\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Create Subject",
+          "name": "72. Create Subject (Code & Faculty Name)",
           "request": {
             "method": "POST",
             "header": [
@@ -5187,7 +5325,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"courseId\": \"btech_cs\",\n  \"semester\": 4,\n  \"name\": \"Operating Systems\",\n  \"code\": \"CS401\"\n}",
+              "raw": "{\n  \"courseId\": \"btech_cs\",\n  \"semester\": 4,\n  \"name\": \"Operating Systems\",\n  \"code\": \"CS401\",\n  \"facultyName\": \"Dr. A. K. Sharma\",\n  \"credits\": 4\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -5222,7 +5360,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"courseId\": \"btech_cs\",\n  \"semester\": 4,\n  \"name\": \"Operating Systems\",\n  \"code\": \"CS401\"\n}",
+                  "raw": "{\n  \"courseId\": \"btech_cs\",\n  \"semester\": 4,\n  \"name\": \"Operating Systems\",\n  \"code\": \"CS401\",\n  \"facultyName\": \"Dr. A. K. Sharma\",\n  \"credits\": 4\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -5240,12 +5378,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Create Subject executed successfully.\",\n  \"data\": {\n    \"message\": \"Create Subject executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.667Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"72. Create Subject (Code & Faculty Name) executed successfully.\",\n  \"data\": {\n    \"id\": \"subj_os_401\",\n    \"name\": \"Operating Systems\",\n    \"code\": \"CS401\",\n    \"credits\": 4,\n    \"facultyName\": \"Dr. A. K. Sharma\",\n    \"description\": \"Core Operating Systems concepts including Process Management, Memory Management, File Systems, and Virtualization.\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Update Subject",
+          "name": "73. Update Subject Details",
           "request": {
             "method": "PUT",
             "header": [
@@ -5325,12 +5463,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Update Subject executed successfully.\",\n  \"data\": {\n    \"message\": \"Update Subject executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.667Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"73. Update Subject Details executed successfully.\",\n  \"data\": {\n    \"id\": \"subj_os_401\",\n    \"name\": \"Operating Systems\",\n    \"code\": \"CS401\",\n    \"credits\": 4,\n    \"facultyName\": \"Dr. A. K. Sharma\",\n    \"description\": \"Core Operating Systems concepts including Process Management, Memory Management, File Systems, and Virtualization.\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Delete Subject",
+          "name": "74. Delete Subject",
           "request": {
             "method": "DELETE",
             "header": [
@@ -5384,12 +5522,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Delete Subject executed successfully.\",\n  \"data\": {\n    \"message\": \"Delete Subject executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.667Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"74. Delete Subject executed successfully.\",\n  \"data\": {\n    \"id\": \"subj_os_401\",\n    \"name\": \"Operating Systems\",\n    \"code\": \"CS401\",\n    \"credits\": 4,\n    \"facultyName\": \"Dr. A. K. Sharma\",\n    \"description\": \"Core Operating Systems concepts including Process Management, Memory Management, File Systems, and Virtualization.\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Upload Material",
+          "name": "75. Upload Material (Notes/PYQs/Books/Videos)",
           "request": {
             "method": "POST",
             "header": [
@@ -5467,12 +5605,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Upload Material executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"75. Upload Material (Notes/PYQs/Books/Videos) executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Update Material",
+          "name": "76. Update Material Details",
           "request": {
             "method": "PUT",
             "header": [
@@ -5552,12 +5690,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Update Material executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"76. Update Material Details executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Delete Material",
+          "name": "77. Delete Material",
           "request": {
             "method": "DELETE",
             "header": [
@@ -5611,12 +5749,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Delete Material executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"77. Delete Material executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "List All Students",
+          "name": "78. List All Students",
           "request": {
             "method": "GET",
             "header": [
@@ -5696,71 +5834,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"List All Students executed successfully.\",\n  \"data\": {\n    \"message\": \"List All Students executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.667Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"78. List All Students executed successfully.\",\n  \"data\": {\n    \"message\": \"78. List All Students executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.713Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Get Student Profile",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{ADMIN_TOKEN}}"
-              }
-            ],
-            "url": {
-              "raw": "{{BASE_URL}}/admin/users/usr_student_101",
-              "host": [
-                "{{BASE_URL}}"
-              ],
-              "path": [
-                "admin",
-                "users",
-                "usr_student_101"
-              ]
-            }
-          },
-          "response": [
-            {
-              "name": "200 OK - Successful Response",
-              "originalRequest": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{ADMIN_TOKEN}}"
-                  }
-                ],
-                "url": {
-                  "raw": "{{BASE_URL}}/admin/users/usr_student_101",
-                  "host": [
-                    "{{BASE_URL}}"
-                  ],
-                  "path": [
-                    "admin",
-                    "users",
-                    "usr_student_101"
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json; charset=utf-8"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Student Profile executed successfully.\",\n  \"data\": {\n    \"message\": \"Get Student Profile executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.667Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
-            }
-          ]
-        },
-        {
-          "name": "Block Student",
+          "name": "79. Block / Unblock Student Account",
           "request": {
             "method": "PATCH",
             "header": [
@@ -5787,7 +5866,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"isBlocked\": true,\n  \"reason\": \"Violation of terms\"\n}",
+              "raw": "{\n  \"isBlocked\": true,\n  \"reason\": \"Violation of app policies\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -5824,7 +5903,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"isBlocked\": true,\n  \"reason\": \"Violation of terms\"\n}",
+                  "raw": "{\n  \"isBlocked\": true,\n  \"reason\": \"Violation of app policies\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -5842,99 +5921,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Block Student executed successfully.\",\n  \"data\": {\n    \"message\": \"Block Student executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.667Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"79. Block / Unblock Student Account executed successfully.\",\n  \"data\": {\n    \"message\": \"79. Block / Unblock Student Account executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.713Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Unblock Student",
-          "request": {
-            "method": "PATCH",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{ADMIN_TOKEN}}"
-              }
-            ],
-            "url": {
-              "raw": "{{BASE_URL}}/admin/users/usr_student_101/unblock",
-              "host": [
-                "{{BASE_URL}}"
-              ],
-              "path": [
-                "admin",
-                "users",
-                "usr_student_101",
-                "unblock"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"isBlocked\": false\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "name": "200 OK - Successful Response",
-              "originalRequest": {
-                "method": "PATCH",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  },
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{ADMIN_TOKEN}}"
-                  }
-                ],
-                "url": {
-                  "raw": "{{BASE_URL}}/admin/users/usr_student_101/unblock",
-                  "host": [
-                    "{{BASE_URL}}"
-                  ],
-                  "path": [
-                    "admin",
-                    "users",
-                    "usr_student_101",
-                    "unblock"
-                  ]
-                },
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"isBlocked\": false\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json; charset=utf-8"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Unblock Student executed successfully.\",\n  \"data\": {\n    \"message\": \"Unblock Student executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.667Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
-            }
-          ]
-        },
-        {
-          "name": "Delete Student Account",
+          "name": "80. Delete Student Account",
           "request": {
             "method": "DELETE",
             "header": [
@@ -5988,12 +5980,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Delete Student Account executed successfully.\",\n  \"data\": {\n    \"message\": \"Delete Student Account executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.667Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"80. Delete Student Account executed successfully.\",\n  \"data\": {\n    \"message\": \"80. Delete Student Account executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.713Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Send Push Notification",
+          "name": "81. Send Mobile Push Notification",
           "request": {
             "method": "POST",
             "header": [
@@ -6019,7 +6011,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"Exam Datesheet Released!\",\n  \"body\": \"Semester 4 PYQs & Notes updated\",\n  \"targetRole\": \"student\"\n}",
+              "raw": "{\n  \"title\": \"Exam Datesheet Released!\",\n  \"body\": \"Semester 4 PYQs & Notes updated for all subjects.\",\n  \"targetRole\": \"student\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -6055,7 +6047,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"title\": \"Exam Datesheet Released!\",\n  \"body\": \"Semester 4 PYQs & Notes updated\",\n  \"targetRole\": \"student\"\n}",
+                  "raw": "{\n  \"title\": \"Exam Datesheet Released!\",\n  \"body\": \"Semester 4 PYQs & Notes updated for all subjects.\",\n  \"targetRole\": \"student\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -6073,69 +6065,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Send Push Notification executed successfully.\",\n  \"data\": {\n    \"message\": \"Send Push Notification executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.667Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"81. Send Mobile Push Notification executed successfully.\",\n  \"data\": {\n    \"message\": \"81. Send Mobile Push Notification executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.713Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Get Notifications History",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{ADMIN_TOKEN}}"
-              }
-            ],
-            "url": {
-              "raw": "{{BASE_URL}}/admin/notifications",
-              "host": [
-                "{{BASE_URL}}"
-              ],
-              "path": [
-                "admin",
-                "notifications"
-              ]
-            }
-          },
-          "response": [
-            {
-              "name": "200 OK - Successful Response",
-              "originalRequest": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{ADMIN_TOKEN}}"
-                  }
-                ],
-                "url": {
-                  "raw": "{{BASE_URL}}/admin/notifications",
-                  "host": [
-                    "{{BASE_URL}}"
-                  ],
-                  "path": [
-                    "admin",
-                    "notifications"
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json; charset=utf-8"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Notifications History executed successfully.\",\n  \"data\": {\n    \"message\": \"Get Notifications History executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.667Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
-            }
-          ]
-        },
-        {
-          "name": "Create Banner",
+          "name": "82. Create Promotional Banner",
           "request": {
             "method": "POST",
             "header": [
@@ -6213,69 +6148,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Create Banner executed successfully.\",\n  \"data\": {\n    \"message\": \"Create Banner executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.667Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"82. Create Promotional Banner executed successfully.\",\n  \"data\": {\n    \"message\": \"82. Create Promotional Banner executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.713Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Get All Banners",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{ADMIN_TOKEN}}"
-              }
-            ],
-            "url": {
-              "raw": "{{BASE_URL}}/admin/banners",
-              "host": [
-                "{{BASE_URL}}"
-              ],
-              "path": [
-                "admin",
-                "banners"
-              ]
-            }
-          },
-          "response": [
-            {
-              "name": "200 OK - Successful Response",
-              "originalRequest": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{ADMIN_TOKEN}}"
-                  }
-                ],
-                "url": {
-                  "raw": "{{BASE_URL}}/admin/banners",
-                  "host": [
-                    "{{BASE_URL}}"
-                  ],
-                  "path": [
-                    "admin",
-                    "banners"
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json; charset=utf-8"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get All Banners executed successfully.\",\n  \"data\": {\n    \"message\": \"Get All Banners executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.667Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
-            }
-          ]
-        },
-        {
-          "name": "Update Banner Status",
+          "name": "83. Update Banner Status",
           "request": {
             "method": "PUT",
             "header": [
@@ -6355,12 +6233,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Update Banner Status executed successfully.\",\n  \"data\": {\n    \"message\": \"Update Banner Status executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.667Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"83. Update Banner Status executed successfully.\",\n  \"data\": {\n    \"message\": \"83. Update Banner Status executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.713Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Delete Banner",
+          "name": "84. Delete Banner",
           "request": {
             "method": "DELETE",
             "header": [
@@ -6414,197 +6292,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Delete Banner executed successfully.\",\n  \"data\": {\n    \"message\": \"Delete Banner executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.667Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"84. Delete Banner executed successfully.\",\n  \"data\": {\n    \"message\": \"84. Delete Banner executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.713Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "Get Audit Logs",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{ADMIN_TOKEN}}"
-              }
-            ],
-            "url": {
-              "raw": "{{BASE_URL}}/admin/audit-logs",
-              "host": [
-                "{{BASE_URL}}"
-              ],
-              "path": [
-                "admin",
-                "audit-logs"
-              ]
-            }
-          },
-          "response": [
-            {
-              "name": "200 OK - Successful Response",
-              "originalRequest": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{ADMIN_TOKEN}}"
-                  }
-                ],
-                "url": {
-                  "raw": "{{BASE_URL}}/admin/audit-logs",
-                  "host": [
-                    "{{BASE_URL}}"
-                  ],
-                  "path": [
-                    "admin",
-                    "audit-logs"
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json; charset=utf-8"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Audit Logs executed successfully.\",\n  \"data\": {\n    \"message\": \"Get Audit Logs executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.667Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
-            }
-          ]
-        },
-        {
-          "name": "Get User Feedbacks",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{ADMIN_TOKEN}}"
-              }
-            ],
-            "url": {
-              "raw": "{{BASE_URL}}/admin/feedbacks",
-              "host": [
-                "{{BASE_URL}}"
-              ],
-              "path": [
-                "admin",
-                "feedbacks"
-              ]
-            }
-          },
-          "response": [
-            {
-              "name": "200 OK - Successful Response",
-              "originalRequest": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{ADMIN_TOKEN}}"
-                  }
-                ],
-                "url": {
-                  "raw": "{{BASE_URL}}/admin/feedbacks",
-                  "host": [
-                    "{{BASE_URL}}"
-                  ],
-                  "path": [
-                    "admin",
-                    "feedbacks"
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json; charset=utf-8"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get User Feedbacks executed successfully.\",\n  \"data\": {\n    \"message\": \"Get User Feedbacks executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.667Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
-            }
-          ]
-        },
-        {
-          "name": "Export Reports",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{ADMIN_TOKEN}}"
-              }
-            ],
-            "url": {
-              "raw": "{{BASE_URL}}/admin/reports/export?format=csv",
-              "host": [
-                "{{BASE_URL}}"
-              ],
-              "path": [
-                "admin",
-                "reports",
-                "export"
-              ],
-              "query": [
-                {
-                  "key": "format",
-                  "value": "csv"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "name": "200 OK - Successful Response",
-              "originalRequest": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{ADMIN_TOKEN}}"
-                  }
-                ],
-                "url": {
-                  "raw": "{{BASE_URL}}/admin/reports/export?format=csv",
-                  "host": [
-                    "{{BASE_URL}}"
-                  ],
-                  "path": [
-                    "admin",
-                    "reports",
-                    "export"
-                  ],
-                  "query": [
-                    {
-                      "key": "format",
-                      "value": "csv"
-                    }
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json; charset=utf-8"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Export Reports executed successfully.\",\n  \"data\": {\n    \"message\": \"Export Reports executed successfully.\",\n    \"timestamp\": \"2026-07-28T10:10:03.667Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
-            }
-          ]
-        },
-        {
-          "name": "📲 Get Referral Leaderboard & Invite Analytics",
+          "name": "85. Get Referral Leaderboard & Invite Analytics",
           "request": {
             "method": "GET",
             "header": [
@@ -6656,12 +6349,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"📲 Get Referral Leaderboard & Invite Analytics executed successfully.\",\n  \"data\": {\n    \"referralCode\": \"STUDYHUB-RAHU8E24\",\n    \"referralLink\": \"https://studyhub-backend-server.onrender.com/invite?ref=STUDYHUB-RAHU8E24\",\n    \"shareMessage\": \"Hey classmate! Join me on StudyHub App to access Semester Notes, PYQs, Books & AI Assistant. Click here: https://studyhub-backend-server.onrender.com/invite?ref=STUDYHUB-RAHU8E24\",\n    \"totalInvitedFriends\": 5,\n    \"rewardPoints\": 250\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"85. Get Referral Leaderboard & Invite Analytics executed successfully.\",\n  \"data\": {\n    \"referralCode\": \"STUDYHUB-RAHU8E24\",\n    \"referralLink\": \"https://studyhub-backend-server.onrender.com/invite?ref=STUDYHUB-RAHU8E24\",\n    \"shareMessage\": \"Hey classmate! Join me on StudyHub App to access Semester Notes, PYQs, Books & AI Assistant. Click here: https://studyhub-backend-server.onrender.com/invite?ref=STUDYHUB-RAHU8E24\",\n    \"totalInvitedFriends\": 5,\n    \"rewardPoints\": 250\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "📲 Get Student Invited Friends List",
+          "name": "86. Get Student Feedbacks & Support Tickets",
           "request": {
             "method": "GET",
             "header": [
@@ -6671,15 +6364,13 @@
               }
             ],
             "url": {
-              "raw": "{{BASE_URL}}/admin/users/usr_student_101/referrals",
+              "raw": "{{BASE_URL}}/admin/feedbacks",
               "host": [
                 "{{BASE_URL}}"
               ],
               "path": [
                 "admin",
-                "users",
-                "usr_student_101",
-                "referrals"
+                "feedbacks"
               ]
             }
           },
@@ -6695,15 +6386,13 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{BASE_URL}}/admin/users/usr_student_101/referrals",
+                  "raw": "{{BASE_URL}}/admin/feedbacks",
                   "host": [
                     "{{BASE_URL}}"
                   ],
                   "path": [
                     "admin",
-                    "users",
-                    "usr_student_101",
-                    "referrals"
+                    "feedbacks"
                   ]
                 }
               },
@@ -6717,7 +6406,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"📲 Get Student Invited Friends List executed successfully.\",\n  \"data\": {\n    \"referralCode\": \"STUDYHUB-RAHU8E24\",\n    \"referralLink\": \"https://studyhub-backend-server.onrender.com/invite?ref=STUDYHUB-RAHU8E24\",\n    \"shareMessage\": \"Hey classmate! Join me on StudyHub App to access Semester Notes, PYQs, Books & AI Assistant. Click here: https://studyhub-backend-server.onrender.com/invite?ref=STUDYHUB-RAHU8E24\",\n    \"totalInvitedFriends\": 5,\n    \"rewardPoints\": 250\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"86. Get Student Feedbacks & Support Tickets executed successfully.\",\n  \"data\": {\n    \"message\": \"86. Get Student Feedbacks & Support Tickets executed successfully.\",\n    \"timestamp\": \"2026-07-28T11:01:15.713Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         }

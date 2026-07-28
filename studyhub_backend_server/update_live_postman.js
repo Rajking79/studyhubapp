@@ -44,7 +44,7 @@ function generateSampleResponse(name, pathStr, bodyObj, isAdmin) {
         isGuest: pathStr.includes("guest"),
         loginMethod: pathStr.includes("google") ? "google" : (pathStr.includes("dev") ? "dev" : "email")
       },
-      token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI6YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026",
+      token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026",
       refreshToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJpYXQiOjE3ODUyMjQ1NzF9.sample_refresh_token_2026",
       expiresIn: "15m"
     };
@@ -379,7 +379,7 @@ const collection = {
   ]
 };
 
+fs.writeFileSync('../postman_collection.json', JSON.stringify(collection, null, 2));
 fs.writeFileSync('./postman_collection.json', JSON.stringify(collection, null, 2));
-fs.writeFileSync('./studyhub_backend_server/postman_collection.json', JSON.stringify(collection, null, 2));
 
 console.log('✅ Master Postman Collection JSON with 87 Endpoints Generated Successfully!');

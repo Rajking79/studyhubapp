@@ -67,6 +67,10 @@ class AcademicRepository {
     return await Course.create(data);
   }
 
+  static async updateCourse(id, data) {
+    return await Course.findByIdAndUpdate(id, { $set: data }, { new: true }).lean();
+  }
+
   static async softDeleteCourse(id) {
     return await Course.findByIdAndUpdate(id, { $set: { isDeleted: true, deletedAt: new Date() } }, { new: true });
   }
@@ -133,6 +137,10 @@ class AcademicRepository {
 
   static async createSubject(data) {
     return await Subject.create(data);
+  }
+
+  static async updateSubject(id, data) {
+    return await Subject.findByIdAndUpdate(id, { $set: data }, { new: true }).lean();
   }
 
   static async softDeleteSubject(id) {

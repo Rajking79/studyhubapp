@@ -42,6 +42,12 @@ class AcademicService {
     return await AcademicRepository.createCourse(data);
   }
 
+  static async updateCourse(id, data) {
+    const course = await AcademicRepository.updateCourse(id, data);
+    if (!course) throw new ApiError(404, "Course not found");
+    return course;
+  }
+
   static async deleteCourse(id) {
     const course = await AcademicRepository.softDeleteCourse(id);
     if (!course) throw new ApiError(404, "Course not found");
@@ -68,6 +74,12 @@ class AcademicService {
 
   static async createSubject(data) {
     return await AcademicRepository.createSubject(data);
+  }
+
+  static async updateSubject(id, data) {
+    const subject = await AcademicRepository.updateSubject(id, data);
+    if (!subject) throw new ApiError(404, "Subject not found");
+    return subject;
   }
 
   static async deleteSubject(id) {

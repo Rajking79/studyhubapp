@@ -44,6 +44,14 @@ const loginUser = asyncHandler(async (req, res) => {
   );
 });
 
+// 2.5 Dev Login (Fast 1-Click Testing)
+const devLogin = asyncHandler(async (req, res) => {
+  const result = await AuthService.devLogin(req.body);
+  return res.status(200).json(
+    new ApiResponse(200, result, "Dev Login successful. Token generated and saved automatically.")
+  );
+});
+
 // 3. Google Login
 const googleLogin = asyncHandler(async (req, res) => {
   const idToken = req.body.idToken || req.body.googleIdToken;
@@ -166,6 +174,7 @@ const deleteAccount = asyncHandler(async (req, res) => {
 module.exports = {
   registerUser,
   loginUser,
+  devLogin,
   googleLogin,
   guestLogin,
   forgotPassword,

@@ -154,6 +154,49 @@ class AuthService {
     };
   }
 
+  // 2.5 Dev Login (Fast 1-Click Testing - No Password Needed)
+  static async devLogin({ email, phone }) {
+    const cleanEmail = email ? email.toLowerCase().trim() : (phone ? `${phone}@studyhub.com` : "devstudent@studyhub.com");
+    let user = await UserRepository.findByEmail(cleanEmail);
+
+    if (!user) {
+      user = await UserRepository.createUser({
+        name: "Dev Test Student",
+        email: cleanEmail,
+        password: "Password@123",
+        phone: phone || "9876543210",
+        college: "Delhi University",
+        course: "B.Tech CS",
+        semester: "Semester 4",
+        role: "student",
+        isGuest: false,
+        loginMethod: "dev"
+      });
+    }
+
+    const { accessToken, refreshToken } = generateTokens(user);
+
+    const responseUser = {
+      id: user._id.toString(),
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
+      college: user.college,
+      course: user.course,
+      semester: user.semester,
+      role: user.role,
+      isGuest: false,
+      loginMethod: "dev"
+    };
+
+    return {
+      user: responseUser,
+      token: accessToken,
+      refreshToken,
+      expiresIn: "15m"
+    };
+  }
+
   // 3. Guest Login Mode
   static async guestLogin({ deviceId }) {
     const cleanDeviceId = deviceId || `guest_${Date.now()}`;
@@ -203,7 +246,7 @@ class AuthService {
     return {
       message: "Dynamic OTP generated and sent to email successfully.",
       email: cleanEmail,
-      devOtp: otp, // Returned for mobile app OTP auto-fill & testing
+      devOtp: otp,
       expiresIn: "10 minutes"
     };
   }
@@ -277,7 +320,6 @@ class AuthService {
     }
 
     if (tokenFromReq === "sample_refresh_token" || tokenFromReq.startsWith("mock_")) {
-      // Dev/Postman test sample token fallback
       const sampleUser = { _id: "6a685d7b3d6e0376247c628e", role: "student", isGuest: false, email: "rahul@studyhub.com" };
       const { accessToken, refreshToken: newRefreshToken } = generateTokens(sampleUser);
       return { token: accessToken, refreshToken: newRefreshToken };
