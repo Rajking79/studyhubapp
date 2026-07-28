@@ -7,6 +7,7 @@ const morgan = require("morgan");
 const compression = require("compression");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
+const mongoose = require("mongoose");
 
 dotenv.config();
 
@@ -37,7 +38,8 @@ app.get("/", (req, res) => {
     message: "🚀 StudyHub AI & Admin Panel Backend Server is Running Live!",
     adminWebPanel: `${req.protocol}://${req.get("host")}/admin/`,
     healthCheck: `${req.protocol}://${req.get("host")}/api/v1/health`,
-    apiBaseUrl: `${req.protocol}://${req.get("host")}/api/v1`
+    apiBaseUrl: `${req.protocol}://${req.get("host")}/api/v1`,
+    mongoStatus: mongoose.connection.readyState === 1 ? "Online" : "Offline"
   });
 });
 
@@ -59,12 +61,31 @@ app.get("/api/v1/health", (req, res) => {
     success: true,
     statusCode: 200,
     message: "🚀 StudyHub AI Backend API is running smoothly!",
+    mongoStatus: mongoose.connection.readyState === 1 ? "Connected" : "Disconnected",
     timestamp: new Date().toISOString()
   });
 });
 
+// Database Health Check Guard Middleware
+const checkDbHealth = (req, res, next) => {
+  if (req.path === "/health") return next();
+  if (mongoose.connection.readyState !== 1) {
+    return res.status(503).json({
+      success: false,
+      statusCode: 503,
+      message: "MongoDB Database Connection Offline. Please ensure MongoDB service ('mongod') is running or check MONGO_URI in .env.",
+      data: {},
+      meta: {},
+      errors: [
+        "Database is currently disconnected (Mongoose Connection State: " + mongoose.connection.readyState + ")"
+      ]
+    });
+  }
+  next();
+};
+
 // API Routes Mapping
-app.use("/api/v1", apiRoutes);
+app.use("/api/v1", checkDbHealth, apiRoutes);
 
 // Fallback 404 Route Handler
 app.use("*", (req, res) => {
