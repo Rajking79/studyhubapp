@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "studyhub-production-postman-suite-2026",
     "name": "StudyHub Live Production REST API Suite (Render Cloud)",
-    "description": "Official Production Postman Collection with 83 fully functional endpoints. Pointing directly to Render Cloud deployment: https://studyhub-backend-server.onrender.com/api/v1",
+    "description": "Official Production Postman Collection with 84 fully functional endpoints. Features Automatic Token Saving and DEV LOGIN. Pointing directly to Render Cloud deployment: https://studyhub-backend-server.onrender.com/api/v1",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -13,19 +13,69 @@
     },
     {
       "key": "token",
-      "value": "student_jwt_token_here",
+      "value": "",
       "type": "string"
     },
     {
       "key": "adminToken",
-      "value": "admin_jwt_token_here",
+      "value": "",
       "type": "string"
     }
   ],
   "item": [
     {
-      "name": "🔐 1. Student Authentication & Security (17 APIs)",
+      "name": "🔐 1. Student Authentication & Security (18 APIs)",
       "item": [
+        {
+          "name": "⚡ DEV LOGIN (Fast 1-Click Testing - No Password Needed)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/dev-login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "dev-login"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone\": \"9876543210\",\n  \"email\": \"rahul@studyhub.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var json = pm.response.json();",
+                  "var tokenVal = (json.data && json.data.token) || json.token;",
+                  "if (tokenVal) {",
+                  "  pm.collectionVariables.set('token', tokenVal);",
+                  "  console.log('✅ token saved automatically:', tokenVal);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
         {
           "name": "Register Student",
           "request": {
@@ -59,7 +109,22 @@
                 }
               }
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var json = pm.response.json();",
+                  "var tokenVal = (json.data && json.data.token) || json.token;",
+                  "if (tokenVal) {",
+                  "  pm.collectionVariables.set('token', tokenVal);",
+                  "  console.log('✅ token saved automatically:', tokenVal);",
+                  "}"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Login Student",
@@ -94,7 +159,22 @@
                 }
               }
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var json = pm.response.json();",
+                  "var tokenVal = (json.data && json.data.token) || json.token;",
+                  "if (tokenVal) {",
+                  "  pm.collectionVariables.set('token', tokenVal);",
+                  "  console.log('✅ token saved automatically:', tokenVal);",
+                  "}"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Google OAuth Login",
@@ -122,14 +202,29 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"idToken\": \"sample_google_token\"\n}",
+              "raw": "{\n  \"idToken\": \"sample_google_token\",\n  \"email\": \"custom.google@studyhub.com\",\n  \"name\": \"Custom Student\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var json = pm.response.json();",
+                  "var tokenVal = (json.data && json.data.token) || json.token;",
+                  "if (tokenVal) {",
+                  "  pm.collectionVariables.set('token', tokenVal);",
+                  "  console.log('✅ token saved automatically:', tokenVal);",
+                  "}"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Guest Mode Login",
@@ -164,7 +259,22 @@
                 }
               }
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var json = pm.response.json();",
+                  "var tokenVal = (json.data && json.data.token) || json.token;",
+                  "if (tokenVal) {",
+                  "  pm.collectionVariables.set('token', tokenVal);",
+                  "  console.log('✅ token saved automatically:', tokenVal);",
+                  "}"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Refresh Access Token",
@@ -199,7 +309,22 @@
                 }
               }
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var json = pm.response.json();",
+                  "var tokenVal = (json.data && json.data.token) || json.token;",
+                  "if (tokenVal) {",
+                  "  pm.collectionVariables.set('token', tokenVal);",
+                  "  console.log('✅ token saved automatically:', tokenVal);",
+                  "}"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Get Current User Profile (Me)",
@@ -348,7 +473,22 @@
                 "login-history"
               ]
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var json = pm.response.json();",
+                  "var tokenVal = (json.data && json.data.token) || json.token;",
+                  "if (tokenVal) {",
+                  "  pm.collectionVariables.set('token', tokenVal);",
+                  "  console.log('✅ token saved automatically:', tokenVal);",
+                  "}"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Logout Student",
@@ -531,7 +671,22 @@
                 }
               }
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var json = pm.response.json();",
+                  "var tokenVal = (json.data && json.data.token) || json.token;",
+                  "if (tokenVal) {",
+                  "  pm.collectionVariables.set('token', tokenVal);",
+                  "  console.log('✅ token saved automatically:', tokenVal);",
+                  "}"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Reset Password",
@@ -844,7 +999,7 @@
           }
         },
         {
-          "name": "Step 4: Select Subjects",
+          "name": "Step 4: Select Subject",
           "request": {
             "method": "GET",
             "header": [
@@ -854,7 +1009,7 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/subjects?courseId=btech_cs&semester=Sem 4&search=DBMS",
+              "raw": "{{baseUrl}}/subjects?courseId=btech_cs&semester=4",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -868,18 +1023,14 @@
                 },
                 {
                   "key": "semester",
-                  "value": "Sem 4"
-                },
-                {
-                  "key": "search",
-                  "value": "DBMS"
+                  "value": "4"
                 }
               ]
             }
           }
         },
         {
-          "name": "Step 5: Subject Details Screen",
+          "name": "Get Single Subject Details",
           "request": {
             "method": "GET",
             "header": [
@@ -889,13 +1040,13 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/subjects/subj_dbms_101",
+              "raw": "{{baseUrl}}/subjects/subj_os_401",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "subjects",
-                "subj_dbms_101"
+                "subj_os_401"
               ]
             }
           }
@@ -903,10 +1054,10 @@
       ]
     },
     {
-      "name": "📚 4. Study Materials & 6 Cards System (4 APIs)",
+      "name": "📚 4. Study Materials (Notes, PYQs, Books, Videos, Q-Bank) (9 APIs)",
       "item": [
         {
-          "name": "Fetch Materials (PYQs, Notes, Books)",
+          "name": "Filter All Materials",
           "request": {
             "method": "GET",
             "header": [
@@ -916,7 +1067,7 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/materials?subjectId=subj_dbms_101&category=pyq&tab=pdf&examType=End Sem",
+              "raw": "{{baseUrl}}/materials?subjectId=subj_os_401&category=Notes&page=1&limit=10",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -926,26 +1077,26 @@
               "query": [
                 {
                   "key": "subjectId",
-                  "value": "subj_dbms_101"
+                  "value": "subj_os_401"
                 },
                 {
                   "key": "category",
-                  "value": "pyq"
+                  "value": "Notes"
                 },
                 {
-                  "key": "tab",
-                  "value": "pdf"
+                  "key": "page",
+                  "value": "1"
                 },
                 {
-                  "key": "examType",
-                  "value": "End Sem"
+                  "key": "limit",
+                  "value": "10"
                 }
               ]
             }
           }
         },
         {
-          "name": "Get Single Material Details",
+          "name": "Get Material Details",
           "request": {
             "method": "GET",
             "header": [
@@ -955,19 +1106,209 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/materials/mat_dbms_2024_endsem",
+              "raw": "{{baseUrl}}/materials/mat_os_notes_101",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "materials",
-                "mat_dbms_2024_endsem"
+                "mat_os_notes_101"
               ]
             }
           }
         },
         {
-          "name": "Upload Study Material",
+          "name": "Get Previous Year Question Papers (PYQs)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/pyqs?subjectId=subj_os_401&year=2024",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "pyqs"
+              ],
+              "query": [
+                {
+                  "key": "subjectId",
+                  "value": "subj_os_401"
+                },
+                {
+                  "key": "year",
+                  "value": "2024"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Notes",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/notes?subjectId=subj_os_401",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "notes"
+              ],
+              "query": [
+                {
+                  "key": "subjectId",
+                  "value": "subj_os_401"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get E-Books",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/books?subjectId=subj_os_401",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "books"
+              ],
+              "query": [
+                {
+                  "key": "subjectId",
+                  "value": "subj_os_401"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Video Lectures",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/videos?subjectId=subj_os_401",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "videos"
+              ],
+              "query": [
+                {
+                  "key": "subjectId",
+                  "value": "subj_os_401"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Question Bank",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/question-bank?subjectId=subj_os_401",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "question-bank"
+              ],
+              "query": [
+                {
+                  "key": "subjectId",
+                  "value": "subj_os_401"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Stream Video Lecture (HLS/MP4)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/videos/vid_os_101/stream",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "videos",
+                "vid_os_101",
+                "stream"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Download Material PDF",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/materials/mat_os_notes_101/download",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "materials",
+                "mat_os_notes_101",
+                "download"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🤖 5. AI Assistant & Snap & Solve Engine (4 APIs)",
+      "item": [
+        {
+          "name": "Ask AI Assistant (GPT-4o Mini)",
           "request": {
             "method": "POST",
             "header": [
@@ -981,18 +1322,18 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/materials/upload",
+              "raw": "{{baseUrl}}/ai/chat",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
-                "materials",
-                "upload"
+                "ai",
+                "chat"
               ]
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"DBMS EndSem Solved PYQ.pdf\",\n  \"subjectId\": \"subj_dbms_101\",\n  \"category\": \"pyq\",\n  \"fileUrl\": \"https://studyhub.com/pdf/sample.pdf\"\n}",
+              "raw": "{\n  \"question\": \"Explain Page Replacement Algorithms in OS\",\n  \"subjectContext\": \"Operating Systems\",\n  \"conversationHistory\": []\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1002,7 +1343,7 @@
           }
         },
         {
-          "name": "Record Material Download Action",
+          "name": "Snap & Solve (OCR Image Solution)",
           "request": {
             "method": "POST",
             "header": [
@@ -1016,25 +1357,28 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/materials/mat_dbms_2024_endsem/download",
+              "raw": "{{baseUrl}}/ai/snap-and-solve",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
-                "materials",
-                "mat_dbms_2024_endsem",
-                "download"
+                "ai",
+                "snap-and-solve"
               ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"imageBase64\": \"data:image/png;base64,iVBORw0KGgo...\",\n  \"subjectContext\": \"Mathematics IV\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
             }
           }
-        }
-      ]
-    },
-    {
-      "name": "🛠️ 5. CGPA Tools & Attendance Tracker (5 APIs)",
-      "item": [
+        },
         {
-          "name": "Get CGPA / SGPA History",
+          "name": "Get AI Chat History",
           "request": {
             "method": "GET",
             "header": [
@@ -1044,19 +1388,57 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/tools/cgpa",
+              "raw": "{{baseUrl}}/ai/history?page=1&limit=20",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
-                "tools",
-                "cgpa"
+                "ai",
+                "history"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
               ]
             }
           }
         },
         {
-          "name": "Calculate & Save CGPA",
+          "name": "Clear AI Chat History",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ai/history/clear",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ai",
+                "history",
+                "clear"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "⚙️ 6. Utility Tools (CGPA Calculator & Attendance Tracker) (8 APIs)",
+      "item": [
+        {
+          "name": "Calculate CGPA/SGPA",
           "request": {
             "method": "POST",
             "header": [
@@ -1082,7 +1464,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"semester\": \"Semester 4\",\n  \"subjects\": [\n    {\n      \"name\": \"Operating Systems\",\n      \"credits\": 4,\n      \"grade\": \"A+\"\n    }\n  ]\n}",
+              "raw": "{\n  \"gradingSystem\": \"10-point\",\n  \"semesters\": [\n    {\n      \"semester\": \"Sem 1\",\n      \"gpa\": 8.5,\n      \"credits\": 20\n    },\n    {\n      \"semester\": \"Sem 2\",\n      \"gpa\": 8.8,\n      \"credits\": 22\n    }\n  ]\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1092,7 +1474,43 @@
           }
         },
         {
-          "name": "Get Attendance Tracker Summary",
+          "name": "Save CGPA Calculation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tools/cgpa/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "tools",
+                "cgpa",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"B.Tech Year 1 CGPA\",\n  \"gpaResult\": 8.65,\n  \"semestersData\": []\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get Saved CGPA Calculations",
           "request": {
             "method": "GET",
             "header": [
@@ -1102,19 +1520,43 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/tools/attendance",
+              "raw": "{{baseUrl}}/tools/cgpa/my-calculations",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "tools",
-                "attendance"
+                "cgpa",
+                "my-calculations"
               ]
             }
           }
         },
         {
-          "name": "Add Subject to Attendance Tracker",
+          "name": "Get Attendance Overview",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tools/attendance/summary",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "tools",
+                "attendance",
+                "summary"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Add New Subject Attendance",
           "request": {
             "method": "POST",
             "header": [
@@ -1140,7 +1582,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"subjectName\": \"Computer Architecture\",\n  \"attended\": 22,\n  \"total\": 28,\n  \"targetPercentage\": 75\n}",
+              "raw": "{\n  \"subjectName\": \"Operating Systems\",\n  \"targetPercentage\": 75,\n  \"totalClasses\": 20,\n  \"attendedClasses\": 17\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1150,9 +1592,9 @@
           }
         },
         {
-          "name": "Mark Daily Class Attendance",
+          "name": "Log Class Attendance (Present/Absent/Cancelled)",
           "request": {
-            "method": "PATCH",
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -1164,166 +1606,95 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/tools/attendance/mark",
+              "raw": "{{baseUrl}}/tools/attendance/log",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "tools",
                 "attendance",
-                "mark"
+                "log"
               ]
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"subjectId\": \"att_subj_101\",\n  \"status\": \"present\"\n}",
+              "raw": "{\n  \"subjectId\": \"att_subj_os_101\",\n  \"date\": \"2026-07-28\",\n  \"status\": \"present\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
+            }
+          }
+        },
+        {
+          "name": "Update Subject Attendance Target",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tools/attendance/subject/att_subj_os_101",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "tools",
+                "attendance",
+                "subject",
+                "att_subj_os_101"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"targetPercentage\": 80\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete Attendance Subject",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tools/attendance/subject/att_subj_os_101",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "tools",
+                "attendance",
+                "subject",
+                "att_subj_os_101"
+              ]
             }
           }
         }
       ]
     },
     {
-      "name": "🤖 6. StudyHub AI Assistant & Snap & Solve (2 APIs)",
+      "name": "⭐ 7. Offline Downloads, Favorites & User Activity (6 APIs)",
       "item": [
         {
-          "name": "StudyHub AI Chat Assistant",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/ai/chat",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "ai",
-                "chat"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"prompt\": \"Explain B-Trees indexing in DBMS with example.\",\n  \"subjectContext\": \"DBMS\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          }
-        },
-        {
-          "name": "Snap & Solve AI Image Solver",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/ai/snap-solve",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "ai",
-                "snap-solve"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"imageBase64\": \"sample_image_base64\",\n  \"note\": \"Solve step by step\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
-    {
-      "name": "📥 7. Offline Downloads & Bookmarks (4 APIs)",
-      "item": [
-        {
-          "name": "Get User Downloaded Files List",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/downloads/my-downloads",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "downloads",
-                "my-downloads"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Sync Local Offline Storage Usage",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/downloads/sync-storage",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "downloads",
-                "sync-storage"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"totalStorageUsedMB\": 120,\n  \"downloadedIds\": [\n    \"mat-1\"\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          }
-        },
-        {
-          "name": "Toggle Bookmark / Favorite",
+          "name": "Toggle Favorite / Bookmark Status",
           "request": {
             "method": "POST",
             "header": [
@@ -1348,7 +1719,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"targetType\": \"material\",\n  \"targetId\": \"mat_dbms_2024_endsem\"\n}",
+              "raw": "{\n  \"materialId\": \"mat_os_notes_101\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1358,7 +1729,7 @@
           }
         },
         {
-          "name": "Get Bookmarks List",
+          "name": "Get All User Favorites",
           "request": {
             "method": "GET",
             "header": [
@@ -1377,71 +1748,9 @@
               ]
             }
           }
-        }
-      ]
-    },
-    {
-      "name": "👤 8. Student Profile, Support & Notifications (7 APIs)",
-      "item": [
-        {
-          "name": "Get Student Profile",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/user/profile",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "user",
-                "profile"
-              ]
-            }
-          }
         },
         {
-          "name": "Edit Student Profile",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/user/profile",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "user",
-                "profile"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Rahul Sharma\",\n  \"phone\": \"9876543210\",\n  \"college\": \"Delhi Tech Univ\",\n  \"course\": \"B.Tech CS\",\n  \"semester\": \"Semester 5\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          }
-        },
-        {
-          "name": "Submit Student Feedback",
+          "name": "Sync Offline Download Record",
           "request": {
             "method": "POST",
             "header": [
@@ -1455,18 +1764,18 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/support/feedback",
+              "raw": "{{baseUrl}}/downloads/sync",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
-                "support",
-                "feedback"
+                "downloads",
+                "sync"
               ]
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"type\": \"suggestion\",\n  \"message\": \"Please add more PYQs for Semester 5 Computer Networks.\",\n  \"rating\": 5\n}",
+              "raw": "{\n  \"materialId\": \"mat_os_notes_101\",\n  \"fileSizeBytes\": 4500000\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1476,7 +1785,7 @@
           }
         },
         {
-          "name": "Get All Notifications",
+          "name": "Get User Downloaded Materials List",
           "request": {
             "method": "GET",
             "header": [
@@ -1486,7 +1795,59 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/notifications?category=Exams",
+              "raw": "{{baseUrl}}/downloads",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "downloads"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Student Activity Logs",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/activity-logs?page=1&limit=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "activity-logs"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get User Notifications",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/notifications?unreadOnly=false",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -1495,101 +1856,17 @@
               ],
               "query": [
                 {
-                  "key": "category",
-                  "value": "Exams"
+                  "key": "unreadOnly",
+                  "value": "false"
                 }
               ]
-            }
-          }
-        },
-        {
-          "name": "Mark Notification Read",
-          "request": {
-            "method": "PATCH",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/notifications/notif_101/read",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "notifications",
-                "notif_101",
-                "read"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Referral Code",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/referrals/my-code",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "referrals",
-                "my-code"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Claim Referral Reward",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/referrals/claim",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "referrals",
-                "claim"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"referralCode\": \"STUDY50\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
             }
           }
         }
       ]
     },
     {
-      "name": "⚡ 9. Admin Control Panel Suite (32 APIs)",
+      "name": "⚡ 8. Admin Control Panel Suite (30 APIs)",
       "item": [
         {
           "name": "Admin Login",
@@ -1624,137 +1901,25 @@
                 }
               }
             }
-          }
-        },
-        {
-          "name": "Register New Admin Account",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/admin/register",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "admin",
-                "register"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Super Admin\",\n  \"email\": \"admin@studyhub.com\",\n  \"password\": \"Password@123\",\n  \"phone\": \"+91 9876543210\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var json = pm.response.json();",
+                  "var tokenVal = (json.data && json.data.token) || json.token;",
+                  "if (tokenVal) {",
+                  "  pm.collectionVariables.set('adminToken', tokenVal);",
+                  "  console.log('✅ adminToken saved automatically:', tokenVal);",
+                  "}"
+                ]
               }
             }
-          }
+          ]
         },
         {
-          "name": "Get Admin Profile Details",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/admin/profile",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "admin",
-                "profile"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Update Admin Profile Details",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/admin/profile",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "admin",
-                "profile"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Super Administrator\",\n  \"email\": \"admin@studyhub.com\",\n  \"phone\": \"+91 9876543210\",\n  \"role\": \"Master Super Admin\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          }
-        },
-        {
-          "name": "Change Admin Password",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/admin/change-password",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "admin",
-                "change-password"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"currentPassword\": \"Password@123\",\n  \"newPassword\": \"NewPassword@123\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          }
-        },
-        {
-          "name": "Get Executive Dashboard Stats",
+          "name": "Get Overview Analytics & Stats",
           "request": {
             "method": "GET",
             "header": [
@@ -1776,7 +1941,7 @@
           }
         },
         {
-          "name": "Get All Colleges List",
+          "name": "Get Recent Activity Logs",
           "request": {
             "method": "GET",
             "header": [
@@ -1786,19 +1951,41 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/colleges",
+              "raw": "{{baseUrl}}/admin/activity-logs",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "admin",
-                "colleges"
+                "activity-logs"
               ]
             }
           }
         },
         {
-          "name": "Add New College",
+          "name": "Get System Health Diagnostics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/health",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "health"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create New College",
           "request": {
             "method": "POST",
             "header": [
@@ -1823,7 +2010,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"IIT Delhi (IITD)\",\n  \"university\": \"Institute of National Importance\",\n  \"city\": \"New Delhi\",\n  \"state\": \"Delhi\"\n}",
+              "raw": "{\n  \"name\": \"Delhi Technological University\",\n  \"shortCode\": \"DTU\",\n  \"city\": \"Delhi\",\n  \"state\": \"Delhi\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1833,7 +2020,7 @@
           }
         },
         {
-          "name": "Edit College Details",
+          "name": "Update College Info",
           "request": {
             "method": "PUT",
             "header": [
@@ -1847,52 +2034,24 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/colleges/col-1",
+              "raw": "{{baseUrl}}/admin/colleges/du_dtu",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "admin",
                 "colleges",
-                "col-1"
+                "du_dtu"
               ]
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Delhi University (DU)\",\n  \"university\": \"Central University\",\n  \"city\": \"New Delhi\",\n  \"state\": \"Delhi\"\n}",
+              "raw": "{\n  \"name\": \"Delhi Technological University (DTU)\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
-            }
-          }
-        },
-        {
-          "name": "Toggle Featured College",
-          "request": {
-            "method": "PATCH",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/admin/colleges/col-1/featured",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "admin",
-                "colleges",
-                "col-1",
-                "featured"
-              ]
             }
           }
         },
@@ -1907,42 +2066,20 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/colleges/col-1",
+              "raw": "{{baseUrl}}/admin/colleges/du_dtu",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "admin",
                 "colleges",
-                "col-1"
+                "du_dtu"
               ]
             }
           }
         },
         {
-          "name": "Get All Degree Courses List",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/admin/courses",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "admin",
-                "courses"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Add New Degree Course",
+          "name": "Create New Course",
           "request": {
             "method": "POST",
             "header": [
@@ -1967,7 +2104,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"collegeName\": \"Delhi University (DU)\",\n  \"name\": \"B.Tech Computer Science (CS)\",\n  \"code\": \"BT-CS\",\n  \"durationYears\": 4\n}",
+              "raw": "{\n  \"collegeId\": \"du_dtu\",\n  \"name\": \"B.Tech Computer Science\",\n  \"shortCode\": \"BTECH_CS\",\n  \"totalSemesters\": 8\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1977,7 +2114,43 @@
           }
         },
         {
-          "name": "Delete Degree Course",
+          "name": "Update Course Info",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/courses/btech_cs",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "courses",
+                "btech_cs"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"B.Tech CS & AI\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete Course",
           "request": {
             "method": "DELETE",
             "header": [
@@ -1987,42 +2160,20 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/courses/crs-1",
+              "raw": "{{baseUrl}}/admin/courses/btech_cs",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "admin",
                 "courses",
-                "crs-1"
+                "btech_cs"
               ]
             }
           }
         },
         {
-          "name": "Get All Subjects Catalog",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/admin/subjects",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "admin",
-                "subjects"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Add New Subject to Semester",
+          "name": "Create Subject",
           "request": {
             "method": "POST",
             "header": [
@@ -2047,7 +2198,43 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Database Management Systems (DBMS)\",\n  \"code\": \"CS-401\",\n  \"semester\": 4,\n  \"teacherName\": \"Dr. A.K. Sharma\"\n}",
+              "raw": "{\n  \"courseId\": \"btech_cs\",\n  \"semester\": 4,\n  \"name\": \"Operating Systems\",\n  \"code\": \"CS401\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Update Subject",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/subjects/subj_os_401",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "subjects",
+                "subj_os_401"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Operating Systems & Systems Programming\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -2067,42 +2254,20 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/subjects/sbj-1",
+              "raw": "{{baseUrl}}/admin/subjects/subj_os_401",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "admin",
                 "subjects",
-                "sbj-1"
+                "subj_os_401"
               ]
             }
           }
         },
         {
-          "name": "Get All Materials & Videos",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/admin/materials",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "admin",
-                "materials"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Upload Study Material PDF",
+          "name": "Upload New Study Material",
           "request": {
             "method": "POST",
             "header": [
@@ -2127,7 +2292,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"DBMS 2024 End Sem Solved PYQ Paper.pdf\",\n  \"category\": \"Previous Papers\",\n  \"uploadType\": \"PDF\",\n  \"subjectName\": \"DBMS\",\n  \"collegeName\": \"Delhi University (DU)\",\n  \"courseName\": \"B.Tech CS\",\n  \"semester\": 4,\n  \"pdfUrl\": \"https://studyhub.com/pdf/sample.pdf\"\n}",
+              "raw": "{\n  \"title\": \"Complete OS Revision Notes 2026\",\n  \"category\": \"Notes\",\n  \"subjectId\": \"subj_os_401\",\n  \"fileUrl\": \"https://storage.studyhub.com/notes/os_notes.pdf\",\n  \"isPremium\": false\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -2137,9 +2302,9 @@
           }
         },
         {
-          "name": "Publish Video Lecture URL",
+          "name": "Update Material Record",
           "request": {
-            "method": "POST",
+            "method": "PUT",
             "header": [
               {
                 "key": "Content-Type",
@@ -2151,18 +2316,19 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/materials",
+              "raw": "{{baseUrl}}/admin/materials/mat_os_notes_101",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "admin",
-                "materials"
+                "materials",
+                "mat_os_notes_101"
               ]
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"DBMS B-Trees & Indexing Video Lecture 14\",\n  \"category\": \"Video Lecture\",\n  \"uploadType\": \"Video\",\n  \"subjectName\": \"DBMS\",\n  \"collegeName\": \"Delhi University (DU)\",\n  \"courseName\": \"B.Tech CS\",\n  \"semester\": 4,\n  \"pdfUrl\": \"https://youtube.com/watch?v=demo1\"\n}",
+              "raw": "{\n  \"title\": \"Complete OS Revision Notes v2\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -2172,7 +2338,7 @@
           }
         },
         {
-          "name": "Delete Material or Video",
+          "name": "Delete Study Material",
           "request": {
             "method": "DELETE",
             "header": [
@@ -2182,20 +2348,20 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/materials/mat-1",
+              "raw": "{{baseUrl}}/admin/materials/mat_os_notes_101",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "admin",
                 "materials",
-                "mat-1"
+                "mat_os_notes_101"
               ]
             }
           }
         },
         {
-          "name": "Get Promotional Banners List",
+          "name": "List All Students",
           "request": {
             "method": "GET",
             "header": [
@@ -2205,19 +2371,153 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/banners",
+              "raw": "{{baseUrl}}/admin/users?role=student&page=1&limit=10",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "admin",
-                "banners"
+                "users"
+              ],
+              "query": [
+                {
+                  "key": "role",
+                  "value": "student"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
               ]
             }
           }
         },
         {
-          "name": "Add New Promotional Banner",
+          "name": "Get Student Profile Details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/users/usr_student_101",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "users",
+                "usr_student_101"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Block / Deactivate Student",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/users/usr_student_101/block",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "users",
+                "usr_student_101",
+                "block"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"isBlocked\": true,\n  \"reason\": \"Violation of terms\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Unblock Student",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/users/usr_student_101/unblock",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "users",
+                "usr_student_101",
+                "unblock"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"isBlocked\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete Student Account",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/users/usr_student_101",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "users",
+                "usr_student_101"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Send Targeted Push Notification",
           "request": {
             "method": "POST",
             "header": [
@@ -2231,18 +2531,19 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/banners",
+              "raw": "{{baseUrl}}/admin/notifications/send",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "admin",
-                "banners"
+                "notifications",
+                "send"
               ]
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"End-Sem Examination Datesheet Released\",\n  \"subtitle\": \"View complete May 2026 timetable now\",\n  \"imageUrl\": \"https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80\",\n  \"buttonText\": \"View Datesheet\",\n  \"redirectRoute\": \"/notifications\"\n}",
+              "raw": "{\n  \"title\": \"Exam Datesheet Released!\",\n  \"body\": \"Semester 4 PYQs & Notes updated\",\n  \"targetRole\": \"student\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -2252,85 +2553,7 @@
           }
         },
         {
-          "name": "Toggle Banner On/Off Status",
-          "request": {
-            "method": "PATCH",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/admin/banners/bnr-1/toggle",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "admin",
-                "banners",
-                "bnr-1",
-                "toggle"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Home Layout Sections Order",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/admin/home-sections",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "admin",
-                "home-sections"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Toggle Home Layout Section",
-          "request": {
-            "method": "PATCH",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{adminToken}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/admin/home-sections/sec-1/toggle",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "admin",
-                "home-sections",
-                "sec-1",
-                "toggle"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Broadcast Notice History",
+          "name": "Get Notification History",
           "request": {
             "method": "GET",
             "header": [
@@ -2352,7 +2575,7 @@
           }
         },
         {
-          "name": "Send Instant FCM Push Broadcast",
+          "name": "Create Promotional Banner",
           "request": {
             "method": "POST",
             "header": [
@@ -2366,19 +2589,18 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/notifications/broadcast",
+              "raw": "{{baseUrl}}/admin/banners",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "admin",
-                "notifications",
-                "broadcast"
+                "banners"
               ]
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"DU May 2026 End-Sem Examination Datesheet Released\",\n  \"description\": \"Complete timetable for B.Tech CS Sem 4 end sem exams is now available on feed.\",\n  \"category\": \"Exams\",\n  \"targetCollege\": \"Delhi University (DU)\"\n}",
+              "raw": "{\n  \"title\": \"Supercharge your CGPA!\",\n  \"imageUrl\": \"https://storage.studyhub.com/banners/cgpa_banner.jpg\",\n  \"targetUrl\": \"/tools/cgpa\",\n  \"isActive\": true\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -2388,7 +2610,7 @@
           }
         },
         {
-          "name": "Get All App Students Directory",
+          "name": "Get All Banners",
           "request": {
             "method": "GET",
             "header": [
@@ -2398,21 +2620,21 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/students",
+              "raw": "{{baseUrl}}/admin/banners",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "admin",
-                "students"
+                "banners"
               ]
             }
           }
         },
         {
-          "name": "Toggle Block/Unblock Student Account",
+          "name": "Update Banner Status",
           "request": {
-            "method": "PATCH",
+            "method": "PUT",
             "header": [
               {
                 "key": "Content-Type",
@@ -2424,21 +2646,29 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/students/std-1/block",
+              "raw": "{{baseUrl}}/admin/banners/bnr_101",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "admin",
-                "students",
-                "std-1",
-                "block"
+                "banners",
+                "bnr_101"
               ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"isActive\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
             }
           }
         },
         {
-          "name": "Delete Student Account",
+          "name": "Delete Banner",
           "request": {
             "method": "DELETE",
             "header": [
@@ -2448,20 +2678,20 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/students/std-1",
+              "raw": "{{baseUrl}}/admin/banners/bnr_101",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "admin",
-                "students",
-                "std-1"
+                "banners",
+                "bnr_101"
               ]
             }
           }
         },
         {
-          "name": "Get Student Support & Feedback List",
+          "name": "Get Audit Logs",
           "request": {
             "method": "GET",
             "header": [
@@ -2471,13 +2701,64 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/feedback",
+              "raw": "{{baseUrl}}/admin/audit-logs",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "admin",
-                "feedback"
+                "audit-logs"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get User Feedback & Ratings",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/feedbacks",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "feedbacks"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Export All Reports (CSV/PDF)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/reports/export?format=csv",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "reports",
+                "export"
+              ],
+              "query": [
+                {
+                  "key": "format",
+                  "value": "csv"
+                }
               ]
             }
           }

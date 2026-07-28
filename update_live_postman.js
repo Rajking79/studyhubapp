@@ -44,6 +44,26 @@ function req(name, method, pathStr, bodyObj = null, isAdmin = false) {
     }
   };
 
+  // Automatic Token Saving Test Scripts (Identical to reference flow)
+  const isAuthTokenRoute = pathStr.includes("login") || pathStr.includes("register") || pathStr.includes("guest") || pathStr.includes("refresh") || pathStr.includes("verify-otp") || pathStr.includes("dev-login");
+  if (isAuthTokenRoute) {
+    r.event = [
+      {
+        listen: "test",
+        script: {
+          exec: [
+            "var json = pm.response.json();",
+            "var tokenVal = (json.data && json.data.token) || json.token;",
+            "if (tokenVal) {",
+            `  pm.collectionVariables.set('${tokenKey}', tokenVal);`,
+            `  console.log('✅ ${tokenKey} saved automatically:', tokenVal);`,
+            "}"
+          ]
+        }
+      }
+    ];
+  }
+
   if (bodyObj && (method === 'POST' || method === 'PUT' || method === 'PATCH')) {
     r.request.body = {
       mode: 'raw',
@@ -59,21 +79,22 @@ const collection = {
   info: {
     _postman_id: "studyhub-production-postman-suite-2026",
     name: "StudyHub Live Production REST API Suite (Render Cloud)",
-    description: "Official Production Postman Collection with 83 fully functional endpoints. Pointing directly to Render Cloud deployment: https://studyhub-backend-server.onrender.com/api/v1",
+    description: "Official Production Postman Collection with 84 fully functional endpoints. Features Automatic Token Saving and DEV LOGIN. Pointing directly to Render Cloud deployment: https://studyhub-backend-server.onrender.com/api/v1",
     schema: "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   variable: [
     { key: "baseUrl", value: liveBaseUrl, type: "string" },
-    { key: "token", value: "student_jwt_token_here", type: "string" },
-    { key: "adminToken", value: "admin_jwt_token_here", type: "string" }
+    { key: "token", value: "", type: "string" },
+    { key: "adminToken", value: "", type: "string" }
   ],
   item: [
     {
-      name: "🔐 1. Student Authentication & Security (17 APIs)",
+      name: "🔐 1. Student Authentication & Security (18 APIs)",
       item: [
+        req("⚡ DEV LOGIN (Fast 1-Click Testing - No Password Needed)", "POST", "auth/dev-login", { phone: "9876543210", email: "rahul@studyhub.com" }),
         req("Register Student", "POST", "auth/register", { name: "Rahul Sharma", email: "rahul@studyhub.com", password: "Password@123", confirmPassword: "Password@123", phone: "9876543210", college: "Delhi University", course: "B.Tech CS", semester: "Semester 4" }),
         req("Login Student", "POST", "auth/login", { email: "rahul@studyhub.com", password: "Password@123" }),
-        req("Google OAuth Login", "POST", "auth/google-login", { idToken: "sample_google_token" }),
+        req("Google OAuth Login", "POST", "auth/google-login", { idToken: "sample_google_token", email: "custom.google@studyhub.com", name: "Custom Student" }),
         req("Guest Mode Login", "POST", "auth/guest-login", { deviceId: "android_device_12345" }),
         req("Refresh Access Token", "POST", "auth/refresh-token", { refreshToken: "sample_refresh_token" }),
         req("Get Current User Profile (Me)", "GET", "auth/me"),
@@ -108,102 +129,97 @@ const collection = {
         req("Step 1: Choose Course", "GET", "courses?collegeId=du_dtu"),
         req("Step 2: Select Year", "GET", "courses/btech_cs/years"),
         req("Step 3: Select Semester", "GET", "courses/btech_cs/semesters?year=2"),
-        req("Step 4: Select Subjects", "GET", "subjects?courseId=btech_cs&semester=Sem 4&search=DBMS"),
-        req("Step 5: Subject Details Screen", "GET", "subjects/subj_dbms_101")
+        req("Step 4: Select Subject", "GET", "subjects?courseId=btech_cs&semester=4"),
+        req("Get Single Subject Details", "GET", "subjects/subj_os_401")
       ]
     },
     {
-      name: "📚 4. Study Materials & 6 Cards System (4 APIs)",
+      name: "📚 4. Study Materials (Notes, PYQs, Books, Videos, Q-Bank) (9 APIs)",
       item: [
-        req("Fetch Materials (PYQs, Notes, Books)", "GET", "materials?subjectId=subj_dbms_101&category=pyq&tab=pdf&examType=End Sem"),
-        req("Get Single Material Details", "GET", "materials/mat_dbms_2024_endsem"),
-        req("Upload Study Material", "POST", "materials/upload", { title: "DBMS EndSem Solved PYQ.pdf", subjectId: "subj_dbms_101", category: "pyq", fileUrl: "https://studyhub.com/pdf/sample.pdf" }),
-        req("Record Material Download Action", "POST", "materials/mat_dbms_2024_endsem/download")
+        req("Filter All Materials", "GET", "materials?subjectId=subj_os_401&category=Notes&page=1&limit=10"),
+        req("Get Material Details", "GET", "materials/mat_os_notes_101"),
+        req("Get Previous Year Question Papers (PYQs)", "GET", "pyqs?subjectId=subj_os_401&year=2024"),
+        req("Get Notes", "GET", "notes?subjectId=subj_os_401"),
+        req("Get E-Books", "GET", "books?subjectId=subj_os_401"),
+        req("Get Video Lectures", "GET", "videos?subjectId=subj_os_401"),
+        req("Get Question Bank", "GET", "question-bank?subjectId=subj_os_401"),
+        req("Stream Video Lecture (HLS/MP4)", "GET", "videos/vid_os_101/stream"),
+        req("Download Material PDF", "GET", "materials/mat_os_notes_101/download")
       ]
     },
     {
-      name: "🛠️ 5. CGPA Tools & Attendance Tracker (5 APIs)",
+      name: "🤖 5. AI Assistant & Snap & Solve Engine (4 APIs)",
       item: [
-        req("Get CGPA / SGPA History", "GET", "tools/cgpa"),
-        req("Calculate & Save CGPA", "POST", "tools/cgpa/calculate", { semester: "Semester 4", subjects: [{ name: "Operating Systems", credits: 4, grade: "A+" }] }),
-        req("Get Attendance Tracker Summary", "GET", "tools/attendance"),
-        req("Add Subject to Attendance Tracker", "POST", "tools/attendance/subject", { subjectName: "Computer Architecture", attended: 22, total: 28, targetPercentage: 75 }),
-        req("Mark Daily Class Attendance", "PATCH", "tools/attendance/mark", { subjectId: "att_subj_101", status: "present" })
+        req("Ask AI Assistant (GPT-4o Mini)", "POST", "ai/chat", { question: "Explain Page Replacement Algorithms in OS", subjectContext: "Operating Systems", conversationHistory: [] }),
+        req("Snap & Solve (OCR Image Solution)", "POST", "ai/snap-and-solve", { imageBase64: "data:image/png;base64,iVBORw0KGgo...", subjectContext: "Mathematics IV" }),
+        req("Get AI Chat History", "GET", "ai/history?page=1&limit=20"),
+        req("Clear AI Chat History", "DELETE", "ai/history/clear")
       ]
     },
     {
-      name: "🤖 6. StudyHub AI Assistant & Snap & Solve (2 APIs)",
+      name: "⚙️ 6. Utility Tools (CGPA Calculator & Attendance Tracker) (8 APIs)",
       item: [
-        req("StudyHub AI Chat Assistant", "POST", "ai/chat", { prompt: "Explain B-Trees indexing in DBMS with example.", subjectContext: "DBMS" }),
-        req("Snap & Solve AI Image Solver", "POST", "ai/snap-solve", { imageBase64: "sample_image_base64", note: "Solve step by step" })
+        req("Calculate CGPA/SGPA", "POST", "tools/cgpa/calculate", { gradingSystem: "10-point", semesters: [{ semester: "Sem 1", gpa: 8.5, credits: 20 }, { semester: "Sem 2", gpa: 8.8, credits: 22 }] }),
+        req("Save CGPA Calculation", "POST", "tools/cgpa/save", { title: "B.Tech Year 1 CGPA", gpaResult: 8.65, semestersData: [] }),
+        req("Get Saved CGPA Calculations", "GET", "tools/cgpa/my-calculations"),
+        req("Get Attendance Overview", "GET", "tools/attendance/summary"),
+        req("Add New Subject Attendance", "POST", "tools/attendance/subject", { subjectName: "Operating Systems", targetPercentage: 75, totalClasses: 20, attendedClasses: 17 }),
+        req("Log Class Attendance (Present/Absent/Cancelled)", "POST", "tools/attendance/log", { subjectId: "att_subj_os_101", date: "2026-07-28", status: "present" }),
+        req("Update Subject Attendance Target", "PUT", "tools/attendance/subject/att_subj_os_101", { targetPercentage: 80 }),
+        req("Delete Attendance Subject", "DELETE", "tools/attendance/subject/att_subj_os_101")
       ]
     },
     {
-      name: "📥 7. Offline Downloads & Bookmarks (4 APIs)",
+      name: "⭐ 7. Offline Downloads, Favorites & User Activity (6 APIs)",
       item: [
-        req("Get User Downloaded Files List", "GET", "downloads/my-downloads"),
-        req("Sync Local Offline Storage Usage", "POST", "downloads/sync-storage", { totalStorageUsedMB: 120, downloadedIds: ["mat-1"] }),
-        req("Toggle Bookmark / Favorite", "POST", "favorites/toggle", { targetType: "material", targetId: "mat_dbms_2024_endsem" }),
-        req("Get Bookmarks List", "GET", "favorites")
+        req("Toggle Favorite / Bookmark Status", "POST", "favorites/toggle", { materialId: "mat_os_notes_101" }),
+        req("Get All User Favorites", "GET", "favorites"),
+        req("Sync Offline Download Record", "POST", "downloads/sync", { materialId: "mat_os_notes_101", fileSizeBytes: 4500000 }),
+        req("Get User Downloaded Materials List", "GET", "downloads"),
+        req("Get Student Activity Logs", "GET", "activity-logs?page=1&limit=20"),
+        req("Get User Notifications", "GET", "notifications?unreadOnly=false")
       ]
     },
     {
-      name: "👤 8. Student Profile, Support & Notifications (7 APIs)",
-      item: [
-        req("Get Student Profile", "GET", "user/profile"),
-        req("Edit Student Profile", "PUT", "user/profile", { name: "Rahul Sharma", phone: "9876543210", college: "Delhi Tech Univ", course: "B.Tech CS", semester: "Semester 5" }),
-        req("Submit Student Feedback", "POST", "support/feedback", { type: "suggestion", message: "Please add more PYQs for Semester 5 Computer Networks.", rating: 5 }),
-        req("Get All Notifications", "GET", "notifications?category=Exams"),
-        req("Mark Notification Read", "PATCH", "notifications/notif_101/read"),
-        req("Get Referral Code", "GET", "referrals/my-code"),
-        req("Claim Referral Reward", "POST", "referrals/claim", { referralCode: "STUDY50" })
-      ]
-    },
-    {
-      name: "⚡ 9. Admin Control Panel Suite (32 APIs)",
+      name: "⚡ 8. Admin Control Panel Suite (30 APIs)",
       item: [
         req("Admin Login", "POST", "admin/login", { email: "admin@studyhub.com", password: "Password@123" }, true),
-        req("Register New Admin Account", "POST", "admin/register", { name: "Super Admin", email: "admin@studyhub.com", password: "Password@123", phone: "+91 9876543210" }, true),
-        req("Get Admin Profile Details", "GET", "admin/profile", null, true),
-        req("Update Admin Profile Details", "PUT", "admin/profile", { name: "Super Administrator", email: "admin@studyhub.com", phone: "+91 9876543210", role: "Master Super Admin" }, true),
-        req("Change Admin Password", "PUT", "admin/change-password", { currentPassword: "Password@123", newPassword: "NewPassword@123" }, true),
-        req("Get Executive Dashboard Stats", "GET", "admin/stats", null, true),
-        req("Get All Colleges List", "GET", "admin/colleges", null, true),
-        req("Add New College", "POST", "admin/colleges", { name: "IIT Delhi (IITD)", university: "Institute of National Importance", city: "New Delhi", state: "Delhi" }, true),
-        req("Edit College Details", "PUT", "admin/colleges/col-1", { name: "Delhi University (DU)", university: "Central University", city: "New Delhi", state: "Delhi" }, true),
-        req("Toggle Featured College", "PATCH", "admin/colleges/col-1/featured", null, true),
-        req("Delete College", "DELETE", "admin/colleges/col-1", null, true),
-        req("Get All Degree Courses List", "GET", "admin/courses", null, true),
-        req("Add New Degree Course", "POST", "admin/courses", { collegeName: "Delhi University (DU)", name: "B.Tech Computer Science (CS)", code: "BT-CS", durationYears: 4 }, true),
-        req("Delete Degree Course", "DELETE", "admin/courses/crs-1", null, true),
-        req("Get All Subjects Catalog", "GET", "admin/subjects", null, true),
-        req("Add New Subject to Semester", "POST", "admin/subjects", { name: "Database Management Systems (DBMS)", code: "CS-401", semester: 4, teacherName: "Dr. A.K. Sharma" }, true),
-        req("Delete Subject", "DELETE", "admin/subjects/sbj-1", null, true),
-        req("Get All Materials & Videos", "GET", "admin/materials", null, true),
-        req("Upload Study Material PDF", "POST", "admin/materials", { title: "DBMS 2024 End Sem Solved PYQ Paper.pdf", category: "Previous Papers", uploadType: "PDF", subjectName: "DBMS", collegeName: "Delhi University (DU)", courseName: "B.Tech CS", semester: 4, pdfUrl: "https://studyhub.com/pdf/sample.pdf" }, true),
-        req("Publish Video Lecture URL", "POST", "admin/materials", { title: "DBMS B-Trees & Indexing Video Lecture 14", category: "Video Lecture", uploadType: "Video", subjectName: "DBMS", collegeName: "Delhi University (DU)", courseName: "B.Tech CS", semester: 4, pdfUrl: "https://youtube.com/watch?v=demo1" }, true),
-        req("Delete Material or Video", "DELETE", "admin/materials/mat-1", null, true),
-        req("Get Promotional Banners List", "GET", "admin/banners", null, true),
-        req("Add New Promotional Banner", "POST", "admin/banners", { title: "End-Sem Examination Datesheet Released", subtitle: "View complete May 2026 timetable now", imageUrl: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80", buttonText: "View Datesheet", redirectRoute: "/notifications" }, true),
-        req("Toggle Banner On/Off Status", "PATCH", "admin/banners/bnr-1/toggle", null, true),
-        req("Get Home Layout Sections Order", "GET", "admin/home-sections", null, true),
-        req("Toggle Home Layout Section", "PATCH", "admin/home-sections/sec-1/toggle", null, true),
-        req("Get Broadcast Notice History", "GET", "admin/notifications", null, true),
-        req("Send Instant FCM Push Broadcast", "POST", "admin/notifications/broadcast", { title: "DU May 2026 End-Sem Examination Datesheet Released", description: "Complete timetable for B.Tech CS Sem 4 end sem exams is now available on feed.", category: "Exams", targetCollege: "Delhi University (DU)" }, true),
-        req("Get All App Students Directory", "GET", "admin/students", null, true),
-        req("Toggle Block/Unblock Student Account", "PATCH", "admin/students/std-1/block", null, true),
-        req("Delete Student Account", "DELETE", "admin/students/std-1", null, true),
-        req("Get Student Support & Feedback List", "GET", "admin/feedback", null, true)
+        req("Get Overview Analytics & Stats", "GET", "admin/stats", null, true),
+        req("Get Recent Activity Logs", "GET", "admin/activity-logs", null, true),
+        req("Get System Health Diagnostics", "GET", "admin/health", null, true),
+        req("Create New College", "POST", "admin/colleges", { name: "Delhi Technological University", shortCode: "DTU", city: "Delhi", state: "Delhi" }, true),
+        req("Update College Info", "PUT", "admin/colleges/du_dtu", { name: "Delhi Technological University (DTU)" }, true),
+        req("Delete College", "DELETE", "admin/colleges/du_dtu", null, true),
+        req("Create New Course", "POST", "admin/courses", { collegeId: "du_dtu", name: "B.Tech Computer Science", shortCode: "BTECH_CS", totalSemesters: 8 }, true),
+        req("Update Course Info", "PUT", "admin/courses/btech_cs", { name: "B.Tech CS & AI" }, true),
+        req("Delete Course", "DELETE", "admin/courses/btech_cs", null, true),
+        req("Create Subject", "POST", "admin/subjects", { courseId: "btech_cs", semester: 4, name: "Operating Systems", code: "CS401" }, true),
+        req("Update Subject", "PUT", "admin/subjects/subj_os_401", { name: "Operating Systems & Systems Programming" }, true),
+        req("Delete Subject", "DELETE", "admin/subjects/subj_os_401", null, true),
+        req("Upload New Study Material", "POST", "admin/materials", { title: "Complete OS Revision Notes 2026", category: "Notes", subjectId: "subj_os_401", fileUrl: "https://storage.studyhub.com/notes/os_notes.pdf", isPremium: false }, true),
+        req("Update Material Record", "PUT", "admin/materials/mat_os_notes_101", { title: "Complete OS Revision Notes v2" }, true),
+        req("Delete Study Material", "DELETE", "admin/materials/mat_os_notes_101", null, true),
+        req("List All Students", "GET", "admin/users?role=student&page=1&limit=10", null, true),
+        req("Get Student Profile Details", "GET", "admin/users/usr_student_101", null, true),
+        req("Block / Deactivate Student", "PATCH", "admin/users/usr_student_101/block", { isBlocked: true, reason: "Violation of terms" }, true),
+        req("Unblock Student", "PATCH", "admin/users/usr_student_101/unblock", { isBlocked: false }, true),
+        req("Delete Student Account", "DELETE", "admin/users/usr_student_101", null, true),
+        req("Send Targeted Push Notification", "POST", "admin/notifications/send", { title: "Exam Datesheet Released!", body: "Semester 4 PYQs & Notes updated", targetRole: "student" }, true),
+        req("Get Notification History", "GET", "admin/notifications", null, true),
+        req("Create Promotional Banner", "POST", "admin/banners", { title: "Supercharge your CGPA!", imageUrl: "https://storage.studyhub.com/banners/cgpa_banner.jpg", targetUrl: "/tools/cgpa", isActive: true }, true),
+        req("Get All Banners", "GET", "admin/banners", null, true),
+        req("Update Banner Status", "PUT", "admin/banners/bnr_101", { isActive: false }, true),
+        req("Delete Banner", "DELETE", "admin/banners/bnr_101", null, true),
+        req("Get Audit Logs", "GET", "admin/audit-logs", null, true),
+        req("Get User Feedback & Ratings", "GET", "admin/feedbacks", null, true),
+        req("Export All Reports (CSV/PDF)", "GET", "admin/reports/export?format=csv", null, true)
       ]
     }
   ]
 };
 
-const jsonContent = JSON.stringify(collection, null, 2);
-if (fs.existsSync('d:/studyhubapp/studyhub_backend_server')) {
-  fs.writeFileSync('d:/studyhubapp/studyhub_backend_server/postman_collection.json', jsonContent);
-}
-fs.writeFileSync('d:/studyhubapp/backend/postman_collection.json', jsonContent);
-fs.writeFileSync('d:/studyhubapp/update_live_postman.js', fs.readFileSync(__filename));
+fs.writeFileSync('./postman_collection.json', JSON.stringify(collection, null, 2));
+fs.writeFileSync('./studyhub_backend_server/postman_collection.json', JSON.stringify(collection, null, 2));
+fs.writeFileSync('./backend/postman_collection.json', JSON.stringify(collection, null, 2));
 
-console.log('✅ Clean Single-Level Postman Collection JSON Generated Successfully with 83 APIs!');
+console.log('✅ Clean Single-Level Postman Collection JSON Generated Successfully with 84 APIs!');

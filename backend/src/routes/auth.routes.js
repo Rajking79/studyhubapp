@@ -4,6 +4,7 @@ const router = express.Router();
 const {
   registerUser,
   loginUser,
+  devLogin,
   googleLogin,
   guestLogin,
   forgotPassword,
@@ -26,6 +27,7 @@ const { authRateLimiter } = require("../middlewares/rateLimiter.middleware");
 const {
   validateRegisterInput,
   validateLoginInput,
+  validateDevLogin,
   validateGoogleLogin,
   validateChangePassword,
   validateForgotPassword,
@@ -39,6 +41,7 @@ const {
 // ==========================================
 // PUBLIC AUTH APIs (Accessible without Login)
 // ==========================================
+router.post("/dev-login", validateDevLogin, devLogin);
 router.post("/register", authRateLimiter, validateRegisterInput, registerUser);
 router.post("/login", authRateLimiter, validateLoginInput, loginUser);
 router.post("/google-login", validateGoogleLogin, googleLogin);

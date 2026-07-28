@@ -54,7 +54,14 @@ const validateLoginInput = [
   validate
 ];
 
-// 3. Google Login Validation
+// 3. Dev Login Validation
+const validateDevLogin = [
+  body("phone").optional().trim(),
+  body("email").optional().trim(),
+  validate
+];
+
+// 4. Google Login Validation
 const validateGoogleLogin = [
   body("googleIdToken")
     .optional()
@@ -62,17 +69,10 @@ const validateGoogleLogin = [
   body("idToken")
     .optional()
     .trim(),
-  body().custom((value, { req }) => {
-    const token = req.body.googleIdToken || req.body.idToken;
-    if (!token || token.trim().length === 0) {
-      throw new Error("Google ID token (idToken or googleIdToken) is required");
-    }
-    return true;
-  }),
   validate
 ];
 
-// 4. Change Password Validation
+// 5. Change Password Validation
 const validateChangePassword = [
   body("oldPassword")
     .notEmpty()
@@ -85,7 +85,7 @@ const validateChangePassword = [
   validate
 ];
 
-// 5. Forgot Password Validation
+// 6. Forgot Password Validation
 const validateForgotPassword = [
   body("email")
     .trim()
@@ -97,7 +97,7 @@ const validateForgotPassword = [
   validate
 ];
 
-// 6. Resend OTP Validation
+// 7. Resend OTP Validation
 const validateResendOtp = [
   body("email")
     .trim()
@@ -109,7 +109,7 @@ const validateResendOtp = [
   validate
 ];
 
-// 7. Verify OTP Validation
+// 8. Verify OTP Validation
 const validateVerifyOtp = [
   body("email")
     .trim()
@@ -122,12 +122,12 @@ const validateVerifyOtp = [
     .trim()
     .notEmpty()
     .withMessage("OTP is required")
-    .isLength({ min: 4, max: 6 })
-    .withMessage("OTP must be 4 to 6 digits"),
+    .isLength({ min: 6, max: 6 })
+    .withMessage("OTP must be 6 digits"),
   validate
 ];
 
-// 8. Reset Password Validation
+// 9. Reset Password Validation
 const validateResetPassword = [
   body("newPassword")
     .notEmpty()
@@ -137,7 +137,7 @@ const validateResetPassword = [
   validate
 ];
 
-// 9. Verify Email Validation
+// 10. Verify Email Validation
 const validateVerifyEmail = [
   body("token")
     .optional()
@@ -145,7 +145,7 @@ const validateVerifyEmail = [
   validate
 ];
 
-// 10. Refresh Token Validation
+// 11. Refresh Token Validation
 const validateRefreshToken = [
   body("refreshToken")
     .optional()
@@ -156,6 +156,7 @@ const validateRefreshToken = [
 module.exports = {
   validateRegisterInput,
   validateLoginInput,
+  validateDevLogin,
   validateGoogleLogin,
   validateChangePassword,
   validateForgotPassword,
