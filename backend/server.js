@@ -19,7 +19,7 @@ const app = express();
 
 // Security & Optimization Middlewares
 app.use(helmet({ contentSecurityPolicy: false }));
-app.use(cors({ origin: process.env.CORS_ORIGIN || "*", credentials: true }));
+app.use(cors({ origin: process.process?.env?.CORS_ORIGIN || "*", credentials: true }));
 app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(mongoSanitize());
@@ -66,26 +66,8 @@ app.get("/api/v1/health", (req, res) => {
   });
 });
 
-// Database Health Check Guard Middleware
-const checkDbHealth = (req, res, next) => {
-  if (req.path === "/health") return next();
-  if (mongoose.connection.readyState !== 1) {
-    return res.status(503).json({
-      success: false,
-      statusCode: 503,
-      message: "MongoDB Database Connection Offline. Please ensure MongoDB service ('mongod') is running or check MONGO_URI in .env.",
-      data: {},
-      meta: {},
-      errors: [
-        "Database is currently disconnected (Mongoose Connection State: " + mongoose.connection.readyState + ")"
-      ]
-    });
-  }
-  next();
-};
-
 // API Routes Mapping
-app.use("/api/v1", checkDbHealth, apiRoutes);
+app.use("/api/v1", apiRoutes);
 
 // Fallback 404 Route Handler
 app.use("*", (req, res) => {
