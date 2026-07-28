@@ -350,6 +350,7 @@ const collection = {
       name: "8. Admin Control Panel Web Suite (28 APIs)",
       item: [
         req("62. Admin Login", "POST", "admin/login", { email: "admin@studyhub.com", password: "Password@123" }, true),
+        req("62b. Register New Admin Account", "POST", "admin/register", { name: "System Admin", email: "new.admin@studyhub.com", password: "Password@123", phone: "9876543210" }, false),
         req("63. Get Dashboard Executive Stats", "GET", "admin/stats", null, true),
         req("64. Get Activity Logs", "GET", "admin/activity-logs", null, true),
         req("65. Get System Health Report", "GET", "admin/health", null, true),
