@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "studyhub-production-postman-suite-2026",
     "name": "StudyHub Live Production REST API Suite (Render Cloud)",
-    "description": "Official Production Postman Collection built with reference structure. Features BASE_URL, TOKEN, and ADMIN_TOKEN collection variables with automatic token saving test scripts.",
+    "description": "Official Production Postman Collection with 84 fully functional endpoints. Includes pre-populated 200 OK Example Response Bodies for every API, BASE_URL/TOKEN/ADMIN_TOKEN variables, and automatic token saving scripts.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -74,6 +74,54 @@
                 ]
               }
             }
+          ],
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/auth/dev-login",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "dev-login"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"phone\": \"+919876543210\",\n  \"email\": \"rahul@studyhub.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \" DEV LOGIN (Testing ke liye - No OTP needed) executed successfully.\",\n  \"data\": {\n    \"user\": {\n      \"id\": \"6a685d7b3d6e0376247c628e\",\n      \"name\": \"Rahul Sharma\",\n      \"email\": \"rahul@studyhub.com\",\n      \"phone\": \"+919876543210\",\n      \"college\": \"Delhi Technological University (DTU)\",\n      \"course\": \"B.Tech CS\",\n      \"semester\": \"Semester 4\",\n      \"role\": \"student\",\n      \"isGuest\": false,\n      \"loginMethod\": \"dev\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJpYXQiOjE3ODUyMjQ1NzF9.sample_refresh_token_2026\",\n    \"expiresIn\": \"15m\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": [],\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\"\n}"
+            }
           ]
         },
         {
@@ -123,6 +171,54 @@
                   "}"
                 ]
               }
+            }
+          ],
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/auth/register",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "register"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Rahul Sharma\",\n  \"email\": \"rahul@studyhub.com\",\n  \"password\": \"Password@123\",\n  \"confirmPassword\": \"Password@123\",\n  \"phone\": \"9876543210\",\n  \"college\": \"Delhi University\",\n  \"course\": \"B.Tech CS\",\n  \"semester\": \"Semester 4\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Register (Email + Password) executed successfully.\",\n  \"data\": {\n    \"user\": {\n      \"id\": \"6a685d7b3d6e0376247c628e\",\n      \"name\": \"Rahul Sharma\",\n      \"email\": \"rahul@studyhub.com\",\n      \"phone\": \"9876543210\",\n      \"college\": \"Delhi University\",\n      \"course\": \"B.Tech CS\",\n      \"semester\": \"Semester 4\",\n      \"role\": \"student\",\n      \"isGuest\": false,\n      \"loginMethod\": \"email\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJpYXQiOjE3ODUyMjQ1NzF9.sample_refresh_token_2026\",\n    \"expiresIn\": \"15m\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": [],\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\"\n}"
             }
           ]
         },
@@ -174,6 +270,54 @@
                 ]
               }
             }
+          ],
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/auth/login",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"rahul@studyhub.com\",\n  \"password\": \"Password@123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Login (Email + Password) executed successfully.\",\n  \"data\": {\n    \"user\": {\n      \"id\": \"6a685d7b3d6e0376247c628e\",\n      \"name\": \"Rahul Sharma\",\n      \"email\": \"rahul@studyhub.com\",\n      \"phone\": \"9876543210\",\n      \"college\": \"Delhi Technological University (DTU)\",\n      \"course\": \"B.Tech CS\",\n      \"semester\": \"Semester 4\",\n      \"role\": \"student\",\n      \"isGuest\": false,\n      \"loginMethod\": \"email\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJpYXQiOjE3ODUyMjQ1NzF9.sample_refresh_token_2026\",\n    \"expiresIn\": \"15m\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": [],\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\"\n}"
+            }
           ]
         },
         {
@@ -223,6 +367,54 @@
                   "}"
                 ]
               }
+            }
+          ],
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/auth/google-login",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "google-login"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idToken\": \"sample_google_token\",\n  \"email\": \"custom.google@studyhub.com\",\n  \"name\": \"Custom Student\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Google Login executed successfully.\",\n  \"data\": {\n    \"user\": {\n      \"id\": \"6a685d7b3d6e0376247c628e\",\n      \"name\": \"Custom Student\",\n      \"email\": \"custom.google@studyhub.com\",\n      \"phone\": \"9876543210\",\n      \"college\": \"Delhi Technological University (DTU)\",\n      \"course\": \"B.Tech CS\",\n      \"semester\": \"Semester 4\",\n      \"role\": \"student\",\n      \"isGuest\": false,\n      \"loginMethod\": \"google\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJpYXQiOjE3ODUyMjQ1NzF9.sample_refresh_token_2026\",\n    \"expiresIn\": \"15m\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": [],\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\"\n}"
             }
           ]
         },
@@ -274,6 +466,54 @@
                 ]
               }
             }
+          ],
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/auth/guest-login",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "guest-login"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"deviceId\": \"android_device_12345\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Guest Mode Login executed successfully.\",\n  \"data\": {\n    \"user\": {\n      \"id\": \"6a685d7b3d6e0376247c628e\",\n      \"name\": \"Rahul Sharma\",\n      \"email\": \"rahul@studyhub.com\",\n      \"phone\": \"9876543210\",\n      \"college\": \"Delhi Technological University (DTU)\",\n      \"course\": \"B.Tech CS\",\n      \"semester\": \"Semester 4\",\n      \"role\": \"student\",\n      \"isGuest\": true,\n      \"loginMethod\": \"email\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJpYXQiOjE3ODUyMjQ1NzF9.sample_refresh_token_2026\",\n    \"expiresIn\": \"15m\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": [],\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\"\n}"
+            }
           ]
         },
         {
@@ -324,6 +564,54 @@
                 ]
               }
             }
+          ],
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/auth/refresh-token",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "refresh-token"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"refreshToken\": \"sample_refresh_token\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Refresh Token executed successfully.\",\n  \"data\": {\n    \"message\": \"Refresh Token executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.475Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
           ]
         },
         {
@@ -346,7 +634,42 @@
                 "me"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/auth/me",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "me"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Profile executed successfully.\",\n  \"data\": {\n    \"message\": \"Get Profile executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.932Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Change Password",
@@ -381,7 +704,55 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/auth/change-password",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "change-password"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"oldPassword\": \"Password@123\",\n  \"newPassword\": \"NewPassword@456\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Change Password executed successfully.\",\n  \"data\": {\n    \"message\": \"Change Password executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.932Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Verify Email",
@@ -416,7 +787,55 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/auth/verify-email",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "verify-email"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"sample_verification_token\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Verify Email executed successfully.\",\n  \"data\": {\n    \"message\": \"Verify Email executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.932Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Resend Email Verification",
@@ -451,7 +870,55 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/auth/resend-email-verification",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "resend-email-verification"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"rahul@studyhub.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Resend Email Verification executed successfully.\",\n  \"data\": {\n    \"message\": \"Resend Email Verification executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.932Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Get Login History",
@@ -488,6 +955,41 @@
                 ]
               }
             }
+          ],
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/auth/login-history",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login-history"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Login History executed successfully.\",\n  \"data\": {\n    \"user\": {\n      \"id\": \"6a685d7b3d6e0376247c628e\",\n      \"name\": \"Rahul Sharma\",\n      \"email\": \"rahul@studyhub.com\",\n      \"phone\": \"9876543210\",\n      \"college\": \"Delhi Technological University (DTU)\",\n      \"course\": \"B.Tech CS\",\n      \"semester\": \"Semester 4\",\n      \"role\": \"student\",\n      \"isGuest\": false,\n      \"loginMethod\": \"email\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJpYXQiOjE3ODUyMjQ1NzF9.sample_refresh_token_2026\",\n    \"expiresIn\": \"15m\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": [],\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\"\n}"
+            }
           ]
         },
         {
@@ -514,7 +1016,46 @@
                 "logout"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/auth/logout",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "logout"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Logout executed successfully.\",\n  \"data\": {\n    \"message\": \"Logout executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.932Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Logout All Devices",
@@ -540,7 +1081,46 @@
                 "logout-all-devices"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/auth/logout-all-devices",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "logout-all-devices"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Logout All Devices executed successfully.\",\n  \"data\": {\n    \"message\": \"Logout All Devices executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.932Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Delete Account",
@@ -566,7 +1146,46 @@
                 "delete-account"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/auth/delete-account",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "delete-account"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Delete Account executed successfully.\",\n  \"data\": {\n    \"message\": \"Delete Account executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.932Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Forgot Password (OTP generate)",
@@ -601,7 +1220,55 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/auth/forgot-password",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "forgot-password"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"rahul@studyhub.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Forgot Password (OTP generate) executed successfully.\",\n  \"data\": {\n    \"message\": \"Forgot Password (OTP generate) executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.932Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Resend OTP",
@@ -636,7 +1303,55 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/auth/resend-otp",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "resend-otp"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"rahul@studyhub.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Resend OTP executed successfully.\",\n  \"data\": {\n    \"message\": \"Resend OTP executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.932Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Verify OTP (App User Login)",
@@ -686,6 +1401,54 @@
                 ]
               }
             }
+          ],
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/auth/verify-otp",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "verify-otp"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"rahul@studyhub.com\",\n  \"otp\": \"685538\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Verify OTP (App User Login) executed successfully.\",\n  \"data\": {\n    \"message\": \"Verify OTP (App User Login) executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.932Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
           ]
         },
         {
@@ -721,7 +1484,55 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/auth/reset-password",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "reset-password"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resetToken\": \"sample_token\",\n  \"newPassword\": \"NewPass@123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"New Password (OTP + New Password) executed successfully.\",\n  \"data\": {\n    \"message\": \"New Password (OTP + New Password) executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.932Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         }
       ]
     },
@@ -748,7 +1559,42 @@
                 "home"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/dashboard/home",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "dashboard",
+                    "home"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Dashboard executed successfully.\",\n  \"data\": {\n    \"banners\": [\n      {\n        \"id\": \"bnr_101\",\n        \"title\": \"Supercharge your CGPA!\",\n        \"imageUrl\": \"https://storage.studyhub.com/banners/cgpa.jpg\",\n        \"targetUrl\": \"/tools/cgpa\"\n      }\n    ],\n    \"continueReading\": [\n      {\n        \"materialId\": \"mat_os_101\",\n        \"title\": \"Operating Systems Notes\",\n        \"lastPage\": 14,\n        \"progressPercentage\": 65\n      }\n    ],\n    \"featuredMaterials\": [\n      {\n        \"id\": \"mat_os_101\",\n        \"title\": \"Complete OS Revision Notes 2026\",\n        \"category\": \"Notes\",\n        \"downloadsCount\": 1420\n      }\n    ]\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Get Banners Carousel",
@@ -770,7 +1616,42 @@
                 "banners"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/dashboard/banners",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "dashboard",
+                    "banners"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Banners Carousel executed successfully.\",\n  \"data\": {\n    \"banners\": [\n      {\n        \"id\": \"bnr_101\",\n        \"title\": \"Supercharge your CGPA!\",\n        \"imageUrl\": \"https://storage.studyhub.com/banners/cgpa.jpg\",\n        \"targetUrl\": \"/tools/cgpa\"\n      }\n    ],\n    \"continueReading\": [\n      {\n        \"materialId\": \"mat_os_101\",\n        \"title\": \"Operating Systems Notes\",\n        \"lastPage\": 14,\n        \"progressPercentage\": 65\n      }\n    ],\n    \"featuredMaterials\": [\n      {\n        \"id\": \"mat_os_101\",\n        \"title\": \"Complete OS Revision Notes 2026\",\n        \"category\": \"Notes\",\n        \"downloadsCount\": 1420\n      }\n    ]\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Get Continue Reading Progress",
@@ -792,7 +1673,42 @@
                 "continue-reading"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/dashboard/continue-reading",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "dashboard",
+                    "continue-reading"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Continue Reading Progress executed successfully.\",\n  \"data\": {\n    \"banners\": [\n      {\n        \"id\": \"bnr_101\",\n        \"title\": \"Supercharge your CGPA!\",\n        \"imageUrl\": \"https://storage.studyhub.com/banners/cgpa.jpg\",\n        \"targetUrl\": \"/tools/cgpa\"\n      }\n    ],\n    \"continueReading\": [\n      {\n        \"materialId\": \"mat_os_101\",\n        \"title\": \"Operating Systems Notes\",\n        \"lastPage\": 14,\n        \"progressPercentage\": 65\n      }\n    ],\n    \"featuredMaterials\": [\n      {\n        \"id\": \"mat_os_101\",\n        \"title\": \"Complete OS Revision Notes 2026\",\n        \"category\": \"Notes\",\n        \"downloadsCount\": 1420\n      }\n    ]\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Update Reading Progress",
@@ -827,7 +1743,55 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/dashboard/update-progress",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "dashboard",
+                    "update-progress"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"materialId\": \"mat_os_notes_101\",\n  \"lastPage\": 14,\n  \"lastTimeSeconds\": 480\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Update Reading Progress executed successfully.\",\n  \"data\": {\n    \"banners\": [\n      {\n        \"id\": \"bnr_101\",\n        \"title\": \"Supercharge your CGPA!\",\n        \"imageUrl\": \"https://storage.studyhub.com/banners/cgpa.jpg\",\n        \"targetUrl\": \"/tools/cgpa\"\n      }\n    ],\n    \"continueReading\": [\n      {\n        \"materialId\": \"mat_os_101\",\n        \"title\": \"Operating Systems Notes\",\n        \"lastPage\": 14,\n        \"progressPercentage\": 65\n      }\n    ],\n    \"featuredMaterials\": [\n      {\n        \"id\": \"mat_os_101\",\n        \"title\": \"Complete OS Revision Notes 2026\",\n        \"category\": \"Notes\",\n        \"downloadsCount\": 1420\n      }\n    ]\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Global Search",
@@ -859,7 +1823,52 @@
                 }
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/dashboard/search?q=operating system&type=all",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "dashboard",
+                    "search"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "operating system"
+                    },
+                    {
+                      "key": "type",
+                      "value": "all"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Global Search executed successfully.\",\n  \"data\": {\n    \"banners\": [\n      {\n        \"id\": \"bnr_101\",\n        \"title\": \"Supercharge your CGPA!\",\n        \"imageUrl\": \"https://storage.studyhub.com/banners/cgpa.jpg\",\n        \"targetUrl\": \"/tools/cgpa\"\n      }\n    ],\n    \"continueReading\": [\n      {\n        \"materialId\": \"mat_os_101\",\n        \"title\": \"Operating Systems Notes\",\n        \"lastPage\": 14,\n        \"progressPercentage\": 65\n      }\n    ],\n    \"featuredMaterials\": [\n      {\n        \"id\": \"mat_os_101\",\n        \"title\": \"Complete OS Revision Notes 2026\",\n        \"category\": \"Notes\",\n        \"downloadsCount\": 1420\n      }\n    ]\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         }
       ]
     },
@@ -895,7 +1904,51 @@
                 }
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/colleges?search=Delhi&category=State Univ",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "colleges"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "Delhi"
+                    },
+                    {
+                      "key": "category",
+                      "value": "State Univ"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Colleges List executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"du_dtu\",\n      \"name\": \"Delhi Technological University (DTU)\",\n      \"shortCode\": \"DTU\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    },\n    {\n      \"id\": \"iit_d\",\n      \"name\": \"Indian Institute of Technology Delhi\",\n      \"shortCode\": \"IITD\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Get Single College Details",
@@ -917,7 +1970,42 @@
                 "du_dtu"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/colleges/du_dtu",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "colleges",
+                    "du_dtu"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Single College Details executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"du_dtu\",\n      \"name\": \"Delhi Technological University (DTU)\",\n      \"shortCode\": \"DTU\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    },\n    {\n      \"id\": \"iit_d\",\n      \"name\": \"Indian Institute of Technology Delhi\",\n      \"shortCode\": \"IITD\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Step 1: Choose Course",
@@ -944,7 +2032,47 @@
                 }
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/courses?collegeId=du_dtu",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "courses"
+                  ],
+                  "query": [
+                    {
+                      "key": "collegeId",
+                      "value": "du_dtu"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Step 1: Choose Course executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"btech_cs\",\n      \"name\": \"B.Tech Computer Science\",\n      \"shortCode\": \"BTECH_CS\",\n      \"totalSemesters\": 8\n    },\n    {\n      \"id\": \"bca\",\n      \"name\": \"Bachelor of Computer Applications\",\n      \"shortCode\": \"BCA\",\n      \"totalSemesters\": 6\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Step 2: Select Year",
@@ -967,7 +2095,43 @@
                 "years"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/courses/btech_cs/years",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "courses",
+                    "btech_cs",
+                    "years"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Step 2: Select Year executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"btech_cs\",\n      \"name\": \"B.Tech Computer Science\",\n      \"shortCode\": \"BTECH_CS\",\n      \"totalSemesters\": 8\n    },\n    {\n      \"id\": \"bca\",\n      \"name\": \"Bachelor of Computer Applications\",\n      \"shortCode\": \"BCA\",\n      \"totalSemesters\": 6\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Step 3: Select Semester",
@@ -996,7 +2160,49 @@
                 }
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/courses/btech_cs/semesters?year=2",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "courses",
+                    "btech_cs",
+                    "semesters"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": "2"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Step 3: Select Semester executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"btech_cs\",\n      \"name\": \"B.Tech Computer Science\",\n      \"shortCode\": \"BTECH_CS\",\n      \"totalSemesters\": 8\n    },\n    {\n      \"id\": \"bca\",\n      \"name\": \"Bachelor of Computer Applications\",\n      \"shortCode\": \"BCA\",\n      \"totalSemesters\": 6\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Step 4: Select Subject",
@@ -1027,7 +2233,51 @@
                 }
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/subjects?courseId=btech_cs&semester=4",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "subjects"
+                  ],
+                  "query": [
+                    {
+                      "key": "courseId",
+                      "value": "btech_cs"
+                    },
+                    {
+                      "key": "semester",
+                      "value": "4"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Step 4: Select Subject executed successfully.\",\n  \"data\": {\n    \"message\": \"Step 4: Select Subject executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.933Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Get Single Subject Details",
@@ -1049,7 +2299,42 @@
                 "subj_os_401"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/subjects/subj_os_401",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "subjects",
+                    "subj_os_401"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Single Subject Details executed successfully.\",\n  \"data\": {\n    \"message\": \"Get Single Subject Details executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.933Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         }
       ]
     },
@@ -1093,7 +2378,59 @@
                 }
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/materials?subjectId=subj_os_401&category=Notes&page=1&limit=10",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "materials"
+                  ],
+                  "query": [
+                    {
+                      "key": "subjectId",
+                      "value": "subj_os_401"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Notes"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Filter All Materials executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Get Material Details",
@@ -1115,7 +2452,42 @@
                 "mat_os_notes_101"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/materials/mat_os_notes_101",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "materials",
+                    "mat_os_notes_101"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Material Details executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Get Previous Year Question Papers (PYQs)",
@@ -1146,7 +2518,51 @@
                 }
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/pyqs?subjectId=subj_os_401&year=2024",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "pyqs"
+                  ],
+                  "query": [
+                    {
+                      "key": "subjectId",
+                      "value": "subj_os_401"
+                    },
+                    {
+                      "key": "year",
+                      "value": "2024"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Previous Year Question Papers (PYQs) executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Get Notes",
@@ -1173,7 +2589,47 @@
                 }
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/notes?subjectId=subj_os_401",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "notes"
+                  ],
+                  "query": [
+                    {
+                      "key": "subjectId",
+                      "value": "subj_os_401"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Notes executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Get E-Books",
@@ -1200,7 +2656,47 @@
                 }
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/books?subjectId=subj_os_401",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "books"
+                  ],
+                  "query": [
+                    {
+                      "key": "subjectId",
+                      "value": "subj_os_401"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get E-Books executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Get Video Lectures",
@@ -1227,7 +2723,47 @@
                 }
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/videos?subjectId=subj_os_401",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "videos"
+                  ],
+                  "query": [
+                    {
+                      "key": "subjectId",
+                      "value": "subj_os_401"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Video Lectures executed successfully.\",\n  \"data\": {\n    \"message\": \"Get Video Lectures executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.933Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Get Question Bank",
@@ -1254,7 +2790,47 @@
                 }
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/question-bank?subjectId=subj_os_401",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "question-bank"
+                  ],
+                  "query": [
+                    {
+                      "key": "subjectId",
+                      "value": "subj_os_401"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Question Bank executed successfully.\",\n  \"data\": {\n    \"message\": \"Get Question Bank executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.933Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Stream Video Lecture",
@@ -1277,7 +2853,43 @@
                 "stream"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/videos/vid_os_101/stream",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "videos",
+                    "vid_os_101",
+                    "stream"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Stream Video Lecture executed successfully.\",\n  \"data\": {\n    \"message\": \"Stream Video Lecture executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.934Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Download Material PDF",
@@ -1300,7 +2912,43 @@
                 "download"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/materials/mat_os_notes_101/download",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "materials",
+                    "mat_os_notes_101",
+                    "download"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Download Material PDF executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         }
       ]
     },
@@ -1340,7 +2988,55 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/ai/chat",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "ai",
+                    "chat"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"question\": \"Explain Page Replacement Algorithms in OS\",\n  \"subjectContext\": \"Operating Systems\",\n  \"conversationHistory\": []\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Ask AI Assistant executed successfully.\",\n  \"data\": {\n    \"answer\": \"Page Replacement Algorithms in Operating Systems manage virtual memory by deciding which memory page to swap out when new memory needs to be allocated. Key algorithms include FIFO, LRU, and Optimal Page Replacement.\",\n    \"sources\": [\n      \"Operating System Concepts 10th Edition\",\n      \"Semester 4 OS Notes\"\n    ],\n    \"tokensUsed\": 142\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Snap & Solve (OCR Solution)",
@@ -1375,7 +3071,55 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/ai/snap-and-solve",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "ai",
+                    "snap-and-solve"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"imageBase64\": \"data:image/png;base64,iVBORw0KGgo...\",\n  \"subjectContext\": \"Mathematics IV\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Snap & Solve (OCR Solution) executed successfully.\",\n  \"data\": {\n    \"answer\": \"Page Replacement Algorithms in Operating Systems manage virtual memory by deciding which memory page to swap out when new memory needs to be allocated. Key algorithms include FIFO, LRU, and Optimal Page Replacement.\",\n    \"sources\": [\n      \"Operating System Concepts 10th Edition\",\n      \"Semester 4 OS Notes\"\n    ],\n    \"tokensUsed\": 142\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Get AI Chat History",
@@ -1407,7 +3151,52 @@
                 }
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/ai/history?page=1&limit=20",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "ai",
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get AI Chat History executed successfully.\",\n  \"data\": {\n    \"message\": \"Get AI Chat History executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.934Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Clear AI Chat History",
@@ -1430,7 +3219,43 @@
                 "clear"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/ai/history/clear",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "ai",
+                    "history",
+                    "clear"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Clear AI Chat History executed successfully.\",\n  \"data\": {\n    \"message\": \"Clear AI Chat History executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.934Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         }
       ]
     },
@@ -1471,7 +3296,56 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/tools/cgpa/calculate",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "tools",
+                    "cgpa",
+                    "calculate"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"gradingSystem\": \"10-point\",\n  \"semesters\": [\n    {\n      \"semester\": \"Sem 1\",\n      \"gpa\": 8.5,\n      \"credits\": 20\n    },\n    {\n      \"semester\": \"Sem 2\",\n      \"gpa\": 8.8,\n      \"credits\": 22\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Calculate CGPA/SGPA executed successfully.\",\n  \"data\": {\n    \"title\": \"B.Tech Year 1 CGPA\",\n    \"gpaResult\": 8.65,\n    \"percentageEquivalent\": \"82.18%\",\n    \"classification\": \"First Class with Distinction\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Save CGPA Calculation",
@@ -1507,7 +3381,56 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/tools/cgpa/save",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "tools",
+                    "cgpa",
+                    "save"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"B.Tech Year 1 CGPA\",\n  \"gpaResult\": 8.65,\n  \"semestersData\": []\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Save CGPA Calculation executed successfully.\",\n  \"data\": {\n    \"title\": \"B.Tech Year 1 CGPA\",\n    \"gpaResult\": 8.65,\n    \"percentageEquivalent\": \"82.18%\",\n    \"classification\": \"First Class with Distinction\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Get Saved CGPA Calculations",
@@ -1530,7 +3453,43 @@
                 "my-calculations"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/tools/cgpa/my-calculations",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "tools",
+                    "cgpa",
+                    "my-calculations"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Saved CGPA Calculations executed successfully.\",\n  \"data\": {\n    \"title\": \"B.Tech Year 1 CGPA\",\n    \"gpaResult\": 8.65,\n    \"percentageEquivalent\": \"82.18%\",\n    \"classification\": \"First Class with Distinction\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Get Attendance Summary",
@@ -1553,7 +3512,43 @@
                 "summary"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/tools/attendance/summary",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "tools",
+                    "attendance",
+                    "summary"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Attendance Summary executed successfully.\",\n  \"data\": {\n    \"subjectName\": \"Operating Systems\",\n    \"targetPercentage\": 75,\n    \"currentPercentage\": 85,\n    \"totalClasses\": 20,\n    \"attendedClasses\": 17,\n    \"status\": \"On Track\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Add New Subject Attendance",
@@ -1589,7 +3584,56 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/tools/attendance/subject",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "tools",
+                    "attendance",
+                    "subject"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subjectName\": \"Operating Systems\",\n  \"targetPercentage\": 75,\n  \"totalClasses\": 20,\n  \"attendedClasses\": 17\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Add New Subject Attendance executed successfully.\",\n  \"data\": {\n    \"subjectName\": \"Operating Systems\",\n    \"targetPercentage\": 75,\n    \"currentPercentage\": 85,\n    \"totalClasses\": 20,\n    \"attendedClasses\": 17,\n    \"status\": \"On Track\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Log Class Attendance",
@@ -1625,7 +3669,56 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/tools/attendance/log",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "tools",
+                    "attendance",
+                    "log"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subjectId\": \"att_subj_os_101\",\n  \"date\": \"2026-07-28\",\n  \"status\": \"present\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Log Class Attendance executed successfully.\",\n  \"data\": {\n    \"subjectName\": \"Operating Systems\",\n    \"targetPercentage\": 75,\n    \"currentPercentage\": 85,\n    \"totalClasses\": 20,\n    \"attendedClasses\": 17,\n    \"status\": \"On Track\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Update Attendance Target",
@@ -1662,7 +3755,57 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/tools/attendance/subject/att_subj_os_101",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "tools",
+                    "attendance",
+                    "subject",
+                    "att_subj_os_101"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetPercentage\": 80\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Update Attendance Target executed successfully.\",\n  \"data\": {\n    \"subjectName\": \"Operating Systems\",\n    \"targetPercentage\": 75,\n    \"currentPercentage\": 85,\n    \"totalClasses\": 20,\n    \"attendedClasses\": 17,\n    \"status\": \"On Track\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Delete Attendance Subject",
@@ -1686,7 +3829,44 @@
                 "att_subj_os_101"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/tools/attendance/subject/att_subj_os_101",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "tools",
+                    "attendance",
+                    "subject",
+                    "att_subj_os_101"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Delete Attendance Subject executed successfully.\",\n  \"data\": {\n    \"subjectName\": \"Operating Systems\",\n    \"targetPercentage\": 75,\n    \"currentPercentage\": 85,\n    \"totalClasses\": 20,\n    \"attendedClasses\": 17,\n    \"status\": \"On Track\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         }
       ]
     },
@@ -1726,7 +3906,55 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/favorites/toggle",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "favorites",
+                    "toggle"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"materialId\": \"mat_os_notes_101\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Toggle Favorite Status executed successfully.\",\n  \"data\": {\n    \"message\": \"Toggle Favorite Status executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.936Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Get All Favorites",
@@ -1747,7 +3975,41 @@
                 "favorites"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/favorites",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "favorites"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get All Favorites executed successfully.\",\n  \"data\": {\n    \"message\": \"Get All Favorites executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.936Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Sync Download Record",
@@ -1782,7 +4044,55 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/downloads/sync",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "downloads",
+                    "sync"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"materialId\": \"mat_os_notes_101\",\n  \"fileSizeBytes\": 4500000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Sync Download Record executed successfully.\",\n  \"data\": {\n    \"message\": \"Sync Download Record executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.936Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Get Downloaded List",
@@ -1803,7 +4113,41 @@
                 "downloads"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/downloads",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "downloads"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Downloaded List executed successfully.\",\n  \"data\": {\n    \"message\": \"Get Downloaded List executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.936Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Get Activity Logs",
@@ -1834,7 +4178,51 @@
                 }
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/activity-logs?page=1&limit=20",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "activity-logs"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Activity Logs executed successfully.\",\n  \"data\": {\n    \"message\": \"Get Activity Logs executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.936Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Get Notifications",
@@ -1861,7 +4249,47 @@
                 }
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/notifications?unreadOnly=false",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "notifications"
+                  ],
+                  "query": [
+                    {
+                      "key": "unreadOnly",
+                      "value": "false"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Notifications executed successfully.\",\n  \"data\": {\n    \"message\": \"Get Notifications executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.936Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         }
       ]
     },
@@ -1916,6 +4344,54 @@
                 ]
               }
             }
+          ],
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/login",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "login"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"admin@studyhub.com\",\n  \"password\": \"Password@123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Admin Login executed successfully.\",\n  \"data\": {\n    \"user\": {\n      \"id\": \"6a685d7b3d6e0376247c628e\",\n      \"name\": \"Rahul Sharma\",\n      \"email\": \"admin@studyhub.com\",\n      \"phone\": \"9876543210\",\n      \"college\": \"Delhi Technological University (DTU)\",\n      \"course\": \"B.Tech CS\",\n      \"semester\": \"Semester 4\",\n      \"role\": \"admin\",\n      \"isGuest\": false,\n      \"loginMethod\": \"email\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJpYXQiOjE3ODUyMjQ1NzF9.sample_refresh_token_2026\",\n    \"expiresIn\": \"15m\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": [],\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026\"\n}"
+            }
           ]
         },
         {
@@ -1938,7 +4414,42 @@
                 "stats"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/stats",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "stats"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Dashboard Stats executed successfully.\",\n  \"data\": {\n    \"totalStudents\": 1250,\n    \"totalColleges\": 42,\n    \"totalCourses\": 128,\n    \"totalMaterials\": 4500,\n    \"totalDownloadsToday\": 890,\n    \"systemHealth\": \"Optimal\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Get Activity Logs",
@@ -1960,7 +4471,42 @@
                 "activity-logs"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/activity-logs",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "activity-logs"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Activity Logs executed successfully.\",\n  \"data\": {\n    \"message\": \"Get Activity Logs executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.936Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Get System Health",
@@ -1982,7 +4528,42 @@
                 "health"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/health",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "health"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get System Health executed successfully.\",\n  \"data\": {\n    \"message\": \"Get System Health executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.936Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Create College",
@@ -2017,7 +4598,55 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/colleges",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "colleges"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Delhi Technological University\",\n  \"shortCode\": \"DTU\",\n  \"city\": \"Delhi\",\n  \"state\": \"Delhi\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Create College executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"du_dtu\",\n      \"name\": \"Delhi Technological University (DTU)\",\n      \"shortCode\": \"DTU\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    },\n    {\n      \"id\": \"iit_d\",\n      \"name\": \"Indian Institute of Technology Delhi\",\n      \"shortCode\": \"IITD\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Update College",
@@ -2053,7 +4682,56 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/colleges/du_dtu",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "colleges",
+                    "du_dtu"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Delhi Technological University (DTU)\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Update College executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"du_dtu\",\n      \"name\": \"Delhi Technological University (DTU)\",\n      \"shortCode\": \"DTU\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    },\n    {\n      \"id\": \"iit_d\",\n      \"name\": \"Indian Institute of Technology Delhi\",\n      \"shortCode\": \"IITD\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Delete College",
@@ -2076,7 +4754,43 @@
                 "du_dtu"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/colleges/du_dtu",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "colleges",
+                    "du_dtu"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Delete College executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"du_dtu\",\n      \"name\": \"Delhi Technological University (DTU)\",\n      \"shortCode\": \"DTU\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    },\n    {\n      \"id\": \"iit_d\",\n      \"name\": \"Indian Institute of Technology Delhi\",\n      \"shortCode\": \"IITD\",\n      \"city\": \"Delhi\",\n      \"state\": \"Delhi\"\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Create Course",
@@ -2111,7 +4825,55 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/courses",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "courses"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"collegeId\": \"du_dtu\",\n  \"name\": \"B.Tech Computer Science\",\n  \"shortCode\": \"BTECH_CS\",\n  \"totalSemesters\": 8\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Create Course executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"btech_cs\",\n      \"name\": \"B.Tech Computer Science\",\n      \"shortCode\": \"BTECH_CS\",\n      \"totalSemesters\": 8\n    },\n    {\n      \"id\": \"bca\",\n      \"name\": \"Bachelor of Computer Applications\",\n      \"shortCode\": \"BCA\",\n      \"totalSemesters\": 6\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Update Course",
@@ -2147,7 +4909,56 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/courses/btech_cs",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "courses",
+                    "btech_cs"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"B.Tech CS & AI\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Update Course executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"btech_cs\",\n      \"name\": \"B.Tech Computer Science\",\n      \"shortCode\": \"BTECH_CS\",\n      \"totalSemesters\": 8\n    },\n    {\n      \"id\": \"bca\",\n      \"name\": \"Bachelor of Computer Applications\",\n      \"shortCode\": \"BCA\",\n      \"totalSemesters\": 6\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Delete Course",
@@ -2170,7 +4981,43 @@
                 "btech_cs"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/courses/btech_cs",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "courses",
+                    "btech_cs"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Delete Course executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"btech_cs\",\n      \"name\": \"B.Tech Computer Science\",\n      \"shortCode\": \"BTECH_CS\",\n      \"totalSemesters\": 8\n    },\n    {\n      \"id\": \"bca\",\n      \"name\": \"Bachelor of Computer Applications\",\n      \"shortCode\": \"BCA\",\n      \"totalSemesters\": 6\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Create Subject",
@@ -2205,7 +5052,55 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/subjects",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "subjects"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"courseId\": \"btech_cs\",\n  \"semester\": 4,\n  \"name\": \"Operating Systems\",\n  \"code\": \"CS401\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Create Subject executed successfully.\",\n  \"data\": {\n    \"message\": \"Create Subject executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.937Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Update Subject",
@@ -2241,7 +5136,56 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/subjects/subj_os_401",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "subjects",
+                    "subj_os_401"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Operating Systems & Systems Programming\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Update Subject executed successfully.\",\n  \"data\": {\n    \"message\": \"Update Subject executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.937Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Delete Subject",
@@ -2264,7 +5208,43 @@
                 "subj_os_401"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/subjects/subj_os_401",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "subjects",
+                    "subj_os_401"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Delete Subject executed successfully.\",\n  \"data\": {\n    \"message\": \"Delete Subject executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.937Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Upload Material",
@@ -2299,7 +5279,55 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/materials",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "materials"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Complete OS Revision Notes 2026\",\n  \"category\": \"Notes\",\n  \"subjectId\": \"subj_os_401\",\n  \"fileUrl\": \"https://storage.studyhub.com/notes/os_notes.pdf\",\n  \"isPremium\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Upload Material executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Update Material",
@@ -2335,7 +5363,56 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/materials/mat_os_notes_101",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "materials",
+                    "mat_os_notes_101"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Complete OS Revision Notes v2\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Update Material executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Delete Material",
@@ -2358,7 +5435,43 @@
                 "mat_os_notes_101"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/materials/mat_os_notes_101",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "materials",
+                    "mat_os_notes_101"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Delete Material executed successfully.\",\n  \"data\": [\n    {\n      \"id\": \"mat_os_notes_101\",\n      \"title\": \"Operating Systems Revision Notes 2026\",\n      \"category\": \"Notes\",\n      \"subject\": \"Operating Systems\",\n      \"fileUrl\": \"https://storage.studyhub.com/notes/os.pdf\",\n      \"isPremium\": false,\n      \"downloadsCount\": 2450\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "List All Students",
@@ -2394,7 +5507,56 @@
                 }
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/users?role=student&page=1&limit=10",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "users"
+                  ],
+                  "query": [
+                    {
+                      "key": "role",
+                      "value": "student"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"List All Students executed successfully.\",\n  \"data\": {\n    \"message\": \"List All Students executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.937Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Get Student Profile",
@@ -2417,7 +5579,43 @@
                 "usr_student_101"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/users/usr_student_101",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "users",
+                    "usr_student_101"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Student Profile executed successfully.\",\n  \"data\": {\n    \"message\": \"Get Student Profile executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.937Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Block Student",
@@ -2454,7 +5652,57 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/users/usr_student_101/block",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "users",
+                    "usr_student_101",
+                    "block"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"isBlocked\": true,\n  \"reason\": \"Violation of terms\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Block Student executed successfully.\",\n  \"data\": {\n    \"message\": \"Block Student executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.937Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Unblock Student",
@@ -2491,7 +5739,57 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/users/usr_student_101/unblock",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "users",
+                    "usr_student_101",
+                    "unblock"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"isBlocked\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Unblock Student executed successfully.\",\n  \"data\": {\n    \"message\": \"Unblock Student executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.937Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Delete Student Account",
@@ -2514,7 +5812,43 @@
                 "usr_student_101"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/users/usr_student_101",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "users",
+                    "usr_student_101"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Delete Student Account executed successfully.\",\n  \"data\": {\n    \"message\": \"Delete Student Account executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.937Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Send Push Notification",
@@ -2550,7 +5884,56 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/notifications/send",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "notifications",
+                    "send"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Exam Datesheet Released!\",\n  \"body\": \"Semester 4 PYQs & Notes updated\",\n  \"targetRole\": \"student\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Send Push Notification executed successfully.\",\n  \"data\": {\n    \"message\": \"Send Push Notification executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.937Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Get Notifications History",
@@ -2572,7 +5955,42 @@
                 "notifications"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/notifications",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "notifications"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Notifications History executed successfully.\",\n  \"data\": {\n    \"message\": \"Get Notifications History executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.937Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Create Banner",
@@ -2607,7 +6025,55 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/banners",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "banners"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Supercharge your CGPA!\",\n  \"imageUrl\": \"https://storage.studyhub.com/banners/cgpa_banner.jpg\",\n  \"targetUrl\": \"/tools/cgpa\",\n  \"isActive\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Create Banner executed successfully.\",\n  \"data\": {\n    \"message\": \"Create Banner executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.937Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Get All Banners",
@@ -2629,7 +6095,42 @@
                 "banners"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/banners",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "banners"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get All Banners executed successfully.\",\n  \"data\": {\n    \"message\": \"Get All Banners executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.937Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Update Banner Status",
@@ -2665,7 +6166,56 @@
                 }
               }
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/banners/bnr_101",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "banners",
+                    "bnr_101"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"isActive\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Update Banner Status executed successfully.\",\n  \"data\": {\n    \"message\": \"Update Banner Status executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.937Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Delete Banner",
@@ -2688,7 +6238,43 @@
                 "bnr_101"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/banners/bnr_101",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "banners",
+                    "bnr_101"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Delete Banner executed successfully.\",\n  \"data\": {\n    \"message\": \"Delete Banner executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.937Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Get Audit Logs",
@@ -2710,7 +6296,42 @@
                 "audit-logs"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/audit-logs",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "audit-logs"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get Audit Logs executed successfully.\",\n  \"data\": {\n    \"message\": \"Get Audit Logs executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.937Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Get User Feedbacks",
@@ -2732,7 +6353,42 @@
                 "feedbacks"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/feedbacks",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "feedbacks"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Get User Feedbacks executed successfully.\",\n  \"data\": {\n    \"message\": \"Get User Feedbacks executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.937Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         },
         {
           "name": "Export Reports",
@@ -2761,7 +6417,49 @@
                 }
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "200 OK - Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{ADMIN_TOKEN}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/admin/reports/export?format=csv",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "reports",
+                    "export"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "csv"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Export Reports executed successfully.\",\n  \"data\": {\n    \"message\": \"Export Reports executed successfully.\",\n    \"timestamp\": \"2026-07-28T08:20:49.937Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+            }
+          ]
         }
       ]
     }

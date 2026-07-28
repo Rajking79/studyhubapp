@@ -27,6 +27,107 @@ function buildUrl(pathStr) {
   return urlObj;
 }
 
+function generateSampleResponse(name, pathStr, bodyObj, isAdmin) {
+  let sampleData = {};
+
+  if (pathStr.includes("login") || pathStr.includes("register") || pathStr.includes("guest") || pathStr.includes("dev-login")) {
+    sampleData = {
+      user: {
+        id: "6a685d7b3d6e0376247c628e",
+        name: bodyObj?.name || "Rahul Sharma",
+        email: bodyObj?.email || "rahul@studyhub.com",
+        phone: bodyObj?.phone || "9876543210",
+        college: bodyObj?.college || "Delhi Technological University (DTU)",
+        course: bodyObj?.course || "B.Tech CS",
+        semester: bodyObj?.semester || "Semester 4",
+        role: isAdmin ? "admin" : "student",
+        isGuest: pathStr.includes("guest"),
+        loginMethod: pathStr.includes("google") ? "google" : (pathStr.includes("dev") ? "dev" : "email")
+      },
+      token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJlbWFpbCI6InJhaHVsQHN0dWR5aHViLmNvbSIsImlhdCI6MTc4NTIyNDU3MX0.sample_access_jwt_token_2026",
+      refreshToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJpYXQiOjE3ODUyMjQ1NzF9.sample_refresh_token_2026",
+      expiresIn: "15m"
+    };
+  } else if (pathStr.includes("dashboard") || pathStr.includes("home")) {
+    sampleData = {
+      banners: [
+        { id: "bnr_101", title: "Supercharge your CGPA!", imageUrl: "https://storage.studyhub.com/banners/cgpa.jpg", targetUrl: "/tools/cgpa" }
+      ],
+      continueReading: [
+        { materialId: "mat_os_101", title: "Operating Systems Notes", lastPage: 14, progressPercentage: 65 }
+      ],
+      featuredMaterials: [
+        { id: "mat_os_101", title: "Complete OS Revision Notes 2026", category: "Notes", downloadsCount: 1420 }
+      ]
+    };
+  } else if (pathStr.includes("colleges")) {
+    sampleData = [
+      { id: "du_dtu", name: "Delhi Technological University (DTU)", shortCode: "DTU", city: "Delhi", state: "Delhi" },
+      { id: "iit_d", name: "Indian Institute of Technology Delhi", shortCode: "IITD", city: "Delhi", state: "Delhi" }
+    ];
+  } else if (pathStr.includes("courses")) {
+    sampleData = [
+      { id: "btech_cs", name: "B.Tech Computer Science", shortCode: "BTECH_CS", totalSemesters: 8 },
+      { id: "bca", name: "Bachelor of Computer Applications", shortCode: "BCA", totalSemesters: 6 }
+    ];
+  } else if (pathStr.includes("materials") || pathStr.includes("notes") || pathStr.includes("pyqs") || pathStr.includes("books")) {
+    sampleData = [
+      { id: "mat_os_notes_101", title: "Operating Systems Revision Notes 2026", category: "Notes", subject: "Operating Systems", fileUrl: "https://storage.studyhub.com/notes/os.pdf", isPremium: false, downloadsCount: 2450 }
+    ];
+  } else if (pathStr.includes("ai/chat") || pathStr.includes("snap-and-solve")) {
+    sampleData = {
+      answer: "Page Replacement Algorithms in Operating Systems manage virtual memory by deciding which memory page to swap out when new memory needs to be allocated. Key algorithms include FIFO, LRU, and Optimal Page Replacement.",
+      sources: ["Operating System Concepts 10th Edition", "Semester 4 OS Notes"],
+      tokensUsed: 142
+    };
+  } else if (pathStr.includes("tools/cgpa")) {
+    sampleData = {
+      title: "B.Tech Year 1 CGPA",
+      gpaResult: 8.65,
+      percentageEquivalent: "82.18%",
+      classification: "First Class with Distinction"
+    };
+  } else if (pathStr.includes("tools/attendance")) {
+    sampleData = {
+      subjectName: "Operating Systems",
+      targetPercentage: 75,
+      currentPercentage: 85.0,
+      totalClasses: 20,
+      attendedClasses: 17,
+      status: "On Track"
+    };
+  } else if (pathStr.includes("admin/stats")) {
+    sampleData = {
+      totalStudents: 1250,
+      totalColleges: 42,
+      totalCourses: 128,
+      totalMaterials: 4500,
+      totalDownloadsToday: 890,
+      systemHealth: "Optimal"
+    };
+  } else {
+    sampleData = {
+      message: `${name} executed successfully.`,
+      timestamp: new Date().toISOString()
+    };
+  }
+
+  const responseObj = {
+    success: true,
+    statusCode: 200,
+    message: `${name} executed successfully.`,
+    data: sampleData,
+    meta: { page: 1, limit: 10, total: 1 },
+    errors: []
+  };
+
+  if (sampleData.token) {
+    responseObj.token = sampleData.token;
+  }
+
+  return responseObj;
+}
+
 function req(name, method, pathStr, bodyObj = null, isAdmin = false) {
   const headers = [];
   if (bodyObj || method === 'POST' || method === 'PUT' || method === 'PATCH') {
@@ -35,14 +136,24 @@ function req(name, method, pathStr, bodyObj = null, isAdmin = false) {
   const tokenKey = isAdmin ? 'ADMIN_TOKEN' : 'TOKEN';
   headers.push({ key: 'Authorization', value: `Bearer {{${tokenKey}}}` });
 
+  const urlObj = buildUrl(pathStr);
+
   const r = {
     name: name,
     request: {
       method: method,
       header: headers,
-      url: buildUrl(pathStr)
+      url: urlObj
     }
   };
+
+  if (bodyObj && (method === 'POST' || method === 'PUT' || method === 'PATCH')) {
+    r.request.body = {
+      mode: 'raw',
+      raw: JSON.stringify(bodyObj, null, 2),
+      options: { raw: { language: 'json' } }
+    };
+  }
 
   // Attach test script to automatically save TOKEN / ADMIN_TOKEN on auth endpoints
   const isAuthTokenRoute = pathStr.includes("login") || pathStr.includes("register") || pathStr.includes("guest") || pathStr.includes("refresh") || pathStr.includes("verify-otp") || pathStr.includes("dev-login");
@@ -64,13 +175,27 @@ function req(name, method, pathStr, bodyObj = null, isAdmin = false) {
     ];
   }
 
-  if (bodyObj && (method === 'POST' || method === 'PUT' || method === 'PATCH')) {
-    r.request.body = {
-      mode: 'raw',
-      raw: JSON.stringify(bodyObj, null, 2),
-      options: { raw: { language: 'json' } }
-    };
-  }
+  // Pre-populate 200 OK Saved Example Response Body for every single API endpoint
+  const sampleResponse = generateSampleResponse(name, pathStr, bodyObj, isAdmin);
+  r.response = [
+    {
+      name: "200 OK - Successful Response",
+      originalRequest: {
+        method: method,
+        header: headers,
+        url: urlObj,
+        body: r.request.body || undefined
+      },
+      status: "OK",
+      code: 200,
+      _postman_previewlanguage: "json",
+      header: [
+        { key: "Content-Type", value: "application/json; charset=utf-8" }
+      ],
+      cookie: [],
+      body: JSON.stringify(sampleResponse, null, 2)
+    }
+  ];
 
   return r;
 }
@@ -79,7 +204,7 @@ const collection = {
   info: {
     _postman_id: "studyhub-production-postman-suite-2026",
     name: "StudyHub Live Production REST API Suite (Render Cloud)",
-    description: "Official Production Postman Collection built with reference structure. Features BASE_URL, TOKEN, and ADMIN_TOKEN collection variables with automatic token saving test scripts.",
+    description: "Official Production Postman Collection with 84 fully functional endpoints. Includes pre-populated 200 OK Example Response Bodies for every API, BASE_URL/TOKEN/ADMIN_TOKEN variables, and automatic token saving scripts.",
     schema: "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   variable: [
@@ -222,4 +347,4 @@ fs.writeFileSync('./postman_collection.json', JSON.stringify(collection, null, 2
 fs.writeFileSync('./studyhub_backend_server/postman_collection.json', JSON.stringify(collection, null, 2));
 fs.writeFileSync('./backend/postman_collection.json', JSON.stringify(collection, null, 2));
 
-console.log('✅ Reference-Matching Postman Collection JSON Generated Successfully!');
+console.log('✅ Postman Collection JSON with Pre-Populated 200 OK Example Responses Generated Successfully!');
