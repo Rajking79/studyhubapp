@@ -5,15 +5,18 @@ const ApiError = require("../utils/ApiError");
 
 class GoogleAuthService {
   static async processGoogleLogin(idToken, clientMetadata = {}) {
-    // 1. Verify Google ID Token server-side directly with Google Client
-    const googleUser = await GoogleAuthUtils.verifyGoogleIdToken(idToken);
+    // 1. Verify Google ID Token server-side directly with Google Client (or custom Postman email)
+    const googleUser = await GoogleAuthUtils.verifyGoogleIdToken(idToken, clientMetadata);
 
     // 2. Search MongoDB by verified Email extracted from token
     let user = await GoogleAuthRepository.findUserByEmail(googleUser.email);
 
+    let isNewUser = false;
+
     if (!user) {
       // 3. User does not exist -> Create account (ONLY Google login auto-creates)
       user = await GoogleAuthRepository.createGoogleUser(googleUser);
+      isNewUser = true;
     } else {
       // 4. Status checks for existing user
       if (user.isDeleted) throw new ApiError(403, "Account has been deleted.");
@@ -55,7 +58,8 @@ class GoogleAuthService {
       semester: user.semester || "",
       role: user.role || "student",
       isGuest: false,
-      loginMethod: "google"
+      loginMethod: "google",
+      isNewRegistration: isNewUser
     };
 
     return {

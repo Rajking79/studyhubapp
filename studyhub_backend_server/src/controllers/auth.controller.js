@@ -52,14 +52,16 @@ const googleLogin = asyncHandler(async (req, res) => {
     deviceName: req.headers["x-device-name"] || req.headers["user-agent"] || "Android Mobile",
     androidVersion: req.headers["x-android-version"] || "Android 14",
     appVersion: req.headers["x-app-version"] || "1.0.0",
-    ipAddress: req.ip || req.headers["x-forwarded-for"] || "127.0.0.1"
+    ipAddress: req.ip || req.headers["x-forwarded-for"] || "127.0.0.1",
+    customEmail: req.body.email,
+    customName: req.body.name
   };
 
   const GoogleAuthService = require("../services/googleAuth.service");
   const authResult = await GoogleAuthService.processGoogleLogin(idToken, clientMetadata);
 
   return res.status(200).json(
-    new ApiResponse(200, authResult, "Google Login Successful")
+    new ApiResponse(200, authResult, authResult.user?.isNewRegistration ? "New Student Auto-Registered via Google" : "Google Login Successful")
   );
 });
 
