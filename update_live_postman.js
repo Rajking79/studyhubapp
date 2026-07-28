@@ -48,6 +48,22 @@ function generateSampleResponse(name, pathStr, bodyObj, isAdmin) {
       refreshToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTY4NWQ3YjNkNmUwMzc2MjQ3YzYyOGUiLCJpYXQiOjE3ODUyMjQ1NzF9.sample_refresh_token_2026",
       expiresIn: "15m"
     };
+  } else if (pathStr.includes("user/referral") || pathStr.includes("referral")) {
+    sampleData = {
+      referralCode: "STUDYHUB-RAHU8E24",
+      referralLink: "https://studyhub-backend-server.onrender.com/invite?ref=STUDYHUB-RAHU8E24",
+      shareMessage: "Hey classmate! Join me on StudyHub App to access Semester Notes, PYQs, Books & AI Assistant. Click here: https://studyhub-backend-server.onrender.com/invite?ref=STUDYHUB-RAHU8E24",
+      totalInvitedFriends: 5,
+      rewardPoints: 250
+    };
+  } else if (pathStr.includes("admin/referrals")) {
+    sampleData = {
+      totalAppInvites: 1420,
+      topReferrers: [
+        { studentId: "usr_101", name: "Rahul Sharma", email: "rahul@studyhub.com", referralCode: "STUDYHUB-RAHU8E24", invitedFriendsCount: 24, rewardPoints: 1200 },
+        { studentId: "usr_102", name: "Amit Verma", email: "amit@studyhub.com", referralCode: "STUDYHUB-AMIT9F12", invitedFriendsCount: 18, rewardPoints: 900 }
+      ]
+    };
   } else if (pathStr.includes("dashboard") || pathStr.includes("home")) {
     sampleData = {
       banners: [
@@ -204,7 +220,7 @@ const collection = {
   info: {
     _postman_id: "studyhub-production-postman-suite-2026",
     name: "StudyHub Live Production REST API Suite (Render Cloud)",
-    description: "Official Production Postman Collection with 84 fully functional endpoints. Includes pre-populated 200 OK Example Response Bodies for every API, BASE_URL/TOKEN/ADMIN_TOKEN variables, and automatic token saving scripts.",
+    description: "Official Production Postman Collection with 87 fully functional endpoints. Includes Invite Friends / Referral System APIs for both Mobile App & Admin Web Panel, pre-populated 200 OK Example Responses, BASE_URL/TOKEN/ADMIN_TOKEN variables, and automatic token saving scripts.",
     schema: "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   variable: [
@@ -302,7 +318,9 @@ const collection = {
         req("Sync Download Record", "POST", "downloads/sync", { materialId: "mat_os_notes_101", fileSizeBytes: 4500000 }),
         req("Get Downloaded List", "GET", "downloads"),
         req("Get Activity Logs", "GET", "activity-logs?page=1&limit=20"),
-        req("Get Notifications", "GET", "notifications?unreadOnly=false")
+        req("Get Notifications", "GET", "notifications?unreadOnly=false"),
+        req("📲 Invite Friends (Get Link & Code)", "GET", "user/referral"),
+        req("📲 Apply Friend Referral Code", "POST", "user/referral/apply", { referralCode: "STUDYHUB-RAHU8E24" })
       ]
     },
     {
@@ -337,7 +355,9 @@ const collection = {
         req("Delete Banner", "DELETE", "admin/banners/bnr_101", null, true),
         req("Get Audit Logs", "GET", "admin/audit-logs", null, true),
         req("Get User Feedbacks", "GET", "admin/feedbacks", null, true),
-        req("Export Reports", "GET", "admin/reports/export?format=csv", null, true)
+        req("Export Reports", "GET", "admin/reports/export?format=csv", null, true),
+        req("📲 Get Referral Leaderboard & Invite Analytics", "GET", "admin/referrals", null, true),
+        req("📲 Get Student Invited Friends List", "GET", "admin/users/usr_student_101/referrals", null, true)
       ]
     }
   ]
@@ -347,4 +367,4 @@ fs.writeFileSync('./postman_collection.json', JSON.stringify(collection, null, 2
 fs.writeFileSync('./studyhub_backend_server/postman_collection.json', JSON.stringify(collection, null, 2));
 fs.writeFileSync('./backend/postman_collection.json', JSON.stringify(collection, null, 2));
 
-console.log('✅ Postman Collection JSON with Pre-Populated 200 OK Example Responses Generated Successfully!');
+console.log('✅ Updated Postman Collection JSON with Referral & Invite Friends APIs Generated Successfully!');

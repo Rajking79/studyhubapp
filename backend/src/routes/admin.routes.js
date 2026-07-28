@@ -27,6 +27,7 @@ const {
   getStudents,
   toggleBlockStudent,
   deleteStudent,
+  getReferrals,
   broadcastNotice,
   getFeedback
 } = require("../controllers/admin.controller");
@@ -82,6 +83,9 @@ router.post("/notifications/broadcast", validateBroadcastNotice, broadcastNotice
 router.get("/students", getStudents);
 router.patch("/students/:studentId/block", toggleBlockStudent);
 router.delete("/students/:studentId", deleteStudent);
+
+// Referrals Analytics & Leaderboard
+router.get("/referrals", getReferrals);
 
 // Feedback & Support
 router.get("/feedback", getFeedback);

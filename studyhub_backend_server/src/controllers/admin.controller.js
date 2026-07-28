@@ -34,8 +34,6 @@ const updateAdminProfile = asyncHandler(async (req, res) => {
 
 // 5. Change Admin Password
 const changeAdminPassword = asyncHandler(async (req, res) => {
-  const AuthService = require("../services/auth.service");
-  // update password via service
   return res.status(200).json(new ApiResponse(200, { updated: true }, "Password updated successfully"));
 });
 
@@ -63,66 +61,66 @@ const editCollege = asyncHandler(async (req, res) => {
 
 const toggleFeaturedCollege = asyncHandler(async (req, res) => {
   const college = await AcademicService.toggleFeaturedCollege(req.params.collegeId);
-  return res.status(200).json(new ApiResponse(200, college, "College featured status toggled"));
+  return res.status(200).json(new ApiResponse(200, college, "College featured status updated"));
 });
 
 const deleteCollege = asyncHandler(async (req, res) => {
   const college = await AcademicService.deleteCollege(req.params.collegeId);
-  return res.status(200).json(new ApiResponse(200, college, "College soft deleted"));
+  return res.status(200).json(new ApiResponse(200, college, "College deleted successfully"));
 });
 
 // 8. Courses Management
 const getCourses = asyncHandler(async (req, res) => {
-  const courses = await AcademicService.getCourses(req.query);
-  return res.status(200).json(new ApiResponse(200, courses, "Courses list loaded"));
+  const courses = await AcademicService.getCourses(req.query.collegeId);
+  return res.status(200).json(new ApiResponse(200, courses, "Courses loaded"));
 });
 
 const addCourse = asyncHandler(async (req, res) => {
   const course = await AcademicService.createCourse(req.body);
-  return res.status(201).json(new ApiResponse(201, course, "Course added successfully"));
+  return res.status(201).json(new ApiResponse(201, course, "Course created successfully"));
 });
 
 const deleteCourse = asyncHandler(async (req, res) => {
   const course = await AcademicService.deleteCourse(req.params.courseId);
-  return res.status(200).json(new ApiResponse(200, course, "Course soft deleted"));
+  return res.status(200).json(new ApiResponse(200, course, "Course deleted successfully"));
 });
 
 // 9. Subjects Management
 const getSubjects = asyncHandler(async (req, res) => {
-  const subjects = await AcademicService.getSubjects(req.query);
-  return res.status(200).json(new ApiResponse(200, subjects, "Subjects list loaded"));
+  const subjects = await AcademicService.getSubjects(req.query.courseId, req.query.semester);
+  return res.status(200).json(new ApiResponse(200, subjects, "Subjects loaded"));
 });
 
 const addSubject = asyncHandler(async (req, res) => {
   const subject = await AcademicService.createSubject(req.body);
-  return res.status(201).json(new ApiResponse(201, subject, "Subject added successfully"));
+  return res.status(201).json(new ApiResponse(201, subject, "Subject created successfully"));
 });
 
 const deleteSubject = asyncHandler(async (req, res) => {
   const subject = await AcademicService.deleteSubject(req.params.subjectId);
-  return res.status(200).json(new ApiResponse(200, subject, "Subject soft deleted"));
+  return res.status(200).json(new ApiResponse(200, subject, "Subject deleted successfully"));
 });
 
-// 10. Materials Management
+// 10. Study Materials Upload Hub
 const getMaterials = asyncHandler(async (req, res) => {
   const materials = await MaterialService.getMaterials(req.query);
-  return res.status(200).json(new ApiResponse(200, materials, "Materials list loaded"));
+  return res.status(200).json(new ApiResponse(200, materials, "Study materials loaded"));
 });
 
 const uploadMaterial = asyncHandler(async (req, res) => {
-  const material = await MaterialService.uploadMaterial(req.body, req.user?._id);
-  return res.status(201).json(new ApiResponse(201, material, "Material uploaded successfully"));
+  const material = await MaterialService.createMaterial(req.body, req.user._id);
+  return res.status(201).json(new ApiResponse(201, material, "Study material uploaded successfully"));
 });
 
 const deleteMaterial = asyncHandler(async (req, res) => {
   const material = await MaterialService.deleteMaterial(req.params.materialId);
-  return res.status(200).json(new ApiResponse(200, material, "Material soft deleted"));
+  return res.status(200).json(new ApiResponse(200, material, "Study material deleted successfully"));
 });
 
-// 11. Banners Management
+// 11. Banners Carousel Engine
 const getBanners = asyncHandler(async (req, res) => {
   const banners = await AdminService.getBanners();
-  return res.status(200).json(new ApiResponse(200, { banners }, "Banners list loaded"));
+  return res.status(200).json(new ApiResponse(200, banners, "Banners loaded"));
 });
 
 const addBanner = asyncHandler(async (req, res) => {
@@ -132,10 +130,10 @@ const addBanner = asyncHandler(async (req, res) => {
 
 const toggleBanner = asyncHandler(async (req, res) => {
   const banner = await AdminService.toggleBanner(req.params.bannerId);
-  return res.status(200).json(new ApiResponse(200, banner, "Banner status toggled"));
+  return res.status(200).json(new ApiResponse(200, banner, "Banner toggled successfully"));
 });
 
-// 12. Students Operations
+// 12. Student User Management
 const getStudents = asyncHandler(async (req, res) => {
   const students = await AdminService.getStudents(req.query);
   return res.status(200).json(new ApiResponse(200, students, "Students list loaded"));
@@ -143,7 +141,7 @@ const getStudents = asyncHandler(async (req, res) => {
 
 const toggleBlockStudent = asyncHandler(async (req, res) => {
   const student = await AdminService.toggleBlockStudent(req.params.studentId, req.body.blockedReason);
-  return res.status(200).json(new ApiResponse(200, student, "Student block status toggled"));
+  return res.status(200).json(new ApiResponse(200, student, "Student status updated"));
 });
 
 const deleteStudent = asyncHandler(async (req, res) => {
@@ -151,13 +149,19 @@ const deleteStudent = asyncHandler(async (req, res) => {
   return res.status(200).json(new ApiResponse(200, student, "Student account soft deleted"));
 });
 
-// 13. Notifications Broadcast
+// 13. Referrals Leaderboard & Invites Analytics
+const getReferrals = asyncHandler(async (req, res) => {
+  const referrals = await AdminService.getReferrals();
+  return res.status(200).json(new ApiResponse(200, referrals, "Referral leaderboard and analytics loaded"));
+});
+
+// 14. Notifications Broadcast
 const broadcastNotice = asyncHandler(async (req, res) => {
   const notice = await AdminService.broadcastNotice(req.body);
   return res.status(201).json(new ApiResponse(201, notice, "Notification broadcasted successfully"));
 });
 
-// 14. Feedback Manager
+// 15. Feedback Manager
 const getFeedback = asyncHandler(async (req, res) => {
   const feedback = await AdminService.getFeedback(req.query);
   return res.status(200).json(new ApiResponse(200, feedback, "Feedback list loaded"));
@@ -190,6 +194,7 @@ module.exports = {
   getStudents,
   toggleBlockStudent,
   deleteStudent,
+  getReferrals,
   broadcastNotice,
   getFeedback
 };

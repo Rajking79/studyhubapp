@@ -77,6 +77,22 @@ class AdminService {
     return student;
   }
 
+  // Referral Leaderboard & Invites Analytics
+  static async getReferrals() {
+    const students = await UserRepository.getAllStudents({ limit: 100 });
+    const topReferrers = (students.items || []).map(s => ({
+      studentId: s._id,
+      name: s.name,
+      email: s.email,
+      referralCode: s.referralCode || `STUDYHUB-${s.name ? s.name.replace(/\s+/g, '').toUpperCase().substring(0, 4) : 'USER'}123`,
+      invitedFriendsCount: s.invitedFriendsCount || 0,
+      rewardPoints: s.rewardPoints || 100
+    })).sort((a, b) => b.invitedFriendsCount - a.invitedFriendsCount);
+
+    const totalAppInvites = topReferrers.reduce((acc, curr) => acc + curr.invitedFriendsCount, 0);
+    return { totalAppInvites, topReferrers };
+  }
+
   // Notifications Broadcast
   static async broadcastNotice({ title, description, category, colorHex, targetCollege }) {
     return await NotificationRepository.createNotice({
