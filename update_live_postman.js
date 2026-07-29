@@ -251,26 +251,21 @@ const collection = {
   ],
   item: [
     {
-      name: "1. Auth (18 APIs)",
+      name: "1. Auth (13 APIs)",
       item: [
-        req("1. DEV LOGIN (Fast 1-Click Token Generator)", "POST", "auth/dev-login", { phone: "+919876543210", email: "rahul@studyhub.com" }),
-        req("2. Register Student", "POST", "auth/register", { name: "Rahul Sharma", email: "rahul@studyhub.com", password: "Password@123", confirmPassword: "Password@123", phone: "9876543210", college: "Delhi Technological University (DTU)", course: "B.Tech CS", semester: "Semester 4" }),
-        req("3. Login Student (Email + Password)", "POST", "auth/login", { email: "rahul@studyhub.com", password: "Password@123" }),
-        req("4. Google Login (Auto-registers missing account)", "POST", "auth/google-login", { idToken: "sample_google_id_token_2026", email: "rahul.google@studyhub.com", name: "Rahul Google Student" }),
+        req("1. Quick Dev Bypass Login (Auto Token)", "POST", "auth/dev-login", { email: "rahul@studyhub.com" }),
+        req("2. Register New Student Account", "POST", "auth/register", { name: "Rahul Sharma", email: "rahul@studyhub.com", password: "Password@123", phone: "9876543210", college: "Delhi Technological University (DTU)", course: "B.Tech Computer Science", semester: "Semester 4" }),
+        req("3. Login Student Account", "POST", "auth/login", { email: "rahul@studyhub.com", password: "Password@123" }),
+        req("4. Google One-Tap OAuth Login", "POST", "auth/google-login", { googleIdToken: "sample_google_id_token_xyz" }),
         req("5. Guest Mode Login (Restricted permissions)", "POST", "auth/guest-login", { deviceId: "android_device_12345" }),
-        req("6. Refresh Access Token", "POST", "auth/refresh-token", { refreshToken: "sample_refresh_token" }),
-        req("7. Get Current User Profile", "GET", "auth/me"),
-        req("8. Change Password", "POST", "auth/change-password", { oldPassword: "Password@123", newPassword: "NewPassword@456" }),
-        req("9. Verify Email Token", "POST", "auth/verify-email", { token: "sample_verification_token" }),
-        req("10. Resend Email Verification", "POST", "auth/resend-email-verification", { email: "rahul@studyhub.com" }),
-        req("11. Get Login History Audit Logs", "GET", "auth/login-history"),
-        req("12. Logout User Session", "POST", "auth/logout"),
-        req("13. Logout All Devices", "POST", "auth/logout-all-devices"),
-        req("14. Delete Account", "DELETE", "auth/delete-account", { password: "Password@123" }),
-        req("15. Forgot Password (OTP Generator)", "POST", "auth/forgot-password", { email: "rahul@studyhub.com" }),
-        req("16. Resend Dynamic OTP", "POST", "auth/resend-otp", { email: "rahul@studyhub.com" }),
-        req("17. Verify Dynamic OTP", "POST", "auth/verify-otp", { email: "rahul@studyhub.com", otp: "685538" }),
-        req("18. Reset Password (OTP & New Password)", "POST", "auth/reset-password", { email: "rahul@studyhub.com", otp: "685538", newPassword: "NewPassword@123", confirmPassword: "NewPassword@123" })
+        req("6. Step 1: Forgot Password (Send 6-Digit OTP)", "POST", "auth/forgot-password", { email: "rahul@studyhub.com" }),
+        req("7. Step 2: Reset Password (OTP & New Password)", "POST", "auth/reset-password", { email: "rahul@studyhub.com", otp: "685538", newPassword: "NewPassword@123", confirmPassword: "NewPassword@123" }),
+        req("8. Change Password (When Logged In)", "POST", "auth/change-password", { oldPassword: "Password@123", newPassword: "NewPassword@456" }),
+        req("9. Get Current User Profile", "GET", "auth/me"),
+        req("10. Refresh Access Token", "POST", "auth/refresh-token", { refreshToken: "sample_refresh_token" }),
+        req("11. Logout User Session", "POST", "auth/logout"),
+        req("12. Logout All Devices", "POST", "auth/logout-all-devices"),
+        req("13. Delete Account", "DELETE", "auth/delete-account", { password: "Password@123" })
       ]
     },
     {
