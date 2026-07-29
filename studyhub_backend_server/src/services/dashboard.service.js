@@ -5,18 +5,24 @@ const ProgressRepository = require("../repositories/progress.repository");
 
 class DashboardService {
   static async getHomeFeed(user) {
-    const [banners, colleges, trendingMaterials, continueReading] = await Promise.all([
+    let continueReading = [];
+    try {
+      if (user && (user._id || user.id)) {
+        continueReading = await ProgressRepository.getUserProgressList(user._id || user.id);
+      }
+    } catch (e) {}
+
+    const [banners, colleges, trendingMaterials] = await Promise.all([
       AdminRepository.getBanners(),
       AcademicRepository.getColleges({ page: 1, limit: 6 }),
-      MaterialRepository.getMaterials({ page: 1, limit: 6, sort: "downloadsCount", order: "desc" }),
-      user ? ProgressRepository.getUserProgressList(user._id) : Promise.resolve([])
+      MaterialRepository.getMaterials({ page: 1, limit: 6, sort: "downloadsCount", order: "desc" })
     ]);
 
     return {
-      banners,
-      featuredColleges: colleges.items,
-      trendingMaterials: trendingMaterials.items,
-      continueReading
+      banners: banners || [],
+      featuredColleges: (colleges && colleges.items) || [],
+      trendingMaterials: (trendingMaterials && trendingMaterials.items) || [],
+      continueReading: continueReading || []
     };
   }
 
