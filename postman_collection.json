@@ -24,7 +24,7 @@
   ],
   "item": [
     {
-      "name": "1. Auth (13 APIs)",
+      "name": "1. Auth (12 APIs)",
       "item": [
         {
           "name": "1. Quick Dev Bypass Login (Auto Token)",
@@ -595,7 +595,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"6. Step 1: Forgot Password (Send 6-Digit OTP) executed successfully.\",\n  \"data\": {\n    \"message\": \"6. Step 1: Forgot Password (Send 6-Digit OTP) executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:24:27.498Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"6. Step 1: Forgot Password (Send 6-Digit OTP) executed successfully.\",\n  \"data\": {\n    \"message\": \"6. Step 1: Forgot Password (Send 6-Digit OTP) executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:52:44.982Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
@@ -678,95 +678,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"7. Step 2: Reset Password (OTP & New Password) executed successfully.\",\n  \"data\": {\n    \"message\": \"7. Step 2: Reset Password (OTP & New Password) executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:24:27.516Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"7. Step 2: Reset Password (OTP & New Password) executed successfully.\",\n  \"data\": {\n    \"message\": \"7. Step 2: Reset Password (OTP & New Password) executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:52:44.992Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "8. Change Password (When Logged In)",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{TOKEN}}"
-              }
-            ],
-            "url": {
-              "raw": "{{BASE_URL}}/auth/change-password",
-              "host": [
-                "{{BASE_URL}}"
-              ],
-              "path": [
-                "auth",
-                "change-password"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"oldPassword\": \"Password@123\",\n  \"newPassword\": \"NewPassword@456\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "name": "200 OK - Successful Response",
-              "originalRequest": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  },
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{TOKEN}}"
-                  }
-                ],
-                "url": {
-                  "raw": "{{BASE_URL}}/auth/change-password",
-                  "host": [
-                    "{{BASE_URL}}"
-                  ],
-                  "path": [
-                    "auth",
-                    "change-password"
-                  ]
-                },
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"oldPassword\": \"Password@123\",\n  \"newPassword\": \"NewPassword@456\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json; charset=utf-8"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"8. Change Password (When Logged In) executed successfully.\",\n  \"data\": {\n    \"message\": \"8. Change Password (When Logged In) executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:24:27.516Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
-            }
-          ]
-        },
-        {
-          "name": "9. Get Current User Profile",
+          "name": "8. Get Current User Profile",
           "request": {
             "method": "GET",
             "header": [
@@ -818,12 +735,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"9. Get Current User Profile executed successfully.\",\n  \"data\": {\n    \"message\": \"9. Get Current User Profile executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:24:27.517Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"8. Get Current User Profile executed successfully.\",\n  \"data\": {\n    \"message\": \"8. Get Current User Profile executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:52:44.992Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "10. Refresh Access Token",
+          "name": "9. Refresh Access Token",
           "request": {
             "method": "POST",
             "header": [
@@ -916,12 +833,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"10. Refresh Access Token executed successfully.\",\n  \"data\": {\n    \"message\": \"10. Refresh Access Token executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:24:27.517Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"9. Refresh Access Token executed successfully.\",\n  \"data\": {\n    \"message\": \"9. Refresh Access Token executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:52:44.993Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "11. Logout User Session",
+          "name": "10. Logout User Session",
           "request": {
             "method": "POST",
             "header": [
@@ -981,12 +898,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"11. Logout User Session executed successfully.\",\n  \"data\": {\n    \"message\": \"11. Logout User Session executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:24:27.517Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"10. Logout User Session executed successfully.\",\n  \"data\": {\n    \"message\": \"10. Logout User Session executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:52:44.993Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "12. Logout All Devices",
+          "name": "11. Logout All Devices",
           "request": {
             "method": "POST",
             "header": [
@@ -1046,12 +963,12 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"12. Logout All Devices executed successfully.\",\n  \"data\": {\n    \"message\": \"12. Logout All Devices executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:24:27.517Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"11. Logout All Devices executed successfully.\",\n  \"data\": {\n    \"message\": \"11. Logout All Devices executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:52:44.993Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
         {
-          "name": "13. Delete Account",
+          "name": "12. Delete Account",
           "request": {
             "method": "DELETE",
             "header": [
@@ -1111,7 +1028,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"13. Delete Account executed successfully.\",\n  \"data\": {\n    \"message\": \"13. Delete Account executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:24:27.517Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"12. Delete Account executed successfully.\",\n  \"data\": {\n    \"message\": \"12. Delete Account executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:52:44.993Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         }
@@ -2775,7 +2692,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"42. Get AI Chat History executed successfully.\",\n  \"data\": {\n    \"message\": \"42. Get AI Chat History executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:24:27.520Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"42. Get AI Chat History executed successfully.\",\n  \"data\": {\n    \"message\": \"42. Get AI Chat History executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:52:44.995Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
@@ -2834,7 +2751,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"43. Clear AI Chat History executed successfully.\",\n  \"data\": {\n    \"message\": \"43. Clear AI Chat History executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:24:27.520Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"43. Clear AI Chat History executed successfully.\",\n  \"data\": {\n    \"message\": \"43. Clear AI Chat History executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:52:44.995Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         }
@@ -3789,7 +3706,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"56. Get User App Settings executed successfully.\",\n  \"data\": {\n    \"message\": \"56. Get User App Settings executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:24:27.522Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"56. Get User App Settings executed successfully.\",\n  \"data\": {\n    \"message\": \"56. Get User App Settings executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:52:44.998Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
@@ -3872,7 +3789,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"57. Update Preferred Language (en/hi) executed successfully.\",\n  \"data\": {\n    \"message\": \"57. Update Preferred Language (en/hi) executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:24:27.522Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"57. Update Preferred Language (en/hi) executed successfully.\",\n  \"data\": {\n    \"message\": \"57. Update Preferred Language (en/hi) executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:52:44.998Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
@@ -3955,7 +3872,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"58. Toggle Material Favorite Status executed successfully.\",\n  \"data\": {\n    \"message\": \"58. Toggle Material Favorite Status executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:24:27.522Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"58. Toggle Material Favorite Status executed successfully.\",\n  \"data\": {\n    \"message\": \"58. Toggle Material Favorite Status executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:52:44.998Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
@@ -4010,7 +3927,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"59. Get Saved Favorite Materials executed successfully.\",\n  \"data\": {\n    \"message\": \"59. Get Saved Favorite Materials executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:24:27.522Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"59. Get Saved Favorite Materials executed successfully.\",\n  \"data\": {\n    \"message\": \"59. Get Saved Favorite Materials executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:52:44.998Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
@@ -4093,7 +4010,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"60. Sync Offline Download Record executed successfully.\",\n  \"data\": {\n    \"message\": \"60. Sync Offline Download Record executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:24:27.522Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"60. Sync Offline Download Record executed successfully.\",\n  \"data\": {\n    \"message\": \"60. Sync Offline Download Record executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:52:44.998Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
@@ -4148,7 +4065,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"61. Get Downloaded Materials History executed successfully.\",\n  \"data\": {\n    \"message\": \"61. Get Downloaded Materials History executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:24:27.522Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"61. Get Downloaded Materials History executed successfully.\",\n  \"data\": {\n    \"message\": \"61. Get Downloaded Materials History executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:52:44.998Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         }
@@ -4463,7 +4380,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"64. Get Activity Logs executed successfully.\",\n  \"data\": {\n    \"message\": \"64. Get Activity Logs executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:24:27.523Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"64. Get Activity Logs executed successfully.\",\n  \"data\": {\n    \"message\": \"64. Get Activity Logs executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:52:44.998Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
@@ -4520,7 +4437,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"65. Get System Health Report executed successfully.\",\n  \"data\": {\n    \"message\": \"65. Get System Health Report executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:24:27.523Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"65. Get System Health Report executed successfully.\",\n  \"data\": {\n    \"message\": \"65. Get System Health Report executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:52:44.998Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
@@ -5513,7 +5430,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"78. List All Students executed successfully.\",\n  \"data\": {\n    \"message\": \"78. List All Students executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:24:27.523Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"78. List All Students executed successfully.\",\n  \"data\": {\n    \"message\": \"78. List All Students executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:52:44.998Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
@@ -5600,7 +5517,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"79. Block / Unblock Student Account executed successfully.\",\n  \"data\": {\n    \"message\": \"79. Block / Unblock Student Account executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:24:27.523Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"79. Block / Unblock Student Account executed successfully.\",\n  \"data\": {\n    \"message\": \"79. Block / Unblock Student Account executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:52:44.998Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
@@ -5659,7 +5576,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"80. Delete Student Account executed successfully.\",\n  \"data\": {\n    \"message\": \"80. Delete Student Account executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:24:27.523Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"80. Delete Student Account executed successfully.\",\n  \"data\": {\n    \"message\": \"80. Delete Student Account executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:52:44.998Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
@@ -5744,7 +5661,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"81. Send Mobile Push Notification executed successfully.\",\n  \"data\": {\n    \"message\": \"81. Send Mobile Push Notification executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:24:27.523Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"81. Send Mobile Push Notification executed successfully.\",\n  \"data\": {\n    \"message\": \"81. Send Mobile Push Notification executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:52:44.998Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
@@ -5827,7 +5744,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"82. Create Promotional Banner executed successfully.\",\n  \"data\": {\n    \"message\": \"82. Create Promotional Banner executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:24:27.523Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"82. Create Promotional Banner executed successfully.\",\n  \"data\": {\n    \"message\": \"82. Create Promotional Banner executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:52:44.999Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
@@ -5912,7 +5829,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"83. Update Banner Status executed successfully.\",\n  \"data\": {\n    \"message\": \"83. Update Banner Status executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:24:27.523Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"83. Update Banner Status executed successfully.\",\n  \"data\": {\n    \"message\": \"83. Update Banner Status executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:52:44.999Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
@@ -5971,7 +5888,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"84. Delete Banner executed successfully.\",\n  \"data\": {\n    \"message\": \"84. Delete Banner executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:24:27.523Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"84. Delete Banner executed successfully.\",\n  \"data\": {\n    \"message\": \"84. Delete Banner executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:52:44.999Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         },
@@ -6085,7 +6002,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"86. Get Student Feedbacks & Support Tickets executed successfully.\",\n  \"data\": {\n    \"message\": \"86. Get Student Feedbacks & Support Tickets executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:24:27.524Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"86. Get Student Feedbacks & Support Tickets executed successfully.\",\n  \"data\": {\n    \"message\": \"86. Get Student Feedbacks & Support Tickets executed successfully.\",\n    \"timestamp\": \"2026-07-29T06:52:44.999Z\"\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1\n  },\n  \"errors\": []\n}"
             }
           ]
         }

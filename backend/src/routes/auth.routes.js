@@ -58,7 +58,6 @@ router.post("/resend-email-verification", authRateLimiter, resendEmailVerificati
 // PROTECTED AUTH APIs (Requires Student JWT)
 // ==========================================
 router.get("/me", verifyJWT, getCurrentUser);
-router.post("/change-password", verifyJWT, validateChangePassword, changePassword);
 router.get("/login-history", verifyJWT, getLoginHistory);
 router.post("/logout", verifyJWT, logoutUser);
 router.post("/logout-all-devices", verifyJWT, logoutAllDevices);

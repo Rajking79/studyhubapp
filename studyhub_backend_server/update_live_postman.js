@@ -251,7 +251,7 @@ const collection = {
   ],
   item: [
     {
-      name: "1. Auth (13 APIs)",
+      name: "1. Auth (12 APIs)",
       item: [
         req("1. Quick Dev Bypass Login (Auto Token)", "POST", "auth/dev-login", { email: "rahul@studyhub.com" }),
         req("2. Register New Student Account", "POST", "auth/register", { name: "Rahul Sharma", email: "rahul@studyhub.com", password: "Password@123", phone: "9876543210", college: "Delhi Technological University (DTU)", course: "B.Tech Computer Science", semester: "Semester 4" }),
@@ -260,12 +260,11 @@ const collection = {
         req("5. Guest Mode Login (Restricted permissions)", "POST", "auth/guest-login", { deviceId: "android_device_12345" }),
         req("6. Step 1: Forgot Password (Send 6-Digit OTP)", "POST", "auth/forgot-password", { email: "rahul@studyhub.com" }),
         req("7. Step 2: Reset Password (OTP & New Password)", "POST", "auth/reset-password", { email: "rahul@studyhub.com", otp: "685538", newPassword: "NewPassword@123", confirmPassword: "NewPassword@123" }),
-        req("8. Change Password (When Logged In)", "POST", "auth/change-password", { oldPassword: "Password@123", newPassword: "NewPassword@456" }),
-        req("9. Get Current User Profile", "GET", "auth/me"),
-        req("10. Refresh Access Token", "POST", "auth/refresh-token", { refreshToken: "sample_refresh_token" }),
-        req("11. Logout User Session", "POST", "auth/logout"),
-        req("12. Logout All Devices", "POST", "auth/logout-all-devices"),
-        req("13. Delete Account", "DELETE", "auth/delete-account", { password: "Password@123" })
+        req("8. Get Current User Profile", "GET", "auth/me"),
+        req("9. Refresh Access Token", "POST", "auth/refresh-token", { refreshToken: "sample_refresh_token" }),
+        req("10. Logout User Session", "POST", "auth/logout"),
+        req("11. Logout All Devices", "POST", "auth/logout-all-devices"),
+        req("12. Delete Account", "DELETE", "auth/delete-account", { password: "Password@123" })
       ]
     },
     {
