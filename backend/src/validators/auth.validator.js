@@ -127,13 +127,25 @@ const validateVerifyOtp = [
   validate
 ];
 
-// 9. Reset Password Validation
+// 9. Reset Password Validation (2-step Flow: email + otp + newPassword + confirmPassword)
 const validateResetPassword = [
+  body("email")
+    .optional()
+    .trim()
+    .isEmail()
+    .withMessage("Please enter a valid email address")
+    .normalizeEmail(),
+  body("otp")
+    .optional()
+    .trim(),
   body("newPassword")
     .notEmpty()
     .withMessage("New password is required")
     .isLength({ min: 6 })
     .withMessage("Password must be at least 6 characters long"),
+  body("confirmPassword")
+    .optional()
+    .trim(),
   validate
 ];
 

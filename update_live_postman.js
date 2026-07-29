@@ -270,7 +270,7 @@ const collection = {
         req("15. Forgot Password (OTP Generator)", "POST", "auth/forgot-password", { email: "rahul@studyhub.com" }),
         req("16. Resend Dynamic OTP", "POST", "auth/resend-otp", { email: "rahul@studyhub.com" }),
         req("17. Verify Dynamic OTP", "POST", "auth/verify-otp", { email: "rahul@studyhub.com", otp: "685538" }),
-        req("18. Reset Password with Token", "POST", "auth/reset-password", { resetToken: "sample_reset_token", newPassword: "NewPassword@123" })
+        req("18. Reset Password (OTP & New Password)", "POST", "auth/reset-password", { email: "rahul@studyhub.com", otp: "685538", newPassword: "NewPassword@123", confirmPassword: "NewPassword@123" })
       ]
     },
     {
