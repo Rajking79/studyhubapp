@@ -5,7 +5,7 @@ const loginHistorySchema = new mongoose.Schema({
   ip: { type: String, default: "127.0.0.1" },
   userAgent: { type: String, default: "Unknown Device" },
   deviceId: { type: String, default: "" },
-  loginMethod: { type: String, enum: ["password", "google", "guest"], default: "password" },
+  loginMethod: { type: String, enum: ["password", "email", "google", "guest", "dev", "otp"], default: "password" },
   timestamp: { type: Date, default: Date.now }
 });
 
@@ -41,7 +41,7 @@ const userSchema = new mongoose.Schema(
     },
     isGuest: { type: Boolean, default: false },
     guestDeviceId: { type: String, default: "" },
-    loginMethod: { type: String, enum: ["password", "google", "guest"], default: "password" },
+    loginMethod: { type: String, enum: ["password", "email", "google", "guest", "dev", "otp"], default: "password" },
     googleId: { type: String, default: "" },
 
     // Verification & Security
