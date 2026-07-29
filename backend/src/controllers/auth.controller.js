@@ -101,12 +101,14 @@ const verifyOtp = asyncHandler(async (req, res) => {
   return res.status(200).json(new ApiResponse(200, result, "Dynamic OTP verified successfully"));
 });
 
-// 8. Reset Password
+// 8. Reset Password (2-Step OTP Reset)
 const resetPassword = asyncHandler(async (req, res) => {
   const result = await AuthService.resetPassword({
     resetToken: req.body.resetToken,
     email: req.body.email,
-    newPassword: req.body.newPassword
+    otp: req.body.otp,
+    newPassword: req.body.newPassword,
+    confirmPassword: req.body.confirmPassword
   });
   return res.status(200).json(new ApiResponse(200, result, "Password reset successfully"));
 });
