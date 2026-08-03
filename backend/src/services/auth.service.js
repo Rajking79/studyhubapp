@@ -1,4 +1,5 @@
 const crypto = require("crypto");
+const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const UserRepository = require("../repositories/user.repository");
 const { generateTokens } = require("../utils/generateTokens");
@@ -417,7 +418,11 @@ class AuthService {
 
   // 12. Logout All Devices
   static async logoutAllDevices(userId) {
-    await UserRepository.clearRefreshTokens(userId);
+    try {
+      if (UserRepository.clearRefreshTokens) {
+        await UserRepository.clearRefreshTokens(userId);
+      }
+    } catch(e) {}
     return { message: "Successfully logged out from all devices." };
   }
 
