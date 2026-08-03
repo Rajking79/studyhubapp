@@ -2,11 +2,52 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/utils/app_responsive.dart';
+import '../../core/services/api_service.dart';
 import '../../widgets/cards/semester_card.dart';
 
-class SemesterSelectionScreen extends StatelessWidget {
+class SemesterSelectionScreen extends StatefulWidget {
   final int year;
-  const SemesterSelectionScreen({super.key, this.year = 2});
+  final String courseId;
+  const SemesterSelectionScreen({super.key, this.year = 2, this.courseId = 'btech_cs'});
+
+  @override
+  State<SemesterSelectionScreen> createState() => _SemesterSelectionScreenState();
+}
+
+class _SemesterSelectionScreenState extends State<SemesterSelectionScreen> {
+  final ApiService _apiService = ApiService();
+  bool _isLoading = true;
+  List<Map<String, dynamic>> _semesters = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchSemesters();
+  }
+
+  Future<void> _fetchSemesters() async {
+    setState(() => _isLoading = true);
+    try {
+      final res = await _apiService.getSemesters(courseId: widget.courseId, year: widget.year);
+      if (res is List && res.isNotEmpty) {
+        _semesters = res.map((e) => Map<String, dynamic>.from(e)).toList();
+      } else {
+        final startSem = (widget.year - 1) * 2 + 1;
+        _semesters = [
+          {'semesterNumber': startSem, 'label': 'Semester $startSem'},
+          {'semesterNumber': startSem + 1, 'label': 'Semester ${startSem + 1}'},
+        ];
+      }
+    } catch (_) {
+      final startSem = (widget.year - 1) * 2 + 1;
+      _semesters = [
+        {'semesterNumber': startSem, 'label': 'Semester $startSem'},
+        {'semesterNumber': startSem + 1, 'label': 'Semester ${startSem + 1}'},
+      ];
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +69,7 @@ class SemesterSelectionScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Choose your semester for Year $year',
+                'Choose your semester for Year ${widget.year}',
                 style: TextStyle(
                   fontSize: AppResponsive.bodyFontSize,
                   color: isDark
@@ -38,22 +79,26 @@ class SemesterSelectionScreen extends StatelessWidget {
               ),
               SizedBox(height: AppResponsive.h(2.5)),
               Expanded(
-                child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: AppResponsive.semesterGridColumns,
-                    crossAxisSpacing: AppResponsive.w(3.5),
-                    mainAxisSpacing: AppResponsive.w(3.5),
-                    childAspectRatio: AppResponsive.isTablet ? 1.35 : 1.25,
-                  ),
-                  itemCount: 8,
-                  itemBuilder: (context, index) {
-                    final semNumber = index + 1;
-                    return SemesterCard(
-                      title: 'Semester $semNumber',
-                      onTap: () => context.push('/subjects?sem=$semNumber'),
-                    );
-                  },
-                ),
+                child: _isLoading
+                    ? const Center(child: CircularProgressIndicator())
+                    : GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: AppResponsive.semesterGridColumns,
+                          crossAxisSpacing: AppResponsive.w(3.5),
+                          mainAxisSpacing: AppResponsive.w(3.5),
+                          childAspectRatio: AppResponsive.isTablet ? 1.35 : 1.25,
+                        ),
+                        itemCount: _semesters.length,
+                        itemBuilder: (context, index) {
+                          final sem = _semesters[index];
+                          final num = sem['semesterNumber'] ?? (index + 1);
+                          final label = sem['label'] ?? 'Semester $num';
+                          return SemesterCard(
+                            title: label.toString(),
+                            onTap: () => context.push('/subjects?sem=$num&courseId=${widget.courseId}'),
+                          );
+                        },
+                      ),
               ),
             ],
           ),
@@ -62,3 +107,4 @@ class SemesterSelectionScreen extends StatelessWidget {
     );
   }
 }
+

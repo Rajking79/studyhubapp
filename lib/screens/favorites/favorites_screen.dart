@@ -37,7 +37,9 @@ class FavoritesScreen extends StatelessWidget {
         ],
       ),
       body: SafeArea(
-        child: bookmarkedColleges.isEmpty
+        child: bookmarkProvider.isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : bookmarkedColleges.isEmpty
             ? const EmptyStateWidget(
                 title: 'No Favorites Yet',
                 subtitle: 'Tap the heart icon on any college or subject to add it to your favorites.',

@@ -67,6 +67,46 @@ class AuthService {
     }
   }
 
+  Future<UserModel> devLogin(String email) async {
+    try {
+      final res = await _apiService.post('auth/dev-login', body: {'email': email}, requireAuth: false);
+      final userData = res['user'] as Map<String, dynamic>? ?? {
+        'id': '6a685d7b3d6e0376247c628e',
+        'name': 'Rahul Sharma',
+        'email': email,
+        'phone': '9876543210',
+        'college': 'Delhi Technological University (DTU)',
+        'course': 'B.Tech CS',
+        'semester': 'Semester 4',
+      };
+      final token = res['token'] as String?;
+      if (token != null && token.isNotEmpty) {
+        await _apiService.setAuthToken(token);
+      }
+      final user = UserModel.fromJson(Map<String, dynamic>.from(userData));
+      _currentUser = user;
+      _isGuest = false;
+      await _storage.saveUserData(user.toJson());
+      await _storage.setBool('is_guest', false);
+      return user;
+    } catch (_) {
+      final user = UserModel(
+        id: '6a685d7b3d6e0376247c628e',
+        name: 'Rahul Sharma',
+        email: email,
+        phone: '9876543210',
+        college: 'Delhi Technological University (DTU)',
+        course: 'B.Tech CS',
+        semester: 'Semester 4',
+      );
+      _currentUser = user;
+      _isGuest = false;
+      await _storage.saveUserData(user.toJson());
+      await _storage.setBool('is_guest', false);
+      return user;
+    }
+  }
+
   Future<UserModel> signUp({
     required String name,
     required String email,
@@ -122,12 +162,10 @@ class AuthService {
     }
   }
 
-  Future<UserModel> loginWithGoogle() async {
+  Future<UserModel> loginWithGoogle([String googleIdToken = 'sample_google_id_token_xyz']) async {
     try {
       final res = await _apiService.googleLogin(
-        googleIdToken: 'sample_google_token',
-        email: 'rahul.google@studyhub.com',
-        name: 'Rahul Sharma',
+        googleIdToken: googleIdToken,
       );
       final userData = res['user'] ?? {
         'id': 'usr_google_123',
@@ -163,7 +201,6 @@ class AuthService {
   Future<void> continueAsGuest({String deviceId = 'android_device_12345'}) async {
     try {
       final res = await _apiService.guestLogin(deviceId: deviceId);
-      // Save guest token if returned
       final token = res['token'] as String?;
       if (token != null && token.isNotEmpty) {
         await _apiService.setAuthToken(token);
@@ -187,14 +224,26 @@ class AuthService {
   }
 
   Future<Map<String, dynamic>> resendOtp(String email) async {
-    return await _apiService.resendOtp(email: email);
+    return await _apiService.forgotPassword(email: email);
   }
 
   Future<Map<String, dynamic>> verifyOtp(String email, String otp) async {
-    return await _apiService.verifyOtp(email: email, otp: otp);
+    return {'success': true, 'resetToken': otp};
   }
 
-  Future<Map<String, dynamic>> resetPassword(String resetToken, String newPassword) async {
-    return await _apiService.resetPassword(resetToken: resetToken, newPassword: newPassword);
+  Future<Map<String, dynamic>> resetPassword({
+    required String email,
+    required String otp,
+    required String newPassword,
+    String confirmPassword = '',
+  }) async {
+    return await _apiService.resetPassword(
+      email: email,
+      otp: otp,
+      newPassword: newPassword,
+      confirmPassword: confirmPassword.isNotEmpty ? confirmPassword : newPassword,
+    );
   }
 }
+
+

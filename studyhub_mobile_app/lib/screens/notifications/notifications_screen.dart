@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/utils/app_responsive.dart';
+import '../../core/services/student_support_service.dart';
 import '../../widgets/common/status_chip.dart';
 
 class NotificationsScreen extends StatefulWidget {
@@ -11,10 +12,47 @@ class NotificationsScreen extends StatefulWidget {
 }
 
 class _NotificationsScreenState extends State<NotificationsScreen> {
+  final StudentSupportService _supportService = StudentSupportService();
+  bool _isLoading = true;
   String _selectedFilter = 'All';
   final List<String> _filters = ['All', 'Notices', 'Exams', 'New Uploads'];
 
-  final List<Map<String, dynamic>> _notifications = [
+  List<Map<String, dynamic>> _notifications = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchNotifications();
+  }
+
+  Future<void> _fetchNotifications() async {
+    setState(() => _isLoading = true);
+    try {
+      final res = await _supportService.getNotifications(category: _selectedFilter);
+      if (res is List && res.isNotEmpty) {
+        _notifications = res.map((e) {
+          final m = Map<String, dynamic>.from(e);
+          return {
+            'title': m['title']?.toString() ?? 'Notification',
+            'category': m['category']?.toString() ?? 'Notices',
+            'time': m['time']?.toString() ?? 'Just now',
+            'description': m['description']?.toString() ?? '',
+            'isUnread': m['isUnread'] ?? false,
+            'icon': Icons.notifications_active_rounded,
+            'color': const Color(0xFF2563EB),
+          };
+        }).toList();
+      } else {
+        _notifications = _defaultNotifications;
+      }
+    } catch (_) {
+      _notifications = _defaultNotifications;
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
+  }
+
+  static const List<Map<String, dynamic>> _defaultNotifications = [
     {
       'title': 'End-Sem Examination Datesheet Released',
       'category': 'Exams',
@@ -113,8 +151,10 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 
             // Notifications List
             Expanded(
-              child: filteredList.isEmpty
-                  ? Center(
+              child: _isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : filteredList.isEmpty
+                      ? Center(
                       child: Text(
                         'No notifications in this category',
                         style: TextStyle(

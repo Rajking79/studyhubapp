@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const College = require("../models/College.model");
 const Course = require("../models/Course.model");
 const Subject = require("../models/Subject.model");
@@ -7,23 +8,25 @@ const Semester = require("../models/Semester.model");
 class AcademicRepository {
   // Colleges
   static async getColleges({ search = "", category = "", page = 1, limit = 20, sort = "createdAt", order = "desc" }) {
-    try {
-      const query = { isDeleted: { $ne: true } };
-      if (search) query.name = { $regex: search, $options: "i" };
-      if (category && category !== "All") query.category = category;
+    if (mongoose.connection.readyState === 1) {
+      try {
+        const query = { isDeleted: { $ne: true } };
+        if (search) query.name = { $regex: search, $options: "i" };
+        if (category && category !== "All") query.category = category;
 
-      const skip = (page - 1) * limit;
-      const sortOrder = order === "asc" ? 1 : -1;
+        const skip = (page - 1) * limit;
+        const sortOrder = order === "asc" ? 1 : -1;
 
-      const [items, total] = await Promise.all([
-        College.find(query).sort({ [sort]: sortOrder }).skip(skip).limit(Number(limit)).lean(),
-        College.countDocuments(query)
-      ]);
+        const [items, total] = await Promise.all([
+          College.find(query).sort({ [sort]: sortOrder }).skip(skip).limit(Number(limit)).lean(),
+          College.countDocuments(query)
+        ]);
 
-      if (items && items.length > 0) {
-        return { items, total, page: Number(page), limit: Number(limit), totalPages: Math.ceil(total / limit) || 1 };
-      }
-    } catch (e) {}
+        if (items && items.length > 0) {
+          return { items, total, page: Number(page), limit: Number(limit), totalPages: Math.ceil(total / limit) || 1 };
+        }
+      } catch (e) {}
+    }
 
     const dataStore = require("../services/dataStore");
     let fallback = dataStore.colleges || [];
@@ -32,10 +35,12 @@ class AcademicRepository {
   }
 
   static async getCollegeById(collegeId) {
-    try {
-      const college = await College.findOne({ _id: collegeId, isDeleted: { $ne: true } }).lean();
-      if (college) return college;
-    } catch (e) {}
+    if (mongoose.connection.readyState === 1) {
+      try {
+        const college = await College.findOne({ _id: collegeId, isDeleted: { $ne: true } }).lean();
+        if (college) return college;
+      } catch (e) {}
+    }
 
     const dataStore = require("../services/dataStore");
     const found = (dataStore.colleges || []).find(c => c.id === collegeId || c._id === collegeId);
@@ -64,23 +69,25 @@ class AcademicRepository {
 
   // Courses
   static async getCourses({ collegeId = "", search = "", page = 1, limit = 20, sort = "createdAt", order = "desc" }) {
-    try {
-      const query = { isDeleted: { $ne: true } };
-      if (collegeId) query.collegeId = collegeId;
-      if (search) query.name = { $regex: search, $options: "i" };
+    if (mongoose.connection.readyState === 1) {
+      try {
+        const query = { isDeleted: { $ne: true } };
+        if (collegeId) query.collegeId = collegeId;
+        if (search) query.name = { $regex: search, $options: "i" };
 
-      const skip = (page - 1) * limit;
-      const sortOrder = order === "asc" ? 1 : -1;
+        const skip = (page - 1) * limit;
+        const sortOrder = order === "asc" ? 1 : -1;
 
-      const [items, total] = await Promise.all([
-        Course.find(query).sort({ [sort]: sortOrder }).skip(skip).limit(Number(limit)).lean(),
-        Course.countDocuments(query)
-      ]);
+        const [items, total] = await Promise.all([
+          Course.find(query).sort({ [sort]: sortOrder }).skip(skip).limit(Number(limit)).lean(),
+          Course.countDocuments(query)
+        ]);
 
-      if (items && items.length > 0) {
-        return { items, total, page: Number(page), limit: Number(limit), totalPages: Math.ceil(total / limit) || 1 };
-      }
-    } catch (e) {}
+        if (items && items.length > 0) {
+          return { items, total, page: Number(page), limit: Number(limit), totalPages: Math.ceil(total / limit) || 1 };
+        }
+      } catch (e) {}
+    }
 
     const dataStore = require("../services/dataStore");
     let fallback = dataStore.courses || [];
@@ -101,13 +108,15 @@ class AcademicRepository {
 
   // Years & Semesters (Strictly MongoDB Driven)
   static async getYears({ courseId = "" }) {
-    try {
-      const query = { isDeleted: { $ne: true } };
-      if (courseId) query.courseId = courseId;
-      let items = await Year.find(query).sort({ yearNumber: 1 }).lean();
-      
-      if (items && items.length > 0) return items;
-    } catch (e) {}
+    if (mongoose.connection.readyState === 1) {
+      try {
+        const query = { isDeleted: { $ne: true } };
+        if (courseId) query.courseId = courseId;
+        let items = await Year.find(query).sort({ yearNumber: 1 }).lean();
+        
+        if (items && items.length > 0) return items;
+      } catch (e) {}
+    }
 
     return [
       { yearNumber: 1, name: "1st Year", label: "Freshman Year" },
@@ -118,14 +127,16 @@ class AcademicRepository {
   }
 
   static async getSemesters({ year = 2, courseId = "" }) {
-    try {
-      const yearNum = Number(year);
-      const query = { isDeleted: { $ne: true }, yearNumber: yearNum };
-      if (courseId) query.courseId = courseId;
-      let items = await Semester.find(query).sort({ semesterNumber: 1 }).lean();
-      
-      if (items && items.length > 0) return items;
-    } catch (e) {}
+    if (mongoose.connection.readyState === 1) {
+      try {
+        const yearNum = Number(year);
+        const query = { isDeleted: { $ne: true }, yearNumber: yearNum };
+        if (courseId) query.courseId = courseId;
+        let items = await Semester.find(query).sort({ semesterNumber: 1 }).lean();
+        
+        if (items && items.length > 0) return items;
+      } catch (e) {}
+    }
 
     const yearNum = Number(year || 2);
     const sem1 = yearNum * 2 - 1;
@@ -138,24 +149,26 @@ class AcademicRepository {
 
   // Subjects
   static async getSubjects({ courseId = "", semester = "", search = "", page = 1, limit = 20, sort = "createdAt", order = "desc" }) {
-    try {
-      const query = { isDeleted: { $ne: true } };
-      if (courseId) query.courseId = courseId;
-      if (semester) query.semester = semester;
-      if (search) query.title = { $regex: search, $options: "i" };
+    if (mongoose.connection.readyState === 1) {
+      try {
+        const query = { isDeleted: { $ne: true } };
+        if (courseId) query.courseId = courseId;
+        if (semester) query.semester = semester;
+        if (search) query.title = { $regex: search, $options: "i" };
 
-      const skip = (page - 1) * limit;
-      const sortOrder = order === "asc" ? 1 : -1;
+        const skip = (page - 1) * limit;
+        const sortOrder = order === "asc" ? 1 : -1;
 
-      const [items, total] = await Promise.all([
-        Subject.find(query).sort({ [sort]: sortOrder }).skip(skip).limit(Number(limit)).lean(),
-        Subject.countDocuments(query)
-      ]);
+        const [items, total] = await Promise.all([
+          Subject.find(query).sort({ [sort]: sortOrder }).skip(skip).limit(Number(limit)).lean(),
+          Subject.countDocuments(query)
+        ]);
 
-      if (items && items.length > 0) {
-        return { items, total, page: Number(page), limit: Number(limit), totalPages: Math.ceil(total / limit) || 1 };
-      }
-    } catch (e) {}
+        if (items && items.length > 0) {
+          return { items, total, page: Number(page), limit: Number(limit), totalPages: Math.ceil(total / limit) || 1 };
+        }
+      } catch (e) {}
+    }
 
     const dataStore = require("../services/dataStore");
     let fallback = dataStore.subjects || [];
@@ -163,10 +176,12 @@ class AcademicRepository {
   }
 
   static async getSubjectById(subjectId) {
-    try {
-      const subject = await Subject.findOne({ _id: subjectId, isDeleted: { $ne: true } }).lean();
-      if (subject) return subject;
-    } catch (e) {}
+    if (mongoose.connection.readyState === 1) {
+      try {
+        const subject = await Subject.findOne({ _id: subjectId, isDeleted: { $ne: true } }).lean();
+        if (subject) return subject;
+      } catch (e) {}
+    }
 
     const dataStore = require("../services/dataStore");
     const found = (dataStore.subjects || []).find(s => s.id === subjectId || s._id === subjectId);

@@ -526,15 +526,23 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
               SizedBox(height: AppResponsive.h(1.2)),
 
               // Colleges List
-              ...collegeProvider.colleges.take(3).map(
-                    (college) => CollegeCard(
-                      college: college,
-                      onTap: () => context.push('/courses'),
-                      onBookmarkToggle: () {
-                        collegeProvider.toggleBookmark(college.id);
-                      },
-                    ),
+              if (collegeProvider.isLoading)
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 24),
+                  child: Center(
+                    child: CircularProgressIndicator(),
                   ),
+                )
+              else
+                ...collegeProvider.colleges.take(3).map(
+                      (college) => CollegeCard(
+                        college: college,
+                        onTap: () => context.push('/courses'),
+                        onBookmarkToggle: () {
+                          collegeProvider.toggleBookmark(college.id);
+                        },
+                      ),
+                    ),
             ],
           ),
         ),

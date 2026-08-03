@@ -10,6 +10,8 @@ const {
 const { verifyJWT } = require("../middlewares/auth.middleware");
 
 router.get("/home", verifyJWT, getHomeFeed);
+router.get("/student", verifyJWT, getHomeFeed);
+router.get("/admin", verifyJWT, getHomeFeed);
 router.get("/banners", getBanners);
 router.get("/continue-reading", verifyJWT, getContinueReading);
 router.post("/update-progress", verifyJWT, updateProgress);

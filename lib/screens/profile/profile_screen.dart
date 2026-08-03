@@ -281,9 +281,11 @@ class ProfileScreen extends StatelessWidget {
         ),
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: AppResponsive.screenPadding,
-          child: Column(
+        child: authProvider.isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : SingleChildScrollView(
+                padding: AppResponsive.screenPadding,
+                child: Column(
             children: [
               // Profile Header Avatar
               Center(

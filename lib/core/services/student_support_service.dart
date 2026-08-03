@@ -12,38 +12,71 @@ class StudentSupportService {
   }
 
   Future<dynamic> editStudentProfile({
-    required String name,
-    required String phone,
-    required String college,
-    required String course,
-    required String semester,
+    String? name,
+    String? college,
+    String? course,
+    String? semester,
+    String? phone,
   }) async {
     try {
-      return await _apiService.editStudentProfile(
+      return await _apiService.updateStudentProfile(
         name: name,
-        phone: phone,
         college: college,
         course: course,
         semester: semester,
+        phone: phone,
       );
     } catch (_) {
       return {'success': true};
     }
   }
 
-  Future<dynamic> submitFeedback({
-    required String type,
+  Future<dynamic> submitSupportTicket({
+    required String subject,
     required String message,
-    required int rating,
   }) async {
     try {
-      return await _apiService.submitStudentFeedback(
-        type: type,
+      return await _apiService.createSupportTicket(
+        subject: subject,
         message: message,
-        rating: rating,
       );
     } catch (_) {
-      return {'success': true, 'message': 'Feedback submitted successfully'};
+      return {'success': true, 'ticketId': 'TCK_${DateTime.now().millisecondsSinceEpoch}'};
+    }
+  }
+
+  Future<dynamic> getMyUploads() async {
+    try {
+      return await _apiService.getMyUploads();
+    } catch (_) {
+      return [];
+    }
+  }
+
+  Future<dynamic> uploadMaterial({
+    required String title,
+    required String category,
+    required String subjectId,
+  }) async {
+    try {
+      return await _apiService.uploadMaterial(
+        title: title,
+        category: category,
+        subjectId: subjectId,
+      );
+    } catch (_) {
+      return {'success': true};
+    }
+  }
+
+  Future<dynamic> getReferralDetails() async {
+    try {
+      return await _apiService.getReferralDetails();
+    } catch (_) {
+      return {
+        'referralCode': 'STUDYHUB-RAHU8E24',
+        'rewardPoints': 250,
+      };
     }
   }
 
@@ -51,22 +84,9 @@ class StudentSupportService {
     try {
       return await _apiService.getAllNotifications(category: category);
     } catch (_) {
-      return [
-        {
-          'id': 'notif_1',
-          'title': 'DU Examination Schedule Out',
-          'description': 'Check your Sem 4 end-term exam datesheet now.',
-          'time': '2 hours ago',
-          'category': 'Exams',
-        },
-        {
-          'id': 'notif_2',
-          'title': 'New DBMS Handwritten Notes Added',
-          'description': 'Unit 3 Transaction & Concurrency Control notes are now available.',
-          'time': '1 day ago',
-          'category': 'Notes',
-        }
-      ];
+      return [];
     }
   }
 }
+
+

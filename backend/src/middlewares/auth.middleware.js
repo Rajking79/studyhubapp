@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
 const asyncHandler = require("../utils/asyncHandler");
 const ApiError = require("../utils/ApiError");
 const User = require("../models/User.model");
@@ -27,9 +28,11 @@ const authenticate = asyncHandler(async (req, res, next) => {
     }
 
     let user;
-    try {
-      user = await User.findById(decoded._id || decoded.id).select("-password").lean();
-    } catch (e) {}
+    if (mongoose.connection.readyState === 1) {
+      try {
+        user = await User.findById(decoded._id || decoded.id).select("-password").lean();
+      } catch (e) {}
+    }
 
     if (!user) {
       user = {

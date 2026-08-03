@@ -1,6 +1,15 @@
 import { API_ENDPOINTS, API_BASE_URL } from '../constants/apiConfig';
 import { College, Course, Subject, Material, Student, Banner, HomeScreenSectionConfig, NotificationBroadcast } from '../types';
-import { dummyColleges, dummyCourses, dummySubjects, dummyMaterials, dummyStudents, dummyBanners, dummyHomeSections, dummyNotifications } from '../constants/dummyData';
+import {
+  INITIAL_COLLEGES as dummyColleges,
+  INITIAL_COURSES as dummyCourses,
+  INITIAL_SUBJECTS as dummySubjects,
+  INITIAL_MATERIALS as dummyMaterials,
+  INITIAL_STUDENTS as dummyStudents,
+  INITIAL_BANNERS as dummyBanners,
+  INITIAL_HOME_SECTIONS as dummyHomeSections,
+  INITIAL_NOTIFICATIONS as dummyNotifications
+} from '../constants/dummyData';
 
 // ==========================================
 // CORE FETCH UTILITY — Unwraps ApiResponse

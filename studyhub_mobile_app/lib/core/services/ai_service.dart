@@ -31,4 +31,18 @@ class AiService {
       'confidence': 0.98,
     };
   }
+
+  Future<List<dynamic>> getAiHistory() async {
+    try {
+      final res = await _apiService.getAiHistory();
+      if (res is List) return res;
+    } catch (_) {}
+    return [];
+  }
+
+  Future<void> clearAiHistory() async {
+    try {
+      await _apiService.clearAiHistory();
+    } catch (_) {}
+  }
 }

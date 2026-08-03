@@ -1,8 +1,11 @@
 import 'package:go_router/go_router.dart';
 import '../screens/ai/snap_and_solve_screen.dart';
 import '../screens/analytics/study_progress_screen.dart';
+import '../screens/auth/forgot_password_screen.dart';
 import '../screens/auth/login_screen.dart';
+import '../screens/auth/reset_password_screen.dart';
 import '../screens/auth/signup_screen.dart';
+import '../screens/auth/verify_otp_screen.dart';
 import '../screens/college/college_list_screen.dart';
 import '../screens/course/course_selection_screen.dart';
 import '../screens/main_wrapper.dart';
@@ -41,6 +44,24 @@ class AppRouter {
       GoRoute(
         path: '/signup',
         builder: (context, state) => const SignupScreen(),
+      ),
+      GoRoute(
+        path: '/forgot-password',
+        builder: (context, state) => const ForgotPasswordScreen(),
+      ),
+      GoRoute(
+        path: '/verify-otp',
+        builder: (context, state) {
+          final email = state.extra as String? ?? '';
+          return VerifyOtpScreen(email: email);
+        },
+      ),
+      GoRoute(
+        path: '/reset-password',
+        builder: (context, state) {
+          final resetToken = state.extra as String? ?? '';
+          return ResetPasswordScreen(resetToken: resetToken);
+        },
       ),
       GoRoute(
         path: '/home',

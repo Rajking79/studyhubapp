@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/utils/app_responsive.dart';
+import '../../core/services/tools_service.dart';
 import '../../widgets/common/custom_button.dart';
 
 class StudentToolsScreen extends StatefulWidget {
@@ -12,7 +13,9 @@ class StudentToolsScreen extends StatefulWidget {
 
 class _StudentToolsScreenState extends State<StudentToolsScreen>
     with SingleTickerProviderStateMixin {
+  final ToolsService _toolsService = ToolsService();
   late TabController _tabController;
+  bool _isLoadingTools = true;
 
   // CGPA Calculator State
   final List<Map<String, dynamic>> _subjectGrades = [
@@ -31,6 +34,22 @@ class _StudentToolsScreenState extends State<StudentToolsScreen>
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
+    _loadToolsData();
+  }
+
+  Future<void> _loadToolsData() async {
+    setState(() => _isLoadingTools = true);
+    try {
+      final attRes = await _toolsService.getAttendanceSummary();
+      if (attRes is Map && attRes.containsKey('overallPercentage')) {
+        final pct = (attRes['overallPercentage'] as num).toDouble();
+        _attendedClasses = (pct * 0.6).round();
+        _totalClasses = 60;
+      }
+    } catch (_) {
+    } finally {
+      if (mounted) setState(() => _isLoadingTools = false);
+    }
   }
 
   @override
@@ -82,16 +101,18 @@ class _StudentToolsScreenState extends State<StudentToolsScreen>
         ),
       ),
       body: SafeArea(
-        child: TabBarView(
-          controller: _tabController,
-          children: [
-            // Tab 1: CGPA / SGPA Calculator
-            _buildCgpaCalculator(isDark),
+        child: _isLoadingTools
+            ? const Center(child: CircularProgressIndicator())
+            : TabBarView(
+                controller: _tabController,
+                children: [
+                  // Tab 1: CGPA / SGPA Calculator
+                  _buildCgpaCalculator(isDark),
 
-            // Tab 2: Attendance Tracker
-            _buildAttendanceTracker(isDark),
-          ],
-        ),
+                  // Tab 2: Attendance Tracker
+                  _buildAttendanceTracker(isDark),
+                ],
+              ),
       ),
     );
   }

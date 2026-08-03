@@ -14,12 +14,24 @@ class DatabaseService {
   final List<StudyMaterialModel> _localPapers = DummyData.getPreviousPapers();
   final List<StudyMaterialModel> _localNotesAndBooks = DummyData.getNotesAndBooks();
 
+  List<T> _extractList<T>(dynamic res, T Function(Map<String, dynamic>) fromJson) {
+    List itemsList = [];
+    if (res is List) {
+      itemsList = res;
+    } else if (res is Map && res['items'] is List) {
+      itemsList = res['items'];
+    }
+    if (itemsList.isNotEmpty) {
+      return itemsList.map((item) => fromJson(Map<String, dynamic>.from(item))).toList();
+    }
+    return [];
+  }
+
   Future<List<CollegeModel>> fetchColleges({String category = 'All', String query = ''}) async {
     try {
-      final res = await _apiService.getCollegesList(search: query, category: category);
-      if (res is List && res.isNotEmpty) {
-        return res.map((item) => CollegeModel.fromJson(Map<String, dynamic>.from(item))).toList();
-      }
+      final res = await _apiService.getCollegesList(search: query);
+      final list = _extractList<CollegeModel>(res, CollegeModel.fromJson);
+      if (list.isNotEmpty) return list;
     } catch (_) {}
 
     // Fallback to local data
@@ -40,9 +52,8 @@ class DatabaseService {
   Future<List<CourseModel>> fetchCourses({String collegeId = 'du_dtu'}) async {
     try {
       final res = await _apiService.getCourses(collegeId: collegeId);
-      if (res is List && res.isNotEmpty) {
-        return res.map((item) => CourseModel.fromJson(Map<String, dynamic>.from(item))).toList();
-      }
+      final list = _extractList<CourseModel>(res, CourseModel.fromJson);
+      if (list.isNotEmpty) return list;
     } catch (_) {}
     return _localCourses;
   }
@@ -50,9 +61,8 @@ class DatabaseService {
   Future<List<SubjectModel>> fetchSubjects({String courseId = 'btech_cs', String semester = 'Sem 4', String query = ''}) async {
     try {
       final res = await _apiService.getSubjects(courseId: courseId, semester: semester, search: query);
-      if (res is List && res.isNotEmpty) {
-        return res.map((item) => SubjectModel.fromJson(Map<String, dynamic>.from(item))).toList();
-      }
+      final list = _extractList<SubjectModel>(res, SubjectModel.fromJson);
+      if (list.isNotEmpty) return list;
     } catch (_) {}
 
     if (query.isEmpty) return _localSubjects;
@@ -78,15 +88,11 @@ class DatabaseService {
 
   Future<List<StudyMaterialModel>> fetchPreviousYearPapers({String subjectId = 'subj_dbms_101', String filter = 'All'}) async {
     try {
-      final res = await _apiService.fetchMaterials(
+      final res = await _apiService.getPyqs(
         subjectId: subjectId,
-        category: 'pyq',
-        tab: 'pdf',
-        examType: filter != 'All' ? filter : '',
       );
-      if (res is List && res.isNotEmpty) {
-        return res.map((item) => StudyMaterialModel.fromJson(Map<String, dynamic>.from(item))).toList();
-      }
+      final list = _extractList<StudyMaterialModel>(res, StudyMaterialModel.fromJson);
+      if (list.isNotEmpty) return list;
     } catch (_) {}
 
     if (filter == 'All') return _localPapers;
@@ -95,15 +101,14 @@ class DatabaseService {
 
   Future<List<StudyMaterialModel>> fetchNotesAndBooks({String subjectId = 'subj_dbms_101', StudyMaterialType? type}) async {
     try {
-      final category = type == StudyMaterialType.book ? 'book' : 'notes';
-      final res = await _apiService.fetchMaterials(
-        subjectId: subjectId,
-        category: category,
-        tab: 'pdf',
-      );
-      if (res is List && res.isNotEmpty) {
-        return res.map((item) => StudyMaterialModel.fromJson(Map<String, dynamic>.from(item))).toList();
+      dynamic res;
+      if (type == StudyMaterialType.book) {
+        res = await _apiService.getBooks(subjectId: subjectId);
+      } else {
+        res = await _apiService.getNotes(subjectId: subjectId);
       }
+      final list = _extractList<StudyMaterialModel>(res, StudyMaterialModel.fromJson);
+      if (list.isNotEmpty) return list;
     } catch (_) {}
 
     if (type == null) return _localNotesAndBooks;

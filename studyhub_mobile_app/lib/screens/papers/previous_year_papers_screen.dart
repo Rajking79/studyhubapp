@@ -171,7 +171,9 @@ class _PreviousYearPapersScreenState extends State<PreviousYearPapersScreen> wit
                 controller: _tabController,
                 children: [
                   // Tab 1: PDF Question Papers
-                  ListView.builder(
+                  materialProvider.isLoading
+                      ? const Center(child: CircularProgressIndicator())
+                      : ListView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     itemCount: materialProvider.previousPapers.length,
                     itemBuilder: (context, index) {

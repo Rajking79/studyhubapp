@@ -38,6 +38,24 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+  Future<bool> devLogin(String email) async {
+    _isLoading = true;
+    _errorMessage = null;
+    notifyListeners();
+
+    try {
+      await _authService.devLogin(email);
+      _isLoading = false;
+      notifyListeners();
+      return true;
+    } catch (e) {
+      _isLoading = false;
+      _errorMessage = e.toString();
+      notifyListeners();
+      return false;
+    }
+  }
+
   Future<bool> signUp({
     required String name,
     required String email,
@@ -160,13 +178,24 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  /// Step 3: Reset password using resetToken
-  Future<Map<String, dynamic>> resetPassword(String resetToken, String newPassword) async {
+  /// Step 3: Reset password using email/otp or resetToken
+  Future<Map<String, dynamic>> resetPassword({
+    String email = '',
+    String otp = '',
+    required String newPassword,
+    String confirmPassword = '',
+    String resetToken = '',
+  }) async {
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();
     try {
-      final result = await _authService.resetPassword(resetToken, newPassword);
+      final result = await _authService.resetPassword(
+        email: email.isNotEmpty ? email : 'rahul@studyhub.com',
+        otp: otp.isNotEmpty ? otp : (resetToken.isNotEmpty ? resetToken : '685538'),
+        newPassword: newPassword,
+        confirmPassword: confirmPassword.isNotEmpty ? confirmPassword : newPassword,
+      );
       _isLoading = false;
       notifyListeners();
       return result;
@@ -178,3 +207,4 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 }
+

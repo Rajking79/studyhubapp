@@ -23,11 +23,24 @@ const updateProfile = asyncHandler(async (req, res) => {
 
 const getMyUploads = asyncHandler(async (req, res) => {
   const uploads = await UserService.getMyUploads(req.user._id);
-  return res.status(200).json(new ApiResponse(200, uploads.items, "My uploaded materials fetched"));
+  return res.status(200).json(new ApiResponse(200, uploads.items || uploads, "My uploaded materials fetched"));
+});
+
+const exportUserData = asyncHandler(async (req, res) => {
+  const data = await UserService.exportUserData(req.user._id);
+  return res.status(200).json(new ApiResponse(200, data, "User profile and data exported successfully (GDPR)"));
+});
+
+const deleteMyAccount = asyncHandler(async (req, res) => {
+  const { confirmText } = req.body;
+  const result = await UserService.deleteUserAccount(req.user._id, confirmText);
+  return res.status(200).json(new ApiResponse(200, result, "User account soft-deleted successfully"));
 });
 
 module.exports = {
   getProfile,
   updateProfile,
-  getMyUploads
+  getMyUploads,
+  exportUserData,
+  deleteMyAccount
 };

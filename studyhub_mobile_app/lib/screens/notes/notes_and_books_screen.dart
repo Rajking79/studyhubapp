@@ -177,7 +177,9 @@ class _NotesAndBooksScreenState extends State<NotesAndBooksScreen> with SingleTi
                 controller: _tabController,
                 children: [
                   // Tab 1: PDF Materials & Books
-                  ListView.builder(
+                  materialProvider.isLoading
+                      ? const Center(child: CircularProgressIndicator())
+                      : ListView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
                     itemCount: materialProvider.notesAndBooks.length,
                     itemBuilder: (context, index) {

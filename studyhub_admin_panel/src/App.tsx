@@ -63,15 +63,17 @@ import { ReportsView } from './pages/ReportsView';
 import { SettingsView } from './pages/SettingsView';
 import { ProfileView } from './pages/ProfileView';
 import { LoginView } from './pages/LoginView';
+import { PageLoader } from './components/layout/PageLoader';
 
 import { Search, Sparkles, Building2, UploadCloud, Bell, LogOut } from 'lucide-react';
 
 import { adminApiService } from './services/adminApiService';
 
-export function App() {
+export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [currentView, setCurrentView] = useState<ViewType>('dashboard');
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState<boolean>(false);
+  const [isDataLoading, setIsDataLoading] = useState<boolean>(false);
 
   // Application Data States
   const [colleges, setColleges] = useState<College[]>(INITIAL_COLLEGES);
@@ -103,6 +105,7 @@ export function App() {
   }, []);
 
   const fetchLiveAdminData = async () => {
+    setIsDataLoading(true);
     try {
       const [colData, crsData, sbjData, matData, bnrData, secData, notData, stdData] = await Promise.allSettled([
         adminApiService.getColleges(),
@@ -123,7 +126,10 @@ export function App() {
       if (secData.status === 'fulfilled' && secData.value.length) setHomeSections(secData.value);
       if (notData.status === 'fulfilled' && notData.value.length) setNotifications(notData.value);
       if (stdData.status === 'fulfilled' && stdData.value.length) setStudents(stdData.value);
-    } catch (_) {}
+    } catch (_) {
+    } finally {
+      setIsDataLoading(false);
+    }
   };
 
   const handleLoginSuccess = (token: string) => {
@@ -260,14 +266,18 @@ export function App() {
         />
 
         <main className="p-4 sm:p-7 flex-1">
-          {currentView === 'dashboard' && (
-            <DashboardView
-              colleges={colleges}
-              materials={materials}
-              pendingUploads={uploads.filter(u => u.status === 'Pending')}
-              onNavigateView={(v) => setCurrentView(v)}
-            />
-          )}
+          {isDataLoading ? (
+            <PageLoader message="Fetching live data from StudyHub API Server..." />
+          ) : (
+            <>
+              {currentView === 'dashboard' && (
+                <DashboardView
+                  colleges={colleges}
+                  materials={materials}
+                  pendingUploads={uploads.filter(u => u.status === 'Pending')}
+                  onNavigateView={(v) => setCurrentView(v)}
+                />
+              )}
 
           {currentView === 'colleges' && (
             <CollegesView
@@ -386,6 +396,8 @@ export function App() {
           {currentView === 'settings' && <SettingsView />}
 
           {currentView === 'profile' && <ProfileView />}
+            </>
+          )}
         </main>
       </div>
 

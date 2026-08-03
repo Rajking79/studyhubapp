@@ -63,15 +63,17 @@ import { ReportsView } from './pages/ReportsView';
 import { SettingsView } from './pages/SettingsView';
 import { ProfileView } from './pages/ProfileView';
 import { LoginView } from './pages/LoginView';
+import { PageLoader } from './components/layout/PageLoader';
 
 import { Search, Sparkles, Building2, UploadCloud, Bell, LogOut } from 'lucide-react';
 
 import { adminApiService } from './services/adminApiService';
 
-export function App() {
+export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [currentView, setCurrentView] = useState<ViewType>('dashboard');
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState<boolean>(false);
+  const [isDataLoading, setIsDataLoading] = useState<boolean>(false);
 
   // Application Data States
   const [colleges, setColleges] = useState<College[]>(INITIAL_COLLEGES);
@@ -103,6 +105,7 @@ export function App() {
   }, []);
 
   const fetchLiveAdminData = async () => {
+    setIsDataLoading(true);
     try {
       const [colData, crsData, sbjData, matData, bnrData, secData, notData, stdData] = await Promise.allSettled([
         adminApiService.getColleges(),
@@ -123,7 +126,10 @@ export function App() {
       if (secData.status === 'fulfilled' && secData.value.length) setHomeSections(secData.value);
       if (notData.status === 'fulfilled' && notData.value.length) setNotifications(notData.value);
       if (stdData.status === 'fulfilled' && stdData.value.length) setStudents(stdData.value);
-    } catch (_) {}
+    } catch (_) {
+    } finally {
+      setIsDataLoading(false);
+    }
   };
 
   const handleLoginSuccess = (token: string) => {
@@ -260,132 +266,136 @@ export function App() {
         />
 
         <main className="p-4 sm:p-7 flex-1">
-          {currentView === 'dashboard' && (
-            <DashboardView
-              colleges={colleges}
-              materials={materials}
-              pendingUploads={uploads.filter(u => u.status === 'Pending')}
-              onNavigateView={(v) => setCurrentView(v)}
-            />
+          {isDataLoading ? (
+            <PageLoader message="Fetching live data from StudyHub API Server..." />
+          ) : (
+            <>
+              {currentView === 'dashboard' && (
+                <DashboardView
+                  colleges={colleges}
+                  materials={materials}
+                  pendingUploads={uploads.filter(u => u.status === 'Pending')}
+                  onNavigateView={(v) => setCurrentView(v)}
+                />
+              )}
+
+              {currentView === 'colleges' && (
+                <CollegesView
+                  colleges={colleges}
+                  onAddCollege={handleAddCollege}
+                  onToggleFeatured={handleToggleFeaturedCollege}
+                  onDeleteCollege={handleDeleteCollege}
+                  onEditCollege={handleEditCollege}
+                />
+              )}
+
+              {currentView === 'courses' && (
+                <CoursesView
+                  courses={courses}
+                  colleges={colleges}
+                  onAddCourse={handleAddCourse}
+                />
+              )}
+
+              {currentView === 'years' && <YearsView onNavigateView={(v) => setCurrentView(v)} />}
+              {currentView === 'semesters' && <SemestersView onNavigateView={(v) => setCurrentView(v)} />}
+
+              {currentView === 'subjects' && (
+                <SubjectsView
+                  subjects={subjects}
+                  onAddSubject={handleAddSubject}
+                  onDeleteSubject={handleDeleteSubject}
+                />
+              )}
+
+              {(currentView === 'study-materials' ||
+                currentView === 'pyqs' ||
+                currentView === 'notes' ||
+                currentView === 'books' ||
+                currentView === 'guides' ||
+                currentView === 'assignments' ||
+                currentView === 'question-bank' ||
+                currentView === 'syllabus' ||
+                currentView === 'pdf-manager') && (
+                <StudyMaterialsView
+                  materials={materials}
+                  onUploadMaterial={handleUploadMaterial}
+                  onDeleteMaterial={handleDeleteMaterial}
+                />
+              )}
+
+              {currentView === 'video-manager' && (
+                <VideoManagerView
+                  videos={videos}
+                  onAddVideo={handleAddVideo}
+                  onDeleteVideo={handleDeleteVideo}
+                />
+              )}
+
+              {currentView === 'home-screen-manager' && (
+                <HomeScreenManagerView
+                  sections={homeSections}
+                  onToggleSection={handleToggleHomeSection}
+                />
+              )}
+
+              {currentView === 'studyhub-ai' && (
+                <StudyHubAiView
+                  config={aiConfig}
+                  onSaveConfig={(cfg) => setAiConfig(cfg)}
+                />
+              )}
+
+              {currentView === 'snap-solve-ai' && (
+                <SnapSolveAiView
+                  config={snapSolveConfig}
+                  onToggleOcr={() => setSnapSolveConfig(prev => ({ ...prev, ocrEnabled: !prev.ocrEnabled }))}
+                />
+              )}
+
+              {currentView === 'search-manager' && <SearchManagerView />}
+
+              {currentView === 'cgpa-manager' && <CgpaManagerView rules={cgpaRules} />}
+
+              {currentView === 'attendance-manager' && <AttendanceTrackerManagerView rules={attendanceRules} />}
+
+              {currentView === 'downloads-manager' && <DownloadsManagerView />}
+
+              {currentView === 'favorites-manager' && <FavoritesManagerView />}
+
+              {currentView === 'notifications' && (
+                <NotificationsView
+                  notifications={notifications}
+                  onSendBroadcast={handleSendBroadcast}
+                />
+              )}
+
+              {currentView === 'banner-manager' && (
+                <BannerManagerView
+                  banners={banners}
+                  onToggleBanner={handleToggleBanner}
+                />
+              )}
+
+              {currentView === 'students' && (
+                <StudentsView
+                  students={students}
+                  onToggleBlockStudent={handleToggleBlockStudent}
+                  onDeleteStudent={handleDeleteStudent}
+                />
+              )}
+
+              {currentView === 'feedback' && <FeedbackManagerView />}
+
+              {currentView === 'analytics' && <AnalyticsView />}
+
+              {currentView === 'reports' && <ReportsView />}
+
+              {currentView === 'settings' && <SettingsView />}
+
+              {currentView === 'profile' && <ProfileView />}
+            </>
           )}
-
-          {currentView === 'colleges' && (
-            <CollegesView
-              colleges={colleges}
-              onAddCollege={handleAddCollege}
-              onToggleFeatured={handleToggleFeaturedCollege}
-              onDeleteCollege={handleDeleteCollege}
-              onEditCollege={handleEditCollege}
-            />
-          )}
-
-          {currentView === 'courses' && (
-            <CoursesView
-              courses={courses}
-              colleges={colleges}
-              onAddCourse={handleAddCourse}
-            />
-          )}
-
-          {currentView === 'years' && <YearsView onNavigateView={(v) => setCurrentView(v)} />}
-          {currentView === 'semesters' && <SemestersView onNavigateView={(v) => setCurrentView(v)} />}
-
-          {currentView === 'subjects' && (
-            <SubjectsView
-              subjects={subjects}
-              onAddSubject={handleAddSubject}
-              onDeleteSubject={handleDeleteSubject}
-            />
-          )}
-
-          {(currentView === 'study-materials' ||
-            currentView === 'pyqs' ||
-            currentView === 'notes' ||
-            currentView === 'books' ||
-            currentView === 'guides' ||
-            currentView === 'assignments' ||
-            currentView === 'question-bank' ||
-            currentView === 'syllabus' ||
-            currentView === 'pdf-manager') && (
-            <StudyMaterialsView
-              materials={materials}
-              onUploadMaterial={handleUploadMaterial}
-              onDeleteMaterial={handleDeleteMaterial}
-            />
-          )}
-
-          {currentView === 'video-manager' && (
-            <VideoManagerView
-              videos={videos}
-              onAddVideo={handleAddVideo}
-              onDeleteVideo={handleDeleteVideo}
-            />
-          )}
-
-          {currentView === 'home-screen-manager' && (
-            <HomeScreenManagerView
-              sections={homeSections}
-              onToggleSection={handleToggleHomeSection}
-            />
-          )}
-
-          {currentView === 'studyhub-ai' && (
-            <StudyHubAiView
-              config={aiConfig}
-              onSaveConfig={(cfg) => setAiConfig(cfg)}
-            />
-          )}
-
-          {currentView === 'snap-solve-ai' && (
-            <SnapSolveAiView
-              config={snapSolveConfig}
-              onToggleOcr={() => setSnapSolveConfig(prev => ({ ...prev, ocrEnabled: !prev.ocrEnabled }))}
-            />
-          )}
-
-          {currentView === 'search-manager' && <SearchManagerView />}
-
-          {currentView === 'cgpa-manager' && <CgpaManagerView rules={cgpaRules} />}
-
-          {currentView === 'attendance-manager' && <AttendanceTrackerManagerView rules={attendanceRules} />}
-
-          {currentView === 'downloads-manager' && <DownloadsManagerView />}
-
-          {currentView === 'favorites-manager' && <FavoritesManagerView />}
-
-
-
-          {currentView === 'notifications' && (
-            <NotificationsView
-              notifications={notifications}
-              onSendBroadcast={handleSendBroadcast}
-            />
-          )}
-
-          {currentView === 'banner-manager' && (
-            <BannerManagerView
-              banners={banners}
-              onToggleBanner={handleToggleBanner}
-            />
-          )}
-
-          {currentView === 'students' && (
-            <StudentsView
-              students={students}
-              onToggleBlockStudent={handleToggleBlockStudent}
-              onDeleteStudent={handleDeleteStudent}
-            />
-          )}
-
-          {currentView === 'feedback' && <FeedbackManagerView />}
-
-          {currentView === 'analytics' && <AnalyticsView />}
-
-          {currentView === 'reports' && <ReportsView />}
-
-          {currentView === 'settings' && <SettingsView />}
-
-          {currentView === 'profile' && <ProfileView />}
         </main>
       </div>
 
@@ -448,28 +458,40 @@ export function App() {
             <div className="space-y-2">
               <button
                 onClick={() => { setCurrentView('colleges'); setIsQuickCreateOpen(false); }}
-                className="w-full p-3 bg-slate-50 hover:bg-blue-50 text-xs font-bold text-slate-800 rounded-xl flex items-center gap-3 border border-slate-200 transition"
+                className="w-full p-3 rounded-xl bg-slate-50 hover:bg-blue-50 hover:text-[#2563EB] text-slate-700 font-bold text-xs flex items-center justify-between transition"
               >
-                <Building2 className="w-4 h-4 text-[#2563EB]" /> Add New College
+                <span className="flex items-center gap-2">
+                  <Building2 className="w-4 h-4" /> Add New College
+                </span>
+                <span>→</span>
               </button>
+
               <button
                 onClick={() => { setCurrentView('study-materials'); setIsQuickCreateOpen(false); }}
-                className="w-full p-3 bg-slate-50 hover:bg-blue-50 text-xs font-bold text-slate-800 rounded-xl flex items-center gap-3 border border-slate-200 transition"
+                className="w-full p-3 rounded-xl bg-slate-50 hover:bg-blue-50 hover:text-[#2563EB] text-slate-700 font-bold text-xs flex items-center justify-between transition"
               >
-                <UploadCloud className="w-4 h-4 text-[#2563EB]" /> Upload Study Material (PDF)
+                <span className="flex items-center gap-2">
+                  <UploadCloud className="w-4 h-4" /> Upload Study Material PDF
+                </span>
+                <span>→</span>
               </button>
+
               <button
                 onClick={() => { setCurrentView('notifications'); setIsQuickCreateOpen(false); }}
-                className="w-full p-3 bg-slate-50 hover:bg-blue-50 text-xs font-bold text-slate-800 rounded-xl flex items-center gap-3 border border-slate-200 transition"
+                className="w-full p-3 rounded-xl bg-slate-50 hover:bg-blue-50 hover:text-[#2563EB] text-slate-700 font-bold text-xs flex items-center justify-between transition"
               >
-                <Bell className="w-4 h-4 text-[#2563EB]" /> Broadcast Exam Push Notification
+                <span className="flex items-center gap-2">
+                  <Bell className="w-4 h-4" /> Send Instant Push Broadcast
+                </span>
+                <span>→</span>
               </button>
             </div>
+
             <button
               onClick={() => setIsQuickCreateOpen(false)}
-              className="w-full py-2 bg-slate-100 text-slate-600 rounded-xl text-xs font-bold"
+              className="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl font-bold text-xs transition mt-2"
             >
-              Close
+              Close Menu
             </button>
           </div>
         </div>
@@ -477,5 +499,3 @@ export function App() {
     </div>
   );
 }
-
-export default App;

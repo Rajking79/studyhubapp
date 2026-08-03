@@ -144,7 +144,9 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
                 SizedBox(height: AppResponsive.h(1.5)),
                 Expanded(
-                  child: ListView.builder(
+                  child: (searchProvider.isSearching || materialProvider.isLoading)
+                      ? const Center(child: CircularProgressIndicator())
+                      : ListView.builder(
                     itemCount: materialProvider.subjects.length,
                     itemBuilder: (context, index) {
                       final subject = materialProvider.subjects[index];

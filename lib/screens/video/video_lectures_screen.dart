@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/utils/app_responsive.dart';
+import '../../core/services/api_service.dart';
 
 class VideoLecturesScreen extends StatefulWidget {
   const VideoLecturesScreen({super.key});
@@ -10,10 +11,47 @@ class VideoLecturesScreen extends StatefulWidget {
 }
 
 class _VideoLecturesScreenState extends State<VideoLecturesScreen> {
+  final ApiService _apiService = ApiService();
+  bool _isLoading = true;
   int _selectedCategoryIndex = 0;
   final List<String> _categories = ['All Videos', 'Operating System', 'DBMS', 'Data Structures', 'Algorithms'];
 
-  final List<Map<String, String>> _videos = [
+  List<Map<String, String>> _videos = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadVideos();
+  }
+
+  Future<void> _loadVideos() async {
+    setState(() => _isLoading = true);
+    try {
+      final res = await _apiService.getVideos(subjectId: 'subj_os_401');
+      if (res is List && res.isNotEmpty) {
+        _videos = res.map((e) {
+          final m = Map<String, dynamic>.from(e);
+          return {
+            'title': m['title']?.toString() ?? 'Lecture Video',
+            'duration': m['duration']?.toString() ?? '45m',
+            'instructor': m['instructor']?.toString() ?? 'Faculty Member',
+            'views': m['views']?.toString() ?? '15K views',
+            'subject': m['subject']?.toString() ?? 'Operating System',
+            'thumbnail': m['thumbnail']?.toString() ?? '💻',
+            'id': m['_id']?.toString() ?? m['id']?.toString() ?? 'vid_os_101',
+          };
+        }).toList();
+      } else {
+        _videos = _defaultVideos;
+      }
+    } catch (_) {
+      _videos = _defaultVideos;
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
+  }
+
+  static const List<Map<String, String>> _defaultVideos = [
     {
       'title': 'Operating System Complete One-Shot Video Lecture',
       'duration': '3h 45m',
@@ -48,7 +86,18 @@ class _VideoLecturesScreenState extends State<VideoLecturesScreen> {
     },
   ];
 
-  void _playVideo(Map<String, String> video) {
+  void _playVideo(Map<String, String> video) async {
+    String? streamUrl;
+    if (video.containsKey('id')) {
+      try {
+        final res = await _apiService.streamVideo(video['id']!);
+        if (res is Map && res.containsKey('streamUrl')) {
+          streamUrl = res['streamUrl'].toString();
+        }
+      } catch (_) {}
+    }
+
+    if (!mounted) return;
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -68,7 +117,7 @@ class _VideoLecturesScreenState extends State<VideoLecturesScreen> {
                 alignment: Alignment.center,
                 children: [
                   Text(
-                    video['thumbnail']!,
+                    video['thumbnail'] ?? '🎥',
                     style: const TextStyle(fontSize: 48),
                   ),
                   const CircleAvatar(
@@ -80,6 +129,9 @@ class _VideoLecturesScreenState extends State<VideoLecturesScreen> {
               ),
             ),
             const SizedBox(height: 12),
+            if (streamUrl != null)
+              Text('Stream URL: $streamUrl', style: const TextStyle(fontSize: 11, color: AppColors.primary)),
+            const SizedBox(height: 4),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -164,7 +216,9 @@ class _VideoLecturesScreenState extends State<VideoLecturesScreen> {
 
             // Video Cards List
             Expanded(
-              child: ListView.builder(
+              child: _isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : ListView.builder(
                 padding: AppResponsive.screenPadding,
                 itemCount: filteredVideos.length,
                 itemBuilder: (context, index) {

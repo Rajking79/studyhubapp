@@ -15,13 +15,20 @@ const connectDB = require("./src/config/db.js");
 const apiRoutes = require("./src/routes/index.js");
 const errorMiddleware = require("./src/middlewares/error.middleware.js");
 
+const rateLimit = require("express-rate-limit");
+
 const app = express();
 
 // Security & Optimization Middlewares
 app.use(helmet({ contentSecurityPolicy: false }));
-app.use(cors({ origin: process.process?.env?.CORS_ORIGIN || "*", credentials: true }));
-app.use(express.json({ limit: "16kb" }));
-app.use(express.urlencoded({ extended: true, limit: "16kb" }));
+
+const corsOrigins = process.env.CORS_ORIGIN
+  ? process.env.CORS_ORIGIN.split(",")
+  : ["http://localhost:3000", "http://localhost:5173", "http://localhost:5000"];
+
+app.use(cors({ origin: corsOrigins, credentials: true }));
+app.use(express.json({ limit: "10kb" }));
+app.use(express.urlencoded({ extended: true, limit: "10kb" }));
 app.use(mongoSanitize());
 app.use(xss());
 app.use(compression());
@@ -29,6 +36,25 @@ app.use(compression());
 if (process.env.NODE_ENV !== "production") {
   app.use(morgan("dev"));
 }
+
+// Global API Rate Limiter (100 requests per minute)
+const globalLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 100,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, statusCode: 429, message: "Too many requests, please try again later." }
+});
+app.use("/api", globalLimiter);
+
+// Strict Auth Rate Limiter (10 requests per minute)
+const authLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 10,
+  skipSuccessfulRequests: true,
+  message: { success: false, statusCode: 429, message: "Too many login/auth attempts, please wait a minute." }
+});
+app.use("/api/v1/auth", authLimiter);
 
 // Root Welcome Route
 app.get("/", (req, res) => {
@@ -38,6 +64,7 @@ app.get("/", (req, res) => {
     message: "🚀 StudyHub AI & Admin Panel Backend Server is Running Live!",
     adminWebPanel: `${req.protocol}://${req.get("host")}/admin/`,
     healthCheck: `${req.protocol}://${req.get("host")}/api/v1/health`,
+    readinessCheck: `${req.protocol}://${req.get("host")}/api/v1/ready`,
     apiBaseUrl: `${req.protocol}://${req.get("host")}/api/v1`,
     mongoStatus: mongoose.connection.readyState === 1 ? "Online" : "Offline"
   });
@@ -55,7 +82,7 @@ app.get("/admin/*", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "admin", "index.html"));
 });
 
-// API Health Check
+// API Health Check (Liveness)
 app.get("/api/v1/health", (req, res) => {
   res.status(200).json({
     success: true,
@@ -64,6 +91,26 @@ app.get("/api/v1/health", (req, res) => {
     mongoStatus: mongoose.connection.readyState === 1 ? "Connected" : "Disconnected",
     timestamp: new Date().toISOString()
   });
+});
+
+// API Readiness Check (Readiness with DB state)
+app.get("/api/v1/ready", (req, res) => {
+  const isReady = mongoose.connection.readyState === 1;
+  if (isReady) {
+    return res.status(200).json({
+      success: true,
+      statusCode: 200,
+      message: "Ready to accept traffic",
+      database: "Connected"
+    });
+  } else {
+    return res.status(503).json({
+      success: false,
+      statusCode: 503,
+      message: "Service Unavailable - Database Connecting",
+      database: "Disconnected"
+    });
+  }
 });
 
 // API Routes Mapping

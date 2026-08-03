@@ -7,49 +7,39 @@ import '../../providers/auth_provider.dart';
 import '../../widgets/common/custom_button.dart';
 import '../../widgets/common/custom_text_field.dart';
 
-class ResetPasswordScreen extends StatefulWidget {
-  final String resetToken;
-
-  const ResetPasswordScreen({super.key, required this.resetToken});
+class ForgotPasswordScreen extends StatefulWidget {
+  const ForgotPasswordScreen({super.key});
 
   @override
-  State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
+  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
 }
 
-class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
-  bool _obscurePassword = true;
-  bool _obscureConfirm = true;
+  final _emailController = TextEditingController();
 
   @override
   void dispose() {
-    _passwordController.dispose();
-    _confirmPasswordController.dispose();
+    _emailController.dispose();
     super.dispose();
   }
 
-  void _handleReset() async {
+  void _handleSendOtp() async {
     if (!_formKey.currentState!.validate()) return;
 
+    final email = _emailController.text.trim();
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
+
     try {
-      await authProvider.resetPassword(
-        resetToken: widget.resetToken,
-        newPassword: _passwordController.text,
-        confirmPassword: _confirmPasswordController.text,
-      );
+      await authProvider.forgotPassword(email);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Password reset successfully! Please login with your new password.'),
+            content: Text('OTP sent to your email! Check your inbox.'),
             backgroundColor: Colors.green,
-            duration: Duration(seconds: 3),
           ),
         );
-        // Navigate back to login, clear the whole stack
-        context.go('/login');
+        context.push('/verify-otp', extra: email);
       }
     } catch (e) {
       if (mounted) {
@@ -98,21 +88,21 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     height: 90,
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
-                        colors: [Color(0xFFFF6B6B), Color(0xFFFF8E53)],
+                        colors: [Color(0xFF6C63FF), Color(0xFF3D5CFF)],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
                       borderRadius: BorderRadius.circular(24),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFFFF6B6B).withValues(alpha: 0.35),
+                          color: const Color(0xFF6C63FF).withValues(alpha: 0.35),
                           blurRadius: 24,
                           offset: const Offset(0, 8),
                         ),
                       ],
                     ),
                     child: const Icon(
-                      Icons.lock_outline_rounded,
+                      Icons.lock_reset_rounded,
                       color: Colors.white,
                       size: 44,
                     ),
@@ -120,8 +110,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 ),
                 const SizedBox(height: 32),
 
+                // Title
                 Text(
-                  'Set New Password',
+                  'Forgot Password?',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 26,
@@ -132,7 +123,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 const SizedBox(height: 10),
 
                 Text(
-                  'Create a strong password for your account. Use at least 8 characters with uppercase, lowercase, and a number.',
+                  'Enter your registered email address and we\'ll send you a one-time password (OTP) to reset your password.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 14,
@@ -143,43 +134,14 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 const SizedBox(height: 40),
 
                 CustomTextField(
-                  label: 'New Password',
-                  hint: 'enter new password',
-                  controller: _passwordController,
-                  obscureText: _obscurePassword,
-                  prefixIcon: Icons.lock_outline_rounded,
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _obscurePassword
-                          ? Icons.visibility_off_outlined
-                          : Icons.visibility_outlined,
-                      size: 20,
-                    ),
-                    onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
-                  ),
-                  validator: Validators.validatePassword,
+                  label: 'Email Address',
+                  hint: 'enter your registered email',
+                  controller: _emailController,
+                  prefixIcon: Icons.email_outlined,
+                  keyboardType: TextInputType.emailAddress,
+                  validator: Validators.validateEmail,
                 ),
-                const SizedBox(height: 18),
-
-                CustomTextField(
-                  label: 'Confirm New Password',
-                  hint: 'confirm new password',
-                  controller: _confirmPasswordController,
-                  obscureText: _obscureConfirm,
-                  prefixIcon: Icons.lock_outline_rounded,
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _obscureConfirm
-                          ? Icons.visibility_off_outlined
-                          : Icons.visibility_outlined,
-                      size: 20,
-                    ),
-                    onPressed: () => setState(() => _obscureConfirm = !_obscureConfirm),
-                  ),
-                  validator: (val) =>
-                      Validators.validateConfirmPassword(val, _passwordController.text),
-                ),
-                const SizedBox(height: 32),
+                const SizedBox(height: 28),
 
                 // Error message
                 if (authProvider.errorMessage != null) ...[
@@ -207,64 +169,40 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 ],
 
                 CustomButton(
-                  text: 'Reset Password',
+                  text: 'Send OTP',
                   isLoading: authProvider.isLoading,
-                  onPressed: _handleReset,
+                  onPressed: _handleSendOtp,
                 ),
                 const SizedBox(height: 24),
 
-                // Password strength hints
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: isDark
-                        ? Colors.white.withValues(alpha: 0.05)
-                        : Colors.grey.withValues(alpha: 0.07),
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Password requirements:',
+                // Back to login
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Remember your password? ',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () => context.go('/login'),
+                      child: const Text(
+                        'Login',
                         style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                          color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.primary,
                         ),
                       ),
-                      const SizedBox(height: 8),
-                      _buildHint('At least 8 characters', isDark),
-                      _buildHint('One uppercase letter (A–Z)', isDark),
-                      _buildHint('One lowercase letter (a–z)', isDark),
-                      _buildHint('One number (0–9)', isDark),
-                      _buildHint('One special character (@, #, \$, etc.)', isDark),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildHint(String text, bool isDark) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 4),
-      child: Row(
-        children: [
-          const Icon(Icons.check_circle_outline_rounded, size: 14, color: AppColors.primary),
-          const SizedBox(width: 8),
-          Text(
-            text,
-            style: TextStyle(
-              fontSize: 12,
-              color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
-            ),
-          ),
-        ],
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
+import '../../core/services/ai_service.dart';
 
 class AiStudyAssistantModal extends StatefulWidget {
   const AiStudyAssistantModal({super.key});
@@ -19,6 +20,8 @@ class AiStudyAssistantModal extends StatefulWidget {
 
 class _AiStudyAssistantModalState extends State<AiStudyAssistantModal> {
   final TextEditingController _chatController = TextEditingController();
+  bool _isThinking = false;
+
   final List<Map<String, String>> _messages = [
     {
       'sender': 'ai',
@@ -26,29 +29,37 @@ class _AiStudyAssistantModalState extends State<AiStudyAssistantModal> {
     },
   ];
 
-  void _sendMessage() {
+  void _sendMessage() async {
     final text = _chatController.text.trim();
     if (text.isEmpty) return;
 
     setState(() {
       _messages.add({'sender': 'user', 'text': text});
       _chatController.clear();
+      _isThinking = true;
     });
 
-    Future.delayed(const Duration(milliseconds: 1000), () {
-      if (!mounted) return;
-      setState(() {
-        _messages.add({
-          'sender': 'ai',
-          'text': '💡 **StudyHub AI Explanation:**\n\n'
-              'Here is the key breakdown for "$text":\n'
-              '1. Core Principle & Definition explained clearly.\n'
-              '2. Standard University Exam Formula & Steps.\n'
-              '3. Real-world example & PYQ tip.\n\n'
-              'Need more details or practice questions?',
+    try {
+      final answer = await AiService().askQuestion(prompt: text, subjectContext: 'General Academic');
+      if (mounted) {
+        setState(() {
+          _messages.add({'sender': 'ai', 'text': answer});
         });
-      });
-    });
+      }
+    } catch (_) {
+      if (mounted) {
+        setState(() {
+          _messages.add({
+            'sender': 'ai',
+            'text': '💡 **StudyHub AI Explanation:**\n\nHere is the key breakdown for "$text":\n1. Core Definition & Principle.\n2. Standard Formula & Steps.\n3. University Exam Tip.',
+          });
+        });
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isThinking = false);
+      }
+    }
   }
 
   @override
@@ -102,37 +113,55 @@ class _AiStudyAssistantModalState extends State<AiStudyAssistantModal> {
 
           // Messages Stream List
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(16),
-              itemCount: _messages.length,
-              itemBuilder: (context, index) {
-                final msg = _messages[index];
-                final isAi = msg['sender'] == 'ai';
-                return Align(
-                  alignment: isAi ? Alignment.centerLeft : Alignment.centerRight,
-                  child: Container(
-                    margin: const EdgeInsets.only(bottom: 12),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                    constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.8),
-                    decoration: BoxDecoration(
-                      color: isAi
-                          ? (isDark ? const Color(0xFF1E293B) : const Color(0xFFF1F5F9))
-                          : AppColors.primary,
-                      borderRadius: BorderRadius.circular(18),
-                    ),
-                    child: Text(
-                      msg['text']!,
-                      style: TextStyle(
-                        fontSize: 13.5,
-                        height: 1.4,
-                        color: isAi
-                            ? (isDark ? Colors.white : Colors.black87)
-                            : Colors.white,
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    padding: const EdgeInsets.all(16),
+                    itemCount: _messages.length,
+                    itemBuilder: (context, index) {
+                      final msg = _messages[index];
+                      final isAi = msg['sender'] == 'ai';
+                      return Align(
+                        alignment: isAi ? Alignment.centerLeft : Alignment.centerRight,
+                        child: Container(
+                          margin: const EdgeInsets.only(bottom: 12),
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                          constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.8),
+                          decoration: BoxDecoration(
+                            color: isAi
+                                ? (isDark ? const Color(0xFF1E293B) : const Color(0xFFF1F5F9))
+                                : AppColors.primary,
+                            borderRadius: BorderRadius.circular(18),
+                          ),
+                          child: Text(
+                            msg['text']!,
+                            style: TextStyle(
+                              fontSize: 13.5,
+                              height: 1.4,
+                              color: isAi
+                                  ? (isDark ? Colors.white : Colors.black87)
+                                  : Colors.white,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                if (_isThinking)
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: SizedBox(
+                        height: 24,
+                        width: 24,
+                        child: CircularProgressIndicator(strokeWidth: 2.5),
                       ),
                     ),
                   ),
-                );
-              },
+              ],
             ),
           ),
 
