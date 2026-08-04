@@ -1,1 +1,0 @@
-// Cleaned up procedural animations
